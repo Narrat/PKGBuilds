@@ -1,0 +1,52 @@
+# Maintainer: Lex Black <autumn-wind at web dot de>
+# Contributor: Massimiliano Torromeo <massimiliano.torromeo@gmail.com>
+
+_pkgname=libuv
+pkgname=libuv-git
+pkgver=0.7.6.861.g8fbe433
+pkgrel=1
+pkgdesc="libuv is a new platform layer for Node.JS"
+arch=('i686' 'x86_64')
+url="https://github.com/JuliaLang/libuv"
+license=('custom')
+depends=('glibc')
+provides=('libuv')
+conflicts=('libuv')
+source=('git://github.com/JuliaLang/libuv.git')
+md5sums=('SKIP')
+
+
+pkgver() {
+	cd $_pkgname
+	git describe --tags | sed 's/^v//;s/-/./g;s/node.v//'
+}
+
+build() {
+	cd "$srcdir/$_pkgname"
+
+	CFLAGS=-fPIC make
+}
+
+check() {
+	cd "$srcdir/$_pkgname"
+
+	make test
+}
+
+package() {
+	cd "$srcdir/$_pkgname"
+
+	install -Dm644 LICENSE \
+		"$pkgdir/usr/share/licenses/$_pkgname/LICENSE"
+	install -Dm644 AUTHORS \
+		"$pkgdir/usr/share/doc/$_pkgname/AUTHORS"
+	install -Dm644 README.md \
+		"$pkgdir/usr/share/doc/$_pkgname/README.md"
+
+	install -Dm644 libuv.a "$pkgdir/usr/lib/libuv.a"
+	install -Dm644 libuv.so "$pkgdir/usr/lib/libuv.so"
+
+	cd include
+	find -type f -exec \
+		install -Dm644 {} "$pkgdir/usr/include/$pkgname/"{} \;
+}

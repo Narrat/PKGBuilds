@@ -1,0 +1,31 @@
+# Maintainer: Lex Black <autumn-wind at web dot de>
+
+_pkgname=canto-next
+pkgname=canto-next-git
+pkgver=0.8.1.14.g866f473
+pkgrel=1
+pkgdesc="A news aggregator for Atom/RSS/RDF. Git version"
+url="http://codezen.org/canto-ng/"
+license=('GPL')
+arch=('i686' 'x86_64')
+makedepends=('python' 'git')
+depends=('python' 'python-feedparser')
+optdepends=('canto-curses-git: Curses interface. Git pull')
+conflicts=('canto-daemon')
+provides=('canto-daemon')
+source=('git://github.com/themoken/canto-next#branch=master')
+md5sums=('SKIP')
+
+
+pkgver() {
+	cd $_pkgname
+	#git log -1 --date=short | grep -Eo '[[:digit:]]{1,4}\-[[:digit:]]{1,2}\-[[:digit:]]{1,2}' | sed -e 's#-##g'
+	git describe | sed 's/^v//;s/-/./g'
+}
+
+package() {
+	cd $srcdir/$_pkgname
+	
+	msg "Starting build process."
+	python setup.py install --root=${pkgdir}
+}

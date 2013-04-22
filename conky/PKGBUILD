@@ -1,0 +1,45 @@
+# $Id: PKGBUILD 158528 2012-05-03 23:54:02Z bisson $
+# Contributor: Giovanni Scafora <giovanni@archlinux.org>
+# Contributor: James Rayner <james@archlinux.org>
+# Contributor: Partha Chowdhury <kira.laucas@gmail.com>
+# Maintainer: Gaetan Bisson <bisson@archlinux.org>
+
+pkgname=conky
+pkgver=1.9.0
+pkgrel=1
+pkgdesc='Lightweight system monitor for X'
+url='http://conky.sourceforge.net/'
+license=('BSD' 'GPL')
+arch=('i686' 'x86_64')
+options=('!emptydirs')
+makedepends=('docbook2x')
+depends=('alsa-lib' 'libxml2' 'curl' 'libxft' 'glib2' 'libxdamage' 'imlib2')
+backup=('etc/conky/conky.conf' 'etc/conky/conky_no_x11.conf')
+source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}/${pkgver}/${pkgname}-${pkgver}.tar.gz")
+sha1sums=('a8d26d002370c9b877ae77ad3a3bbd2566b38e5d')
+
+replaces=('torsmo')
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+
+	CPPFLAGS="${CXXFLAGS}" LIBS="${LDFLAGS}" ./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--enable-curl \
+		--enable-imlib2 \
+		--disable-lua \
+		--enable-xmms2 \
+		--disable-moc \
+		--disable-mpd \
+
+	make
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make DESTDIR="${pkgdir}" install
+	install -Dm644 COPYING "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+	install -Dm644 extras/vim/syntax/conkyrc.vim "${pkgdir}"/usr/share/vim/vimfiles/syntax/conkyrc.vim
+	install -Dm644 extras/vim/ftdetect/conkyrc.vim "${pkgdir}"/usr/share/vim/vimfiles/ftdetect/conkyrc.vim
+}
