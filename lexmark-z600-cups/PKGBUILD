@@ -16,7 +16,7 @@ else
 fi
 makedepends=('rpmextract')
 conflicts=('z600' 'cjlz35le-cups' 'lexmarkz-cups')
-install=lexmarkz-cups.install
+install=lexmark-z600-cups.install
 source=(http://webjdm.free.fr/archlinux/${_pkgname}/${_pkgname}-RPM.tar.gz \
 	'lexmark-eula.txt')
 md5sums=('711821c160e81ddf58d33f204c12e0dc'
