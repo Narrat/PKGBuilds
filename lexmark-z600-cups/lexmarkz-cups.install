@@ -1,9 +1,0 @@
-post_install() {
-	cat << _EOF
-==> Z600 driver for:
- -> Lexmark Z601/Z602/Z603/Z604/Z605/Z611/Z612/Z613/Z614/Z615/Z617
- -> Lexmark X1100/X1110/X1130/X1140/X1150/X1170/X1185/X1190/X1195
- -> Lexmark X1240/X1250/X1270/X1290
- -> Dell A920, Dell Photo 720
-_EOF
-}
