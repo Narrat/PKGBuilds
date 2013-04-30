@@ -7,7 +7,7 @@ pkgrel=1
 pkgdesc="A news aggregator for Atom/RSS/RDF. Git version"
 url="http://codezen.org/canto-ng/"
 license=('GPL')
-arch=('i686' 'x86_64')
+arch=('any')
 makedepends=('python' 'git')
 depends=('python' 'python-feedparser')
 optdepends=('canto-curses-git: Curses interface. Git pull')
@@ -19,7 +19,6 @@ md5sums=('SKIP')
 
 pkgver() {
 	cd $_pkgname
-	#git log -1 --date=short | grep -Eo '[[:digit:]]{1,4}\-[[:digit:]]{1,2}\-[[:digit:]]{1,2}' | sed -e 's#-##g'
 	git describe | sed 's/^v//;s/-/./g'
 }
 
