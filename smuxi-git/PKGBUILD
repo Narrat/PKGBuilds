@@ -4,7 +4,7 @@
 
 _pkgname=smuxi
 pkgname=smuxi-git
-pkgver=0.8.10.1.359.g324ad0c
+pkgver=0.8.10.1.373.g08e6f8d
 pkgrel=1
 pkgdesc="The user-friendly and cross-platform IRC client for sophisticated users for GNOME/GTK+. Git-Version"
 arch=('any')
