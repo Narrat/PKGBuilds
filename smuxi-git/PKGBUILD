@@ -4,11 +4,11 @@
 
 _pkgname=smuxi
 pkgname=smuxi-git
-pkgver=0.8.10.1.373.g08e6f8d
+pkgver=0.8.11.13.gb264ddb
 pkgrel=1
 pkgdesc="The user-friendly and cross-platform IRC client for sophisticated users for GNOME/GTK+. Git-Version"
 arch=('any')
-url="http://www.smuxi.org/"
+url="http://www.smuxi.im/"
 license=('GPL')
 depends=('hicolor-icon-theme' 'log4net' 'nini' 'stfl' 'gtk-sharp-2' 'xdg-utils')
 optdepends=('libindicate: Support for messaging menu'
