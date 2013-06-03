@@ -3,7 +3,7 @@
 
 _pkgname=translate
 pkgname=translate-git
-pkgver=20130110
+pkgver=0.1.2
 pkgrel=1
 pkgdesc="Google Translator command line interface."
 arch=('i686' 'x86_64')
@@ -17,7 +17,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd $_pkgname
-  git describe | sed 's/^v//;s/-/./g'
+  git describe --always | sed 's/^v//;s/-/./g'
 }
 
 package() {
