@@ -23,34 +23,31 @@ md5sums=('SKIP')
 
 
 pkgver() {
-	cd $_pkgname
-	git describe --always | sed -e 's|-|.|g'
+  cd $_pkgname
+  git describe --always | sed -e 's|-|.|g'
 }
 
 build() {
-	cd $srcdir/$_pkgname
+  cd $srcdir/$_pkgname
 
-	#_gitbranch=$(git branch | grep '^\*' | cut -d ' ' -f 2) 
-	_gitcommithash=$(git log --no-color --first-parent -n1 --pretty=format:%h)
-  
-	./autogen.sh MCS=/usr/bin/dmcs --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
-		--enable-engine-irc \
-		--enable-engine-xmpp \
-		--disable-engine-twitter \
-		--disable-engine-campfire \
-		--enable-frontend-gnome \
-		--enable-frontend-stfl \
-		--with-vendor-package-version="Arch Linux Git-$pkgver-$pkgrel (master/${_gitcommithash})"
+  ./autogen.sh MCS=/usr/bin/dmcs --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+	--enable-engine-irc \
+	--enable-engine-xmpp \
+	--disable-engine-twitter \
+	--disable-engine-campfire \
+	--enable-frontend-gnome \
+	--enable-frontend-stfl \
+	--with-vendor-package-version="Arch Linux Git-$pkgver-$pkgrel (master)"
 
-	make
+  make
 }
 
 package() {
-	cd ${srcdir}/$_pkgname
+  cd ${srcdir}/$_pkgname
 
-	make DESTDIR="$pkgdir/" install
+  make DESTDIR="$pkgdir/" install
 
-	# Uncomment the following lines if you're using the messaging menu in Unity (or the forced use in Gnome3)
-	#mkdir -p $pkgdir/usr/share/indicators/messages/applications
-	#echo '/usr/share/applications/smuxi-frontend-gnome.desktop' > $pkgdir/usr/share/indicators/messages/applications/smuxi-frontend-gnome
+  # Uncomment the following lines if you're using the messaging menu in Unity (or the forced use in Gnome3)
+  #mkdir -p $pkgdir/usr/share/indicators/messages/applications
+  #echo '/usr/share/applications/smuxi-frontend-gnome.desktop' > $pkgdir/usr/share/indicators/messages/applications/smuxi-frontend-gnome
 }
