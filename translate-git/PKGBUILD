@@ -1,0 +1,26 @@
+# Maintainer: Lex Black <autumn-wind at web dot de>
+# Contributor: Henri Häkkinen <henuxd@gmail.com>
+
+_pkgname=translate
+pkgname=translate-git
+pkgver=20130110
+pkgrel=1
+pkgdesc="Google Translator command line interface."
+arch=('i686' 'x86_64')
+url="https://github.com/Narrat/translate.git"
+license=('GPL')
+depends=('python')
+makedepends=('git')
+source=('git://github.com/Narrat/translate.git#branch=master')
+md5sums=('SKIP')
+
+
+pkgver() {
+  cd $_pkgname
+  git describe | sed 's/^v//;s/-/./g'
+}
+
+package() {
+  cd "$srcdir/$_pkgname"
+  make PREFIX="$pkgdir/usr" install
+}
