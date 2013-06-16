@@ -1,5 +1,5 @@
 # Maintainer: Lex Black (autumn-wind at web.de)
-# Contributor: 
+# Contributor: andre.vmatos
 
 _pkgname=resynthesizer
 pkgname=gimp-resynth-git
@@ -10,7 +10,7 @@ arch=('any')
 url="https://github.com/bootchk/resynthesizer"
 license=('GPL2')
 depends=('gimp')
-makedepends=('git')
+makedepends=('git' 'intltool')
 conflicts=('gimp-resynth')
 provides=('gimp-resynth' 'gimp-plugin-resynthesizer')
 options=('!emptydirs')

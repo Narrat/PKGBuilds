@@ -1,38 +1,38 @@
-# $Id: PKGBUILD 185357 2013-05-13 17:34:56Z heftig $
+# $Id: PKGBUILD 188207 2013-06-12 20:16:30Z heftig $
 # Maintainer: Andreas Radke <andyrtr@archlinux.org>
 
-pkgbase=webkitgtk
-pkgname=('webkitgtk3')
-pkgver=2.0.2
+pkgname=webkitgtk
+pkgver=2.0.3
 pkgrel=1
-arch=('i686' 'x86_64')
+pkgdesc="GTK+ Web content engine library"
+arch=(i686 x86_64)
 url="http://webkitgtk.org/"
-license=('custom')
-makedepends=('libxt' 'libxslt' 'sqlite' 'libsoup' 'libgl' 'gtk2' 'gtk3' 'gst-plugins-base-libs' 'gperf' 'gobject-introspection' 'python' 'mesa' 'ruby' 'gtk-doc' 'libsecret' 'libwebp')
-options=('!libtool' '!emptydirs')
-source=(http://webkitgtk.org/releases/$pkgbase-$pkgver.tar.xz)
-sha256sums=('c3685032545eb4c23f3f56826817783a6963ad59bd7bbf806705059b3d8caeb2')
-
-prepare() {
-  cd $pkgbase-$pkgver
-  mkdir build-gtk3
-}
+license=(custom)
+depends=(libxt libxslt sqlite libsoup libgl gtk3 gst-plugins-base-libs
+         libsecret libwebp harfbuzz-icu)
+makedepends=(gtk2 gperf gobject-introspection python mesa ruby gtk-doc)
+optdepends=('gtk2: Netscape plugin support')
+provides=("webkitgtk3=${pkgver}" "libwebkit3=${pkgver}")
+conflicts=(webkitgtk3 libwebkit3)
+replaces=(webkitgtk3 libwebkit3)
+options=(!libtool !emptydirs)
+source=(http://webkitgtk.org/releases/$pkgname-${pkgver}.tar.xz)
+sha256sums=('9bf8a32afbf087c4fc2c652b193a52c44b180735ba9c7c8db88137904d458e1b')
 
 build() {
-  cd $pkgbase-$pkgver/build-gtk3
-  ../configure --prefix=/usr --libexecdir=/usr/lib/webkitgtk3 --enable-introspection --disable-geolocation --disable-spellcheck
+  cd $pkgname-$pkgver
+  ./configure --prefix=/usr \
+    --libexecdir=/usr/lib/$pkgname \
+    --enable-introspection --disable-geolocation --disable-spellcheck
+
+  # https://bugzilla.gnome.org/show_bug.cgi?id=655517
+  sed -i 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
   make all stamp-po
 }
 
-package_webkitgtk3() {
-  pkgdesc="GTK+ Web content engine library for GTK+ 3.0"
-  depends=('libxt' 'libxslt' 'sqlite' 'libsoup' 'libgl' 'gtk3' 'gst-plugins-base-libs' 'libsecret' 'libwebp')
-  conflicts=('libwebkit3')
-  provides=("libwebkit3=${pkgver}")
-  replaces=('libwebkit3')
-  optdepends=('gtk2: Webkit2 plugin support')
-  
-  cd $pkgbase-$pkgver/build-gtk3
+package() {
+  cd $pkgname-$pkgver
   make -j1 DESTDIR="$pkgdir" install
-  install -Dm644 ../Source/WebKit/LICENSE "$pkgdir/usr/share/licenses/${pkgname}/LICENSE"
+  install -Dm644 Source/WebKit/LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
