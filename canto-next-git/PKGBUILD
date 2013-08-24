@@ -26,5 +26,5 @@ package() {
 	cd $srcdir/$_pkgname
 	
 	msg "Starting build process."
-	python setup.py install --root=${pkgdir}
+	python setup.py install --prefix=/usr --root=${pkgdir}
 }

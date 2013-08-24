@@ -17,5 +17,5 @@ package() {
 	cd ${pkgname}-${pkgver}
 
 	msg "Starting install process."
-	python setup.py install --root=${pkgdir}
+	python setup.py install --prefix=/usr --root=${pkgdir}
 }
