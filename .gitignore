@@ -5,3 +5,14 @@
 *.bz2
 *.zip
 *.part
+*.sig
+*.log
+*.scm
+*/smuxi
+*/resynthesizer
+*/gimp-resynth
+*/canto
+*/canto-curses
+*/canto-next
+*/julia
+*/translate
