@@ -4,7 +4,7 @@
 
 _pkgname=julia
 pkgname=julia-git
-pkgver=0.1.2.3731.ge4b6ebd
+pkgver=0.1.2.3838.g7d8e80c
 pkgrel=1
 pkgdesc="Julia is a high-level, high-performance, dynamic programming language."
 arch=('i686' 'x86_64')
