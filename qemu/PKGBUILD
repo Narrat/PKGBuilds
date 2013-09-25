@@ -1,7 +1,7 @@
 # $Id: PKGBUILD 191616 2013-07-27 20:19:26Z tpowa $
 # Maintainer: Tobias Powalowski <tpowa@archlinux.org>
 pkgname=('qemu' 'libcacard')
-pkgver=1.5.2
+pkgver=1.5.3
 pkgrel=1
 arch=('i686' 'x86_64')
 license=('GPL2' 'LGPL2.1')
@@ -53,6 +53,9 @@ package_qemu() {
   rm -rf ${pkgdir}/usr/lib/libcacard*
   rm -rf ${pkgdir}/usr/lib/pkgconfig/libcacard.pc
   rm -rf ${pkgdir}/usr/bin/vscclient
+  rm -rf ${pkgdir}/usr/share/qemu/acpi-dsdt.aml
+  rm -rf ${pkgdir}/usr/share/qemu/q35-acpi-dsdt.aml
+
 }
 
 package_libcacard() {
@@ -66,5 +69,5 @@ package_libcacard() {
  cp -a ${srcdir}/qemu-${pkgver}/.libs/vscclient ${pkgdir}/usr/bin/
 }
 
-md5sums=('04b94189ba587b3280713ded3b7f959a'
+md5sums=('7a7ce91bea6a69e55b3c6e20e4999898'
          '9d6de26867a05c306157e3d3c612b28a')
