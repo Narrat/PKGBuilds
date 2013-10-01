@@ -1,11 +1,11 @@
-# $Id: PKGBUILD 194513 2013-09-17 06:52:04Z tpowa $
+# $Id: PKGBUILD 195202 2013-09-27 13:24:39Z tpowa $
 # Maintainer: Tobias Powalowski <tpowa@archlinux.org>
 # Maintainer: Thomas Baechler <thomas@archlinux.org>
 
 pkgbase=linux               # Build stock -ARCH kernel
-#pkgbase=linux-custom       # Build kernel with a different name
+#pkgbase=linux-hekate       # Build kernel with a different name
 _srcname=linux-3.11
-pkgver=3.11.1
+pkgver=3.11.3
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -20,15 +20,15 @@ source=("http://www.kernel.org/pub/linux/kernel/v3.x/${_srcname}.tar.xz"
         'linux.preset'
         'change-default-console-loglevel.patch'
         'criu-no-expert.patch'
-	    '0001-drm-nv50-disp-prevent-false-output-detection-on-the-.patch')
+        '3.11-haswell-intel_pstate.patch')
 md5sums=('fea363551ff45fbe4cb88497b863b261'
-         '43331cad943b9540afea49ad8ce5cf46'
+         'b098457c2d9e9626faacfda931deefb6'
          '247d9bafa184e2d9a27c1a0485419fff'
          '5effb245b8ec78ad570b3e5962a1a7e0'
          'eb14dcfd80c00852ef81ded6e826826a'
          '98beb36f9b8cf16e58de2483ea9985e3'
          'd50c1ac47394e9aec637002ef3392bd1'
-         'b21ebc500fc336099787c537b4454f5f')
+         '1040ae6c10d4a68f89899f94a2318a17')
 
 _kernelname=${pkgbase#linux}
 
@@ -43,7 +43,6 @@ prepare() {
 
   # add upstream patch
   patch -p1 -i "${srcdir}/patch-${pkgver}"
-  patch -p1 -i "${srcdir}/0001-drm-nv50-disp-prevent-false-output-detection-on-the-.patch"
 
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
@@ -53,6 +52,11 @@ prepare() {
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
   patch -Np1 -i "${srcdir}/change-default-console-loglevel.patch"
 
+  # add intel haswell support to intel_pstate
+  # https://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/patch/?id=6cdcdb793791f776ea9408581b1242b636d43b37
+  # will be in 3.12
+  patch -Np1 -i "${srcdir}/3.11-haswell-intel_pstate.patch"
+ 
   # allow criu without expert option set
   # patch from fedora
   patch -Np1 -i "${srcdir}/criu-no-expert.patch"
