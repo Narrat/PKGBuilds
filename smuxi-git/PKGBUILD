@@ -3,7 +3,7 @@
 
 _pkgname=smuxi
 pkgname=smuxi-git
-pkgver=0.9.83.g742fc48
+pkgver=0.9.105.g876b8a8
 pkgrel=1
 pkgdesc="The user-friendly and cross-platform IRC client for sophisticated users for GNOME/GTK+. Git-Version"
 arch=('any')
@@ -30,7 +30,7 @@ pkgver() {
 build() {
   cd $srcdir/$_pkgname
 
-  ./autogen.sh MCS=/usr/bin/dmcs --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
+  ./autogen.sh --prefix=/usr --sysconfdir=/etc --localstatedir=/var \
 	--enable-engine-irc \
 	--enable-engine-xmpp \
 	--disable-engine-twitter \
