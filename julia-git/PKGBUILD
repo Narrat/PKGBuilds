@@ -4,7 +4,7 @@
 
 _pkgname=julia
 pkgname=julia-git
-pkgver=0.1.2.3838.g7d8e80c
+pkgver=0.2.0.rc1.1.gba9d7e5
 pkgrel=1
 pkgdesc="Julia is a high-level, high-performance, dynamic programming language."
 arch=('i686' 'x86_64')
@@ -72,6 +72,10 @@ package() {
     USE_SYSTEM_LIBUV=0 \
     USE_BLAS64=0 \
     install
+
+  # Move the newly introduced /etc directory to the FHS declared place
+  # see: https://github.com/JuliaLang/julia/pull/4351#issuecomment-26377505
+  mv $pkgdir/usr/etc/ $pkgdir/
 }
 
 # vim:set ts=2 sw=2 et:
