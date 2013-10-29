@@ -4,7 +4,7 @@
 
 _pkgname=julia
 pkgname=julia-git
-pkgver=0.2.0.rc1.1.gba9d7e5
+pkgver=0.2.0.rc2.73.gb7cc778
 pkgrel=1
 pkgdesc="Julia is a high-level, high-performance, dynamic programming language."
 arch=('i686' 'x86_64')
@@ -16,7 +16,7 @@ optdepends=('gnuplot: If using the Gaston Package from julia')
 provides=('julia')
 conflicts=('julia')
 options=('!emptydirs')
-source=('git://github.com/JuliaLang/julia.git#branch=master')
+source=('git://github.com/JuliaLang/julia.git')
 md5sums=('SKIP')
 
 
@@ -28,7 +28,7 @@ pkgver() {
 build() {
   cd "$srcdir/$_pkgname"
   
-  make PREFIX=/usr \
+  make PREFIX=/usr SYSCONFDIR=/etc \
     USE_SYSTEM_LLVM=1 \
     USE_SYSTEM_LIBUNWIND=1 \
     USE_SYSTEM_READLINE=1 \
@@ -52,7 +52,7 @@ build() {
 package() {
   cd "$srcdir/$_pkgname"
 
-  make PREFIX=$pkgdir/usr \
+  make PREFIX=$pkgdir/usr SYSCONFDIR=$pkgdir/etc \
     USE_SYSTEM_LLVM=1 \
     USE_SYSTEM_LIBUNWIND=1 \
     USE_SYSTEM_READLINE=1 \
@@ -72,10 +72,6 @@ package() {
     USE_SYSTEM_LIBUV=0 \
     USE_BLAS64=0 \
     install
-
-  # Move the newly introduced /etc directory to the FHS declared place
-  # see: https://github.com/JuliaLang/julia/pull/4351#issuecomment-26377505
-  mv $pkgdir/usr/etc/ $pkgdir/
 }
 
 # vim:set ts=2 sw=2 et:
