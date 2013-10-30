@@ -4,14 +4,14 @@
 
 _pkgname=julia
 pkgname=julia-git
-pkgver=0.2.0.rc2.73.gb7cc778
+pkgver=0.2.0.rc2.80.g59a4083
 pkgrel=1
 pkgdesc="Julia is a high-level, high-performance, dynamic programming language."
 arch=('i686' 'x86_64')
 url="http://julialang.org"
 license=('GPL')
 depends=('arpack' 'fftw' 'git' 'gmp' 'llvm' 'libunwind' 'mpfr' 'pcre' 'librmath' 'readline' 'zlib' ) # 'suitesparse'
-makedepends=('perl' 'gcc' 'gcc-fortran')
+makedepends=('gcc-fortran')
 optdepends=('gnuplot: If using the Gaston Package from julia')
 provides=('julia')
 conflicts=('julia')
