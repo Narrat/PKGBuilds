@@ -10,7 +10,7 @@ url="http://webkitgtk.org/"
 license=(custom)
 depends=(libxt libxslt sqlite libsoup enchant libgl gtk3 gst-plugins-base-libs
          libsecret libwebp harfbuzz-icu)
-makedepends=(gtk2 gperf gobject-introspection python mesa ruby gtk-doc)
+makedepends=(gtk2 gperf python mesa ruby)
 optdepends=('gtk2: Netscape plugin support')
 provides=("webkitgtk3=${pkgver}" "libwebkit3=${pkgver}")
 conflicts=(webkitgtk3 libwebkit3)
@@ -19,11 +19,18 @@ options=(!emptydirs)
 source=(http://webkitgtk.org/releases/$pkgname-${pkgver}.tar.xz)
 sha256sums=('4a45768695ccded14fdc47f99dbcdb750076f55dad61560cadac7b55db0b304d')
 
+
+prepare() {
+  cd $pkgname-$pkgver
+  #If you have not installed GTK-Doc-1.19, fix a bug that will cause make install to fail:
+  sed -i '/generate-gtkdoc --rebase/s:^:# :' GNUmakefile.in
+}
+
 build() {
   cd $pkgname-$pkgver
   ./configure --prefix=/usr \
     --libexecdir=/usr/lib/$pkgname \
-    --enable-introspection --disable-geolocation
+    --disable-geolocation
 
   # https://bugzilla.gnome.org/show_bug.cgi?id=655517
   sed -i 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
