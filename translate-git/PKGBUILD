@@ -1,12 +1,15 @@
 # Maintainer: Lex Black <autumn-wind at web dot de>
 # Contributor: Henri Häkkinen <henuxd@gmail.com>
 
+# A version for Python2.x is placed in the branch Python2
+# If you decide to use the python2 version don't forget to adjust the dep
+
 _pkgname=translate
 pkgname=translate-git
-pkgver=0.1.2
+pkgver=0.1.2.2.gf076e3f
 pkgrel=1
 pkgdesc="Google Translator command line interface."
-arch=('i686' 'x86_64')
+arch=('any')
 url="https://github.com/Narrat/translate.git"
 license=('GPL')
 depends=('python')
@@ -17,7 +20,7 @@ md5sums=('SKIP')
 
 pkgver() {
   cd $_pkgname
-  git describe --always | sed 's/^v//;s/-/./g'
+  git describe --always --all | sed 's/^v//;s/-/./g;s#tags/##g'
 }
 
 package() {
