@@ -45,8 +45,8 @@ _build() (
 )
 
 build() {
-  _build gtk --enable-gtk-doc
-  _build gtk2 --disable-webkit2 --with-gtk=2.0
+  _build gtk --disable-gtk-doc
+  #_build gtk2 --disable-webkit2 --with-gtk=2.0
 }
 
 package_webkitgtk() {
@@ -62,13 +62,14 @@ package_webkitgtk() {
 }
 
 package_webkitgtk2() {
-  pkgdesc+=" for GTK2"
-  depends+=(gtk2)
-  provides=("libwebkit=${pkgver}")
-  conflicts=(libwebkit)
-  replaces=(libwebkit)
+  #pkgdesc+=" for GTK2"
+  #depends+=(gtk2)
+  #provides=("libwebkit=${pkgver}")
+  #conflicts=(libwebkit)
+  #replaces=(libwebkit)
 
-  make -C build-gtk2 -j1 DESTDIR="$pkgdir" install
-  install -Dm644 $pkgbase-$pkgver/Source/WebKit/LICENSE \
-    "$pkgdir/usr/share/licenses/webkitgtk2/LICENSE"
+  #make -C build-gtk2 -j1 DESTDIR="$pkgdir" install
+  #install -Dm644 $pkgbase-$pkgver/Source/WebKit/LICENSE \
+   # "$pkgdir/usr/share/licenses/webkitgtk2/LICENSE"
+   msg "webkitgtk2 build disabled"
 }
