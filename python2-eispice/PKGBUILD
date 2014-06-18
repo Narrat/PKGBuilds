@@ -1,0 +1,39 @@
+# Maintainer: Lex Black <autumn-wind at web dot de>
+
+_pkgname=eispice
+pkgname=python2-eispice-git
+pkgver=0.11.6.1.2.gc09f669
+pkgrel=1
+pkgdesc="Clone of Berkley SPICE 3 Simulation Engine. Git version"
+url="http://www.thedigitalmachine.net/eispice.html"
+license=('GPL')
+arch=('i686' 'x86_64')
+makedepends=('python2' 'git')
+depends=('python2-numpy' 'python2-scipy')
+conflicts=('eispice' 'python2-eispice')
+provides=('python2-eispice')
+source=('git://github.com/Narrat/eispice#branch=master'
+	'headerfiles.patch')
+md5sums=('SKIP'
+         '89015b1e4952120f2b0896bd37d0b6b0')
+
+
+pkgver() {
+	cd $_pkgname
+	git describe | sed 's/^v//;s/-/./g'
+}
+
+prepare() {
+	cd $srcdir/${_pkgname}
+	
+	# Applying patch for header files and python transition
+	patch -p1 <$srcdir/headerfiles.patch
+}
+
+#build() {
+package() {
+	cd $srcdir/${_pkgname}
+
+	python2 setup.py install --root=${pkgdir}
+	#make DESTDIR="$pkgdir/" install
+}
