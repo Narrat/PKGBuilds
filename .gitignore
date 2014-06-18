@@ -8,13 +8,14 @@
 *.sig
 *.log
 *.scm
-*/smuxi
-*/resynthesizer
-*/gimp-resynth
 */canto
 */canto-curses
 */canto-next
+*/eispice
+*/gimp-resynth
 */julia
+*/resynthesizer
+*/smuxi
 */translate
 */xombrero
 */*.pkg
