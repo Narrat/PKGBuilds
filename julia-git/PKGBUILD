@@ -4,7 +4,7 @@
 
 _pkgname=julia
 pkgname=julia-git
-pkgver=0.2.0.2616.g60af64b
+pkgver=0.2.0.4143.g3962af2
 pkgrel=1
 pkgdesc="Julia is a high-level, high-performance, dynamic programming language."
 arch=('i686' 'x86_64')
@@ -22,11 +22,12 @@ md5sums=('SKIP')
 
 pkgver() {
   cd $_pkgname
+
   git describe --tags | sed 's/^v//;s/-/./g'
 }
 
 build() {
-  cd "$srcdir/$_pkgname"
+  cd $_pkgname
 
   make prefix=/usr sysconfdir=/etc \
     USE_SYSTEM_LLVM=1 \
@@ -35,6 +36,7 @@ build() {
     USE_SYSTEM_LIBM=1 \
     USE_SYSTEM_OPENLIBM=0 \
     USE_SYSTEM_OPENSPECFUN=0 \
+    USE_SYSTEM_DSFMT=0 \
     USE_SYSTEM_BLAS=1 \
     USE_SYSTEM_LAPACK=1 \
     USE_SYSTEM_FFTW=1 \
@@ -47,13 +49,13 @@ build() {
     USE_SYSTEM_RMATH=0 \
     USE_SYSTEM_LIBUV=0 \
     USE_SYSTEM_UTF8PROC=0 \
-    USE_MKL=0 \
+    USE_INTEL_MKL=0 \
     USE_BLAS64=0 \
     USE_LLVM_SHLIB=0
 }
 
 package() {
-  cd "$srcdir/$_pkgname"
+  cd $_pkgname
 
   make DESTDIR=$pkgdir prefix=/usr sysconfdir=/etc \
     USE_SYSTEM_LLVM=1 \
@@ -62,6 +64,7 @@ package() {
     USE_SYSTEM_LIBM=1 \
     USE_SYSTEM_OPENLIBM=0 \
     USE_SYSTEM_OPENSPECFUN=0 \
+    USE_SYSTEM_DSFMT=0 \
     USE_SYSTEM_BLAS=1 \
     USE_SYSTEM_LAPACK=1 \
     USE_SYSTEM_FFTW=1 \
@@ -74,13 +77,16 @@ package() {
     USE_SYSTEM_RMATH=0 \
     USE_SYSTEM_LIBUV=0 \
     USE_SYSTEM_UTF8PROC=0 \
-    USE_MKL=0 \
+    USE_INTEL_MKL=0 \
     USE_BLAS64=0 \
     USE_LLVM_SHLIB=0 \
     install
     
     # Remove man-page from julia/doc (one is enough)
     rm -rv $pkgdir/usr/share/julia/doc/man
+
+    # Temporary remove remaining doc (split package will follow that provides the generated docs)
+    rm -rv $pkgdir/usr/share/julia/doc
 }
 
 # vim:set ts=2 sw=2 et:
