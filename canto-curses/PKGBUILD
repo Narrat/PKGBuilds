@@ -2,20 +2,19 @@
 
 pkgname=canto-curses
 pkgver=0.8.4
-pkgrel=1
-pkgdesc="A ncurses user interface for canto-daemon"
+pkgrel=2
+pkgdesc="ncurses user interface for canto-daemon"
 url="http://codezen.org/canto-ng/"
 license="GPL"
 arch=('any')
-makedepends=('python')
 depends=('python' 'ncurses' 'canto-daemon>=0.8.2')
+makedepends=('python')
 source=(http://codezen.org/static/${pkgname}-${pkgver}.tar.gz)
 md5sums=('7629cc292781c50410641d74931576cf')
-conflicts=('canto-curses-git')
+
 
 package() {
-	cd ${pkgname}-${pkgver}
+    cd ${pkgname}-${pkgver}
 
-	msg "Starting install process."
-	python setup.py install --prefix=/usr --root=${pkgdir}
+    python setup.py install --prefix=/usr --root=${pkgdir}
 }

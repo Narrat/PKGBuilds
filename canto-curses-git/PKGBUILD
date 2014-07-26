@@ -2,14 +2,14 @@
 
 _pkgname=canto-curses
 pkgname=canto-curses-git
-pkgver=0.8.2.22.g9daca19
+pkgver=0.8.2.64.ga5347ef
 pkgrel=1
-pkgdesc="A ncurses user interface for canto-daemon/canto-next. Git version"
+pkgdesc="ncurses user interface for canto-daemon/canto-next. Git version"
 url="http://codezen.org/canto-ng/"
 license=('GPL')
 arch=('any')
-makedepends=('python' 'git')
-depends=('ncurses' 'python' 'canto-next-git')
+depends=('ncurses' 'python' 'readline' 'canto-next-git')
+makedepends=('git')
 conflicts=('canto-curses')
 provides=('canto-curses')
 source=('git://github.com/themoken/canto-curses#branch=master')
@@ -17,13 +17,18 @@ md5sums=('SKIP')
 
 
 pkgver() {
-	cd $_pkgname
-	git describe | sed 's/^v//;s/-/./g'
+    cd $_pkgname
+    git describe | sed 's/^v//;s/-/./g'
+}
+
+build() {
+    cd $srcdir/$_pkgname
+
+    python setup.py build
 }
 
 package() {
-	cd $srcdir/$_pkgname
+    cd $srcdir/$_pkgname
 
-	msg "Starting build process."
-	python setup.py install --prefix=/usr --root=${pkgdir}
+    python setup.py install --prefix=/usr --root=${pkgdir}
 }
