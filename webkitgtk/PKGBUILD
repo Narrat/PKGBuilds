@@ -3,8 +3,8 @@
 
 pkgbase=webkitgtk
 pkgname=(webkitgtk webkitgtk2)
-pkgver=2.4.4
-pkgrel=1
+pkgver=2.4.6
+pkgrel=3
 pkgdesc="GTK+ Web content engine library"
 arch=(i686 x86_64)
 url="http://webkitgtk.org/"
@@ -18,7 +18,7 @@ optdepends=('gst-plugins-base: free media decoding'
 options=(!emptydirs)
 source=(http://webkitgtk.org/releases/$pkgbase-${pkgver}.tar.xz
         fix-pretty-quotes.patch)
-sha256sums=('58cbfc7e352ae1e1f5e383f9f766795794d88483e9a52377a295f56eedf53ab9'
+sha256sums=('6fef4aa8d4a2668e03ea15472a71396ea7b776bbe56ad9459a4124b823c11457'
             '56316228bbbf0b7ebcbe210a35120f4e72cb9c1b680dd82cc2bde0f4549245e6')
 
 prepare() {
