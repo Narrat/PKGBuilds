@@ -1,0 +1,24 @@
+# Contributor: Lex Black <autumn-wind at web dot de>
+# Contributor: Lara Maia <lara@craft.net.br>
+
+pkgname='gimp-plugin-bimp'
+pkgver=1.11
+pkgrel=1
+pkgdesc='Batch Image Manipulation Plugin for GIMP.'
+arch=('x86_64' 'i686')
+url='http://www.alessandrofrancesconi.it/projects/bimp/'
+license=('GPL')
+depends=('gimp')
+source=(http://www.alessandrofrancesconi.it/projects/bimp/$pkgname.zip)
+md5sums=('1f9e3e69efcbe139b793f6f977a39b8c')
+
+
+build() {
+	make
+}
+
+package() {
+	mkdir -p "$pkgdir"/usr/lib/gimp/2.0/plug-ins/
+	cp "$srcdir"/bin/bimp "$pkgdir"/usr/lib/gimp/2.0/plug-ins/
+	cp -Rf "$srcdir"/bin/win32/bimp-locale/  "$pkgdir"/usr/lib/gimp/2.0/plug-ins/
+}
