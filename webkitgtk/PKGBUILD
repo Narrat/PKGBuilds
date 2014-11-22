@@ -1,24 +1,24 @@
-# $Id: PKGBUILD 216826 2014-07-11 21:54:26Z heftig $
+# $Id: PKGBUILD 225366 2014-10-26 09:00:20Z heftig $
 # Maintainer: Andreas Radke <andyrtr@archlinux.org>
 
 pkgbase=webkitgtk
 pkgname=(webkitgtk webkitgtk2)
-pkgver=2.4.6
-pkgrel=3
+pkgver=2.4.7
+pkgrel=1
 pkgdesc="GTK+ Web content engine library"
 arch=(i686 x86_64)
 url="http://webkitgtk.org/"
 license=(custom)
 depends=(libxt libxslt sqlite libsoup enchant libgl gst-plugins-base-libs
          libsecret libwebp harfbuzz-icu)
-makedepends=(gtk3 gtk2 gperf python2 mesa ruby)
+makedepends=(gtk3 gtk2 gperf gobject-introspection python2 mesa ruby)
 optdepends=('gst-plugins-base: free media decoding'
             'gst-plugins-good: media decoding'
             'gst-libav: nonfree media decoding')
 options=(!emptydirs)
 source=(http://webkitgtk.org/releases/$pkgbase-${pkgver}.tar.xz
         fix-pretty-quotes.patch)
-sha256sums=('6fef4aa8d4a2668e03ea15472a71396ea7b776bbe56ad9459a4124b823c11457'
+sha256sums=('f5cf26e39abf1d6b2d25f1398348fef6bbe6c03fb4f99e11c569091c05197d38'
             '56316228bbbf0b7ebcbe210a35120f4e72cb9c1b680dd82cc2bde0f4549245e6')
 
 prepare() {
@@ -38,6 +38,9 @@ _build() (
 
   ../$pkgbase-$pkgver/configure --prefix=/usr \
     --libexecdir=/usr/lib/webkit${_ver} \
+    --enable-introspection \
+    --disable-webkit2 \
+    --disable-gtk-doc \
     --disable-geolocation \
     "$@"
 
@@ -50,7 +53,7 @@ _build() (
 build() {
   PATH="$srcdir/path:$PATH"
 
-  _build gtk --disable-gtk-doc
+  _build gtk
   #_build gtk2 --disable-webkit2 --with-gtk=2.0
 }
 
