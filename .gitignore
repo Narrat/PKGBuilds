@@ -6,6 +6,7 @@
 *.zip
 *.part
 *.sig
+*.sign
 *.log
 *.scm
 */canto
