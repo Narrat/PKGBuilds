@@ -10,7 +10,7 @@ arch=('i686' 'x86_64')
 url="https://github.com/rlane/Oort"
 license=("GPL")
 depends=('glib2' 'gtk2' 'gtkglext' 'glew')
-makedepends=(automake-1.11)
+makedepends=('automake-1.11' 'boost' 'box2d')
 source=($_pkgname::git://github.com/rlane/Oort)
 md5sums=('SKIP')
 
