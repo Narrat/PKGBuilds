@@ -9,6 +9,7 @@
 *.sign
 *.log
 *.scm
+*/asp
 */canto
 */canto-curses
 */canto-next
