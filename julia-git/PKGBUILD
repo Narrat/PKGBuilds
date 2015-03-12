@@ -5,13 +5,13 @@
 _pkgbase=julia
 pkgbase=${_pkgbase}-git
 pkgname=('julia-git' 'julia-git-docs')
-pkgver=0.4.0.dev.3677.g46bcd77
+pkgver=0.4.0.dev.3792.gf54ba05
 pkgrel=1
 pkgdesc='High-level, high-performance, dynamic programming language'
 arch=('i686' 'x86_64')
 url="http://julialang.org"
 license=('GPL')
-makedepends=('gcc-fortran' 'arpack' 'fftw' 'git' 'gmp' 'libgit2' 'libunwind' 'llvm>=3.6' 'mpfr' 'pcre' 'suitesparse')
+makedepends=('gcc-fortran' 'arpack' 'fftw' 'git' 'gmp' 'libgit2' 'libunwind' 'llvm' 'mpfr' 'pcre' 'suitesparse')
 # Needed if building the documentation
 #makedepends+=('python2-sphinx' 'python2-sphinx_rtd_theme' 'python-pip' 'texlive-langcjk' 'texlive-latexextra')
 options=('!emptydirs')
