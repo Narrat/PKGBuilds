@@ -5,7 +5,7 @@
 pkgbase=linux               # Build stock -ARCH kernel
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
 _srcname=linux-4.0
-pkgver=4.0.1
+pkgver=4.0.2
 pkgrel=1
 arch=('i686' 'x86_64')
 url="http://www.kernel.org/"
@@ -25,11 +25,11 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/${_srcname}.tar.xz"
         'change-default-console-loglevel.patch')
 sha256sums=('0f2f7d44979bc8f71c4fc5d3308c03499c26a824dd311fdf6eef4dee0d7d5991'
             'SKIP'
-            '9b4b47eb6584dc39aaa5db46843b83f7c60975abecbda4dc106a8722eabe96fb'
+            'c879ac300e9c1c8d2433ad9c66be5d374d15cf2175ac9876fb22d7d53a6b2e3b'
             'SKIP'
-            '514aa8a9d03d2419c8084725fcdb2b5b4ce07966f5bd6a51224a5f7a5f8c3694'
-            'b268b03a042e3f604a12a80c6e24c42006e4d9bf4a6d9b3201eb006942718128'
-            '96aaeec405140dde2552d1128bf87c781d69d6122d56d09baa654a8f2ed772f6'
+            'c2bd1710d2bb35be10c02a63f19f13e2b70df022392067fa23dfe0478a76cb6e'
+            'a2dda5aeaf8e9fc7f0f6f6b345b9e959ea3d8cb1ef51aa5a5b807e3a15fa4cda'
+            '8dc1fb82d8b70d384d13c51a65c5d7c2c1f7a7cd276246402810215f077718af'
             '6c34a4c5d844f97ae4fa214ecfc341589f3acc4235eb7738ed4f9ae9ac95fd68'
             'f0d90e756f14533ee67afda280500511a62465b4f76adcc5effa95a40045179c'
             '1256b241cd477b265a3c2d64bdc19ffe3c9bbcee82ea3994c590c2c76e767d99')
