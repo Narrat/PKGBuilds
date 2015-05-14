@@ -1,0 +1,17 @@
+pkgbase = librmath
+	pkgdesc = Standalone lib from R
+	pkgver = 3.2.0
+	pkgrel = 1
+	url = http://www.r-project.org/
+	arch = i686
+	arch = x86_64
+	license = GPL
+	makedepends = gcc-fortran
+	conflicts = r
+	source = http://cran.r-project.org/src/base/R-3/R-3.2.0.tar.gz
+	source = R.conf
+	sha1sums = a6e9a6ca5ef186037a2f8ad2ccc8d7d0147640f1
+	sha1sums = 43668da6cfd1b4455a99f23e79e2059294dddac9
+
+pkgname = librmath
+
