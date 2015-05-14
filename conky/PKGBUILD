@@ -12,7 +12,7 @@ url='http://conky.sourceforge.net/'
 license=('BSD' 'GPL')
 arch=('i686' 'x86_64')
 makedepends=('docbook2x')
-depends=('glib2' 'curl' 'libxml2' 'libxft' 'libxdamage' 'imlib2')
+depends=('glib2' 'curl' 'lua' 'wireless_tools' 'libxml2' 'libxft' 'libxdamage' 'imlib2')
 source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}/${pkgver}/${pkgname}-${pkgver}.tar.gz")
 sha1sums=('a8d26d002370c9b877ae77ad3a3bbd2566b38e5d')
 
@@ -27,10 +27,11 @@ build() {
 		--sysconfdir=/etc \
 		--enable-curl \
 		--enable-imlib2 \
-		--disable-lua \
+		--enable-lua \
 		--enable-xmms2 \
 		--disable-moc \
 		--disable-mpd \
+		--enable-wlan
 
 	make
 }
