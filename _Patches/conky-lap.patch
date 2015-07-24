@@ -21,7 +21,7 @@ index 78b248f..7b50a6d 100644
  		-D BUILD_WEATHER_METAR=ON \
  		-D BUILD_WEATHER_XOAP=ON \
  		-D BUILD_WLAN=ON \
-+       -D BUILD_MPD=ON \
++		-D BUILD_MPD=ON \
  		-D CMAKE_INSTALL_PREFIX=/usr \
  		.
  
