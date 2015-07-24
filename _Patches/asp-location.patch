@@ -1,0 +1,23 @@
+commit d3bc146802dcb443335e76ac048a9a03abca342d
+Author: Narrat
+Date:   Fri Jul 24 02:25:04 2015 +0200
+
+    Change default storedir
+
+diff --git a/PKGBUILD b/PKGBUILD
+index ad86af8..c705bdc 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -21,6 +21,12 @@ pkgver() {
+   printf 'r%s.%s\n' "$(git rev-list HEAD | wc -l)" "$(git describe --always)"
+ }
+ 
++prepare() {
++  cd 'asp'
++
++  sed -i 'asp.in' -e 's#$HOME/asp#$HOME/Builds/ASP#'
++}
++
+ build() {
+   make -C asp
+ }

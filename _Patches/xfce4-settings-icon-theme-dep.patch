@@ -1,0 +1,45 @@
+commit e144f1b640885d50f66fce554368d45d700518ef
+Author: Narrat
+Date:   Wed May 13 20:08:40 2015 +0200
+
+    Change default icon theme to adwaita
+
+diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
+index 3836a7a..74fc631 100644
+--- a/trunk/PKGBUILD
++++ b/trunk/PKGBUILD
+@@ -12,18 +12,18 @@ url="http://www.xfce.org/"
+ license=('GPL2')
+ groups=('xfce4')
+ depends=('exo' 'garcon' 'libxfce4ui' 'libnotify' 'libxklavier'
+-         'gnome-icon-theme' 'gnome-themes-standard')
++         'adwaita-icon-theme' 'gnome-themes-standard')
+ makedepends=('intltool' 'xf86-input-libinput')
+ optdepends=('libcanberra: for sound control')
+ install=$pkgname.install
+ source=(http://archive.xfce.org/src/xfce/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2
+         default-xsettings-xml.patch)
+ sha256sums=('04becef105c19d0266cfe8dbf42619e7233c3b9fa99b43dbfc9c6a5959501f81'
+-            '1c4110fd5ce0f17564cda892b72d59a87b515fdb4580c7154bbb4c1979f5ade7')
++            '8e9a6c70ab0ceb5d91b637dc290768f8a47edb5d7b6e2eebc4459dbc4ee040d7')
+ prepare() {
+   cd "$srcdir/$pkgname-$pkgver"
+ 
+-  # Enable GNOME icon theme, Adwaita theme and font hinting by default
++  # Enable Adwaita theme and icon-theme and font hinting by default
+   patch -Np1 -i "$srcdir/default-xsettings-xml.patch"
+ }
+ 
+diff --git a/trunk/default-xsettings-xml.patch b/trunk/default-xsettings-xml.patch
+index d953941..914c736 100644
+--- a/trunk/default-xsettings-xml.patch
++++ b/trunk/default-xsettings-xml.patch
+@@ -8,7 +8,7 @@ diff -upr xfce4-settings-4.12.0.orig/xfsettingsd/xsettings.xml xfce4-settings-4.
+ -    <property name="ThemeName" type="empty"/>
+ -    <property name="IconThemeName" type="empty"/>
+ +    <property name="ThemeName" type="string" value="Adwaita"/>
+-+    <property name="IconThemeName" type="string" value="gnome"/>
+++    <property name="IconThemeName" type="string" value="Adwaita"/>
+      <property name="DoubleClickTime" type="int" value="400"/>
+      <property name="DoubleClickDistance" type="int" value="5"/>
+      <property name="DndDragThreshold" type="int" value="8"/>

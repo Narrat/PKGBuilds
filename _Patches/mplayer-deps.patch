@@ -1,0 +1,50 @@
+commit f785771e02d5edfc1b78609ce9d9a111ec81011f
+Author: Narrat
+Date:   Wed Jun 10 17:10:14 2015 +0200
+
+    Disable Samba
+    
+    and remove libcaca
+
+diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
+index 708a561..cb74762 100644
+--- a/trunk/PKGBUILD
++++ b/trunk/PKGBUILD
+@@ -10,7 +10,7 @@ pkgrel=3
+ arch=('i686' 'x86_64')
+ makedepends=(
+   'libxxf86dga' 'libxxf86vm' 'libmad' 'libxinerama' 'sdl' 'lame' 'libtheora'
+-  'xvidcore' 'libmng' 'libxss' 'libgl' 'smbclient' 'aalib' 'jack' 'libcaca'
++  'xvidcore' 'libmng' 'libxss' 'libgl' 'aalib' 'jack'
+   'faac' 'faad2' 'lirc'  'libxvmc' 'enca' 'libvdpau' 'opencore-amr'
+   'libdca' 'a52dec' 'schroedinger' 'libvpx' 'libpulse' 'fribidi' 'unzip' 'mesa'
+   'live-media' 'yasm' 'git' 'fontconfig' 'mpg123' 'ladspa' 'libass' 'libbluray'
+@@ -68,7 +68,7 @@ build() {
+     --enable-xvmc \
+     --enable-radio \
+     --enable-radio-capture \
+-    --enable-smb \
++    --disable-smb \
+     --language=all \
+     --confdir=/etc/mplayer
+   [[ "$CARCH" = "i686" ]] &&  sed 's|-march=i486|-march=i686|g' -i config.mak
+@@ -83,8 +83,8 @@ package_mplayer() {
+   depends=(
+     'desktop-file-utils' 'ttf-font' 'enca' 'libxss' 'a52dec' 'libvpx'
+     'lirc' 'libx264' 'libmng' 'libdca' 'aalib' 'lame' 'fontconfig'
+-    'libgl' 'libxinerama' 'libvdpau' 'libpulse' 'smbclient' 'xvidcore'
+-    'opencore-amr' 'jack' 'libmad' 'sdl' 'libtheora' 'libcaca' 'libxxf86dga'
++    'libgl' 'libxinerama' 'libvdpau' 'libpulse' 'xvidcore'
++    'opencore-amr' 'jack' 'libmad' 'sdl' 'libtheora' 'libxxf86dga'
+     'fribidi' 'libjpeg' 'faac' 'faad2' 'libxvmc' 'schroedinger' 'mpg123'
+     'libass' 'libxxf86vm' 'libbluray' 'libcdio-paranoia' 'opus' 'rtmpdump'
+     'gsm' 'gnutls' 'libdvdnav'
+@@ -107,7 +107,7 @@ package_mencoder() {
+   pkgdesc='Free command line video decoding, encoding and filtering tool'
+   depends=(
+     'enca' 'a52dec' 'libvpx' 'libx264' 'libmng' 'libdca' 'bzip2' 'lame'
+-    'alsa-lib' 'fontconfig' 'giflib' 'libpng' 'smbclient' 'xvidcore'
++    'alsa-lib' 'fontconfig' 'giflib' 'libpng' 'xvidcore'
+     'opencore-amr' 'libmad' 'libtheora' 'fribidi' 'libjpeg' 'faac' 'faad2'
+     'schroedinger' 'mpg123' 'libass' 'libbluray' 'libcdio-paranoia'
+     'libvorbis' 'opus' 'rtmpdump' 'gsm' 'libdvdnav'

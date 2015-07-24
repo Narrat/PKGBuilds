@@ -1,0 +1,19 @@
+commit 8966b60e5e13a50e088a831e1cb5995626188e24
+Author: Narrat
+Date:   Sun Jul 19 20:41:38 2015 +0200
+
+    Remove themes I don't want
+
+diff --git a/PKGBUILD b/PKGBUILD
+index 9c90f3a..3e7930f 100755
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -28,7 +28,7 @@ md5sums=('f697ed1b0e18a63c5c99db877749a913')
+ # luteus         - orange gradient                           #
+ ##############################################################
+ 
+-_buildtheme=(violaceus lux_violaceus canus dark_canus caeruleus lux_caeruleus viridis luteus)
++_buildtheme=(dark_canus caeruleus lux_caeruleus)
+ 
+ build() {
+  for _theme in ${_buildtheme[*]}; do

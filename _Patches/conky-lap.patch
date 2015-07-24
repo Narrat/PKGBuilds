@@ -1,0 +1,27 @@
+commit e75fc20ed973f1b24ec954a901f07935537842a1
+Author: Narrat <autumn-wind@web.de>
+Date:   Fri Jul 24 13:18:08 2015 +0200
+
+    add mpd to conky
+
+diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
+index 78b248f..7b50a6d 100644
+--- a/trunk/PKGBUILD
++++ b/trunk/PKGBUILD
+@@ -12,7 +12,7 @@ url='http://conky.sourceforge.net/'
+ license=('BSD' 'GPL')
+ arch=('i686' 'x86_64')
+ makedepends=('cmake' 'docbook2x' 'docbook-xml' 'man-db')
+-depends=('glib2' 'curl' 'lua' 'wireless_tools' 'libxml2' 'libxft' 'libxdamage' 'imlib2')
++depends=('glib2' 'curl' 'lua' 'wireless_tools' 'libxml2' 'libxft' 'libxdamage' 'imlib2' 'mpd')
+ source=("https://github.com/brndnmtthws/conky/archive/v${pkgver}.tar.gz"
+         'ascii.patch'
+         'lua53.patch'
+@@ -47,6 +47,7 @@ build() {
+ 		-D BUILD_WEATHER_METAR=ON \
+ 		-D BUILD_WEATHER_XOAP=ON \
+ 		-D BUILD_WLAN=ON \
++       -D BUILD_MPD=ON \
+ 		-D CMAKE_INSTALL_PREFIX=/usr \
+ 		.
+ 

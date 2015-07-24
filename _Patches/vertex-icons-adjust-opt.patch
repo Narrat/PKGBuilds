@@ -1,0 +1,29 @@
+commit d18a0e0bd79f7ba7c01cc15f9c787d9f0e586e9b
+Author: Narrat
+Date:   Fri Jul 24 12:32:49 2015 +0200
+
+    Change to custom fallbacks
+
+diff --git a/PKGBUILD b/PKGBUILD
+index 830dea4..2a572e8 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -11,15 +11,15 @@
+ # Note that most of the time "hicolor" should be always given as
+ # last possible fall-back icon theme, as it will be always present.
+ #
+-_inherits=''
++_inherits='nouveGnome,Adwaita,hicolor'
+ 
+ pkgname='vertex-icons-git'
+ pkgdesc='A Gnome icon theme to match the Vertex Gtk theme'
+ pkgver=r16.f27e47e
+ pkgrel=3
+ url='https://github.com/horst3180/Vertex-Icons/'
+-optdepends=('moka-icon-theme-git: Default fall-back icon theme'
+-            'faba-mono-icons-git: Default fall-back icon theme')
++optdepends=('nouvegnome-icon-theme: First custom fall-back icon theme'
++            'adwaita-icon-theme: Second custom fall-back icon theme')
+ arch=('any')
+ license='GPL'
+ source=("${pkgname}::git://github.com/horst3180/Vertex-Icons.git")
