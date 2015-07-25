@@ -1,28 +1,28 @@
-commit 1128296ca8c6a8543e3e374a9d3f5c5b3ffde386
+commit d6dc6bd0654a2a22c42f912a6050c90467bd82a0
 Author: Narrat
 Date:   Fri Jul 24 13:36:32 2015 +0200
 
     Remove bluez-libs
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index ebc374f..5d06f7b 100644
+index 845a83a..cadc351 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -7,7 +7,7 @@ arch=('i686' 'x86_64')
  license=('GPL2' 'LGPL2.1')
  url="http://wiki.qemu.org/Index.html"
  makedepends=('pixman' 'libjpeg' 'libpng' 'sdl' 'alsa-lib' 'nss' 'glib2'
--             'gnutls>=2.4.1' 'bluez-libs' 'vde2' 'util-linux' 'curl' 'libsasl'
-+             'gnutls>=2.4.1' 'vde2' 'util-linux' 'curl' 'libsasl'
+-             'gnutls' 'bluez-libs' 'vde2' 'util-linux' 'curl' 'libsasl'
++             'gnutls' 'vde2' 'util-linux' 'curl' 'libsasl'
               'libgl' 'libpulse' 'seabios' 'libcap-ng' 'libaio' 'libseccomp'
               'libiscsi' 'libcacard' 'spice' 'spice-protocol' 'python2'
-              'usbredir' 'ceph')
-@@ -41,7 +41,7 @@ build ()
+              'usbredir' 'ceph' 'glusterfs' 'libssh2' 'lzo')
+@@ -42,7 +42,7 @@ build ()
  package_qemu() {
    pkgdesc="A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation."
    depends=('pixman' 'libjpeg' 'libpng' 'sdl' 'alsa-lib' 'nss' 'glib2'
--         'gnutls>=2.4.1' 'bluez-libs' 'vde2' 'util-linux' 'curl' 'libsasl'
-+         'gnutls>=2.4.1' 'vde2' 'util-linux' 'curl' 'libsasl'
+-         'gnutls' 'bluez-libs' 'vde2' 'util-linux' 'curl' 'libsasl'
++         'gnutls' 'vde2' 'util-linux' 'curl' 'libsasl'
           'libgl' 'libpulse' 'seabios' 'libcap-ng' 'libaio' 'libseccomp'
-          'libiscsi' 'libcacard' 'spice' 'usbredir' 'libssh2>=1.5.0' 'ceph')
+          'libcacard' 'spice' 'usbredir' 'lzo')
    backup=('etc/qemu/target-x86_64.conf')
