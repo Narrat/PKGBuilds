@@ -1,28 +1,28 @@
-commit d6dc6bd0654a2a22c42f912a6050c90467bd82a0
+commit 6c416c7c80820cc43f0480739c236a4c9005bd8b
 Author: Narrat
 Date:   Fri Jul 24 13:36:32 2015 +0200
 
     Remove bluez-libs
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 845a83a..cadc351 100644
+index 500a8c9..d5b23e3 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -7,7 +7,7 @@ arch=('i686' 'x86_64')
+@@ -14,7 +14,7 @@ arch=('i686' 'x86_64')
  license=('GPL2' 'LGPL2.1')
- url="http://wiki.qemu.org/Index.html"
+ url='http://wiki.qemu.org/'
  makedepends=('pixman' 'libjpeg' 'libpng' 'sdl' 'alsa-lib' 'nss' 'glib2'
 -             'gnutls' 'bluez-libs' 'vde2' 'util-linux' 'curl' 'libsasl'
 +             'gnutls' 'vde2' 'util-linux' 'curl' 'libsasl'
               'libgl' 'libpulse' 'seabios' 'libcap-ng' 'libaio' 'libseccomp'
               'libiscsi' 'libcacard' 'spice' 'spice-protocol' 'python2'
-              'usbredir' 'ceph' 'glusterfs' 'libssh2' 'lzo')
-@@ -42,7 +42,7 @@ build ()
+              'usbredir' 'ceph' 'glusterfs' 'libssh2' 'lzo' 'snappy')
+@@ -62,7 +62,7 @@ build ()
  package_qemu() {
-   pkgdesc="A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation."
-   depends=('pixman' 'libjpeg' 'libpng' 'sdl' 'alsa-lib' 'nss' 'glib2'
--         'gnutls' 'bluez-libs' 'vde2' 'util-linux' 'curl' 'libsasl'
-+         'gnutls' 'vde2' 'util-linux' 'curl' 'libsasl'
-          'libgl' 'libpulse' 'seabios' 'libcap-ng' 'libaio' 'libseccomp'
-          'libcacard' 'spice' 'usbredir' 'lzo')
-   backup=('etc/qemu/target-x86_64.conf')
+   pkgdesc='A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation'
+   depends=('glibc' 'pixman' 'libjpeg' 'libpng' 'sdl' 'alsa-lib' 'nss' 'glib2'
+-           'gnutls' 'bluez-libs' 'vde2' 'util-linux' 'libsasl' 'mesa-libgl'
++           'gnutls' 'vde2' 'util-linux' 'libsasl' 'mesa-libgl'
+            'seabios' 'libcap' 'libcap-ng' 'libaio' 'libseccomp' 'libcacard'
+            'spice' 'usbredir' 'lzo' 'snappy' 'gcc-libs' 'zlib' 'bzip2' 'nspr'
+            'ncurses' 'libx11' 'libusb' 'libpulse' 'libssh2' 'curl')
