@@ -1,11 +1,11 @@
-commit 6c416c7c80820cc43f0480739c236a4c9005bd8b
+commit 797c684c94eb58b50c8cb8b52d1355431749ac00
 Author: Narrat
 Date:   Fri Jul 24 13:36:32 2015 +0200
 
     Remove bluez-libs
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 500a8c9..d5b23e3 100644
+index 570f318..763204f 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -14,7 +14,7 @@ arch=('i686' 'x86_64')
@@ -21,8 +21,8 @@ index 500a8c9..d5b23e3 100644
  package_qemu() {
    pkgdesc='A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation'
    depends=('glibc' 'pixman' 'libjpeg' 'libpng' 'sdl' 'alsa-lib' 'nss' 'glib2'
--           'gnutls' 'bluez-libs' 'vde2' 'util-linux' 'libsasl' 'mesa-libgl'
-+           'gnutls' 'vde2' 'util-linux' 'libsasl' 'mesa-libgl'
+-           'gnutls' 'bluez-libs' 'vde2' 'util-linux' 'libsasl' 'libgl'
++           'gnutls' 'vde2' 'util-linux' 'libsasl' 'libgl'
             'seabios' 'libcap' 'libcap-ng' 'libaio' 'libseccomp' 'libcacard'
             'spice' 'usbredir' 'lzo' 'snappy' 'gcc-libs' 'zlib' 'bzip2' 'nspr'
             'ncurses' 'libx11' 'libusb' 'libpulse' 'libssh2' 'curl')
