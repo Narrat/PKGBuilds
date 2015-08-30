@@ -1,0 +1,21 @@
+commit 6c87d3f0c1bcb9b2c02bbe92ef35198068ab586a
+Author: Narrat
+Date:   Mon Aug 3 17:47:24 2015 +0200
+
+    Remove gnome-icon-theme from deps
+
+diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
+index 476aea6..b8f1bcc 100644
+--- a/trunk/PKGBUILD
++++ b/trunk/PKGBUILD
+@@ -11,8 +11,9 @@ pkgrel=1
+ arch=(i686 x86_64)
+ url="http://freedesktop.org/software/pulseaudio/pavucontrol/"
+ license=(GPL)
+-depends=(gnome-icon-theme libcanberra-pulse gtkmm3 libsigc++)
++depends=(libcanberra-pulse gtkmm3 libsigc++)
+ makedepends=(intltool lynx)
++optdepends=("vertex-icon-theme: .desktop wants multimedia-volume-control")
+ source=($url/$pkgname-$pkgver.tar.xz)
+ sha256sums=('b3d2ea5a25fc88dcee80c396014f72df1b4742f8cfbbc5349c39d64a0d338890')
+ 
