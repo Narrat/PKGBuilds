@@ -1,4 +1,4 @@
-commit af66e872a34d1bae4ad541557862246eb3bfb253
+commit bb56a1ae4ce308e71e8e8c9f5e96e8a3a030701f
 Author: Narrat
 Date:   Tue Jul 21 19:53:19 2015 +0200
 
@@ -7,16 +7,15 @@ Date:   Tue Jul 21 19:53:19 2015 +0200
     and removed provides line
 
 diff --git a/PKGBUILD b/PKGBUILD
-index 9dbb894..0dbed32 100644
+index 483bd4e..1e2298d 100644
 --- a/PKGBUILD
 +++ b/PKGBUILD
-@@ -10,8 +10,7 @@ _releasever=20150718
+@@ -10,7 +10,7 @@ _releasever=20150923
  arch=('any')
  url='http://horst3180.deviantart.com/art/Vertex-Theme-470663601'
  license=('GPL3')
 -depends=('gtk-engine-murrine')
--provides=('vertex-themes')
 +optdepends=('gtk-engine-murrine: For the GTK2 theme')
  conflicts=('vertex-themes-git')
  source=("${pkgname}-${_releasever}.tar.gz::https://github.com/horst3180/Vertex-theme/archive/${_releasever}.tar.gz")
- sha256sums=('b947d7e975a101dbde902104102ee7b007cc2ed65133ad14e7ef1c1eeea17b4d')
+ sha256sums=('8484edaf1e9324676a9ebe76c58bb46e0aacbe289a3ee40d01f717e8fde3eb51')
