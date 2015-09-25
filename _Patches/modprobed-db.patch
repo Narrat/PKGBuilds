@@ -1,0 +1,73 @@
+commit 8d6a65d4301bceb46323b8e7200520ba1fc545af
+Author: Narrat <autumn-wind@web.de>
+Date:   Tue Sep 22 21:33:53 2015 +0200
+
+    Customize the timer
+    
+    Just enabling the timer starts everything.
+    (Didn't want to place them locally (Easier to follow upstream changes))
+
+diff --git a/PKGBUILD b/PKGBUILD
+index c6e4722..ee28062 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -10,10 +10,18 @@ optdepends=('sudo: needed to recall modules via a call to modprobe')
+ replaces=('modprobed_db')
+ conflicts=('modprobed_db')
+ url="https://wiki.archlinux.org/index.php/Modprobed-db"
+-source=("http://repo-ck.com/source/$pkgname/$pkgname-$pkgver.tar.xz")
+-sha256sums=('5f8a719088a8646b1f4b9f9d34b2f7110168137ae17b6d4b74c440b2f29d649e')
++source=("http://repo-ck.com/source/$pkgname/$pkgname-$pkgver.tar.xz"
++        "modprobed-db-units.patch")
++sha256sums=('5f8a719088a8646b1f4b9f9d34b2f7110168137ae17b6d4b74c440b2f29d649e'
++            'a99b30a3e0d7ad64217cd5cd831ae245ef6df8592b963572536afca14d411b3f')
+ install=readme.install
+ 
++
++prepare() {
++	cd "$pkgname-$pkgver"
++    patch -Np1 -i $srcdir/modprobed-db-units.patch
++}
++
+ build() {
+ 	cd "$pkgname-$pkgver"
+ 	make
+diff --git a/modprobed-db-units.patch b/modprobed-db-units.patch
+new file mode 100644
+index 0000000..3b2ec0c
+--- /dev/null
++++ b/modprobed-db-units.patch
+@@ -0,0 +1,33 @@
++commit be0507dedb748968d5f1ec666d20ff847b218b0c
++Author: Narrat <autumn-wind@web.de>
++Date:   Tue Sep 22 21:14:45 2015 +0200
++
++    Add OnBootSec to the timer
++    
++    This activates the .service file after one hour and then OnUnitActive resumes everything.
++    The effect is, only the timer needs to be started/enabled
++
++diff --git a/init/modprobed-db.service b/init/modprobed-db.service
++index f92aba8..7b7e501 100644
++--- a/init/modprobed-db.service
+++++ b/init/modprobed-db.service
++@@ -8,6 +8,3 @@ Wants=modprobed-db.timer
++ [Service]
++ Type=simple
++ ExecStart=/usr/bin/modprobed-db storesilent
++-
++-[Install]
++-WantedBy=default.target
++diff --git a/init/modprobed-db.timer b/init/modprobed-db.timer
++index a41a018..aeba4d7 100644
++--- a/init/modprobed-db.timer
+++++ b/init/modprobed-db.timer
++@@ -3,4 +3,8 @@ Description=Timer for modprobed-db - 1Hour
++ PartOf=modprobed-db.service
++ 
++ [Timer]
+++OnBootSec=1h
++ OnUnitActiveSec=1h
+++
+++[Install]
+++WantedBy=timers.target
