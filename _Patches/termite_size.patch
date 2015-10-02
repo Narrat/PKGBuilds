@@ -1,35 +1,14 @@
-commit edbb3c0f1d2e3e1006ad5f7ba8a9b7749cfeca75
-Author: Narrat
+commit 49df720068e0d2ff7139f70b9c4e94ae5d23018f
+Author: Narrat <autumn-wind@web.de>
 Date:   Sun Aug 30 11:20:14 2015 +0200
 
-    Circumvent some quirks until upstream decides how to solve
-    
-     Patches by saivert
+    Fix unneeded spacing and add ctrl to opening links
 
-diff --git a/0001_termite_size.diff b/0001_termite_size.diff
-new file mode 100644
-index 0000000..e6c8af4
---- /dev/null
-+++ b/0001_termite_size.diff
-@@ -0,0 +1,13 @@
-+--- a/termite.cc
-++++ a/termite.cc
-+@@ -221,8 +221,8 @@
-+     static const GdkWindowHints wh = (GdkWindowHints)(GDK_HINT_RESIZE_INC | GDK_HINT_MIN_SIZE | GDK_HINT_BASE_SIZE);
-+     GdkGeometry hints;
-+ 
-+-    hints.base_width = char_width;
-+-    hints.base_height = char_height;
-++    hints.base_width = char_width + 2;
-++    hints.base_height = char_height + 2;
-+     hints.min_width = char_width;
-+     hints.min_height = char_height;
-+     hints.width_inc  = char_width;
-diff --git a/0002_additional_button_for_url.diff b/0002_additional_button_for_url.diff
+diff --git a/trunk/0002_additional_button_for_url.diff b/trunk/0002_additional_button_for_url.diff
 new file mode 100644
 index 0000000..c29e797
 --- /dev/null
-+++ b/0002_additional_button_for_url.diff
++++ b/trunk/0002_additional_button_for_url.diff
 @@ -0,0 +1,11 @@
 +--- a/termite.cc
 ++++ a/termite.cc
@@ -42,10 +21,10 @@ index 0000000..c29e797
 +         auto match = make_unique(check_match(vte, (int)event->x, (int)event->y), g_free);
 +         if (!match)
 +             return FALSE;
-diff --git a/PKGBUILD b/PKGBUILD
-index 3f52447..dca95ce 100644
---- a/PKGBUILD
-+++ b/PKGBUILD
+diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
+index 3f52447..0fb8910 100644
+--- a/trunk/PKGBUILD
++++ b/trunk/PKGBUILD
 @@ -11,8 +11,19 @@ license=('LGPL')
  depends=('vte3-ng')
  makedepends=('git')
@@ -53,16 +32,16 @@ index 3f52447..dca95ce 100644
 -source=("git://github.com/thestinger/termite#tag=v$pkgver")
 -md5sums=('SKIP')
 +source=("git://github.com/thestinger/termite#tag=v$pkgver"
-+        "0001_termite_size.diff"
 +        "0002_additional_button_for_url.diff")
 +md5sums=('SKIP'
-+         '98bc2d154c5a61e535df1e74e55c1bb7'
 +         '6fc4a5a22a1d655e16641ae4cab130e2')
 +
 +
 +prepare() {
 +  cd $pkgname
-+  patch -Np1 -i $srcdir/0001_termite_size.diff
++  # Fix unneeded spacing
++  git cherry-pick ba63e3c
++  # Add additional button for opening links
 +  patch -Np1 -i $srcdir/0002_additional_button_for_url.diff
 +}
  
