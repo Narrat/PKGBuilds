@@ -1,4 +1,4 @@
-commit feb7a01d31b3c53c2a5c6931f04d352825d1fb3f
+commit 8f5d3eb370a9a01c909845230222d94f428e429f
 Author: Narrat
 Date:   Thu May 28 17:08:00 2015 +0200
 
@@ -9,7 +9,7 @@ Date:   Thu May 28 17:08:00 2015 +0200
     So I disabled all the stuff
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index b24d56d..8000c80 100644
+index ae697b6..1846f09 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -12,7 +12,7 @@ arch=('i686' 'x86_64')
@@ -19,9 +19,9 @@ index b24d56d..8000c80 100644
 -             'libidn' 'libgadu' 'python2' 'hicolor-icon-theme' 'farstream-0.1'
 +             'libidn' 'libgadu' 'python2' 'hicolor-icon-theme'
               'avahi' 'tk' 'ca-certificates' 'intltool' 'networkmanager')
- source=(https://downloads.sourceforge.net/project/$pkgname/Pidgin/$pkgver/$pkgname-$pkgver.tar.bz2{,.asc})
- sha256sums=('f2ae211341fc77efb9945d40e9932aa535cdf3a6c8993fe7919fca8cc1c04007'
-@@ -38,6 +38,9 @@ build() {
+ source=(https://downloads.sourceforge.net/project/$pkgname/Pidgin/$pkgver/$pkgname-$pkgver.tar.bz2)
+ sha256sums=('f2ae211341fc77efb9945d40e9932aa535cdf3a6c8993fe7919fca8cc1c04007')
+@@ -37,6 +37,9 @@ build() {
      --disable-gnutls \
      --enable-cyrus-sasl \
      --disable-doxygen \
@@ -31,7 +31,7 @@ index b24d56d..8000c80 100644
      --enable-nm \
      --with-python=/usr/bin/python2 \
      --with-system-ssl-certs=/etc/ssl/certs
-@@ -67,7 +70,7 @@ package_pidgin(){
+@@ -66,7 +69,7 @@ package_pidgin(){
  
  package_libpurple(){
    pkgdesc="IM library extracted from Pidgin"
@@ -40,7 +40,7 @@ index b24d56d..8000c80 100644
    optdepends=('avahi: Bonjour protocol support'
                'ca-certificates: SSL CA certificates'
                'python2-dbus: for purple-remote and purple-url-handler'
-@@ -80,8 +83,8 @@ package_libpurple(){
+@@ -79,8 +82,8 @@ package_libpurple(){
    done
  
    # Remove GConf schema file
