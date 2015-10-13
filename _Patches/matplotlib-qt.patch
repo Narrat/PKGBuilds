@@ -1,14 +1,14 @@
-commit ea3f73f024841762529e2281f38be2dfabea9752
+commit ff52a10c3f7215294e6cbc50e6bcbbf9a3a8e27c
 Author: Narrat
-Date:   Fri Jul 24 13:33:26 2015 +0200
+Date:   Fri Oct 2 18:15:44 2015 +0200
 
     Remove QT deps and disable build of py2 version
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index d3d4673..b1cd0db 100644
+index 556653f..c88e14b 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -13,19 +13,21 @@ pkgdesc="A python plotting library, making publication quality plots"
+@@ -13,24 +13,26 @@ pkgdesc="A python plotting library, making publication quality plots"
  arch=('i686' 'x86_64')
  url='http://matplotlib.org'
  license=('custom')
@@ -21,7 +21,7 @@ index d3d4673..b1cd0db 100644
 -             'python2-pyparsing' 'pygtk' 'python-six' 'ghostscript' 'texlive-bin'
 -             'python-tornado' 'python2-tornado' 'gtk3' 'wxpython' 'python-pyqt5' 'python2-pyqt5'
 -             'libxkbcommon-x11' 'python-pillow' 'python2-pillow')
--source=("$pkgbase-$pkgver.tar.gz::https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz")
+-source=("$pkgbase-$pkgver.tar.gz::https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz"
 +#checkdepends+=('python2-nose' 'python2-mock')
 +makedepends=('python-pytz' 'python-numpy' 'tk' 'python-cairocffi' 'python-dateutil'
 +             'python-gobject' 'python-pyparsing' 'python-six' 'ghostscript' 'texlive-bin'
@@ -29,17 +29,22 @@ index d3d4673..b1cd0db 100644
 +# Python2 deps
 +#makedepends+=('python2-pytz' 'python2-numpy' 'python2-cairocffi' 'python2-gobject'
 +#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'wxpython')
-+source=("https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz")
- sha512sums=('4aebbda31934bedbee5206b783e5cbe07db17367d50117a50bb80b7ea4aad987ec225958bed58885c561f00582c309d6e8c0a69861d3b4210a09b2d63975d2aa')
++source=("https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz"
+         fix-numpy-warning.patch)
+ sha512sums=('4aebbda31934bedbee5206b783e5cbe07db17367d50117a50bb80b7ea4aad987ec225958bed58885c561f00582c309d6e8c0a69861d3b4210a09b2d63975d2aa'
+             '5cfb8458c1b71f853cc1571fc0e4c8e3ebcf555f24a043a9b94f023e16dca8aa700339646783453918b0dc986de0f9d622f6e04ca785882ce189247b7f7a60b3')
  
 +
  prepare() {
+    # https://github.com/matplotlib/matplotlib/commit/5e8fb6213394ee27ea0d5ff6337ef6efd3e9c667
+    (cd matplotlib-${pkgver}; patch -p1 -i ../fix-numpy-warning.patch)
+ 
 -   cp -a matplotlib-${pkgver} matplotlib-${pkgver}-py2
 +   #cp -a matplotlib-${pkgver} matplotlib-${pkgver}-py2
  
     cd matplotlib-${pkgver}
     for file in $(find . -name '*.py' -print); do
-@@ -33,11 +35,11 @@ prepare() {
+@@ -38,11 +40,11 @@ prepare() {
               -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python3|" ${file}
     done
  
@@ -56,7 +61,7 @@ index d3d4673..b1cd0db 100644
  }
  
  build() {
-@@ -48,8 +50,8 @@ build() {
+@@ -53,8 +55,8 @@ build() {
     cd matplotlib-${pkgver}
     python3 setup.py build
  
@@ -67,7 +72,7 @@ index d3d4673..b1cd0db 100644
  }
  
  check() {
-@@ -62,42 +64,41 @@ check() {
+@@ -67,42 +69,41 @@ check() {
         python ../matplotlib-${pkgver}/tests.py -sv --processes=8 --process-timeout=300 || warning "Tests failed"
     )
  
@@ -102,6 +107,12 @@ index d3d4673..b1cd0db 100644
 -               'python2-gobject: for GTK3Agg/GTK3Cairo backend'
 -               'wxpython: for WX/WXAgg backend'
 -               'python2-pillow: for reading/saving .jpg/bmp/tiff files')
+-
+-   cd matplotlib-${pkgver}-py2
+-   python2 setup.py install -O1 --skip-build --root "${pkgdir}" --prefix=/usr
+-
+-   install -dm755 "${pkgdir}"/usr/share/licenses/python2-matplotlib
+-   install -m 644 doc/users/license.rst "${pkgdir}"/usr/share/licenses/python2-matplotlib
 +   #depends=('python2-pytz' 'python2-numpy' 'python2-dateutil' 'python2-pyparsing' 'libxkbcommon-x11')
 +   #optdepends=('pygtk: for GTK/GTKAgg/GTKCairo backend'
 +    #           'python2-cairo: for GTKCairo/GTK3Cairo backend'
@@ -113,14 +124,10 @@ index d3d4673..b1cd0db 100644
 +    #           'python2-gobject: for GTK3Agg/GTK3Cairo backend'
 +    #           'wxpython: for WX/WXAgg backend'
 +    #           'python2-pillow: for reading/saving .jpg/bmp/tiff files')
- 
--   cd matplotlib-${pkgver}-py2
--   python2 setup.py install -O1 --skip-build --root "${pkgdir}" --prefix=/usr
++
 +   #cd matplotlib-${pkgver}-py2
 +   #python2 setup.py install -O1 --skip-build --root "${pkgdir}" --prefix=/usr
- 
--   install -dm755 "${pkgdir}"/usr/share/licenses/python2-matplotlib
--   install -m 644 doc/users/license.rst "${pkgdir}"/usr/share/licenses/python2-matplotlib
++
 +   #install -dm755 "${pkgdir}"/usr/share/licenses/python2-matplotlib
 +   #install -m 644 doc/users/license.rst "${pkgdir}"/usr/share/licenses/python2-matplotlib
 +   msg2 "Nothing to see"
