@@ -1,22 +1,22 @@
-commit ef7a9ee4edf6181aab594a0b2f03cf59189d54bf
+commit e40df543bb96ca2e25b638a045dd328fc62c9dd0
 Author: Narrat
-Date:   Fri Aug 21 13:51:12 2015 +0200
+Date:   Fri Oct 2 20:02:30 2015 +0200
 
     QT stays opt, gnuplot replaces fltk
     
     Which removes the native backend fltk from depends and disable it at buildtime. So for plot commands to be working gnuplot is needed, therefor the move from opt to regular deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 5132829..2e3ee70 100644
+index ca4a660..ad22aa4 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -10,10 +10,10 @@ pkgdesc="A high-level language, primarily intended for numerical computations."
  arch=('i686' 'x86_64')
  url="http://www.octave.org"
  license=('GPL')
--depends=('fftw' 'curl' 'graphicsmagick' 'glpk' 'hdf5' 'qhull' 'fltk' 'arpack' 'glu' 'ghostscript' 'suitesparse' 'gl2ps' 'qscintilla')
+-depends=('fftw' 'curl' 'graphicsmagick' 'glpk' 'hdf5' 'qhull' 'fltk' 'arpack' 'glu' 'ghostscript' 	   'suitesparse' 'gl2ps' 'qscintilla' 'libsndfile')
 -makedepends=('gcc-fortran' 'texlive-core' 'suitesparse' 'texinfo' 'gnuplot' 'qscintilla')
-+depends=('fftw' 'curl' 'graphicsmagick' 'gnuplot' 'glpk' 'hdf5' 'qhull' 'arpack' 'glu' 'ghostscript' 'suitesparse' 'gl2ps')
++depends=('fftw' 'curl' 'graphicsmagick' 'gnuplot' 'glpk' 'hdf5' 'qhull' 'arpack' 'glu' 'ghostscript' 'suitesparse' 'gl2ps' 'libsndfile')
 +makedepends=('gcc-fortran' 'texlive-core' 'suitesparse' 'texinfo' 'qscintilla')
  optdepends=('texinfo: for help-support in octave'
 -            'gnuplot: alternative plotting')
