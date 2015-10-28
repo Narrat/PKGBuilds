@@ -1,14 +1,14 @@
-commit ff52a10c3f7215294e6cbc50e6bcbbf9a3a8e27c
+commit 70e7e53d5364bac1299dc35f6e4612492c8fb262
 Author: Narrat
 Date:   Fri Oct 2 18:15:44 2015 +0200
 
     Remove QT deps and disable build of py2 version
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 556653f..c88e14b 100644
+index e9377dd..6c4b9da 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -13,24 +13,26 @@ pkgdesc="A python plotting library, making publication quality plots"
+@@ -13,25 +13,26 @@ pkgdesc="A python plotting library, making publication quality plots"
  arch=('i686' 'x86_64')
  url='http://matplotlib.org'
  license=('custom')
@@ -20,15 +20,16 @@ index 556653f..c88e14b 100644
 -             'python2-dateutil' 'python-gobject' 'python2-gobject' 'python-pyparsing'
 -             'python2-pyparsing' 'pygtk' 'python-six' 'ghostscript' 'texlive-bin'
 -             'python-tornado' 'python2-tornado' 'gtk3' 'wxpython' 'python-pyqt5' 'python2-pyqt5'
--             'libxkbcommon-x11' 'python-pillow' 'python2-pillow')
+-             'libxkbcommon-x11' 'python-pillow' 'python2-pillow' 'python-setuptools'
+-             'python2-setuptools')
 -source=("$pkgbase-$pkgver.tar.gz::https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz"
 +#checkdepends+=('python2-nose' 'python2-mock')
 +makedepends=('python-pytz' 'python-numpy' 'tk' 'python-cairocffi' 'python-dateutil'
 +             'python-gobject' 'python-pyparsing' 'python-six' 'ghostscript' 'texlive-bin'
-+             'python-tornado' 'gtk3' 'libxkbcommon-x11' 'python-pillow')
++             'python-tornado' 'gtk3' 'libxkbcommon-x11' 'python-pillow' 'python-setuptools')
 +# Python2 deps
 +#makedepends+=('python2-pytz' 'python2-numpy' 'python2-cairocffi' 'python2-gobject'
-+#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'wxpython')
++#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'python2-setuptools' 'wxpython')
 +source=("https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz"
          fix-numpy-warning.patch)
  sha512sums=('4aebbda31934bedbee5206b783e5cbe07db17367d50117a50bb80b7ea4aad987ec225958bed58885c561f00582c309d6e8c0a69861d3b4210a09b2d63975d2aa'
@@ -44,7 +45,7 @@ index 556653f..c88e14b 100644
  
     cd matplotlib-${pkgver}
     for file in $(find . -name '*.py' -print); do
-@@ -38,11 +40,11 @@ prepare() {
+@@ -39,11 +40,11 @@ prepare() {
               -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python3|" ${file}
     done
  
@@ -61,7 +62,7 @@ index 556653f..c88e14b 100644
  }
  
  build() {
-@@ -53,8 +55,8 @@ build() {
+@@ -54,8 +55,8 @@ build() {
     cd matplotlib-${pkgver}
     python3 setup.py build
  
@@ -72,7 +73,7 @@ index 556653f..c88e14b 100644
  }
  
  check() {
-@@ -67,42 +69,41 @@ check() {
+@@ -68,42 +69,41 @@ check() {
         python ../matplotlib-${pkgver}/tests.py -sv --processes=8 --process-timeout=300 || warning "Tests failed"
     )
  
