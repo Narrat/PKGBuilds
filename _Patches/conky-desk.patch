@@ -1,23 +1,24 @@
-commit e75fc20ed973f1b24ec954a901f07935537842a1
+commit 4830207fade6ef2ca4b7e2928503da7c544eee03
 Author: Narrat
-Date:   Fri Jul 24 13:18:08 2015 +0200
+Date:   Thu Aug 6 13:01:02 2015 +0200
 
     add mpd to conky and remove wireless_tools
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 78b248f..7b50a6d 100644
+index b4e2a2f..66e1d33 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -12,7 +12,7 @@ url='http://conky.sourceforge.net/'
+@@ -12,7 +12,7 @@ url='https://github.com/brndnmtthws/conky'
  license=('BSD' 'GPL')
  arch=('i686' 'x86_64')
- makedepends=('cmake' 'docbook2x' 'docbook-xml' 'man-db')
+ makedepends=('cmake' 'docbook2x' 'docbook-xml' 'man-db' 'git')
 -depends=('glib2' 'curl' 'lua' 'wireless_tools' 'libxml2' 'libxft' 'libxdamage' 'imlib2')
 +depends=('glib2' 'curl' 'lua' 'libxml2' 'libxft' 'libxdamage' 'imlib2' 'mpd')
  source=("https://github.com/brndnmtthws/conky/archive/v${pkgver}.tar.gz"
-         'ascii.patch'
-         'lua53.patch'
-@@ -47,6 +47,7 @@ build() {
+         'lua53.patch')
+ sha1sums=('97b59ec1daf54126b30516e8663a9cf1f218d8ae'
+@@ -37,7 +37,8 @@ build() {
+ 		-D BUILD_RSS=ON \
  		-D BUILD_WEATHER_METAR=ON \
  		-D BUILD_WEATHER_XOAP=ON \
 -		-D BUILD_WLAN=ON \
