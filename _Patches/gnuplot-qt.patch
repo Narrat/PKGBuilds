@@ -1,11 +1,11 @@
-commit 4de25c9f87254d50e91bd4be5353220f277fb55c
+commit 532865d0aa4a3d8b477f5a5d9c1776b8eca090ae
 Author: Narrat
-Date:   Fri Jul 24 13:29:23 2015 +0200
+Date:   Fri Oct 2 19:45:06 2015 +0200
 
     Remove qt deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index d4befc9..7277044 100644
+index 2eba58f..e585d2f 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -10,7 +10,7 @@ pkgdesc="Plotting package which outputs to X11, PostScript, PNG, GIF, and others
@@ -17,12 +17,13 @@ index d4befc9..7277044 100644
  makedepends=('texinfo' 'texlive-core' 'emacs' 'texlive-latexextra')
  options=('!makeflags')
  install=gnuplot.install
-@@ -38,7 +38,7 @@ build() {
+@@ -38,7 +38,8 @@ build() {
    WX_CONFIG=/usr/bin/wx-config ./configure --prefix=/usr \
                --libexecdir=/usr/bin \
                --with-gihdir=/usr/share/gnuplot \
 -              --with-readline=gnu --enable-qt
-+              --with-readline=gnu
++              --with-readline=gnu \
++              --with-qt=no
    make pkglibexecdir=/usr/bin
  }
  
