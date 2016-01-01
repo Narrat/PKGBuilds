@@ -1,0 +1,248 @@
+commit c4c05d119fbbb569f7dfbbea92f32e5cafe28ec3
+Author: Narrat
+Date:   Sat Nov 21 22:04:59 2015 +0100
+
+    dunstify
+
+diff --git a/PKGBUILD b/PKGBUILD
+index c5344e4..a5bb10f 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -10,10 +10,17 @@ optdepends=('libnotify: to display volume and mute status')
+ conflicts=('pulseaudio_ctl')
+ replaces=('pulseaudio_ctl')
+ url=https://github.com/graysky2/pulseaudio-ctl
+-source=("http://repo-ck.com/source/$pkgname/$pkgname-$pkgver.tar.xz")
+-sha256sums=('ec4aefed97241928fea8bc03e61abc7d46b5d1919f99dc19876d533729e8cdb8')
++source=("http://repo-ck.com/source/$pkgname/$pkgname-$pkgver.tar.xz"
++        "dunstify.patch")
++sha256sums=('ec4aefed97241928fea8bc03e61abc7d46b5d1919f99dc19876d533729e8cdb8'
++            'ba34c8439f1ca8d71b4e26c81e36613f56b032092c055d3638f3c9627b8e2bef')
+ install=readme.install
+ 
++prepare() {
++	cd "$pkgname-$pkgver"
++	patch -Np1 -i $srcdir/dunstify.patch
++}
++
+ build() {
+ 	cd "$pkgname-$pkgver"
+ 	make
+diff --git a/dunstify.patch b/dunstify.patch
+new file mode 100644
+index 0000000..d1e1184
+--- /dev/null
++++ b/dunstify.patch
+@@ -0,0 +1,212 @@
++commit 96695509691a7de316d35d83fd4bf471f124ddf4
++Author: Narrat <autumn-wind@web.de>
++Date:   Fri Jan 1 19:16:17 2016 +0100
++
++    Allow the use of dunstify
++    
++    Option enabled alternative to notify-send.
++    Major improvement for my previous hack, where I simply replaced notify-send commands
++
++diff --git a/common/config.skel b/common/config.skel
++index 8a096f1..5a1131f 100644
++--- a/common/config.skel
+++++ b/common/config.skel
++@@ -6,7 +6,7 @@
++ # above 100 % but Some users may wish exceed this level. If this describes
++ # your use case, uncomment the UPPER_THRESHOLD variable below setting it to
++ # the new upper threshold.
++-# 
+++#
++ #UPPER_THRESHOLD=150
++ 
++ # Push output through libnotify. Set to any value to enable this feature
++@@ -15,6 +15,10 @@
++ #
++ #NOTIFY=yes
++ 
+++# Alternative to notify-send with dunstify
+++# notify-send and dunstify are mutually exclusive. Either x or y
+++#DOTIFY=yes
+++
++ # Show a graphical progress-bar type visualization of the volume level in
++ # libnotify. No setting or commented out will show a simply percentage but
++ # a setting will convert the percentage to a progress-bar in libnotify.
++diff --git a/common/pulseaudio-ctl.in b/common/pulseaudio-ctl.in
++index 42a98cc..6919fa8 100644
++--- a/common/pulseaudio-ctl.in
+++++ b/common/pulseaudio-ctl.in
++@@ -92,7 +92,7 @@ checkconfig() {
++ 
++   case "${NOTIFY,,}" in
++     y|yes|true|t|on|1|enabled|enable|use)
++-      USEN=1
+++      USENO=1
++       command -v notify-send >/dev/null 2>&1 || {
++       echo "You wish to use notifications but I require notify-send but it's not installed." >&2
++       echo "Modify $CONFIG or install the package that provides it. Aborting." >&2
++@@ -102,7 +102,20 @@ checkconfig() {
++       USEN=0
++       ;;
++   esac
++-  
+++
+++  case "${DOTIFY,,}" in
+++    y|yes|true|t|on|1|enabled|enable|use)
+++      USEDO=1
+++      command -v dunstify >/dev/null 2>&1 || {
+++      echo "You wish to use notifications but I require dunstify but it's not installed." >&2
+++      echo "Modify $CONFIG or install the package that provides it. Aborting." >&2
+++      exit 1; }
+++      ;;
+++    *)
+++      USEN=0
+++      ;;
+++  esac
+++
++   case "${BARCHART,,}" in
++     y|yes|true|t|on|1|enabled|enable|use)
++       USEB=1
++@@ -130,7 +143,7 @@ checkconfig() {
++ refreshcurvol() {
++   # this worked some versions of PA 4 but is no longer valid with v5
++   # CURVOL=$(pacmd list-sinks|grep -A 15 '* index'| awk '/base volume: /{ print $5 }'|sed 's/%//')
++-  [[ $PCV -eq 0 ]] && 
+++  [[ $PCV -eq 0 ]] &&
++   CURVOL=$(pacmd list-sinks|grep -A 15 '* index'| awk '/volume: /{ print $3 }' | grep -m 1 % |sed 's/[%|,]//g') ||
++     CURVOL=$(pacmd list-sinks|grep -A 15 '* index'| awk '/volume: front/{ print $5 }' | sed 's/[%|,]//g')
++ }
++@@ -154,7 +167,7 @@ setup() {
++   SOURCE=$(pacmd list-sources|awk '/\* index:/{ print $3 }')
++   MUTED=$(pacmd list-sinks|grep -A 15 '* index'|awk '/muted:/{ print $2 }')
++   SOURCE_MUTED=$(pacmd list-sources|grep -A 15 '* index'|awk '/muted:/{ print $2 }')
++-  
+++
++   refreshcurvol # sets CURVOL ahead of integer check
++ 
++   # check that extracted vars are integers
++@@ -169,6 +182,30 @@ setup() {
++   done
++ }
++ 
+++setup_notifier() {
+++  # Check for the used program to send notifications
+++  if [[ $USENO -eq 1 ]]; then
+++    SEND=notify-send
+++    HINT=--hint
+++    SID="/dev/null"
+++    idvol=''
+++    idmute=''
+++    USEN=1
+++  fi
+++
+++  if [[ $USEDO -eq 1 ]]; then
+++    SEND="dunstify -p -r"
+++    HINT=--hints
+++
+++    # check that /tmp/pulseaudio-ctl exists and write a value into them (else it fails)
+++    if [ ! -f /tmp/pulseaudio-ctl-vol ]; then
+++      echo 0 > /tmp/pulseaudio-ctl-vol
+++      echo 0 > /tmp/pulseaudio-ctl-mute
+++    fi
+++    USEN=1
+++  fi
+++}
+++
++ kde_osd() {
++   dbus-send --session --dest="org.freedesktop.Notifications" --type="method_call" "/org/kde/osdService" "org.kde.osdService.volumeChanged" "int32:$1"
++ }
++@@ -179,9 +216,25 @@ kde_osd_mic() {
++ 
++ checkconfig
++ setup
++-# checks if exist a valid $2 
+++setup_notifier
+++# checks if exist a valid $2
++ PERC=5
++-[[ -n "$2" ]] && [[ $(is_integer "${2%%%}") == '1' ]] && PERC=${2%%%} 
+++[[ -n "$2" ]] && [[ $(is_integer "${2%%%}") == '1' ]] && PERC=${2%%%}
+++
+++case "$1" in
+++  M|m|[M,m]u|[M,m]ute|[M,m]i|[M,m]ute-[I,i]nput)
+++    if [[ $USEDO -eq 1 ]]; then
+++      idmute=$(head -n1 /tmp/pulseaudio-ctl-mute)
+++      SID="/tmp/pulseaudio-ctl-mute"
+++    fi
+++    ;;
+++  U|u|[U,u]p|D|d|[D,d]own|[D,d]o|set|atmost|C|c|[C,c]urrent|[F,f]s|[F,f]ull-[S,s]tatus|*)
+++    if [[ $USEDO -eq 1 ]]; then
+++      idvol=$(head -n1 /tmp/pulseaudio-ctl-vol)
+++      SID="/tmp/pulseaudio-ctl-vol"
+++    fi
+++    ;;
+++esac
++ 
++ case "$1" in
++   U|u|[U,u]p)
++@@ -198,8 +251,8 @@ case "$1" in
++     refreshbarvolperc
++     if [[ $USEN -eq 1 ]]; then
++       [[ $USEB -eq 1 ]] &&
++-        notify-send -t 1000 -i multimedia-volume-control --hint=int:transient:1 --hint=int:value:$UPPER_THRESHOLD_AWARE_VOL --hint=string:synchronous:volume "Volume up $PERC %" "" ||
++-        notify-send -t 1000 --hint=int:transient:1 "Volume up $PERC%" "Current is $CURVOL %" --icon=multimedia-volume-control
+++        ${SEND} ${idvol} -t 1000 -i multimedia-volume-control ${HINT}=int:transient:1 ${HINT}=int:value:$UPPER_THRESHOLD_AWARE_VOL ${HINT}=string:synchronous:volume "Volume up $PERC %" "" > ${SID} ||
+++        ${SEND} ${idvol} -t 1000 ${HINT}=int:transient:1 "Volume up $PERC%" "Current is $CURVOL %" --icon=multimedia-volume-control > ${SID}
++     fi
++     [[ $USEK -eq 1 ]] &&
++       kde_osd $CURVOL
++@@ -216,8 +269,8 @@ case "$1" in
++     refreshbarvolperc
++     if [[ $USEN -eq 1 ]]; then
++       [[ $USEB -eq 1 ]] &&
++-        notify-send -t 1000 -i multimedia-volume-control --hint=int:transient:1 --hint=int:value:$UPPER_THRESHOLD_AWARE_VOL --hint=string:synchronous:volume "Volume down $PERC %" "" ||
++-        notify-send -t 1000 --hint=int:transient:1 "Volume down $PERC%" "Current is $CURVOL %" --icon=multimedia-volume-control
+++        ${SEND} ${idvol} -t 1000 -i multimedia-volume-control ${HINT}=int:transient:1 ${HINT}=int:value:$UPPER_THRESHOLD_AWARE_VOL ${HINT}=string:synchronous:volume "Volume down $PERC %" "" > ${SID} ||
+++        ${SEND} ${idvol} -t 1000 ${HINT}=int:transient:1 "Volume down $PERC%" "Current is $CURVOL %" --icon=multimedia-volume-control > ${SID}
++     fi
++     [[ $USEK -eq 1 ]] &&
++       kde_osd $CURVOL
++@@ -227,7 +280,7 @@ case "$1" in
++     pactl set-sink-mute "$SINK" toggle
++     MUTED=$(pacmd list-sinks|grep -A 15 '* index'|awk '/muted:/{ print $2 }')
++     [[ $USEN -eq 1 ]] &&
++-      notify-send -t 1000 --hint=int:transient:1 "Mute toggle" "Muted: $MUTED" --icon=audio-volume-muted
+++      ${SEND} ${idmute} -t 1000 ${HINT}=int:transient:1 "Mute toggle" "Muted: $MUTED" --icon=audio-volume-muted > ${SID}
++     if [[ $USEK -eq 1 ]]; then
++       if [[ $MUTED == "yes" ]]; then
++         kde_osd 0
++@@ -242,7 +295,7 @@ case "$1" in
++     pactl set-source-mute "$SOURCE" toggle
++     SOURCE_MUTED=$(pacmd list-sources|grep -A 15 '* index'|awk '/muted:/{ print $2 }')
++     [[ $USEN -eq 1 ]] &&
++-      notify-send -t 1000 --hint=int:transient:1 "Mute toggle" "Muted: $SOURCE_MUTED" --icon=audio-volume-muted
+++      ${SEND} ${idmute} -t 1000 ${HINT}=int:transient:1 "Mute toggle" "Muted: $SOURCE_MUTED" --icon=audio-volume-muted > ${SID}
++     if [[ $USEK -eq 1 ]]; then
++       if [[ $SOURCE_MUTED == "yes" ]]; then
++         kde_osd_mic 0
++@@ -262,7 +315,7 @@ case "$1" in
++       esac
++     refreshcurvol
++     [[ $USEN -eq 1 ]] &&
++-      notify-send -t 1000 --hint=int:transient:1 "Volume set" "Level: $CURVOL" --icon=multimedia-volume-control
+++      ${SEND} ${idvol} -t 1000 ${HINT}=int:transient:1 "Volume set" "Level: $CURVOL" --icon=multimedia-volume-control > ${SID}
++     [[ $USEK -eq 1 ]] &&
++       kde_osd $CURVOL
++     ;;
++@@ -277,7 +330,7 @@ case "$1" in
++       esac
++     refreshcurvol
++     [[ $USEN -eq 1 ]] &&
++-      notify-send -t 1000 --hint=int:transient:1 "Atmost set" "Level: $CURVOL" --icon=multimedia-volume-control
+++      ${SEND} ${idvol} -t 1000 ${HINT}=int:transient:1 "Atmost set" "Level: $CURVOL" --icon=multimedia-volume-control > ${SID}
++     [[ $USEK -eq 1 ]] &&
++       kde_osd $CURVOL
++     ;;
++@@ -293,7 +346,7 @@ case "$1" in
++   *)
++     # send to notify-send if enabled
++     [[ $USEN -eq 1 ]] &&
++-      notify-send -t 8000 --hint=int:transient:1 "Pulseaudio Settings" "Volume level     : $CURVOL %\nIs sink muted    : $MUTED\nIs source muted  : $SOURCE_MUTED\nDetected sink    : $SINK\nDetected source  : $SOURCE\nPulse version    : $PAVERSION" --icon=multimedia-volume-control
+++      ${SEND} ${idvol} -t 8000 ${HINT}=int:transient:1 "Pulseaudio Settings" "Volume level     : $CURVOL %\nIs sink muted    : $MUTED\nIs source muted  : $SOURCE_MUTED\nDetected sink    : $SINK\nDetected source  : $SOURCE\nPulse version    : $PAVERSION" --icon=multimedia-volume-control > ${SID}
++     # add pretty colors for mute status for CLI only
++     [[ "$MUTED" = "yes" ]] && MUTED="${NRM}${RED}$MUTED${NRM}" ||
++       MUTED="${NRM}${GRN}$MUTED${NRM}"
