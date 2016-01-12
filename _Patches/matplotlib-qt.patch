@@ -1,11 +1,11 @@
-commit 09abac90bf5fbdfa86b32af22ab65166eea92cbe
+commit a8841cea50b1ca6872611bf78910c73100c15143
 Author: Narrat
 Date:   Fri Oct 2 18:15:44 2015 +0200
 
     Remove QT deps and disable build of py2 version
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 3da03b0..7c46d50 100644
+index bec4151..fca545b 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -13,21 +13,21 @@ pkgdesc="A python plotting library, making publication quality plots"
@@ -13,25 +13,26 @@ index 3da03b0..7c46d50 100644
  url='http://matplotlib.org'
  license=('custom')
 -checkdepends=('python-nose' 'python2-nose' 'python-mock' 'python2-mock' 'xorg-server-xvfb'
-+checkdepends=('python-nose' 'python-mock'  'xorg-server-xvfb'
-               'texlive-core' 'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape')
+-              'texlive-core' 'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape'
+-              'pep8' 'python2-pep8' 'python-pandas' 'python2-pandas')
 -makedepends=('python2-pytz' 'python2-numpy' 'python2-pyqt4' 'python-pytz' 'python-numpy'
 -             'python-pyqt4' 'tk' 'python-cairocffi' 'python2-cairocffi' 'python-dateutil'
 -             'python2-dateutil' 'python-gobject' 'python2-gobject' 'python-pyparsing'
 -             'python2-pyparsing' 'pygtk' 'python-six' 'ghostscript' 'texlive-bin'
 -             'python-tornado' 'python2-tornado' 'gtk3' 'wxpython' 'python-pyqt5' 'python2-pyqt5'
 -             'libxkbcommon-x11' 'python-pillow' 'python2-pillow' 'python-setuptools'
--             'python2-setuptools' 'python-cycler' 'python2-cycler' 'pep8' 'python2-pep8'
--             'python-pandas' 'python2-pandas')
-+#checkdepends+=('python2-nose' 'python2-mock')
+-             'python2-setuptools' 'python-cycler' 'python2-cycler')
++checkdepends=('python-nose' 'python-mock'  'xorg-server-xvfb'
++              'texlive-core' 'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape' 'pep8' 'python-pandas')
++#checkdepends+=('python2-nose' 'python2-mock' 'python2-pep8' 'python2-pandas')
 +makedepends=('python-pytz' 'python-numpy' 'tk' 'python-cairocffi' 'python-dateutil'
 +             'python-gobject' 'python-pyparsing' 'python-six' 'ghostscript' 'texlive-bin'
-+             'python-tornado' 'gtk3' 'libxkbcommon-x11' 'python-pillow' 'python-setuptools' 'python-cycler' 'pep8' 'python-pandas')
++             'python-tornado' 'gtk3' 'libxkbcommon-x11' 'python-pillow' 'python-setuptools' 'python-cycler')
 +# Python2 deps
 +#makedepends+=('python2-pytz' 'python2-numpy' 'python2-cairocffi' 'python2-gobject'
-+#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'python2-setuptools' 'python2-cycler' 'python2-pep8' 'python2-pandas' 'wxpython')
++#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'python2-setuptools' 'python2-cycler' 'wxpython')
  source=("$pkgbase-$pkgver.tar.gz::https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz")
- sha512sums=('4096515f70410e5c86f86497ae566793c751eca01ec3197e0b710e6097280b7e1617535fdb565c3fbcec6dd747be49d12295163716439a9936f8f091b6861c0c')
+ sha512sums=('82df20b18d4008ffed2b7098cbfede109a1054c995b5683b384adbdac62371b9fbb776fd735adf2e5f03d3ba0c2fed869f2f54b0bb1e969e82af5110613b0149')
  
 +
  prepare() {
