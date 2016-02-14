@@ -1,8 +1,8 @@
-commit 49df720068e0d2ff7139f70b9c4e94ae5d23018f
+commit 6e7b76d21cbe8f67a1e2019f42eb976601e9bb96
 Author: Narrat <autumn-wind@web.de>
-Date:   Sun Aug 30 11:20:14 2015 +0200
+Date:   Sun Feb 14 02:25:15 2016 +0200
 
-    Fix unneeded spacing and add ctrl to opening links
+    Add ctrl to opening links
 
 diff --git a/trunk/0002_additional_button_for_url.diff b/trunk/0002_additional_button_for_url.diff
 new file mode 100644
@@ -22,10 +22,10 @@ index 0000000..c29e797
 +         if (!match)
 +             return FALSE;
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 3f52447..0fb8910 100644
+index 64bbb16..d660160 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -11,8 +11,19 @@ license=('LGPL')
+@@ -11,8 +11,17 @@ license=('LGPL')
  depends=('vte3-ng')
  makedepends=('git')
  backup=(etc/xdg/termite/config)
@@ -39,8 +39,6 @@ index 3f52447..0fb8910 100644
 +
 +prepare() {
 +  cd $pkgname
-+  # Fix unneeded spacing
-+  git cherry-pick ba63e3c
 +  # Add additional button for opening links
 +  patch -Np1 -i $srcdir/0002_additional_button_for_url.diff
 +}
