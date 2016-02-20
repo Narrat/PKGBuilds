@@ -1,14 +1,14 @@
-commit a8841cea50b1ca6872611bf78910c73100c15143
+commit 831e2150a329ed3d2b4962a0e949e8334f68cb73
 Author: Narrat
-Date:   Fri Oct 2 18:15:44 2015 +0200
+Date:   Sat Feb 20 19:01:25 2016 +0200
 
     Remove QT deps and disable build of py2 version
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index bec4151..fca545b 100644
+index 2789048..a813bab 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -13,21 +13,21 @@ pkgdesc="A python plotting library, making publication quality plots"
+@@ -13,23 +13,22 @@ pkgdesc="A python plotting library, making publication quality plots"
  arch=('i686' 'x86_64')
  url='http://matplotlib.org'
  license=('custom')
@@ -31,49 +31,69 @@ index bec4151..fca545b 100644
 +# Python2 deps
 +#makedepends+=('python2-pytz' 'python2-numpy' 'python2-cairocffi' 'python2-gobject'
 +#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'python2-setuptools' 'python2-cycler' 'wxpython')
- source=("$pkgbase-$pkgver.tar.gz::https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz")
- sha512sums=('82df20b18d4008ffed2b7098cbfede109a1054c995b5683b384adbdac62371b9fbb776fd735adf2e5f03d3ba0c2fed869f2f54b0bb1e969e82af5110613b0149')
+ source=("$pkgbase-$pkgver.tar.gz::https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz"
+         setup.cfg)
+ sha512sums=('da99fffcb4fb600ed4386ce89e61725768d4209f3bd4ab174e0d8474c24b2736516a4299ceaa0714b276d7d02c3e33e39a6204e014569ec3f6249085b1ba7a0d'
+             '493a08914755d7d27d98025fc309f19cc3ec45e777fc81a56fa50430f90c0b39c2f66c2a01f6fd14a2e351005151365a25d2ab71ae2e80a54c6f57ceeacea35b')
  
-+
  prepare() {
--   cp -a matplotlib-${pkgver} matplotlib-${pkgver}-py2
-+   #cp -a matplotlib-${pkgver} matplotlib-${pkgver}-py2
+-   cp -a "$srcdir"/matplotlib-${pkgver}{,-py2}
++   #cp -a "$srcdir"/matplotlib-${pkgver}{,-py2}
  
-    cd matplotlib-${pkgver}
+    cd "$srcdir"/matplotlib-${pkgver}
     for file in $(find . -name '*.py' -print); do
-@@ -35,11 +35,11 @@ prepare() {
+@@ -37,18 +36,18 @@ prepare() {
               -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python3|" ${file}
     done
  
--   cd ../matplotlib-${pkgver}-py2
+-   cd "$srcdir"/matplotlib-${pkgver}-py2
 -   for file in $(find . -name '*.py' -print); do
 -      sed -i -e "s|^#!.*/usr/bin/python|#!/usr/bin/python2|" \
 -             -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python2|" ${file}
 -   done
-+   #cd ../matplotlib-${pkgver}-py2
++   #cd "$srcdir"/matplotlib-${pkgver}-py2
 +   #for file in $(find . -name '*.py' -print); do
 +      #sed -i -e "s|^#!.*/usr/bin/python|#!/usr/bin/python2|" \
 +             #-e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python2|" ${file}
 +   #done
+ 
+    cp -a "$srcdir"/matplotlib-${pkgver}{,-test}
+-   cp -a "$srcdir"/matplotlib-${pkgver}-py2{,-test}
++   #cp -a "$srcdir"/matplotlib-${pkgver}-py2{,-test}
+ 
+    # Remove tests (FS#48175)
+    cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver/
+-   cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-py2/
++   #cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-py2/
  }
  
  build() {
-@@ -50,8 +50,8 @@ build() {
-    cd matplotlib-${pkgver}
+@@ -59,16 +58,16 @@ build() {
+    cd "$srcdir"/matplotlib-${pkgver}
     python3 setup.py build
  
--   cd ../matplotlib-${pkgver}-py2
+-   cd "$srcdir"/matplotlib-${pkgver}-py2
 -   python2 setup.py build
-+   #cd ../matplotlib-${pkgver}-py2
++   #cd "$srcdir"/matplotlib-${pkgver}-py2
 +   #python2 setup.py build
  }
  
  check() {
-@@ -64,42 +64,41 @@ check() {
+    cd "$srcdir"/matplotlib-${pkgver}-test
+    python3 setup.py build
+ 
+-   cd "$srcdir"/matplotlib-${pkgver}-py2-test
+-   python2 setup.py build
++   #cd "$srcdir"/matplotlib-${pkgver}-py2-test
++   #python2 setup.py build
+ 
+    cd "$srcdir"/matplotlib-${pkgver}-test
+    (
+@@ -79,42 +78,41 @@ check() {
         python ../matplotlib-${pkgver}/tests.py -sv --processes=8 --process-timeout=300 || warning "Tests failed"
     )
  
--   cd ../matplotlib-${pkgver}-py2
+-   cd "$srcdir"/matplotlib-${pkgver}-py2-test
 -   (
 -     export PYTHONPATH="$PWD/build/lib.linux-$CARCH-2.7:$PYTHONPATH"
 -     python2 -c "from matplotlib import font_manager"
@@ -81,7 +101,7 @@ index bec4151..fca545b 100644
 -     xvfb-run -a -s "+extension GLX +extension RANDR +render -screen 0 1280x1024x24" \
 -       python2 ../matplotlib-${pkgver}-py2/tests.py -sv --processes=8 --process-timeout=300 || warning "Tests failed"
 -   )
-+   #cd ../matplotlib-${pkgver}-py2
++   #cd "$srcdir"/matplotlib-${pkgver}-py2-test
 +   #(
 +     #export PYTHONPATH="$PWD/build/lib.linux-$CARCH-2.7:$PYTHONPATH"
 +     #python2 -c "from matplotlib import font_manager"
@@ -104,6 +124,12 @@ index bec4151..fca545b 100644
 -               'python2-gobject: for GTK3Agg/GTK3Cairo backend'
 -               'wxpython: for WX/WXAgg backend'
 -               'python2-pillow: for reading/saving .jpg/bmp/tiff files')
+-
+-   cd matplotlib-${pkgver}-py2
+-   python2 setup.py install -O1 --skip-build --root "${pkgdir}" --prefix=/usr
+-
+-   install -dm755 "${pkgdir}"/usr/share/licenses/python2-matplotlib
+-   install -m 644 doc/users/license.rst "${pkgdir}"/usr/share/licenses/python2-matplotlib
 +   #depends=('python2-pytz' 'python2-numpy' 'python2-dateutil' 'python2-pyparsing' 'python2-cycler' 'libxkbcommon-x11')
 +   #optdepends=('pygtk: for GTK/GTKAgg/GTKCairo backend'
 +    #           'python2-cairo: for GTKCairo/GTK3Cairo backend'
@@ -115,14 +141,10 @@ index bec4151..fca545b 100644
 +    #           'python2-gobject: for GTK3Agg/GTK3Cairo backend'
 +    #           'wxpython: for WX/WXAgg backend'
 +    #           'python2-pillow: for reading/saving .jpg/bmp/tiff files')
- 
--   cd matplotlib-${pkgver}-py2
--   python2 setup.py install -O1 --skip-build --root "${pkgdir}" --prefix=/usr
++
 +   #cd matplotlib-${pkgver}-py2
 +   #python2 setup.py install -O1 --skip-build --root "${pkgdir}" --prefix=/usr
- 
--   install -dm755 "${pkgdir}"/usr/share/licenses/python2-matplotlib
--   install -m 644 doc/users/license.rst "${pkgdir}"/usr/share/licenses/python2-matplotlib
++
 +   #install -dm755 "${pkgdir}"/usr/share/licenses/python2-matplotlib
 +   #install -m 644 doc/users/license.rst "${pkgdir}"/usr/share/licenses/python2-matplotlib
 +   msg2 "Nothing to see"
