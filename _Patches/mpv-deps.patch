@@ -1,11 +1,11 @@
-commit 83e9a3e61c63bb0d49927681ff4b76fd78ea0e65
+commit 977ff1a14136a1a77fcc4672f86829f145f18bac
 Author: Narrat
-Date:   Fri Oct 2 19:41:27 2015 +0200
+Date:   Sat Feb 27 17:51:31 2016 +0100
 
     Disable samba support
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 443e270..890f88c 100644
+index e77d6ce..9b14af9 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -15,7 +15,7 @@ depends=(
@@ -13,7 +13,7 @@ index 443e270..890f88c 100644
    'libxinerama' 'libxv' 'libxkbcommon' 'libva' 'wayland' 'libcaca'
    'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils' 'lua52' 'libdvdnav'
 -  'libxrandr' 'jack' 'smbclient' 'rubberband'
-+  libxrandr' 'jack' 'rubberband'
++  'libxrandr' 'jack' 'rubberband'
  )
  makedepends=('mesa' 'python-docutils' 'ladspa' 'hardening-wrapper')
  optdepends=('youtube-dl: for video-sharing websites playback')
