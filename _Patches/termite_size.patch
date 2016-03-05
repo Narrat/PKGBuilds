@@ -1,6 +1,6 @@
-commit 6e7b76d21cbe8f67a1e2019f42eb976601e9bb96
+commit 6d5d03ccbed916d605fa718f64f79d3ea5f60ed9
 Author: Narrat <autumn-wind@web.de>
-Date:   Sun Feb 14 02:25:15 2016 +0200
+Date:   Sat Mar 5 13:09:18 2016 +0100
 
     Add ctrl to opening links
 
@@ -22,13 +22,13 @@ index 0000000..c29e797
 +         if (!match)
 +             return FALSE;
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 64bbb16..d660160 100644
+index c8129d8..6857d83 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -11,8 +11,17 @@ license=('LGPL')
- depends=('vte3-ng')
- makedepends=('git')
- backup=(etc/xdg/termite/config)
+@@ -8,8 +8,17 @@ arch=('i686' 'x86_64')
+ url="https://github.com/thestinger/termite/"
+ license=('LGPL')
+ makedepends=('git' 'vte3-ng' 'ncurses')
 -source=("git://github.com/thestinger/termite#tag=v$pkgver")
 -md5sums=('SKIP')
 +source=("git://github.com/thestinger/termite#tag=v$pkgver"
@@ -44,4 +44,4 @@ index 64bbb16..d660160 100644
 +}
  
  build() {
-   cd $pkgname
+   cd $pkgbase
