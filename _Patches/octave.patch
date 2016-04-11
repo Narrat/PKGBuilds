@@ -1,22 +1,24 @@
-commit e40df543bb96ca2e25b638a045dd328fc62c9dd0
+commit cdb4ed355303de4835dbb5bf1d403b6b34c852d4
 Author: Narrat
-Date:   Fri Oct 2 20:02:30 2015 +0200
+Date:   Mon Apr 11 17:56:54 2016 +0200
 
     QT stays opt, gnuplot replaces fltk
     
     Which removes the native backend fltk from depends and disable it at buildtime. So for plot commands to be working gnuplot is needed, therefor the move from opt to regular deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index ca4a660..ad22aa4 100644
+index 8e26b2d..12e46fd 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -10,10 +10,10 @@ pkgdesc="A high-level language, primarily intended for numerical computations."
+@@ -10,11 +10,11 @@ pkgdesc="A high-level language, primarily intended for numerical computations."
  arch=('i686' 'x86_64')
  url="http://www.octave.org"
  license=('GPL')
--depends=('fftw' 'curl' 'graphicsmagick' 'glpk' 'hdf5' 'qhull' 'fltk' 'arpack' 'glu' 'ghostscript' 	   'suitesparse' 'gl2ps' 'qscintilla' 'libsndfile')
+-depends=('fftw' 'curl' 'graphicsmagick' 'glpk' 'hdf5' 'qhull' 'fltk' 'arpack' 'glu' 'ghostscript'
+- 	   'suitesparse' 'gl2ps' 'qscintilla' 'libsndfile')
 -makedepends=('gcc-fortran' 'texlive-core' 'suitesparse' 'texinfo' 'gnuplot' 'qscintilla')
-+depends=('fftw' 'curl' 'graphicsmagick' 'gnuplot' 'glpk' 'hdf5' 'qhull' 'arpack' 'glu' 'ghostscript' 'suitesparse' 'gl2ps' 'libsndfile')
++depends=('fftw' 'curl' 'graphicsmagick' 'gnuplot' 'glpk' 'hdf5' 'qhull' 'arpack' 'glu' 'ghostscript'
++ 	   'suitesparse' 'gl2ps' 'libsndfile')
 +makedepends=('gcc-fortran' 'texlive-core' 'suitesparse' 'texinfo' 'qscintilla')
  optdepends=('texinfo: for help-support in octave'
 -            'gnuplot: alternative plotting')
@@ -24,7 +26,7 @@ index ca4a660..ad22aa4 100644
  source=(ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.xz{,.sig})
  options=('!emptydirs')
  install=octave.install
-@@ -30,6 +30,7 @@ build() {
+@@ -31,6 +31,7 @@ build() {
    --enable-shared --disable-static \
    --with-quantum-depth=16 \
    --with-umfpack="-lumfpack -lsuitesparseconfig"  \
