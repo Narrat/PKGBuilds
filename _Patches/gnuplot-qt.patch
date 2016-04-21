@@ -1,11 +1,11 @@
-commit 532865d0aa4a3d8b477f5a5d9c1776b8eca090ae
+commit b0638fdbfbc7c831f7f99bd2413532b055086bb9
 Author: Narrat
-Date:   Fri Oct 2 19:45:06 2015 +0200
+Date:   Thu Apr 21 18:05:11 2016 +0200
 
     Remove qt deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 2eba58f..e585d2f 100644
+index 1e99f85..45e5d42 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -10,7 +10,7 @@ pkgdesc="Plotting package which outputs to X11, PostScript, PNG, GIF, and others
@@ -21,9 +21,9 @@ index 2eba58f..e585d2f 100644
    WX_CONFIG=/usr/bin/wx-config ./configure --prefix=/usr \
                --libexecdir=/usr/bin \
                --with-gihdir=/usr/share/gnuplot \
--              --with-readline=gnu --enable-qt
+-              --with-readline=gnu --enable-qt \
 +              --with-readline=gnu \
-+              --with-qt=no
++              --with-qt=no \
+               --with-bitmap-terminals
    make pkglibexecdir=/usr/bin
  }
- 
