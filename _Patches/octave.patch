@@ -1,4 +1,4 @@
-commit cdb4ed355303de4835dbb5bf1d403b6b34c852d4
+commit 9e97b90d24ebddabb41b0e08f46f90832a6d9158
 Author: Narrat
 Date:   Mon Apr 11 17:56:54 2016 +0200
 
@@ -7,7 +7,7 @@ Date:   Mon Apr 11 17:56:54 2016 +0200
     Which removes the native backend fltk from depends and disable it at buildtime. So for plot commands to be working gnuplot is needed, therefor the move from opt to regular deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 8e26b2d..12e46fd 100644
+index 47323f6..2db2ecc 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -10,11 +10,11 @@ pkgdesc="A high-level language, primarily intended for numerical computations."
@@ -23,10 +23,10 @@ index 8e26b2d..12e46fd 100644
  optdepends=('texinfo: for help-support in octave'
 -            'gnuplot: alternative plotting')
 +            'qscintilla: for the gui')
- source=(ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.xz{,.sig})
+ source=(ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.xz{,.sig} octave-gcc6.patch)
  options=('!emptydirs')
- install=octave.install
-@@ -31,6 +31,7 @@ build() {
+ validpgpkeys=('DBD9C84E39FE1AAE99F04446B05F05B75D36644B')  # John W. Eaton
+@@ -39,6 +39,7 @@ build() {
    --enable-shared --disable-static \
    --with-quantum-depth=16 \
    --with-umfpack="-lumfpack -lsuitesparseconfig"  \
