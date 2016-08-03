@@ -1,11 +1,11 @@
-commit 831e2150a329ed3d2b4962a0e949e8334f68cb73
+commit 6528d0a5437b7ec3723e3d9ee60d4566f092e463
 Author: Narrat
-Date:   Sat Feb 20 19:01:25 2016 +0200
+Date:   Tue Aug 2 13:06:39 2016 +0200
 
     Remove QT deps and disable build of py2 version
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 2789048..a813bab 100644
+index 323ab5a..120e094 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -13,23 +13,22 @@ pkgdesc="A python plotting library, making publication quality plots"
@@ -14,7 +14,7 @@ index 2789048..a813bab 100644
  license=('custom')
 -checkdepends=('python-nose' 'python2-nose' 'python-mock' 'python2-mock' 'xorg-server-xvfb'
 -              'texlive-core' 'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape'
--              'pep8' 'python2-pep8' 'python-pandas' 'python2-pandas')
+-              'python-pandas' 'python2-pandas')
 -makedepends=('python2-pytz' 'python2-numpy' 'python2-pyqt4' 'python-pytz' 'python-numpy'
 -             'python-pyqt4' 'tk' 'python-cairocffi' 'python2-cairocffi' 'python-dateutil'
 -             'python2-dateutil' 'python-gobject' 'python2-gobject' 'python-pyparsing'
@@ -23,8 +23,8 @@ index 2789048..a813bab 100644
 -             'libxkbcommon-x11' 'python-pillow' 'python2-pillow' 'python-setuptools'
 -             'python2-setuptools' 'python-cycler' 'python2-cycler')
 +checkdepends=('python-nose' 'python-mock'  'xorg-server-xvfb'
-+              'texlive-core' 'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape' 'pep8' 'python-pandas')
-+#checkdepends+=('python2-nose' 'python2-mock' 'python2-pep8' 'python2-pandas')
++              'texlive-core' 'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape' 'python-pandas')
++#checkdepends+=('python2-nose' 'python2-mock' 'python2-pandas')
 +makedepends=('python-pytz' 'python-numpy' 'tk' 'python-cairocffi' 'python-dateutil'
 +             'python-gobject' 'python-pyparsing' 'python-six' 'ghostscript' 'texlive-bin'
 +             'python-tornado' 'gtk3' 'libxkbcommon-x11' 'python-pillow' 'python-setuptools' 'python-cycler')
@@ -33,7 +33,7 @@ index 2789048..a813bab 100644
 +#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'python2-setuptools' 'python2-cycler' 'wxpython')
  source=("$pkgbase-$pkgver.tar.gz::https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz"
          setup.cfg)
- sha512sums=('da99fffcb4fb600ed4386ce89e61725768d4209f3bd4ab174e0d8474c24b2736516a4299ceaa0714b276d7d02c3e33e39a6204e014569ec3f6249085b1ba7a0d'
+ sha512sums=('7d4688665273d30a08edf0cf2414cf0c05c619335f72b190c6ea125687e74cafe6133b7f3b6588e969c931ec8f970593d44654766205e6cc19f760925826a7e3'
              '493a08914755d7d27d98025fc309f19cc3ec45e777fc81a56fa50430f90c0b39c2f66c2a01f6fd14a2e351005151365a25d2ab71ae2e80a54c6f57ceeacea35b')
  
  prepare() {
