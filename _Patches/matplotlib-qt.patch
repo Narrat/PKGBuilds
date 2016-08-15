@@ -1,14 +1,14 @@
-commit 6528d0a5437b7ec3723e3d9ee60d4566f092e463
+commit 42e4571588a0aa785964ba9f48a4495cddd8cafc
 Author: Narrat
-Date:   Tue Aug 2 13:06:39 2016 +0200
+Date:   Mon Aug 15 13:10:07 2016 +0200
 
     Remove QT deps and disable build of py2 version
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 323ab5a..120e094 100644
+index 6456626..7dd5ddd 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -13,23 +13,22 @@ pkgdesc="A python plotting library, making publication quality plots"
+@@ -13,16 +13,15 @@ pkgdesc="A python plotting library, making publication quality plots"
  arch=('i686' 'x86_64')
  url='http://matplotlib.org'
  license=('custom')
@@ -32,17 +32,18 @@ index 323ab5a..120e094 100644
 +#makedepends+=('python2-pytz' 'python2-numpy' 'python2-cairocffi' 'python2-gobject'
 +#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'python2-setuptools' 'python2-cycler' 'wxpython')
  source=("$pkgbase-$pkgver.tar.gz::https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz"
+         fix-for-pyqt5.7-support.patch
          setup.cfg)
- sha512sums=('7d4688665273d30a08edf0cf2414cf0c05c619335f72b190c6ea125687e74cafe6133b7f3b6588e969c931ec8f970593d44654766205e6cc19f760925826a7e3'
-             '493a08914755d7d27d98025fc309f19cc3ec45e777fc81a56fa50430f90c0b39c2f66c2a01f6fd14a2e351005151365a25d2ab71ae2e80a54c6f57ceeacea35b')
+@@ -35,7 +34,7 @@ prepare() {
+    cd "$srcdir"/matplotlib-${pkgver}
+    patch -p1 -i ../fix-for-pyqt5.7-support.patch
  
- prepare() {
 -   cp -a "$srcdir"/matplotlib-${pkgver}{,-py2}
 +   #cp -a "$srcdir"/matplotlib-${pkgver}{,-py2}
  
     cd "$srcdir"/matplotlib-${pkgver}
     for file in $(find . -name '*.py' -print); do
-@@ -37,18 +36,18 @@ prepare() {
+@@ -43,18 +42,18 @@ prepare() {
               -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python3|" ${file}
     done
  
@@ -68,7 +69,7 @@ index 323ab5a..120e094 100644
  }
  
  build() {
-@@ -59,16 +58,16 @@ build() {
+@@ -65,16 +64,16 @@ build() {
     cd "$srcdir"/matplotlib-${pkgver}
     python3 setup.py build
  
@@ -89,7 +90,7 @@ index 323ab5a..120e094 100644
  
     cd "$srcdir"/matplotlib-${pkgver}-test
     (
-@@ -79,42 +78,41 @@ check() {
+@@ -85,42 +84,41 @@ check() {
         python ../matplotlib-${pkgver}/tests.py -sv --processes=8 --process-timeout=300 || warning "Tests failed"
     )
  
