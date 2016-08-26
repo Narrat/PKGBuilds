@@ -1,0 +1,57 @@
+commit 950900e5bd80caf595cc71cab47136ac57349c5d
+Author: Narrat
+Date:   Fri Aug 26 14:54:58 2016 +0200
+
+    Replace hardcoded panel items with custom ones
+
+diff --git a/PKGBUILD b/PKGBUILD
+index 8c77806..480d05b 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -11,9 +11,11 @@ depends=("weston" "gnome-desktop" "gnome-menus")
+ makedepends=("git" "intltool")
+ install=maynard.install
+ source=("${pkgname%-git}::git+https://github.com/raspberrypi/maynard.git"
++    "custom_entries.patch"
+ 	"01-maynard.patch")
+ sha256sums=('SKIP'
+-	'939a16eb6b50343059f7bb0afa89eff9831ae67ea561101620e7dab009883f60')
++            '691dde57a0f8c21ea5ac51be928736e0ee09e79f9b81599bc4bef6d56f161372'
++            '939a16eb6b50343059f7bb0afa89eff9831ae67ea561101620e7dab009883f60')
+ 
+ pkgver() {
+ 	cd "$srcdir/${pkgname%-git}"
+@@ -25,6 +27,8 @@ pkgver() {
+ prepare() {
+ 	cd "$srcdir/${pkgname%-git}"
+ 	patch -p1 < "$srcdir/01-maynard.patch"
++
++    patch -p1 -i "$srcdir/custom_entries.patch"
+ }
+ 
+ build() {
+diff --git a/custom_entries.patch b/custom_entries.patch
+new file mode 100644
+index 0000000..3fc20be
+--- /dev/null
++++ b/custom_entries.patch
+@@ -0,0 +1,19 @@
++commit 8fa45ba82740563df1018ec07cb65ed2fae92b96
++Author: Narrat
++Date:   Fri Aug 26 14:51:06 2016 +0200
++
++    Custom Panel entries
++
++diff --git a/data/org.raspberrypi.maynard.gschema.xml.in.in b/data/org.raspberrypi.maynard.gschema.xml.in.in
++index 6e40df6..b434e5e 100644
++--- a/data/org.raspberrypi.maynard.gschema.xml.in.in
+++++ b/data/org.raspberrypi.maynard.gschema.xml.in.in
++@@ -3,7 +3,7 @@
++           path="/org/raspberrypi/maynard/"
++           gettext-domain="@GETTEXT_PACKAGE@">
++     <key name="favorites" type="as">
++-      <default>[ 'gcalctool.desktop', 'libreoffice-writer.desktop', 'nautilus.desktop', 'weston-terminal.desktop', 'epiphany.desktop' ]</default>
+++      <default>[ 'libreoffice-startcenter.desktop', 'SciTE.desktop', 'thunderbird.desktop', 'firefox.desktop', 'Thunar.desktop', 'termite.desktop', 'weston-terminal.desktop' ]</default>
++       <_summary>List of desktop file IDs for favorite applications</_summary>
++       <_description>
++         The applications corresponding to these identifiers
