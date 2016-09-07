@@ -1,6 +1,6 @@
-commit bcf06096eb59c42bf3f67f08ff3d3de4516726c2
+commit f3af167a51c271762623589244077a52dc87439f
 Author: Narrat
-Date:   Thu Aug 11 14:06:39 2016 +0200
+Date:   Sun Sep 4 21:52:31 2016 +0200
 
     ffmpeg: Enable mmal
     
@@ -16,7 +16,7 @@ Date:   Thu Aug 11 14:06:39 2016 +0200
        * another one caused by not building in a clean chroot
 
 diff --git a/extra/ffmpeg/PKGBUILD b/extra/ffmpeg/PKGBUILD
-index 53b932b..1569214 100644
+index ffbc0df..98d52f5 100644
 --- a/extra/ffmpeg/PKGBUILD
 +++ b/extra/ffmpeg/PKGBUILD
 @@ -16,22 +16,29 @@ pkgdesc='Complete solution to record, convert and stream audio and video'
@@ -43,7 +43,7 @@ index 53b932b..1569214 100644
 +source=(http://ffmpeg.org/releases/ffmpeg-${pkgver}.tar.bz2{,.asc}
 +        ffmpeg_opj2.patch)
  validpgpkeys=('FCF986EA15E6E293A5644F10B4322F04D67658D8')
- sha256sums=('62eb8d810b93c1ffc23739c0824a91eabfe5e7be81fab34ce740736a110b70f7'
+ sha256sums=('58bc89c65dd114d874efbf76f76368d03b5e407f0a3f42d5b40801c280968a38'
 -            'SKIP')
 +            'SKIP'
 +            '336f14fa497598fbd437fc780305fa7c576fd6cd44aaef77b0b4f61448f55fb8')
