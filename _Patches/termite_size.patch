@@ -1,28 +1,29 @@
-commit 6d5d03ccbed916d605fa718f64f79d3ea5f60ed9
+commit 6e3460dc7400281bcd80ffcb1b619d3d53c40402
 Author: Narrat <autumn-wind@web.de>
-Date:   Sat Mar 5 13:09:18 2016 +0100
+Date:   Wed Oct 12 13:11:03 2016 +0200
 
     Add ctrl to opening links
 
 diff --git a/trunk/0002_additional_button_for_url.diff b/trunk/0002_additional_button_for_url.diff
 new file mode 100644
-index 0000000..c29e797
+index 0000000..4fbc064
 --- /dev/null
 +++ b/trunk/0002_additional_button_for_url.diff
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,12 @@
 +--- a/termite.cc
-++++ a/termite.cc
-+@@ -1022,7 +1022,7 @@
+++++ b/termite.cc
++@@ -1108,7 +1108,7 @@
 + }
 + 
 + gboolean button_press_cb(VteTerminal *vte, GdkEventButton *event, const config_info *info) {
 +-    if (info->clickable_url && event->type == GDK_BUTTON_PRESS) {
 ++    if (info->clickable_url && event->type == GDK_BUTTON_PRESS && (event->state & GDK_CONTROL_MASK)) {
-+         auto match = make_unique(check_match(vte, (int)event->x, (int)event->y), g_free);
++         auto match = make_unique(check_match(vte, event), g_free);
 +         if (!match)
 +             return FALSE;
++
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index c8129d8..6857d83 100644
+index ffe49b8..1686b7d 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -8,8 +8,17 @@ arch=('i686' 'x86_64')
@@ -34,7 +35,7 @@ index c8129d8..6857d83 100644
 +source=("git://github.com/thestinger/termite#tag=v$pkgver"
 +        "0002_additional_button_for_url.diff")
 +md5sums=('SKIP'
-+         '6fc4a5a22a1d655e16641ae4cab130e2')
++         '6eab9b86b5f89175b09975fe4744faa8')
 +
 +
 +prepare() {
