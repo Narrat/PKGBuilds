@@ -1,6 +1,6 @@
-commit 8d6a65d4301bceb46323b8e7200520ba1fc545af
+commit 02b739eae80227b50c9cde1a5bad14196160b522
 Author: Narrat <autumn-wind@web.de>
-Date:   Tue Sep 22 21:33:53 2015 +0200
+Date:   Sun Apr 24 12:02:47 2016 +0200
 
     Customize the timer
     
@@ -8,7 +8,7 @@ Date:   Tue Sep 22 21:33:53 2015 +0200
     (Didn't want to place them locally (Easier to follow upstream changes))
 
 diff --git a/PKGBUILD b/PKGBUILD
-index c6e4722..ee28062 100644
+index 71ae842..5576f54 100644
 --- a/PKGBUILD
 +++ b/PKGBUILD
 @@ -10,10 +10,18 @@ optdepends=('sudo: needed to recall modules via a call to modprobe')
@@ -16,10 +16,10 @@ index c6e4722..ee28062 100644
  conflicts=('modprobed_db')
  url="https://wiki.archlinux.org/index.php/Modprobed-db"
 -source=("http://repo-ck.com/source/$pkgname/$pkgname-$pkgver.tar.xz")
--sha256sums=('5f8a719088a8646b1f4b9f9d34b2f7110168137ae17b6d4b74c440b2f29d649e')
+-sha256sums=('97345b3c107a290be9270b25095a8f564d1c9f2f4b116f0e7d03f85a2a2843ba')
 +source=("http://repo-ck.com/source/$pkgname/$pkgname-$pkgver.tar.xz"
 +        "modprobed-db-units.patch")
-+sha256sums=('5f8a719088a8646b1f4b9f9d34b2f7110168137ae17b6d4b74c440b2f29d649e'
++sha256sums=('97345b3c107a290be9270b25095a8f564d1c9f2f4b116f0e7d03f85a2a2843ba'
 +            'a99b30a3e0d7ad64217cd5cd831ae245ef6df8592b963572536afca14d411b3f')
  install=readme.install
  
