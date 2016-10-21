@@ -1,6 +1,6 @@
-commit 6f064f49a498d2617b22be61ca5ba9ca3eb21ed4
+commit 33ae52749afdcc84a5b907eb0dde6f553d8788fd
 Author: Narrat
-Date:   Tue Sep 20 23:44:46 2016 +0200
+Date:   Fri Oct 21 23:15:02 2016 +0200
 
     ffmpeg: Enable mmal
     
@@ -14,7 +14,7 @@ Date:   Tue Sep 20 23:44:46 2016 +0200
        * another one caused by not building in a clean chroot
 
 diff --git a/extra/ffmpeg/PKGBUILD b/extra/ffmpeg/PKGBUILD
-index fe308f7..5510b4a 100644
+index edc935d..2684d10 100644
 --- a/extra/ffmpeg/PKGBUILD
 +++ b/extra/ffmpeg/PKGBUILD
 @@ -18,20 +18,27 @@ url='http://ffmpeg.org/'
@@ -22,24 +22,25 @@ index fe308f7..5510b4a 100644
  depends=('alsa-lib' 'bzip2' 'fontconfig' 'fribidi' 'gmp' 'gnutls' 'gsm' 'jack'
           'lame' 'libass' 'libavc1394' 'libbluray' 'libiec61883' 'libmodplug'
 -         'libpulse' 'libsoxr' 'libssh' 'libtheora' 'libva' 'libvdpau' 'libwebp'
--         'netcdf' 'opencore-amr' 'openjpeg' 'opus' 'schroedinger' 'sdl' 'speex'
+-         'opencore-amr' 'openjpeg' 'opus' 'schroedinger' 'sdl' 'speex'
 +         'libpulse' 'libsoxr' 'libssh' 'libtheora' 'libva' 'libvdpau' 'libwebp' 'libxv'
-+         'netcdf' 'opencore-amr' 'openjpeg2' 'opus' 'schroedinger' 'sdl' 'speex'
++         'opencore-amr' 'openjpeg2' 'opus' 'schroedinger' 'sdl' 'speex'
           'v4l-utils' 'xvidcore' 'zlib'
           'libvidstab.so' 'libvorbis.so' 'libvorbisenc.so' 'libvpx.so'
--         'libx264.so' 'libx265.so')
-+         'libx264.so' 'libx265.so' 'raspberrypi-firmware-tools')
+-         'libx264.so' 'libx265.so' 'libnetcdf.so')
++         'libx264.so' 'libx265.so' 'libnetcdf.so' 'raspberrypi-firmware-tools')
  makedepends=('hardening-wrapper' 'ladspa' 'libvdpau' 'yasm')
  optdepends=('ladspa: LADSPA filters')
  provides=('libavcodec.so' 'libavdevice.so' 'libavfilter.so' 'libavformat.so'
            'libavresample.so' 'libavutil.so' 'libpostproc.so' 'libswresample.so'
            'libswscale.so')
--source=(http://ffmpeg.org/releases/ffmpeg-${pkgver}.tar.bz2{,.asc})
+-source=("https://ffmpeg.org/releases/ffmpeg-${pkgver}.tar.xz"{,.asc})
 +source=(http://ffmpeg.org/releases/ffmpeg-${pkgver}.tar.bz2{,.asc}
 +        ffmpeg_opj2.patch)
  validpgpkeys=('FCF986EA15E6E293A5644F10B4322F04D67658D8')
- sha256sums=('58bc89c65dd114d874efbf76f76368d03b5e407f0a3f42d5b40801c280968a38'
+-sha256sums=('a80cb378dda5c9bbcdbd62a99bdec0e4eedbcb47f290e72845af4855c1146b5b'
 -            'SKIP')
++sha256sums=('7c99df75a4dc12d22c0f1ed11d0acf98cac1f8b5fe7a7434344b167f810bcbfa'
 +            'SKIP'
 +            '336f14fa497598fbd437fc780305fa7c576fd6cd44aaef77b0b4f61448f55fb8')
 +
