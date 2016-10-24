@@ -1,6 +1,6 @@
-commit 33ae52749afdcc84a5b907eb0dde6f553d8788fd
+commit 093cfbf2b293b1215321a5de293013abd1d100f1
 Author: Narrat
-Date:   Fri Oct 21 23:15:02 2016 +0200
+Date:   Mon Oct 24 20:15:24 2016 +0200
 
     ffmpeg: Enable mmal
     
@@ -8,16 +8,16 @@ Date:   Fri Oct 21 23:15:02 2016 +0200
     
     Changes involved:
      * raspberry-firmware-tools to deps (needed for mmal)
-     * change openjpeg to openjpeg2 and add patch for it
-       * not building in clean chroot and jpeg2 gets used, but has a problem, therefor the patch
+     * change openjpeg to openjpeg2
+       * not building in clean chroot and jpeg2 gets used
      * add libxv
        * another one caused by not building in a clean chroot
 
 diff --git a/extra/ffmpeg/PKGBUILD b/extra/ffmpeg/PKGBUILD
-index edc935d..2684d10 100644
+index 746b0d9..9ac83e7 100644
 --- a/extra/ffmpeg/PKGBUILD
 +++ b/extra/ffmpeg/PKGBUILD
-@@ -18,20 +18,27 @@ url='http://ffmpeg.org/'
+@@ -18,11 +18,11 @@ url='http://ffmpeg.org/'
  license=('GPL3')
  depends=('alsa-lib' 'bzip2' 'fontconfig' 'fribidi' 'gmp' 'gnutls' 'gsm' 'jack'
           'lame' 'libass' 'libavc1394' 'libbluray' 'libiec61883' 'libmodplug'
@@ -32,26 +32,15 @@ index edc935d..2684d10 100644
  makedepends=('hardening-wrapper' 'ladspa' 'libvdpau' 'yasm')
  optdepends=('ladspa: LADSPA filters')
  provides=('libavcodec.so' 'libavdevice.so' 'libavfilter.so' 'libavformat.so'
-           'libavresample.so' 'libavutil.so' 'libpostproc.so' 'libswresample.so'
-           'libswscale.so')
--source=("https://ffmpeg.org/releases/ffmpeg-${pkgver}.tar.xz"{,.asc})
-+source=(http://ffmpeg.org/releases/ffmpeg-${pkgver}.tar.bz2{,.asc}
-+        ffmpeg_opj2.patch)
- validpgpkeys=('FCF986EA15E6E293A5644F10B4322F04D67658D8')
--sha256sums=('a80cb378dda5c9bbcdbd62a99bdec0e4eedbcb47f290e72845af4855c1146b5b'
--            'SKIP')
-+sha256sums=('7c99df75a4dc12d22c0f1ed11d0acf98cac1f8b5fe7a7434344b167f810bcbfa'
-+            'SKIP'
-+            '336f14fa497598fbd437fc780305fa7c576fd6cd44aaef77b0b4f61448f55fb8')
-+
-+prepare() {
-+  cd ffmpeg-${pkgver}
-+  patch -Np1 -i ${srcdir}/ffmpeg_opj2.patch
-+}
+@@ -33,6 +33,7 @@ validpgpkeys=('FCF986EA15E6E293A5644F10B4322F04D67658D8')
+ sha256sums=('49cc3105f7891c5637f8fabb1b75ebb19c9b5123b311a3ccc6182aa35d58b89a'
+             'SKIP')
  
++
  build() {
    cd ffmpeg-${pkgver}
-@@ -80,6 +87,7 @@ build() {
+ 
+@@ -80,6 +81,7 @@ build() {
      --enable-shared \
      --enable-version3 \
      --enable-x11grab \
@@ -59,45 +48,3 @@ index edc935d..2684d10 100644
      $CONFIG
  
    make
-diff --git a/extra/ffmpeg/ffmpeg_opj2.patch b/extra/ffmpeg/ffmpeg_opj2.patch
-new file mode 100644
-index 0000000..11e66b4
---- /dev/null
-+++ b/extra/ffmpeg/ffmpeg_opj2.patch
-@@ -0,0 +1,36 @@
-+diff -rupN ffmpeg-3.1.1/configure ffmpeg-3.1.1-new/configure
-+--- ffmpeg-3.1.1/configure	2016-06-27 01:54:28.000000000 +0200
-++++ ffmpeg-3.1.1-new/configure	2016-07-27 22:25:36.585141648 +0200
-+@@ -5669,7 +5669,7 @@ enabled libopencv         && { check_hea
-+                                  require opencv opencv2/core/core_c.h cvCreateImageHeader -lopencv_core -lopencv_imgproc; } ||
-+                                require_pkg_config opencv opencv/cxcore.h cvCreateImageHeader; }
-+ enabled libopenh264       && require_pkg_config openh264 wels/codec_api.h WelsGetCodecVersion
-+-enabled libopenjpeg       && { check_lib openjpeg-2.1/openjpeg.h opj_version -lopenjp2 -DOPJ_STATIC ||
-++enabled libopenjpeg       && { check_lib openjpeg-2.1/openjpeg.h opj_version -lopenjp2 ||
-+                                check_lib openjpeg-2.0/openjpeg.h opj_version -lopenjp2 -DOPJ_STATIC ||
-+                                check_lib openjpeg-1.5/openjpeg.h opj_version -lopenjpeg -DOPJ_STATIC ||
-+                                check_lib openjpeg.h opj_version -lopenjpeg -DOPJ_STATIC ||
-+diff -rupN ffmpeg-3.1.1/libavcodec/libopenjpegdec.c ffmpeg-3.1.1-new/libavcodec/libopenjpegdec.c
-+--- ffmpeg-3.1.1/libavcodec/libopenjpegdec.c	2016-06-27 01:54:29.000000000 +0200
-++++ ffmpeg-3.1.1-new/libavcodec/libopenjpegdec.c	2016-07-27 22:25:45.509327071 +0200
-+@@ -24,8 +24,6 @@
-+  * JPEG 2000 decoder using libopenjpeg
-+  */
-+
-+-#define  OPJ_STATIC
-+-
-+ #include "libavutil/common.h"
-+ #include "libavutil/imgutils.h"
-+ #include "libavutil/intreadwrite.h"
-+diff -rupN ffmpeg-3.1.1/libavcodec/libopenjpegenc.c ffmpeg-3.1.1-new/libavcodec/libopenjpegenc.c
-+--- ffmpeg-3.1.1/libavcodec/libopenjpegenc.c	2016-06-27 01:54:29.000000000 +0200
-++++ ffmpeg-3.1.1-new/libavcodec/libopenjpegenc.c	2016-07-27 22:25:40.298218807 +0200
-+@@ -24,8 +24,6 @@
-+  * JPEG 2000 encoder using libopenjpeg
-+  */
-+
-+-#define  OPJ_STATIC
-+-
-+ #include "libavutil/avassert.h"
-+ #include "libavutil/common.h"
-+ #include "libavutil/imgutils.h"
