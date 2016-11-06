@@ -1,21 +1,21 @@
-commit 8ef2ccfdb77509204d79571d843d3af158e4b310
+commit b6e3713c914af12aa345e4889b97b31a6d899398
 Author: Narrat
-Date:   Sat May 7 17:56:45 2016 +0200
+Date:   Sun Nov 6 17:57:37 2016 +0100
 
     Remove smbclient from deps
     
     I don't use samba
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index da4ae3a..d16ed66 100644
+index 1967a1c..570ae29 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -14,7 +14,7 @@ license=('GPL')
  arch=('i686' 'x86_64')
  depends=('libao' 'ffmpeg' 'libmodplug' 'audiofile' 'libshout' 'libmad' 'curl' 'faad2'
           'sqlite' 'jack' 'libmms' 'wavpack' 'avahi' 'libid3tag' 'yajl' 'libmpdclient'
--         'icu' 'libupnp' 'libnfs' 'libsamplerate' 'libsoxr' 'smbclient' 'libcdio-paranoia')
-+         'icu' 'libupnp' 'libnfs' 'libsamplerate' 'libsoxr' 'libcdio-paranoia')
+-         'icu' 'libupnp' 'libnfs' 'libsamplerate' 'libsoxr' 'smbclient' 'libcdio-paranoia'
++         'icu' 'libupnp' 'libnfs' 'libsamplerate' 'libsoxr' 'libcdio-paranoia'
+          'libgme')
  makedepends=('boost' 'doxygen')
  validpgpkeys=('0392335A78083894A4301C43236E8A58C6DB4512')
- source=("http://www.musicpd.org/download/${pkgname}/${pkgver%.*}/${pkgname}-${pkgver}.tar.xz"{,.sig}
