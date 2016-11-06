@@ -1,23 +1,25 @@
-commit b0638fdbfbc7c831f7f99bd2413532b055086bb9
+commit 7a55af9886c41e52f34a8a7a3632a802e5055378
 Author: Narrat
-Date:   Thu Apr 21 18:05:11 2016 +0200
+Date:   Sun Nov 6 17:53:24 2016 +0100
 
     Remove qt deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 1e99f85..45e5d42 100644
+index cc6fa47..e4db54f 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -10,7 +10,7 @@ pkgdesc="Plotting package which outputs to X11, PostScript, PNG, GIF, and others
+@@ -10,8 +10,8 @@ pkgdesc="Plotting package which outputs to X11, PostScript, PNG, GIF, and others
  arch=('i686' 'x86_64') 
  url="http://www.gnuplot.info" 
  license=('custom') 
--depends=('readline' 'gd' 'wxgtk' 'cairo' 'libjpeg' 'lua' 'qt5-svg' 'qt5-tools' 'gnutls') 
+-depends=('readline' 'gd' 'wxgtk' 'cairo' 'libjpeg' 'lua' 'qt5-svg' 'gnutls') 
+-makedepends=('texinfo' 'texlive-core' 'emacs' 'texlive-latexextra' 'qt5-tools')
 +depends=('readline' 'gd' 'wxgtk' 'cairo' 'libjpeg' 'lua' 'gnutls')
- makedepends=('texinfo' 'texlive-core' 'emacs' 'texlive-latexextra')
++makedepends=('texinfo' 'texlive-core' 'emacs' 'texlive-latexextra')
  options=('!makeflags')
- install=gnuplot.install
-@@ -38,7 +38,8 @@ build() {
+ source=("http://downloads.sourceforge.net/sourceforge/$pkgname/$pkgname-$pkgver.tar.gz"
+         "lua53_compat.patch")
+@@ -37,7 +37,8 @@ build() {
    WX_CONFIG=/usr/bin/wx-config ./configure --prefix=/usr \
                --libexecdir=/usr/bin \
                --with-gihdir=/usr/share/gnuplot \
