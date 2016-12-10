@@ -1,36 +1,40 @@
-commit 9e97b90d24ebddabb41b0e08f46f90832a6d9158
+commit 9fbfb6086112f441baec515e2a697ed63ecc826d
 Author: Narrat
-Date:   Mon Apr 11 17:56:54 2016 +0200
+Date:   Sat Dec 10 11:47:35 2016 +0100
 
     QT stays opt, gnuplot replaces fltk
     
     Which removes the native backend fltk from depends and disable it at buildtime. So for plot commands to be working gnuplot is needed, therefor the move from opt to regular deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 47323f6..2db2ecc 100644
+index 1c9b9f5..9182f53 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -10,11 +10,11 @@ pkgdesc="A high-level language, primarily intended for numerical computations."
+@@ -10,12 +10,12 @@ pkgdesc="A high-level language, primarily intended for numerical computations."
  arch=('i686' 'x86_64')
  url="http://www.octave.org"
  license=('GPL')
 -depends=('fftw' 'curl' 'graphicsmagick' 'glpk' 'hdf5' 'qhull' 'fltk' 'arpack' 'glu' 'ghostscript'
-- 	   'suitesparse' 'gl2ps' 'qscintilla' 'libsndfile')
--makedepends=('gcc-fortran' 'texlive-core' 'suitesparse' 'texinfo' 'gnuplot' 'qscintilla')
+- 	   'suitesparse' 'gl2ps' 'qscintilla-qt5' 'libsndfile')
+-makedepends=('gcc-fortran' 'texlive-core' 'suitesparse' 'texinfo' 'gnuplot' 'qt5-tools')
 +depends=('fftw' 'curl' 'graphicsmagick' 'gnuplot' 'glpk' 'hdf5' 'qhull' 'arpack' 'glu' 'ghostscript'
 + 	   'suitesparse' 'gl2ps' 'libsndfile')
-+makedepends=('gcc-fortran' 'texlive-core' 'suitesparse' 'texinfo' 'qscintilla')
++makedepends=('gcc-fortran' 'texlive-core' 'suitesparse' 'texinfo' 'qt5-tools' 'qscintilla-qt5')
  optdepends=('texinfo: for help-support in octave'
 -            'gnuplot: alternative plotting')
-+            'qscintilla: for the gui')
- source=(ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.xz{,.sig} octave-gcc6.patch)
+-source=(ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.gz{,.sig})
++            'qscintilla-qt5: for the gui')
++source=(ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.xz{,.sig})
  options=('!emptydirs')
  validpgpkeys=('DBD9C84E39FE1AAE99F04446B05F05B75D36644B')  # John W. Eaton
-@@ -39,6 +39,7 @@ build() {
+ sha1sums=('9fac578c08a7efabd79ccc38bc196b9627e3212f'
+@@ -27,7 +27,8 @@ build() {
+   ./configure --prefix=/usr --libexecdir=/usr/lib \
    --enable-shared --disable-static \
    --with-quantum-depth=16 \
-   --with-umfpack="-lumfpack -lsuitesparseconfig"  \
+-  --with-umfpack="-lumfpack -lsuitesparseconfig"
++  --with-umfpack="-lumfpack -lsuitesparseconfig"  \
 +  --without-fltk \
-   MOC=moc-qt4 UIC=uic-qt4
  # https://mailman.cae.wisc.edu/pipermail/help-octave/2012-September/053991.html 
  
+   LANG=C make
