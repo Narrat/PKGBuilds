@@ -1,19 +1,19 @@
-commit 977ff1a14136a1a77fcc4672f86829f145f18bac
+commit e76ff5774d4b32a78240db0d77651d10684c0283
 Author: Narrat
-Date:   Sat Feb 27 17:51:31 2016 +0100
+Date:   Sun Jan 8 19:50:39 2017 +0100
 
     Disable samba support
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index e77d6ce..9b14af9 100644
+index d116fd1..3a6f9cc 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -15,7 +15,7 @@ depends=(
-   'ffmpeg' 'lcms2' 'libcdio-paranoia' 'libgl' 'enca' 'libxss'
+@@ -16,7 +16,7 @@ depends=(
+   'ffmpeg' 'lcms2' 'libcdio-paranoia' 'libgl' 'libxss'
    'libxinerama' 'libxv' 'libxkbcommon' 'libva' 'wayland' 'libcaca'
    'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils' 'lua52' 'libdvdnav'
--  'libxrandr' 'jack' 'smbclient' 'rubberband'
-+  'libxrandr' 'jack' 'rubberband'
+-  'libxrandr' 'jack' 'smbclient' 'rubberband' 'uchardet'
++  'libxrandr' 'jack' 'rubberband' 'uchardet'
  )
  makedepends=('mesa' 'python-docutils' 'ladspa' 'hardening-wrapper')
  optdepends=('youtube-dl: for video-sharing websites playback')
