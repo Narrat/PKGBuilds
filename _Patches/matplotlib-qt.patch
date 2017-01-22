@@ -1,14 +1,14 @@
-commit 7c0067cb802eb4dbf503c70f2cc9c64ba5702722
+commit 8afa0478e1774ede778208d2ee772501d0408cc5
 Author: Narrat
-Date:   Sat Oct 22 12:44:15 2016 +0200
+Date:   Thu Jan 19 22:58:39 2017 +0100
 
     Remove QT deps and disable build of py2 version
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 93c9048..97824f2 100644
+index dcfe6b6..450b120 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -13,23 +13,22 @@ pkgdesc="A python plotting library, making publication quality plots"
+@@ -13,16 +13,15 @@ pkgdesc="A python plotting library, making publication quality plots"
  arch=('i686' 'x86_64')
  url='http://matplotlib.org'
  license=('custom')
@@ -21,7 +21,7 @@ index 93c9048..97824f2 100644
 -             'python2-pyparsing' 'pygtk' 'python-six' 'ghostscript' 'texlive-bin'
 -             'python-tornado' 'python2-tornado' 'gtk3' 'wxpython' 'python-pyqt5' 'python2-pyqt5'
 -             'libxkbcommon-x11' 'python-pillow' 'python2-pillow' 'python-setuptools'
--             'python2-setuptools' 'python-cycler' 'python2-cycler')
+-             'python2-setuptools' 'python-cycler' 'python2-cycler' 'python2-backports.functools_lru_cache')
 +checkdepends=('python-nose' 'python-mock'  'xorg-server-xvfb'
 +              'texlive-core' 'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape' 'python-pandas')
 +#checkdepends+=('python2-nose' 'python2-mock' 'python2-pandas')
@@ -30,19 +30,20 @@ index 93c9048..97824f2 100644
 +             'python-tornado' 'gtk3' 'libxkbcommon-x11' 'python-pillow' 'python-setuptools' 'python-cycler')
 +# Python2 deps
 +#makedepends+=('python2-pytz' 'python2-numpy' 'python2-cairocffi' 'python2-gobject'
-+#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'python2-setuptools' 'python2-cycler' 'wxpython')
++#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'python2-setuptools' 'python2-cycler'  'python2-backports.functools_lru_cache' 'wxpython')
  source=("$pkgbase-$pkgver.tar.gz::https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz"
-         setup.cfg)
- sha512sums=('8b135a93d134646655f1defc0c1a58bee1488435b40643bb96d91724942395c71a41d0c9f77149097c233e3d9a9938d9e332dd21b62089e8932076380d74731b'
-             '493a08914755d7d27d98025fc309f19cc3ec45e777fc81a56fa50430f90c0b39c2f66c2a01f6fd14a2e351005151365a25d2ab71ae2e80a54c6f57ceeacea35b')
+         setup.cfg backports.functools_lru_cache.patch)
+ sha512sums=('b0e6d91aee5f91e0155c9e6716eef1a7e1fb907daeb93d603709142b749878fd758e42fe3707ac73c3d87959c6a35126c9e17c08ef78c5734106fafdf198f304'
+@@ -34,7 +33,7 @@ prepare() {
+    (cd matplotlib-$pkgver; patch -p1 -i ../backports.functools_lru_cache.patch)
+    sed -i '/Subprocess32/d' matplotlib-$pkgver/setup.py
  
- prepare() {
 -   cp -a "$srcdir"/matplotlib-${pkgver}{,-py2}
 +   #cp -a "$srcdir"/matplotlib-${pkgver}{,-py2}
  
     cd "$srcdir"/matplotlib-${pkgver}
     for file in $(find . -name '*.py' -print); do
-@@ -37,18 +36,18 @@ prepare() {
+@@ -42,18 +41,18 @@ prepare() {
               -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python3|" ${file}
     done
  
@@ -61,14 +62,14 @@ index 93c9048..97824f2 100644
 -   cp -a "$srcdir"/matplotlib-${pkgver}-py2{,-test}
 +   #cp -a "$srcdir"/matplotlib-${pkgver}-py2{,-test}
  
-    # Remove tests (FS#48175)
-    cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver/
--   cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-py2/
-+   #cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-py2/
+    # Configure tests (FS#48175)
+    cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-test/
+-   cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-py2-test/
++   #cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-py2-test/
  }
  
  build() {
-@@ -59,16 +58,16 @@ build() {
+@@ -64,16 +63,16 @@ build() {
     cd "$srcdir"/matplotlib-${pkgver}
     python3 setup.py build
  
@@ -89,7 +90,7 @@ index 93c9048..97824f2 100644
  
     cd "$srcdir"/matplotlib-${pkgver}-test
     (
-@@ -79,42 +78,41 @@ check() {
+@@ -84,42 +83,41 @@ check() {
         python ../matplotlib-${pkgver}/tests.py -sv --processes=8 --process-timeout=300 || warning "Tests failed"
     )
  
@@ -112,7 +113,7 @@ index 93c9048..97824f2 100644
  }
  
  package_python2-matplotlib() {
--   depends=('python2-pytz' 'python2-numpy' 'python2-pyqt5' 'python2-dateutil' 'python2-pyparsing' 'python2-cycler' 'libxkbcommon-x11')
+-   depends=('python2-pytz' 'python2-numpy' 'python2-pyqt5' 'python2-dateutil' 'python2-pyparsing' 'python2-cycler' 'libxkbcommon-x11' 'python2-backports.functools_lru_cache')
 -   optdepends=('pygtk: for GTK/GTKAgg/GTKCairo backend'
 -               'python2-cairo: for GTKCairo/GTK3Cairo backend'
 -               'python2-cairocffi: for GTKCairo/GTK3Cairo backend (alternative to python2-cairo)'
@@ -130,7 +131,7 @@ index 93c9048..97824f2 100644
 -
 -   install -dm755 "${pkgdir}"/usr/share/licenses/python2-matplotlib
 -   install -m 644 doc/users/license.rst "${pkgdir}"/usr/share/licenses/python2-matplotlib
-+   #depends=('python2-pytz' 'python2-numpy' 'python2-dateutil' 'python2-pyparsing' 'python2-cycler' 'libxkbcommon-x11')
++   #depends=('python2-pytz' 'python2-numpy' 'python2-dateutil' 'python2-pyparsing' 'python2-cycler' 'python2-backports.functools_lru_cache' 'libxkbcommon-x11')
 +   #optdepends=('pygtk: for GTK/GTKAgg/GTKCairo backend'
 +    #           'python2-cairo: for GTKCairo/GTK3Cairo backend'
 +    #           'python2-cairocffi: for GTKCairo/GTK3Cairo backend (alternative to python2-cairo)'
