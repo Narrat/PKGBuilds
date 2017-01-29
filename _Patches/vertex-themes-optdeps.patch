@@ -1,16 +1,14 @@
-commit bb56a1ae4ce308e71e8e8c9f5e96e8a3a030701f
+commit dd73171c79bda82156d58f1ba8b573ca7c3dd7de
 Author: Narrat
-Date:   Tue Jul 21 19:53:19 2015 +0200
+Date:   Sun Jan 29 20:39:54 2017 +0100
 
     Moved the murrine engine into optdeps
-    
-    and removed provides line
 
 diff --git a/PKGBUILD b/PKGBUILD
-index 483bd4e..1e2298d 100644
+index dee85e3..6fef5fd 100644
 --- a/PKGBUILD
 +++ b/PKGBUILD
-@@ -10,7 +10,7 @@ _releasever=20150923
+@@ -10,7 +10,7 @@ _releasever=20170128
  arch=('any')
  url='http://horst3180.deviantart.com/art/Vertex-Theme-470663601'
  license=('GPL3')
@@ -18,4 +16,4 @@ index 483bd4e..1e2298d 100644
 +optdepends=('gtk-engine-murrine: For the GTK2 theme')
  conflicts=('vertex-themes-git')
  source=("${pkgname}-${_releasever}.tar.gz::https://github.com/horst3180/Vertex-theme/archive/${_releasever}.tar.gz")
- sha256sums=('8484edaf1e9324676a9ebe76c58bb46e0aacbe289a3ee40d01f717e8fde3eb51')
+ sha256sums=('1540657ff247bcdb9c49a740e4ddf305aecd4f3bebc93ca566fe74d319b7a620')
