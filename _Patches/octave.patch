@@ -1,16 +1,16 @@
-commit 006cd9555cc85ba9ded325bf33eff8b0bf5ee113
+commit dfb3a393bf3c2f5df07565d70eb7c29a8400304f
 Author: Narrat
-Date:   Wed Mar 1 19:56:45 2017 +0100
+Date:   Wed Mar 1 21:04:55 2017 +0100
 
     QT stays opt, gnuplot replaces fltk
     
     Which removes the native backend fltk from depends and disable it at buildtime. So for plot commands to be working gnuplot is needed, therefor the move from opt to regular deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index caa88f0..bb6836f 100644
+index caa88f0..6f372d4 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -10,13 +10,13 @@ pkgdesc="A high-level language, primarily intended for numerical computations."
+@@ -10,11 +10,11 @@ pkgdesc="A high-level language, primarily intended for numerical computations."
  arch=('i686' 'x86_64')
  url="http://www.octave.org"
  license=('GPL')
@@ -24,11 +24,8 @@ index caa88f0..bb6836f 100644
 -            'gnuplot: alternative plotting'
 +            'qscintilla-qt5: for the gui'
              'portaudio: audio support')
--source=(ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.gz{,.sig} octave-qscintilla-2.10.patch)
-+source=(ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.xz{,.sig} octave-qscintilla-2.10.patch)
+ source=(ftp://ftp.gnu.org/gnu/octave/octave-$pkgver.tar.gz{,.sig} octave-qscintilla-2.10.patch)
  options=('!emptydirs')
- validpgpkeys=('DBD9C84E39FE1AAE99F04446B05F05B75D36644B')  # John W. Eaton
- sha1sums=('3d60e860d97c2497ec42de67f85a1eea2c79cdfd'
 @@ -37,7 +37,8 @@ build() {
    ./configure --prefix=/usr --libexecdir=/usr/lib \
    --enable-shared --disable-static \
