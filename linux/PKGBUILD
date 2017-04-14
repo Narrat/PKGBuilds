@@ -19,7 +19,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/${_srcname}.tar.xz"
         # the main kernel config files
         'config.i686' 'config.x86_64'
         # custom kernel config files
-        'config_hekate' 'config_persephone'
+        'config.Hekate' 'config.Persephone'
         # pacman hook for initramfs regeneration
         '90-linux.hook'
         # standard config files for mkinitcpio ramdisk
@@ -51,13 +51,8 @@ prepare() {
   # add latest fixes from stable queue, if needed
   # http://git.kernel.org/?p=linux/kernel/git/stable/stable-queue.git
 
-  if [ "$(hostname)" = "Hekate" ]; then
-    msg2 "Hekate config"
-    cat "${srcdir}/config_hekate" > ./.config
-  else
-    msg2 "Persphone config"
-    cat "${srcdir}/config_persephone" > ./.config
-  fi
+  #cat "${srcdir}/config.${CARCH}" > ./.config
+  cat "${srcdir}/config.$(hostname)" > ./.config
 
   if [ "${_kernelname}" != "" ]; then
     sed -i "s|CONFIG_LOCALVERSION=.*|CONFIG_LOCALVERSION=\"${_kernelname}\"|g" ./.config
