@@ -1,11 +1,11 @@
-commit 104bfe0677ab61d233381768df82ddc7203804f6
+commit b29246c2570aaef07269e9b637a90a4b8661da20
 Author: Narrat
 Date:   Tue Jul 26 01:50:11 2016 +0200
 
     add mpd to conky
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 33f4e7f..b446024 100644
+index 15e7814..638f241 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -13,7 +13,7 @@ license=('BSD' 'GPL')
@@ -16,11 +16,11 @@ index 33f4e7f..b446024 100644
 +         'imlib2' 'libxml2' 'libpulse' 'mpd')
  source=("https://github.com/brndnmtthws/conky/archive/v${pkgver}.tar.gz"
          'lua53.patch')
- sha1sums=('971b20be2d8c2e676374441469e8525708500776'
-@@ -40,6 +40,7 @@ build() {
- 		-D BUILD_WEATHER_METAR=ON \
+ sha256sums=('4c80982960b2a72e3e33cef33347c97b9239ed110d9584da4e7f17f28faf60ca'
+@@ -41,6 +41,7 @@ build() {
  		-D BUILD_WEATHER_XOAP=ON \
  		-D BUILD_PULSEAUDIO=ON \
+ 		-D BUILD_JOURNAL=ON \
 +		-D BUILD_MPD=ON \
  		-D CMAKE_INSTALL_PREFIX=/usr \
  		.
