@@ -1,6 +1,6 @@
-commit 05284c8df2e0314b53afd65f63424b5c99a14d74
+commit bf4dd7a81de032c9d90ce6e8e51bd0d037055802
 Author: Narrat
-Date:   Mon Oct 31 02:34:58 2016 +0100
+Date:   Sat Jun 10 01:21:30 2017 +0200
 
     ffmpeg: Enable mmal
     
@@ -12,7 +12,7 @@ Date:   Mon Oct 31 02:34:58 2016 +0100
        * caused by not building in a clean chroot
 
 diff --git a/extra/ffmpeg/PKGBUILD b/extra/ffmpeg/PKGBUILD
-index d604c26a8..45bc931db 100644
+index eb6b88e0c..f17a90f47 100644
 --- a/extra/ffmpeg/PKGBUILD
 +++ b/extra/ffmpeg/PKGBUILD
 @@ -19,11 +19,11 @@ license=('GPL3')
@@ -22,23 +22,23 @@ index d604c26a8..45bc931db 100644
 -         'libwebp' 'libx11' 'libxcb' 'opencore-amr' 'openjpeg2' 'opus'
 +         'libwebp' 'libx11' 'libxcb' 'libxv' 'opencore-amr' 'openjpeg2' 'opus'
           'schroedinger' 'sdl2' 'speex' 'v4l-utils' 'xz' 'zlib'
-          'libass.so' 'libbluray.so' 'libfreetype.so' 'libnetcdf.so'
-          'libvidstab.so' 'libvorbisenc.so' 'libvorbis.so' 'libvpx.so'
+          'libass.so' 'libbluray.so' 'libfreetype.so' 'libvidstab.so'
+          'libvorbisenc.so' 'libvorbis.so' 'libvpx.so'
 -         'libx264.so' 'libx265.so' 'libxvidcore.so')
 +         'libx264.so' 'libx265.so' 'libxvidcore.so' 'raspberrypi-firmware-tools')
  makedepends=('hardening-wrapper' 'ladspa' 'libvdpau' 'yasm')
  optdepends=('ladspa: LADSPA filters')
  provides=('libavcodec.so' 'libavdevice.so' 'libavfilter.so' 'libavformat.so'
 @@ -34,6 +34,7 @@ validpgpkeys=('FCF986EA15E6E293A5644F10B4322F04D67658D8')
- sha256sums=('599e7f7c017221c22011c4037b88bdcd1c47cd40c1e466838bc3c465f3e9569d'
+ sha256sums=('b702a7fc656ac23e276b8c823a2f646e4e6f6309bb2788435a708e69bea98f2f'
              'SKIP')
  
 +
  build() {
    cd ffmpeg-${pkgver}
  
-@@ -81,6 +82,7 @@ build() {
-     --enable-netcdf \
+@@ -80,6 +81,7 @@ build() {
+     --enable-libxvid \
      --enable-shared \
      --enable-version3 \
 +    --enable-mmal \
