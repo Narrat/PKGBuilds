@@ -1,13 +1,13 @@
-commit b6e3713c914af12aa345e4889b97b31a6d899398
+commit 6458c7d0458a5a851d1a9d512a9704ffa8f9222a
 Author: Narrat
-Date:   Sun Nov 6 17:57:37 2016 +0100
+Date:   Wed Jun 21 16:14:27 2017 +0200
 
     Remove smbclient from deps
     
     I don't use samba
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 1967a1c..570ae29 100644
+index 96b11a8..254616b 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -14,7 +14,7 @@ license=('GPL')
@@ -16,6 +16,6 @@ index 1967a1c..570ae29 100644
           'sqlite' 'jack' 'libmms' 'wavpack' 'avahi' 'libid3tag' 'yajl' 'libmpdclient'
 -         'icu' 'libupnp' 'libnfs' 'libsamplerate' 'libsoxr' 'smbclient' 'libcdio-paranoia'
 +         'icu' 'libupnp' 'libnfs' 'libsamplerate' 'libsoxr' 'libcdio-paranoia'
-          'libgme')
+          'libgme' 'zziplib')
  makedepends=('boost' 'doxygen')
  validpgpkeys=('0392335A78083894A4301C43236E8A58C6DB4512')
