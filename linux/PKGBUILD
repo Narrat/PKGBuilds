@@ -4,9 +4,9 @@
 
 pkgbase=linux               # Build stock -ARCH kernel
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-_srcname=linux-4.11
-pkgver=4.11.9
-pkgrel=1
+_srcname=linux-4.12
+pkgver=4.12.1
+pkgrel=2
 arch=('i686' 'x86_64')
 url="https://www.kernel.org/"
 license=('GPL2')
@@ -25,12 +25,12 @@ source=("https://www.kernel.org/pub/linux/kernel/v4.x/${_srcname}.tar.xz"
         # standard config files for mkinitcpio ramdisk
         'linux.preset')
 
-sha256sums=('b67ecafd0a42b3383bf4d82f0850cbff92a7e72a215a6d02f42ddbafcf42a7d6'
+sha256sums=('a45c3becd4d08ce411c14628a949d08e2433d8cdeca92036c7013980e93858ab'
             'SKIP'
-            'a112d1330817bac401dbbd1e2c8aacb1b725bc28239e2ca58281ea3754deceb5'
+            '466ad7caf26aac66fdf299dbe6b23d0cf1729e363a4ee37738938e3be563946b'
             'SKIP'
-            'f330007da72867bb86556d1f8b84b8a4c8148a5ed5195ae25570a5da61428733'
-            '9dd9aa4a8ec613cc8261e40db897685d75e3d426219ed8d21fa3a6bc72a27a32'
+            'df55887a43dcbb6bd35fd2fb1ec841427b6ea827334c0880cbc256d4f042a7a1'
+            'bf84528c592d1841bba0662242f0339a24a1de384c31f28248631e8be9446586'
             '19aaf5312ca767230e9d7551943c30332ddb07bc39682d506530f74c08f84f00'
             '21d89c79beae2eeab23bf1ebf78ffbfadd20a27e73d28178820508d689f452bb'
             '834bd254b56ab71d73f59b3221f056c72f559553c04718e350ab2a3e2991afe0'
