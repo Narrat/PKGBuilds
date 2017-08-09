@@ -1,6 +1,6 @@
-commit bf4dd7a81de032c9d90ce6e8e51bd0d037055802
+commit db115fea0278aac881fc9fcb4b7526f8f064dead
 Author: Narrat
-Date:   Sat Jun 10 01:21:30 2017 +0200
+Date:   Wed Aug 9 21:46:25 2017 +0200
 
     ffmpeg: Enable mmal
     
@@ -12,7 +12,7 @@ Date:   Sat Jun 10 01:21:30 2017 +0200
        * caused by not building in a clean chroot
 
 diff --git a/extra/ffmpeg/PKGBUILD b/extra/ffmpeg/PKGBUILD
-index eb6b88e0c..f17a90f47 100644
+index a1c4fa02e..bb9bf14e3 100644
 --- a/extra/ffmpeg/PKGBUILD
 +++ b/extra/ffmpeg/PKGBUILD
 @@ -19,11 +19,11 @@ license=('GPL3')
@@ -26,11 +26,11 @@ index eb6b88e0c..f17a90f47 100644
           'libvorbisenc.so' 'libvorbis.so' 'libvpx.so'
 -         'libx264.so' 'libx265.so' 'libxvidcore.so')
 +         'libx264.so' 'libx265.so' 'libxvidcore.so' 'raspberrypi-firmware-tools')
- makedepends=('hardening-wrapper' 'ladspa' 'libvdpau' 'yasm')
+ makedepends=('ladspa' 'libvdpau' 'yasm')
  optdepends=('ladspa: LADSPA filters')
  provides=('libavcodec.so' 'libavdevice.so' 'libavfilter.so' 'libavformat.so'
 @@ -34,6 +34,7 @@ validpgpkeys=('FCF986EA15E6E293A5644F10B4322F04D67658D8')
- sha256sums=('b702a7fc656ac23e276b8c823a2f646e4e6f6309bb2788435a708e69bea98f2f'
+ sha256sums=('d2a9002cdc6b533b59728827186c044ad02ba64841f1b7cd6c21779875453a1e'
              'SKIP')
  
 +
