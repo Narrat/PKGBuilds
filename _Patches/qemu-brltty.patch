@@ -1,4 +1,4 @@
-commit 4c1cf5d630cc0d9d0cfc21f7201cecc966c13d3e
+commit e71fc0a4854efd4198cdd8434a3a7a813ecbfd09
 Author: Narrat
 Date:   Mon Aug 15 15:14:44 2016 +0200
 
@@ -12,15 +12,15 @@ Date:   Mon Aug 15 15:14:44 2016 +0200
      * portaudio: and dep
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 64b2a5a..6df7fb8 100644
+index 4aee4b3..809d30c 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -13,7 +13,7 @@ license=(GPL2 LGPL2.1)
  url="http://wiki.qemu.org/"
  _headlessdeps=(seabios gnutls libpng libaio numactl jemalloc xfsprogs libnfs
-                lzo snappy curl vde2 libcap-ng spice usbredir)
+                lzo snappy curl vde2 libcap-ng spice libcacard usbredir)
 -depends=(virglrenderer sdl2 vte3 brltty "${_headlessdeps[@]}")
 +depends=(virglrenderer sdl2 vte3 "${_headlessdeps[@]}")
  makedepends=(spice-protocol python2 ceph libiscsi glusterfs)
- source=("$url/download/${pkgname}-${pkgver}.tar.bz2"
+ source=("$url/download/${pkgname}-${pkgver}.tar.bz2"{,.sig}
          qemu.sysusers
