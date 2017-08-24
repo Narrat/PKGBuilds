@@ -1,20 +1,20 @@
-commit 7a55af9886c41e52f34a8a7a3632a802e5055378
+commit e4cb9eb3af7b4062a308a50dc0a8ee6093870ac1
 Author: Narrat
-Date:   Sun Nov 6 17:53:24 2016 +0100
+Date:   Thu Aug 24 19:55:06 2017 +0200
 
     Remove qt deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index cc6fa47..e4db54f 100644
+index 29b07c0..28a3d6b 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -10,8 +10,8 @@ pkgdesc="Plotting package which outputs to X11, PostScript, PNG, GIF, and others
  arch=('i686' 'x86_64') 
  url="http://www.gnuplot.info" 
  license=('custom') 
--depends=('readline' 'gd' 'wxgtk' 'cairo' 'libjpeg' 'lua' 'qt5-svg' 'gnutls') 
+-depends=('readline' 'gd' 'wxgtk2' 'cairo' 'libjpeg' 'lua' 'qt5-svg' 'gnutls') 
 -makedepends=('texinfo' 'texlive-core' 'emacs' 'texlive-latexextra' 'qt5-tools')
-+depends=('readline' 'gd' 'wxgtk' 'cairo' 'libjpeg' 'lua' 'gnutls')
++depends=('readline' 'gd' 'wxgtk2' 'cairo' 'libjpeg' 'lua' 'gnutls')
 +makedepends=('texinfo' 'texlive-core' 'emacs' 'texlive-latexextra')
  options=('!makeflags')
  source=("http://downloads.sourceforge.net/sourceforge/$pkgname/$pkgname-$pkgver.tar.gz"
@@ -26,6 +26,6 @@ index cc6fa47..e4db54f 100644
 -              --with-readline=gnu --enable-qt \
 +              --with-readline=gnu \
 +              --with-qt=no \
-               --with-bitmap-terminals
+               --with-bitmap-terminals --with-wx-single-threaded
    make pkglibexecdir=/usr/bin
  }
