@@ -1,30 +1,32 @@
-commit 8afa0478e1774ede778208d2ee772501d0408cc5
+commit e78bf6c0388f3e3949049722dba2d146aaa03d0f
 Author: Narrat
 Date:   Thu Jan 19 22:58:39 2017 +0100
 
     Remove QT deps and disable build of py2 version
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index dcfe6b6..450b120 100644
+index acee6f8..0b823c4 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -13,16 +13,15 @@ pkgdesc="A python plotting library, making publication quality plots"
+@@ -13,18 +13,15 @@ pkgdesc="A python plotting library, making publication quality plots"
  arch=('i686' 'x86_64')
  url='http://matplotlib.org'
  license=('custom')
--checkdepends=('python-nose' 'python2-nose' 'python-mock' 'python2-mock' 'xorg-server-xvfb'
--              'texlive-core' 'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape'
--              'python-pandas' 'python2-pandas')
+-checkdepends=('python-pytest-xdist' 'python2-pytest-xdist' 'python-pytest-runner'
+-              'python2-pytest-runner' 'python2-mock' 'xorg-server-xvfb' 'texlive-core'
+-              'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape' 'python-pandas'
+-              'python2-pandas' 'ttf-freefont')
 -makedepends=('python2-pytz' 'python2-numpy' 'python2-pyqt4' 'python-pytz' 'python-numpy'
 -             'python-pyqt4' 'tk' 'python-cairocffi' 'python2-cairocffi' 'python-dateutil'
 -             'python2-dateutil' 'python-gobject' 'python2-gobject' 'python-pyparsing'
 -             'python2-pyparsing' 'pygtk' 'python-six' 'ghostscript' 'texlive-bin'
 -             'python-tornado' 'python2-tornado' 'gtk3' 'wxpython' 'python-pyqt5' 'python2-pyqt5'
 -             'libxkbcommon-x11' 'python-pillow' 'python2-pillow' 'python-setuptools'
--             'python2-setuptools' 'python-cycler' 'python2-cycler' 'python2-backports.functools_lru_cache')
-+checkdepends=('python-nose' 'python-mock'  'xorg-server-xvfb'
-+              'texlive-core' 'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape' 'python-pandas')
-+#checkdepends+=('python2-nose' 'python2-mock' 'python2-pandas')
+-             'python2-setuptools' 'python-cycler' 'python2-cycler'
+-             'python2-backports.functools_lru_cache')
++checkdepends=('python-pytest-xdist' 'python-pytest-runner' 'xorg-server-xvfb' 'texlive-core'
++              'texlive-latexextra' 'imagemagick' 'ffmpeg' 'mencoder' 'inkscape' 'python-pandas' 'ttf-freefont')
++#checkdepends+=('python2-pytest-xdist' 'python2-pytest-runner' 'python2-mock' 'python2-pandas')
 +makedepends=('python-pytz' 'python-numpy' 'tk' 'python-cairocffi' 'python-dateutil'
 +             'python-gobject' 'python-pyparsing' 'python-six' 'ghostscript' 'texlive-bin'
 +             'python-tornado' 'gtk3' 'libxkbcommon-x11' 'python-pillow' 'python-setuptools' 'python-cycler')
@@ -32,131 +34,115 @@ index dcfe6b6..450b120 100644
 +#makedepends+=('python2-pytz' 'python2-numpy' 'python2-cairocffi' 'python2-gobject'
 +#            'python2-dateutil' 'python2-pyparsing' 'pygtk' 'python2-tornado' 'python2-pillow' 'python2-setuptools' 'python2-cycler'  'python2-backports.functools_lru_cache' 'wxpython')
  source=("$pkgbase-$pkgver.tar.gz::https://github.com/matplotlib/matplotlib/archive/v$pkgver.tar.gz"
-         setup.cfg backports.functools_lru_cache.patch)
- sha512sums=('b0e6d91aee5f91e0155c9e6716eef1a7e1fb907daeb93d603709142b749878fd758e42fe3707ac73c3d87959c6a35126c9e17c08ef78c5734106fafdf198f304'
-@@ -34,7 +33,7 @@ prepare() {
-    (cd matplotlib-$pkgver; patch -p1 -i ../backports.functools_lru_cache.patch)
-    sed -i '/Subprocess32/d' matplotlib-$pkgver/setup.py
+         setup.cfg)
+ sha512sums=('19fa97eeb483218f92d72900654984387e90b9f9cc8fd62209443a6eaeb1415e68d7d9c20c5ae0028f99836db58f12aff3af56e756a4673f5130e3f5a724ca87'
+@@ -33,7 +30,7 @@ sha512sums=('19fa97eeb483218f92d72900654984387e90b9f9cc8fd62209443a6eaeb1415e68d
+ prepare() {
+   sed -i '/Subprocess32/d' matplotlib-$pkgver/setup.py
  
--   cp -a "$srcdir"/matplotlib-${pkgver}{,-py2}
-+   #cp -a "$srcdir"/matplotlib-${pkgver}{,-py2}
+-  cp -a "$srcdir"/matplotlib-$pkgver{,-py2}
++  #cp -a "$srcdir"/matplotlib-$pkgver{,-py2}
  
-    cd "$srcdir"/matplotlib-${pkgver}
-    for file in $(find . -name '*.py' -print); do
-@@ -42,18 +41,18 @@ prepare() {
-              -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python3|" ${file}
-    done
+   cd "$srcdir"/matplotlib-$pkgver
+   for file in $(find . -name '*.py' -print); do
+@@ -41,18 +38,18 @@ prepare() {
+            -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python3|" $file
+   done
  
--   cd "$srcdir"/matplotlib-${pkgver}-py2
--   for file in $(find . -name '*.py' -print); do
--      sed -i -e "s|^#!.*/usr/bin/python|#!/usr/bin/python2|" \
--             -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python2|" ${file}
--   done
-+   #cd "$srcdir"/matplotlib-${pkgver}-py2
-+   #for file in $(find . -name '*.py' -print); do
-+      #sed -i -e "s|^#!.*/usr/bin/python|#!/usr/bin/python2|" \
-+             #-e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python2|" ${file}
-+   #done
+-  cd "$srcdir"/matplotlib-$pkgver-py2
+-  for file in $(find . -name '*.py' -print); do
+-    sed -i -e "s|^#!.*/usr/bin/python|#!/usr/bin/python2|" \
+-           -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python2|" $file
+-  done
++  #cd "$srcdir"/matplotlib-$pkgver-py2
++  #for file in $(find . -name '*.py' -print); do
++    #sed -i -e "s|^#!.*/usr/bin/python|#!/usr/bin/python2|" \
++      #     -e "s|^#!.*/usr/bin/env *python|#!/usr/bin/env python2|" $file
++  #done
  
-    cp -a "$srcdir"/matplotlib-${pkgver}{,-test}
--   cp -a "$srcdir"/matplotlib-${pkgver}-py2{,-test}
-+   #cp -a "$srcdir"/matplotlib-${pkgver}-py2{,-test}
+   cp -a "$srcdir"/matplotlib-$pkgver{,-test}
+-  cp -a "$srcdir"/matplotlib-$pkgver-py2{,-test}
++  #cp -a "$srcdir"/matplotlib-$pkgver-py2{,-test}
  
-    # Configure tests (FS#48175)
-    cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-test/
--   cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-py2-test/
-+   #cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-py2-test/
+   # Configure tests (FS#48175)
+   cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-test/
+-  cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-py2-test/
++  #cp "$srcdir/setup.cfg" "$srcdir"/matplotlib-$pkgver-py2-test/
  }
  
  build() {
-@@ -64,16 +63,16 @@ build() {
-    cd "$srcdir"/matplotlib-${pkgver}
-    python3 setup.py build
+@@ -63,8 +60,8 @@ build() {
+   cd "$srcdir"/matplotlib-$pkgver
+   python3 setup.py build
  
--   cd "$srcdir"/matplotlib-${pkgver}-py2
--   python2 setup.py build
-+   #cd "$srcdir"/matplotlib-${pkgver}-py2
-+   #python2 setup.py build
+-  cd "$srcdir"/matplotlib-$pkgver-py2
+-  python2 setup.py build
++  #cd "$srcdir"/matplotlib-$pkgver-py2
++  #python2 setup.py build
  }
  
  check() {
-    cd "$srcdir"/matplotlib-${pkgver}-test
-    python3 setup.py build
+@@ -74,17 +71,15 @@ check() {
+   xvfb-run -a -s "+extension GLX +extension RANDR +render -screen 0 1280x1024x24" \
+     python setup.py pytest --addopts="-n auto" || warning "Tests failed"
  
--   cd "$srcdir"/matplotlib-${pkgver}-py2-test
--   python2 setup.py build
-+   #cd "$srcdir"/matplotlib-${pkgver}-py2-test
-+   #python2 setup.py build
- 
-    cd "$srcdir"/matplotlib-${pkgver}-test
-    (
-@@ -84,42 +83,41 @@ check() {
-        python ../matplotlib-${pkgver}/tests.py -sv --processes=8 --process-timeout=300 || warning "Tests failed"
-    )
- 
--   cd "$srcdir"/matplotlib-${pkgver}-py2-test
--   (
--     export PYTHONPATH="$PWD/build/lib.linux-$CARCH-2.7:$PYTHONPATH"
--     python2 -c "from matplotlib import font_manager"
--     rm -rf ../tmp_test_dir && mkdir ../tmp_test_dir && cd ../tmp_test_dir
--     xvfb-run -a -s "+extension GLX +extension RANDR +render -screen 0 1280x1024x24" \
--       python2 ../matplotlib-${pkgver}-py2/tests.py -sv --processes=8 --process-timeout=300 || warning "Tests failed"
--   )
-+   #cd "$srcdir"/matplotlib-${pkgver}-py2-test
-+   #(
-+     #export PYTHONPATH="$PWD/build/lib.linux-$CARCH-2.7:$PYTHONPATH"
-+     #python2 -c "from matplotlib import font_manager"
-+     #rm -rf ../tmp_test_dir && mkdir ../tmp_test_dir && cd ../tmp_test_dir
-+     #xvfb-run -a -s "+extension GLX +extension RANDR +render -screen 0 1280x1024x24" \
-+       #python2 ../matplotlib-${pkgver}-py2/tests.py -sv --processes=8 --process-timeout=300 || warning "Tests failed"
-+   #)
- }
- 
- package_python2-matplotlib() {
--   depends=('python2-pytz' 'python2-numpy' 'python2-pyqt5' 'python2-dateutil' 'python2-pyparsing' 'python2-cycler' 'libxkbcommon-x11' 'python2-backports.functools_lru_cache')
--   optdepends=('pygtk: for GTK/GTKAgg/GTKCairo backend'
--               'python2-cairo: for GTKCairo/GTK3Cairo backend'
--               'python2-cairocffi: for GTKCairo/GTK3Cairo backend (alternative to python2-cairo)'
--               'python2-pyqt4: for Qt4Agg backend'
--               'tk: used by the TkAgg backend'
--               'ghostscript: usetex dependencies'
--               'texlive-bin: usetex dependencies'
--               'python2-tornado: for webagg backend'
--               'python2-gobject: for GTK3Agg/GTK3Cairo backend'
--               'wxpython: for WX/WXAgg backend'
--               'python2-pillow: for reading/saving .jpg/bmp/tiff files')
--
--   cd matplotlib-${pkgver}-py2
--   python2 setup.py install -O1 --skip-build --root "${pkgdir}" --prefix=/usr
--
--   install -dm755 "${pkgdir}"/usr/share/licenses/python2-matplotlib
--   install -m 644 doc/users/license.rst "${pkgdir}"/usr/share/licenses/python2-matplotlib
-+   #depends=('python2-pytz' 'python2-numpy' 'python2-dateutil' 'python2-pyparsing' 'python2-cycler' 'python2-backports.functools_lru_cache' 'libxkbcommon-x11')
-+   #optdepends=('pygtk: for GTK/GTKAgg/GTKCairo backend'
-+    #           'python2-cairo: for GTKCairo/GTK3Cairo backend'
-+    #           'python2-cairocffi: for GTKCairo/GTK3Cairo backend (alternative to python2-cairo)'
-+    #           'tk: used by the TkAgg backend'
-+    #           'ghostscript: usetex dependencies'
-+    #           'texlive-bin: usetex dependencies'
-+    #           'python2-tornado: for webagg backend'
-+    #           'python2-gobject: for GTK3Agg/GTK3Cairo backend'
-+    #           'wxpython: for WX/WXAgg backend'
-+    #           'python2-pillow: for reading/saving .jpg/bmp/tiff files')
-+
-+   #cd matplotlib-${pkgver}-py2
-+   #python2 setup.py install -O1 --skip-build --root "${pkgdir}" --prefix=/usr
-+
-+   #install -dm755 "${pkgdir}"/usr/share/licenses/python2-matplotlib
-+   #install -m 644 doc/users/license.rst "${pkgdir}"/usr/share/licenses/python2-matplotlib
-+   msg2 "Nothing to see"
+-  cd "$srcdir"/matplotlib-$pkgver-py2-test
+-  xvfb-run -a -s "+extension GLX +extension RANDR +render -screen 0 1280x1024x24" \
+-    python2 setup.py pytest --addopts="-n auto" || warning "Tests failed"
++  #cd "$srcdir"/matplotlib-$pkgver-py2-test
++  #xvfb-run -a -s "+extension GLX +extension RANDR +render -screen 0 1280x1024x24" \
++    #python2 setup.py pytest --addopts="-n auto" || warning "Tests failed"
  }
  
  package_python-matplotlib() {
--   depends=('python-pytz' 'python-numpy' 'python-pyqt5' 'python-dateutil' 'python-pyparsing' 'python-cycler' 'libxkbcommon-x11')
-+   depends=('python-pytz' 'python-numpy' 'python-dateutil' 'python-pyparsing' 'python-cycler' 'libxkbcommon-x11')
-    optdepends=('python-gobject: for GTK3Agg/GTK3Cairo backend'
-                'python-cairocffi: for GTK3Agg/GTK3Cairo backend'
--               'python-pyqt4: for Qt4Agg backend'
-                'tk: used by the TkAgg backend'
-                'ghostscript: usetex dependencies'
-                'texlive-bin: usetex dependencies'
+-  depends=('python-pytz' 'python-numpy' 'python-pyqt5' 'python-dateutil' 'python-pyparsing'
+-           'python-cycler' 'libxkbcommon-x11')
++  depends=('python-pytz' 'python-numpy' 'python-dateutil' 'python-pyparsing' 'python-cycler' 'libxkbcommon-x11')
+   optdepends=('python-gobject: for GTK3Agg/GTK3Cairo backend'
+               'python-cairocffi: for GTK3Agg/GTK3Cairo backend'
+-              'python-pyqt4: for Qt4Agg backend'
+               'tk: used by the TkAgg backend'
+               'ghostscript: usetex dependencies'
+               'texlive-bin: usetex dependencies'
+@@ -99,23 +94,24 @@ package_python-matplotlib() {
+ }
+ 
+ package_python2-matplotlib() {
+-  depends=('python2-pytz' 'python2-numpy' 'python2-pyqt5' 'python2-dateutil' 'python2-pyparsing'
+-           'python2-cycler' 'libxkbcommon-x11' 'python2-backports.functools_lru_cache')
+-  optdepends=('pygtk: for GTK/GTKAgg/GTKCairo backend'
+-              'python2-cairo: for GTKCairo/GTK3Cairo backend'
+-              'python2-cairocffi: for GTKCairo/GTK3Cairo backend (alternative to python2-cairo)'
+-              'python2-pyqt4: for Qt4Agg backend'
+-              'tk: used by the TkAgg backend'
+-              'ghostscript: usetex dependencies'
+-              'texlive-bin: usetex dependencies'
+-              'python2-tornado: for webagg backend'
+-              'python2-gobject: for GTK3Agg/GTK3Cairo backend'
+-              'wxpython: for WX/WXAgg backend'
+-              'python2-pillow: for reading/saving .jpg/bmp/tiff files')
++  #depends=('python2-pytz' 'python2-numpy' 'python2-pyqt5' 'python2-dateutil' 'python2-pyparsing'
++    #       'python2-cycler' 'libxkbcommon-x11' 'python2-backports.functools_lru_cache')
++  #optdepends=('pygtk: for GTK/GTKAgg/GTKCairo backend'
++    #          'python2-cairo: for GTKCairo/GTK3Cairo backend'
++    #          'python2-cairocffi: for GTKCairo/GTK3Cairo backend (alternative to python2-cairo)'
++    #          'python2-pyqt4: for Qt4Agg backend'
++    #          'tk: used by the TkAgg backend'
++    #          'ghostscript: usetex dependencies'
++    #          'texlive-bin: usetex dependencies'
++    #          'python2-tornado: for webagg backend'
++    #          'python2-gobject: for GTK3Agg/GTK3Cairo backend'
++    #          'wxpython: for WX/WXAgg backend'
++    #          'python2-pillow: for reading/saving .jpg/bmp/tiff files')
+ 
+-  cd matplotlib-$pkgver-py2
+-  python2 setup.py install -O1 --skip-build --root "$pkgdir" --prefix=/usr
++  #cd matplotlib-$pkgver-py2
++  #python2 setup.py install -O1 --skip-build --root "$pkgdir" --prefix=/usr
+ 
+-  install -dm755 "$pkgdir"/usr/share/licenses/python2-matplotlib
+-  install -m 644 doc/users/license.rst "$pkgdir"/usr/share/licenses/python2-matplotlib
++  #install -dm755 "$pkgdir"/usr/share/licenses/python2-matplotlib
++  #install -m 644 doc/users/license.rst "$pkgdir"/usr/share/licenses/python2-matplotlib
++  msg2 "Nothing to see"
+ }
