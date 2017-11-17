@@ -1,29 +1,29 @@
-commit 2a820065d5f8ca79b555b7c8140bdeda1355dc57
+commit 3e2f8ff51f0577153e4dfcfffb8fb62a2c37ddb2
 Author: Narrat
 Date:   Wed Sep 6 19:50:46 2017 +0200
 
     Remove qt deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 8e78a0e..6ffc5a9 100644
+index f6ff4cd..fe60e6e 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -10,8 +10,8 @@ pkgdesc="Plotting package which outputs to X11, PostScript, PNG, GIF, and others
- arch=('i686' 'x86_64') 
+ arch=('x86_64')
  url="http://www.gnuplot.info" 
  license=('custom') 
 -depends=('readline' 'gd' 'wxgtk2' 'cairo' 'libjpeg' 'lua' 'qt5-svg' 'gnutls') 
 -makedepends=('texinfo' 'texlive-core' 'emacs' 'texlive-latexextra' 'qt5-tools')
 +depends=('readline' 'gd' 'wxgtk2' 'cairo' 'libjpeg' 'lua' 'gnutls')
 +makedepends=('texinfo' 'texlive-core' 'emacs' 'texlive-latexextra')
- source=("http://downloads.sourceforge.net/sourceforge/$pkgname/$pkgname-$pkgver.tar.gz"
+ source=("https://downloads.sourceforge.net/sourceforge/$pkgname/$pkgname-$pkgver.tar.gz"
          "lua53_compat.patch")
- sha1sums=('360fbd0e0ac84cc0e9ece374f463fca244980c3c'
+ sha1sums=('fc39158851f39e48136d2bdd3f753bf46a99965c'
 @@ -37,6 +37,7 @@ build() {
                --libexecdir=/usr/bin \
                --with-gihdir=/usr/share/gnuplot \
                --with-readline=gnu \
 +              --with-qt=no \
                --with-bitmap-terminals \
-               --with-wx-single-threaded
-   make pkglibexecdir=/usr/bin
+               --with-wx-single-threaded \
+               --with-texdir=/usr/share/texmf/tex/latex/gnuplot
