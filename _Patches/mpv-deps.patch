@@ -1,19 +1,27 @@
-commit e76ff5774d4b32a78240db0d77651d10684c0283
-Author: Narrat
-Date:   Sun Jan 8 19:50:39 2017 +0100
+commit 979aba54bc077116c41c858756bee6e4d9a4ca22
+Author: Narrat <autumn-wind@web.de>
+Date:   Fri Dec 15 19:23:47 2017 +0100
 
     Disable samba support
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index d116fd1..3a6f9cc 100644
+index 6787f285..dc85a07f 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -16,7 +16,7 @@ depends=(
+@@ -18,7 +18,7 @@ depends=(
    'ffmpeg' 'lcms2' 'libcdio-paranoia' 'libgl' 'libxss'
    'libxinerama' 'libxv' 'libxkbcommon' 'libva' 'wayland' 'libcaca'
    'desktop-file-utils' 'hicolor-icon-theme' 'xdg-utils' 'lua52' 'libdvdnav'
--  'libxrandr' 'jack' 'smbclient' 'rubberband' 'uchardet'
-+  'libxrandr' 'jack' 'rubberband' 'uchardet'
+-  'libxrandr' 'jack' 'rubberband' 'uchardet' 'libarchive' 'smbclient'
++  'libxrandr' 'jack' 'rubberband' 'uchardet' 'libarchive'
  )
- makedepends=('mesa' 'python-docutils' 'ladspa' 'hardening-wrapper')
+ makedepends=('mesa' 'python-docutils' 'ladspa')
  optdepends=('youtube-dl: for video-sharing websites playback')
+@@ -60,7 +60,6 @@ build() {
+     --enable-encoding \
+     --enable-libarchive \
+     --enable-libmpv-shared \
+-    --enable-libsmbclient \
+     --enable-zsh-comp
+ 
+   ./waf build
