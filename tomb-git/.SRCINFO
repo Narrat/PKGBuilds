@@ -1,6 +1,6 @@
 pkgbase = tomb-git
 	pkgdesc = simple tool to manage encrypted storage
-	pkgver = 2.3.r12.g5b7f875
+	pkgver = 2.5.r0.g74689ea
 	pkgrel = 1
 	url = http://tomb.dyne.org/
 	arch = any
@@ -12,7 +12,7 @@ pkgbase = tomb-git
 	source = tomb::git://github.com/dyne/Tomb.git
 	source = _tomb
 	sha256sums = SKIP
-	sha256sums = 3952cda7762fded6e9fd03be4b4b2634f50ea20fba72c6a2803978f228630749
+	sha256sums = 3d71fb492d489ab2bc0ffe21e18b297796b7ceb628158f5a068777aabed8633e
 
 pkgname = tomb-git
 	depends = cryptsetup
@@ -23,7 +23,6 @@ pkgname = tomb-git
 	optdepends = lsof: allows the operation slam
 	optdepends = steghide: steganography
 	optdepends = dcfldd: show nice progress during massive I/O
-	optdepends = wipe: secure file deletion
 	optdepends = qrencode: for paper backups of keys
 	optdepends = swish-e: file content indexer
 
