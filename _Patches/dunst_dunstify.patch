@@ -1,20 +1,20 @@
-commit 9670d302998d2318eafb7afeb70e48c8cd1c2fa1
+commit 203a30f05ed6e74c6fa8c6136dff152f26d43e93
 Author: Narrat
-Date:   Sat Nov 21 21:02:04 2015 +0100
+Date:   Sun Jan 7 18:26:36 2018 +0100
 
     Enable dunstify
     
     Can more stuff than notify-send (like IDs) which I wanna have for sending notifications
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 1a0fa72..a8b5d29 100644
+index 9b1ff1b..1f0eadc 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -17,11 +17,14 @@ md5sums=('7c37fb5306012fd658839908479dbbed')
+@@ -21,11 +21,14 @@ md5sums=('f095a62ae24ec9de87596cadad19811a')
  
  build() {
- 	make -C "$srcdir/$pkgname-$pkgver" X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
-+	make -C "$srcdir/$pkgname-$pkgver" dunstify
+ 	make -C "$srcdir/$pkgname-$pkgver" PREFIX=/usr X11INC=/usr/include/X11 X11LIB=/usr/lib/X11
++	make -C "$srcdir/$pkgname-$pkgver" PREFIX=/usr X11INC=/usr/include/X11 X11LIB=/usr/lib/X11 dunstify
  }
  
  package() {
