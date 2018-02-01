@@ -1,0 +1,68 @@
+commit a478013d4ecf9878d450ed620c0b06f4a8bad5b6
+Author: Narrat <autumn-wind@web.de>
+Date:   Thu Feb 1 02:56:23 2018 +0100
+
+    Adjust icons for notifications
+
+diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
+index 41919392..2539b9c7 100644
+--- a/trunk/PKGBUILD
++++ b/trunk/PKGBUILD
+@@ -9,10 +9,16 @@ arch=('x86_64')
+ url="http://github.com/falconindy/ponymix"
+ license=('MIT')
+ depends=('pulseaudio' 'libnotify')
+-source=(https://pkgbuild.com/~dreisner/sources/ponymix/ponymix-5.tar.xz{,.sig})
++source=(https://pkgbuild.com/~dreisner/sources/ponymix/ponymix-5.tar.xz{,.sig}
++        icon_path.patch)
+ validpgpkeys=('487EACC08557AD082088DABA1EB2638FF56C0C53')
+ md5sums=('ac44f2224bb6e694673ed0498b07fec8'
+-         'SKIP')
++         'SKIP'
++         '7feed6547e07bd2a4ad643355c906832')
++
++prepare() {
++  patch -Np1 -d "${pkgname}-${pkgver}" -i ../icon_path.patch
++}
+ 
+ build() {
+   make -C "$srcdir/$pkgname-$pkgver"
+diff --git a/trunk/icon_path.patch b/trunk/icon_path.patch
+new file mode 100644
+index 00000000..916041df
+--- /dev/null
++++ b/trunk/icon_path.patch
+@@ -0,0 +1,33 @@
++commit 8a737c0c0e7ce7977bb2606a17caf38c061f20c8
++Author: Narrat <autumn-wind@web.de>
++Date:   Thu Feb 1 02:47:06 2018 +0100
++
++    notify.h: Change icon names
++    
++    One out of countless themes got those filenames.
++    Could introduce untracked symbolic links or patch ponymix
++
++diff --git a/notify.h b/notify.h
++index 6016df0..f6856b2 100644
++--- a/notify.h
+++++ b/notify.h
++@@ -70,15 +70,15 @@ class LibnotifyNotifier : public Notifier {
++ 
++  private:
++   void volchange(long vol, bool mute) const {
++-    const char* icon = "notification-audio-volume-muted";
+++    const char* icon = "audio-volume-muted";
++ 
++     if (!mute) {
++       if (vol > 67) {
++-        icon = "notification-audio-volume-high";
+++        icon = "audio-volume-high";
++       } else if (vol > 33) {
++-        icon = "notification-audio-volume-medium";
+++        icon = "audio-volume-medium";
++       } else if (vol > 0) {
++-        icon = "notification-audio-volume-low";
+++        icon = "audio-volume-low";
++       }
++     }
++ 
