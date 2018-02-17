@@ -1,24 +1,24 @@
-commit b80bd324ea9e11bcb545bfefb049e3832eb10e28
+commit 96c2cfa0d5b92415acf59c021ed4bdb84aca53af
 Author: Narrat
 Date:   Sat Jul 23 23:25:09 2016 +0200
 
     add mpd to conky and remove wireless_tools
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 33f4e7f..91b9835 100644
+index ab180a6..295fafc 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -12,8 +12,8 @@ url='https://github.com/brndnmtthws/conky'
  license=('BSD' 'GPL')
- arch=('i686' 'x86_64')
- makedepends=('cmake' 'docbook2x' 'docbook-xml' 'man-db' 'git')
+ arch=('x86_64')
+ makedepends=('cmake' 'docbook2x' 'docbook-xsl' 'man-db' 'git')
 -depends=('glib2' 'lua' 'wireless_tools' 'libxdamage' 'libxinerama' 'libxft'
 -         'imlib2' 'libxml2' 'libpulse')
 +depends=('glib2' 'lua' 'libxdamage' 'libxinerama' 'libxft'
 +         'imlib2' 'libxml2' 'libpulse' 'mpd')
  source=("https://github.com/brndnmtthws/conky/archive/v${pkgver}.tar.gz"
          'lua53.patch')
- sha1sums=('971b20be2d8c2e676374441469e8525708500776'
+ sha256sums=('2ebd655a27c816bd613538b71d4ec1c096252cb522feaa05f64781dcedea8857'
 @@ -32,7 +32,7 @@ build() {
  	cmake \
  		-D CMAKE_BUILD_TYPE=Release \
@@ -28,10 +28,10 @@ index 33f4e7f..91b9835 100644
  		-D BUILD_XDBE=ON \
  		-D BUILD_IMLIB2=ON \
  		-D BUILD_CURL=ON \
-@@ -40,6 +40,7 @@ build() {
- 		-D BUILD_WEATHER_METAR=ON \
+@@ -41,6 +41,7 @@ build() {
  		-D BUILD_WEATHER_XOAP=ON \
  		-D BUILD_PULSEAUDIO=ON \
+ 		-D BUILD_JOURNAL=ON \
 +		-D BUILD_MPD=ON \
  		-D CMAKE_INSTALL_PREFIX=/usr \
  		.
