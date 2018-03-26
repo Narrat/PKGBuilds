@@ -5,7 +5,7 @@
 pkgbase=linux               # Build stock -ARCH kernel
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
 _srcname=linux-4.15
-pkgver=4.15.11
+pkgver=4.15.13
 pkgrel=1
 arch=('x86_64')
 url="https://www.kernel.org/"
@@ -30,7 +30,7 @@ validpgpkeys=(
 )
 sha256sums=('5a26478906d5005f4f809402e981518d2b8844949199f60c4b6e1f986ca2a769'
             'SKIP'
-            'ad74ca849d66056ac453d004caa36f20c56fe5eedb4370e279b55b4e7b02ccc2'
+            'f1bc5cfc7316daa463cd0ed366e376eb24a29072491c29a68732e1edf8a6ef8b'
             'SKIP'
             'f38927db126ec7141ea2dd70cabb2ef378552672b31db4ab621493928497abd7'
             'c4bd733e1021d020e7abb50ff462a73fddf9734ffec6d504db8613496ffee624'
