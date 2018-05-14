@@ -1,11 +1,11 @@
-commit 99fbca0dc0afad99256b5446b4ad6f65a623ba08
+commit e6222015edb8dcf8db97f4b76a0138cd964401ff
 Author: Narrat <autumn-wind@web.de>
 Date:   Mon May 14 09:56:34 2018 +0200
 
     Disable samba support
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index da96be2b..d38fdbd8 100644
+index 59060e53..ca255b16 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -17,7 +17,7 @@ url='https://mpv.io/'
@@ -22,6 +22,6 @@ index da96be2b..d38fdbd8 100644
      --enable-libarchive \
      --enable-libmpv-shared \
 -    --enable-libsmbclient \
+     --enable-tv \
      --enable-zsh-comp
  
-   ./waf build
