@@ -1,4 +1,4 @@
-commit 0174b11e21e271d575554935416627924cdd2fb3
+commit ac702ccad10f3a552840b2ef56860ae8a0cbb8e2
 Author: Narrat
 Date:   Thu May 31 01:31:37 2018 +0200
 
@@ -10,7 +10,7 @@ Date:   Thu May 31 01:31:37 2018 +0200
      * raspberrypi-firmware-tools to deps (needed for mmal)
 
 diff --git a/extra/ffmpeg/PKGBUILD b/extra/ffmpeg/PKGBUILD
-index a9204cf18..47f425cd7 100644
+index a9204cf18..fba629b20 100644
 --- a/extra/ffmpeg/PKGBUILD
 +++ b/extra/ffmpeg/PKGBUILD
 @@ -22,7 +22,7 @@ depends=('alsa-lib' 'bzip2' 'fontconfig' 'fribidi' 'glibc' 'gmp' 'gnutls' 'gsm'
@@ -18,14 +18,15 @@ index a9204cf18..47f425cd7 100644
           'libtheora' 'libvdpau' 'libwebp' 'libx11' 'libxcb' 'libxext' 'libxml2'
           'libxv' 'opencore-amr' 'openjpeg2' 'opus' 'sdl2' 'speex' 'v4l-utils'
 -         'xz' 'zlib'
-+         'xz' 'zlib' 'raspberrypi-firmware-tools'
++         'xz' 'zlib' 'raspberrypi-firmware'
           'libass.so' 'libbluray.so' 'libfreetype.so' 'libva-drm.so' 'libva.so'
           'libva-x11.so' 'libvidstab.so' 'libvorbisenc.so' 'libvorbis.so'
           'libvpx.so' 'libx264.so' 'libx265.so' 'libxvidcore.so')
-@@ -83,6 +83,7 @@ build() {
+@@ -83,6 +83,8 @@ build() {
      --enable-omx \
      --enable-shared \
      --enable-version3 \
++    --enable-omx-rpi \
 +    --enable-mmal \
      $CONFIG
  
