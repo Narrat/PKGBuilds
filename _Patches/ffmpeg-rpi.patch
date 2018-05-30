@@ -1,6 +1,6 @@
-commit 1a1700f2273550f42e6bbe174777d9a39c5cb9d3
+commit 0174b11e21e271d575554935416627924cdd2fb3
 Author: Narrat
-Date:   Thu Feb 1 00:09:29 2018 +0100
+Date:   Thu May 31 01:31:37 2018 +0200
 
     ffmpeg: Enable mmal
     
@@ -8,29 +8,24 @@ Date:   Thu Feb 1 00:09:29 2018 +0100
     
     Changes involved:
      * raspberrypi-firmware-tools to deps (needed for mmal)
-     * add libxv
-       * caused by not building in a clean chroot
 
 diff --git a/extra/ffmpeg/PKGBUILD b/extra/ffmpeg/PKGBUILD
-index e19d741a5..91adbfa01 100644
+index a9204cf18..47f425cd7 100644
 --- a/extra/ffmpeg/PKGBUILD
 +++ b/extra/ffmpeg/PKGBUILD
-@@ -19,9 +19,9 @@ license=('GPL3')
- depends=('alsa-lib' 'bzip2' 'fontconfig' 'fribidi' 'glibc' 'gmp' 'gnutls' 'gsm'
-          'jack' 'lame' 'libavc1394' 'libiec61883' 'libmodplug' 'libpulse'
-          'libraw1394' 'libsoxr' 'libssh' 'libtheora' 'libvdpau' 'libwebp'
--         'libx11' 'libxcb' 'libxml2' 'opencore-amr' 'openjpeg2' 'opus' 'sdl2'
-+         'libx11' 'libxcb' 'libxml2' 'libxv' 'opencore-amr' 'openjpeg2' 'opus' 'sdl2'
-          'speex' 'v4l-utils' 'xz' 'zlib'
--         'libomxil-bellagio'
-+         'libomxil-bellagio' 'raspberrypi-firmware-tools'
+@@ -22,7 +22,7 @@ depends=('alsa-lib' 'bzip2' 'fontconfig' 'fribidi' 'glibc' 'gmp' 'gnutls' 'gsm'
+          'libomxil-bellagio' 'libpulse' 'libraw1394' 'libsoxr' 'libssh'
+          'libtheora' 'libvdpau' 'libwebp' 'libx11' 'libxcb' 'libxext' 'libxml2'
+          'libxv' 'opencore-amr' 'openjpeg2' 'opus' 'sdl2' 'speex' 'v4l-utils'
+-         'xz' 'zlib'
++         'xz' 'zlib' 'raspberrypi-firmware-tools'
           'libass.so' 'libbluray.so' 'libfreetype.so' 'libva-drm.so' 'libva.so'
           'libva-x11.so' 'libvidstab.so' 'libvorbisenc.so' 'libvorbis.so'
           'libvpx.so' 'libx264.so' 'libx265.so' 'libxvidcore.so')
-@@ -92,6 +92,7 @@ build() {
+@@ -83,6 +83,7 @@ build() {
+     --enable-omx \
      --enable-shared \
      --enable-version3 \
-     --enable-omx \
 +    --enable-mmal \
      $CONFIG
  
