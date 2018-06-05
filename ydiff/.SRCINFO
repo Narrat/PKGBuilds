@@ -1,0 +1,14 @@
+pkgbase = ydiff
+	pkgdesc = Colored, incremental, side-by-side diff viewer
+	pkgver = 1.1
+	pkgrel = 1
+	url = http://pypi.python.org/pypi/ydiff/
+	arch = any
+	license = BSD
+	depends = python
+	conflicts = cdiff
+	source = https://files.pythonhosted.org/packages/source/y/ydiff/ydiff-1.1.tar.gz
+	md5sums = b8ef08b5fb5e77860922cbf96ad034a5
+
+pkgname = ydiff
+
