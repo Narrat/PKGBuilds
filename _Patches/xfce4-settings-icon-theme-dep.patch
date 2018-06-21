@@ -1,11 +1,11 @@
-commit d649d152e8f00316a11b845c4a7ccc95d05ad6c4
+commit a99acd612a4dfb14588653bc8bf777e7a27d3fdf
 Author: Narrat
-Date:   Fri Sep 16 00:29:29 2016 +0200
+Date:   Thu Jun 21 21:21:18 2018 +0200
 
     Change default icon theme to adwaita
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index ab1adda..90e285d 100644
+index f67b851..398d29e 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -12,17 +12,17 @@ url="http://www.xfce.org/"
@@ -16,9 +16,9 @@ index ab1adda..90e285d 100644
 +         'adwaita-icon-theme' 'gnome-themes-standard')
  makedepends=('intltool' 'xf86-input-libinput')
  optdepends=('libcanberra: for sound control')
- source=(http://archive.xfce.org/src/xfce/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2
+ source=(https://archive.xfce.org/src/xfce/$pkgname/${pkgver%.*}/$pkgname-$pkgver.tar.bz2
          default-xsettings-xml.patch)
- sha256sums=('f6484a0b1a7dad65ba5ee4eba8e07299b7c92a2a8adb195684e0e2b959886574'
+ sha256sums=('e2a04cad48bf9e951409d0c841829fa3b4ce632cd799082ef82d0506618b6f9b'
 -            '1c4110fd5ce0f17564cda892b72d59a87b515fdb4580c7154bbb4c1979f5ade7')
 +            '8e9a6c70ab0ceb5d91b637dc290768f8a47edb5d7b6e2eebc4459dbc4ee040d7')
  prepare() {
