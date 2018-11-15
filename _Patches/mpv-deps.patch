@@ -1,24 +1,24 @@
-commit e6222015edb8dcf8db97f4b76a0138cd964401ff
+commit ed9f7fe948029d1075eabf83a7fdb9e47018fd60
 Author: Narrat <autumn-wind@web.de>
-Date:   Mon May 14 09:56:34 2018 +0200
+Date:   Thu Nov 15 21:50:54 2018 +0100
 
     Disable samba support
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 59060e53..ca255b16 100644
+index 0309415b..8b5186f8 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -17,7 +17,7 @@ url='https://mpv.io/'
+@@ -16,7 +16,7 @@ url='https://mpv.io/'
  depends=('desktop-file-utils' 'ffmpeg' 'hicolor-icon-theme' 'jack' 'lcms2'
           'libarchive' 'libcaca' 'libcdio-paranoia' 'libdvdnav' 'libgl' 'libva'
           'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss' 'libxv' 'lua52'
 -         'rubberband' 'smbclient' 'uchardet' 'vulkan-icd-loader' 'wayland'
 +         'rubberband' 'uchardet' 'vulkan-icd-loader' 'wayland'
-          'xdg-utils')
+          'xdg-utils' 'shaderc')
  makedepends=('mesa' 'python-docutils' 'ladspa' 'wayland-protocols'
-              'vulkan-headers')
-@@ -45,7 +45,6 @@ build() {
-     --enable-encoding \
+              'ffnvcodec-headers' 'vulkan-headers')
+@@ -43,7 +43,6 @@ build() {
+     --enable-dvdnav \
      --enable-libarchive \
      --enable-libmpv-shared \
 -    --enable-libsmbclient \
