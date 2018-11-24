@@ -1,6 +1,6 @@
-commit 02b739eae80227b50c9cde1a5bad14196160b522
+commit 1c6b8c391767a86f6415f9c8aa7d669260f1fc72
 Author: Narrat <autumn-wind@web.de>
-Date:   Sun Apr 24 12:02:47 2016 +0200
+Date:   Sat Nov 24 19:42:38 2018 +0100
 
     Customize the timer
     
@@ -8,25 +8,25 @@ Date:   Sun Apr 24 12:02:47 2016 +0200
     (Didn't want to place them locally (Easier to follow upstream changes))
 
 diff --git a/PKGBUILD b/PKGBUILD
-index 71ae842..5576f54 100644
+index 768491e..c99413e 100644
 --- a/PKGBUILD
 +++ b/PKGBUILD
-@@ -10,10 +10,18 @@ optdepends=('sudo: needed to recall modules via a call to modprobe')
+@@ -10,10 +10,18 @@ optdepends=('sudo: needed for recall function')
  replaces=('modprobed_db')
  conflicts=('modprobed_db')
  url="https://wiki.archlinux.org/index.php/Modprobed-db"
--source=("http://repo-ck.com/source/$pkgname/$pkgname-$pkgver.tar.xz")
--sha256sums=('97345b3c107a290be9270b25095a8f564d1c9f2f4b116f0e7d03f85a2a2843ba')
-+source=("http://repo-ck.com/source/$pkgname/$pkgname-$pkgver.tar.xz"
+-source=("$pkgname-$pkgver.tar.gz::https://github.com/graysky2/$pkgname/archive/v$pkgver.tar.gz")
+-sha256sums=('49dfaeeb9e43269c2a36118bf5ff24df615fa20c599fea4b82eb47138a4a3c79')
++source=("$pkgname-$pkgver.tar.gz::https://github.com/graysky2/$pkgname/archive/v$pkgver.tar.gz"
 +        "modprobed-db-units.patch")
-+sha256sums=('97345b3c107a290be9270b25095a8f564d1c9f2f4b116f0e7d03f85a2a2843ba'
++sha256sums=('49dfaeeb9e43269c2a36118bf5ff24df615fa20c599fea4b82eb47138a4a3c79'
 +            'a99b30a3e0d7ad64217cd5cd831ae245ef6df8592b963572536afca14d411b3f')
  install=readme.install
  
 +
 +prepare() {
 +	cd "$pkgname-$pkgver"
-+    patch -Np1 -i $srcdir/modprobed-db-units.patch
++	patch -Np1 -i $srcdir/modprobed-db-units.patch
 +}
 +
  build() {
@@ -34,7 +34,7 @@ index 71ae842..5576f54 100644
  	make
 diff --git a/modprobed-db-units.patch b/modprobed-db-units.patch
 new file mode 100644
-index 0000000..3b2ec0c
+index 0000000..9b2e3fd
 --- /dev/null
 +++ b/modprobed-db-units.patch
 @@ -0,0 +1,33 @@
@@ -43,7 +43,7 @@ index 0000000..3b2ec0c
 +Date:   Tue Sep 22 21:14:45 2015 +0200
 +
 +    Add OnBootSec to the timer
-+    
++
 +    This activates the .service file after one hour and then OnUnitActive resumes everything.
 +    The effect is, only the timer needs to be started/enabled
 +
