@@ -1,6 +1,6 @@
-commit ac702ccad10f3a552840b2ef56860ae8a0cbb8e2
+commit a9df126cf55d97e2742e63d838d01efb9c08bd0c
 Author: Narrat
-Date:   Thu May 31 01:31:37 2018 +0200
+Date:   Thu Nov 29 02:15:17 2018 +0100
 
     ffmpeg: Enable mmal
     
@@ -10,19 +10,18 @@ Date:   Thu May 31 01:31:37 2018 +0200
      * raspberrypi-firmware-tools to deps (needed for mmal)
 
 diff --git a/extra/ffmpeg/PKGBUILD b/extra/ffmpeg/PKGBUILD
-index a9204cf18..fba629b20 100644
+index 93e9d6fca..cd8ecf0d7 100644
 --- a/extra/ffmpeg/PKGBUILD
 +++ b/extra/ffmpeg/PKGBUILD
-@@ -22,7 +22,7 @@ depends=('alsa-lib' 'bzip2' 'fontconfig' 'fribidi' 'glibc' 'gmp' 'gnutls' 'gsm'
-          'libomxil-bellagio' 'libpulse' 'libraw1394' 'libsoxr' 'libssh'
-          'libtheora' 'libvdpau' 'libwebp' 'libx11' 'libxcb' 'libxext' 'libxml2'
-          'libxv' 'opencore-amr' 'openjpeg2' 'opus' 'sdl2' 'speex' 'v4l-utils'
--         'xz' 'zlib'
-+         'xz' 'zlib' 'raspberrypi-firmware'
-          'libass.so' 'libbluray.so' 'libfreetype.so' 'libva-drm.so' 'libva.so'
-          'libva-x11.so' 'libvidstab.so' 'libvorbisenc.so' 'libvorbis.so'
-          'libvpx.so' 'libx264.so' 'libx265.so' 'libxvidcore.so')
-@@ -83,6 +83,8 @@ build() {
+@@ -26,6 +26,7 @@ depends=(
+   'libass.so' 'libbluray.so' 'libfreetype.so' 'libva-drm.so' 'libva.so'
+   'libva-x11.so' 'libvidstab.so' 'libvorbisenc.so' 'libvorbis.so' 'libvpx.so'
+   'libx264.so' 'libx265.so' 'libxvidcore.so'
++  'raspberrypi-firmware'
+ )
+ makedepends=('git' 'ladspa' 'yasm')
+ optdepends=('ladspa: LADSPA filters')
+@@ -83,6 +84,8 @@ build() {
      --enable-omx \
      --enable-shared \
      --enable-version3 \
