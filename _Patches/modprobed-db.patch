@@ -1,6 +1,6 @@
-commit 1c6b8c391767a86f6415f9c8aa7d669260f1fc72
+commit 39a27a8c31df064e5eb12a7f5d6735ca97ec2f09
 Author: Narrat <autumn-wind@web.de>
-Date:   Sat Nov 24 19:42:38 2018 +0100
+Date:   Sun Dec 2 00:41:25 2018 +0100
 
     Customize the timer
     
@@ -8,7 +8,7 @@ Date:   Sat Nov 24 19:42:38 2018 +0100
     (Didn't want to place them locally (Easier to follow upstream changes))
 
 diff --git a/PKGBUILD b/PKGBUILD
-index 768491e..c99413e 100644
+index 22ee5d6..dd83e79 100644
 --- a/PKGBUILD
 +++ b/PKGBUILD
 @@ -10,10 +10,18 @@ optdepends=('sudo: needed for recall function')
@@ -16,11 +16,11 @@ index 768491e..c99413e 100644
  conflicts=('modprobed_db')
  url="https://wiki.archlinux.org/index.php/Modprobed-db"
 -source=("$pkgname-$pkgver.tar.gz::https://github.com/graysky2/$pkgname/archive/v$pkgver.tar.gz")
--sha256sums=('49dfaeeb9e43269c2a36118bf5ff24df615fa20c599fea4b82eb47138a4a3c79')
+-sha256sums=('761da77d8221adf93e60111601dcde0020b183401c66992f78d1d77ce7dc0a65')
 +source=("$pkgname-$pkgver.tar.gz::https://github.com/graysky2/$pkgname/archive/v$pkgver.tar.gz"
 +        "modprobed-db-units.patch")
-+sha256sums=('49dfaeeb9e43269c2a36118bf5ff24df615fa20c599fea4b82eb47138a4a3c79'
-+            'a99b30a3e0d7ad64217cd5cd831ae245ef6df8592b963572536afca14d411b3f')
++sha256sums=('761da77d8221adf93e60111601dcde0020b183401c66992f78d1d77ce7dc0a65'
++            'f0f96309ddc3aa74c6401c20b759c3fe9bd237249f43ffa2c348be5a2dde2c66')
  install=readme.install
  
 +
