@@ -1,14 +1,14 @@
 pkgbase = gimp-plugin-bimp
-	pkgdesc = Batch Image Manipulation Plugin for GIMP.
-	pkgver = 1.18
+	pkgdesc = Batch Image Manipulation Plugin for GIMP
+	pkgver = 2.0
 	pkgrel = 1
 	url = http://www.alessandrofrancesconi.it/projects/bimp/
 	arch = x86_64
 	arch = i686
 	license = GPL
 	depends = gimp
-	source = bimp-1.18.tar.gz::https://github.com/alessandrofrancesconi/gimp-plugin-bimp/archive/v1.18.tar.gz
-	md5sums = 84b748a4f1fa0bd67da12a77b65b4611
+	source = bimp-2.0.tar.gz::https://github.com/alessandrofrancesconi/gimp-plugin-bimp/archive/v2.0.tar.gz
+	md5sums = 715a543f158fa9dd7a4f46dd2f28bb89
 
 pkgname = gimp-plugin-bimp
 
