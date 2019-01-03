@@ -1,14 +1,15 @@
 pkgbase = scite
 	pkgdesc = Editor with facilities for building and running programs
-	pkgver = 4.1.0
+	pkgver = 4.1.2
 	pkgrel = 1
 	url = http://www.scintilla.org/SciTE.html
+	arch = i686
 	arch = x86_64
 	license = custom:scite
 	depends = gtk3
 	backup = usr/share/scite/SciTEGlobal.properties
-	source = https://www.scintilla.org/scite410.tgz
-	sha256sums = d1f9cf27b8d44b3d6bab179173a58cdfe76b44f84c8e74aeb85bf16c50148cf7
+	source = https://www.scintilla.org/scite412.tgz
+	sha256sums = 01eceecb4cfe80415bd1488900ada32340850cf3bba80f25f004da4811e3fcc8
 
 pkgname = scite
 
