@@ -1,17 +1,17 @@
-commit 07d6a82f46644c230240794c2ad8cd3bc9aba7c4
+commit 2c5f9d5674a0122e81ed830376458e9b5b543587
 Author: Narrat
-Date:   Tue Nov 13 02:08:25 2018 +0100
+Date:   Sun Feb 24 14:51:23 2019 +0100
 
     remove smbclient from deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 9f6a27d..440830f 100644
+index 7601421..c80aa14 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -15,7 +15,7 @@ depends=('audiofile' 'avahi' 'curl' 'faad2' 'ffmpeg' 'fluidsynth' 'icu' 'jack'
           'libao' 'libcdio-paranoia' 'libgme' 'libid3tag' 'libmad' 'libmikmod'
           'libmms' 'libmodplug' 'libmpcdec' 'libmpdclient' 'libnfs'
-          'libsamplerate' 'libshout' 'libsoxr' 'libsystemd' 'libupnp' 'mpg123'
+          'libsamplerate' 'libshout' 'libsoxr' 'systemd-libs' 'libupnp' 'mpg123'
 -         'openal' 'smbclient' 'sqlite' 'twolame' 'wavpack' 'wildmidi' 'yajl'
 +         'openal' 'sqlite' 'twolame' 'wavpack' 'wildmidi' 'yajl'
           'zziplib')
