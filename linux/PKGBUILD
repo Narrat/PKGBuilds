@@ -4,7 +4,7 @@
 
 pkgbase=linux               # Build stock -ARCH kernel
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-_srcver=4.20.1-arch1
+_srcver=5.0.1-arch1
 pkgver=${_srcver//-/.}
 pkgrel=1
 arch=(x86_64)
@@ -16,8 +16,8 @@ _srcname=archlinux-linux
 source=(
   "$_srcname::git+https://git.archlinux.org/linux.git?signed#tag=v$_srcver"
   config         # the main kernel config file
-  config.Hekate  # custom kernel config for Hekate (x86_64)
-  config.Persephone # custom kernel config for Persephone (i686)
+  config.Hekate  # custom kernel config for Hekate
+  config.Persephone # custom kernel config for Persephone
   60-linux.hook  # pacman hook for depmod
   90-linux.hook  # pacman hook for initramfs regeneration
   linux.preset   # standard config files for mkinitcpio ramdisk
@@ -28,7 +28,7 @@ validpgpkeys=(
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
 sha256sums=('SKIP'
-            '72be7e1240975218dd370a9ce7e10f0b77e7fd9585ae8cdec0deab1800b307fe'
+            'df2ce998b050c707950c555f7f6ec0efcb8498fca10b4bce45f681844c8aa0ab'
             '6f44b40fbdd222734d907f5499bb5845ae0fd534f06af97e5b07346fbf23bc0d'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
