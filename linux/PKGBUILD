@@ -2,11 +2,11 @@
 # Maintainer: Tobias Powalowski <tpowa@archlinux.org>
 # Contributor: Thomas Baechler <thomas@archlinux.org>
 
-pkgbase=linux               # Build stock -ARCH kernel
-#pkgbase=linux-$(hostname)  # Build kernel with a different name
-_srcver=5.1.3-arch1
+#pkgbase=linux               # Build stock -ARCH kernel
+pkgbase=linux-$(hostname)  # Build kernel with a different name
+_srcver=5.1.5-arch1
 pkgver=${_srcver//-/.}
-pkgrel=1
+pkgrel=2
 arch=(x86_64)
 url="https://git.archlinux.org/linux.git/log/?h=v$_srcver"
 license=(GPL2)
@@ -29,7 +29,7 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '02390efe7637927502bc834daf3f413ea5e2cb084bca125372e70dc9438e824c'
-            '513a432bdb2d5c9f8853d649e62fc05f45b6f83c65002309bb0ae020917f979e'
+            '2e83bf4efcf54744d221c242048ab4b3bbb0c6828607ee3be50ef09bff18cb33'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
             'c043f3033bb781e2688794a59f6d1f7ed49ef9b13eb77ff9a425df33a244a636'
