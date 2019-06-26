@@ -4,7 +4,7 @@
 
 pkgbase=linux               # Build stock -ARCH kernel
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-_srcver=5.1.9-arch1
+_srcver=5.1.15-arch1
 pkgver=${_srcver//-/.}
 pkgrel=1
 arch=(x86_64)
@@ -28,7 +28,7 @@ validpgpkeys=(
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
 sha256sums=('SKIP'
-            '2e555646f47002c3e76e2a8405d33a64fcc8cf060ef5430881a5d144d8e3bc98'
+            'd8eac4a183fbc5a6391a21beb9be1c9b24b7ff2deeb3cedb8b4635722ddcede9'
             '2e83bf4efcf54744d221c242048ab4b3bbb0c6828607ee3be50ef09bff18cb33'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
