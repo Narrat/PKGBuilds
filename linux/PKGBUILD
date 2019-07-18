@@ -4,13 +4,16 @@
 
 pkgbase=linux               # Build stock -ARCH kernel
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-_srcver=5.1.15-arch1
+_srcver=5.2.1-arch1
 pkgver=${_srcver//-/.}
 pkgrel=1
 arch=(x86_64)
 url="https://git.archlinux.org/linux.git/log/?h=v$_srcver"
 license=(GPL2)
-makedepends=(xmlto kmod inetutils bc libelf git)
+makedepends=(
+  xmlto kmod inetutils bc libelf git python-sphinx python-sphinx_rtd_theme
+  graphviz imagemagick
+)
 options=('!strip')
 _srcname=archlinux-linux
 source=(
@@ -28,7 +31,7 @@ validpgpkeys=(
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
 sha256sums=('SKIP'
-            'd8eac4a183fbc5a6391a21beb9be1c9b24b7ff2deeb3cedb8b4635722ddcede9'
+            'd49d9d0570785051f6b8b58962a4d792d1d1501ecb0a98dcf616226e6da6bdb5'
             '2e83bf4efcf54744d221c242048ab4b3bbb0c6828607ee3be50ef09bff18cb33'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             'ae2e95db94ef7176207c690224169594d49445e04249d2499e9d2fbc117a0b21'
@@ -66,7 +69,7 @@ prepare() {
 
 build() {
   cd $_srcname
-  make bzImage modules
+  make bzImage modules htmldocs
 }
 
 _package() {
@@ -216,6 +219,18 @@ _package-docs() {
   msg2 "Installing documentation..."
   mkdir -p "$builddir"
   cp -t "$builddir" -a Documentation
+
+  msg2 "Removing doctrees..."
+  rm -r "$builddir/Documentation/output/.doctrees"
+
+  msg2 "Moving HTML docs..."
+  local src dst
+  while read -rd '' src; do
+    dst="$builddir/Documentation/${src#$builddir/Documentation/output/}"
+    mkdir -p "${dst%/*}"
+    mv "$src" "$dst"
+    rmdir -p --ignore-fail-on-non-empty "${src%/*}"
+  done < <(find "$builddir/Documentation/output" -type f -print0)
 
   msg2 "Adding symlink..."
   mkdir -p "$pkgdir/usr/share/doc"
