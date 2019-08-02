@@ -11,8 +11,9 @@ pkgdesc="Lexmark Z600 Printer Driver"
 arch=('i686' 'x86_64')
 url="http://www.lexmark.com/"
 license=('custom')
-depends_i686=('cups' 'libstdc++5')
-depends_x86_64=('cups' 'lib32-libcups' 'lib32-libstdc++5')
+depends=('cups')
+depends_i686=('libstdc++5')
+depends_x86_64=('lib32-libcups' 'lib32-libstdc++5')
 source=("http://downloads.lexmark.com/downloads/cpd/CJLZ600LE-CUPS-1.0-1.TAR.gz")
 md5sums=('c0e35c9819b25e587e75a5a743c49f18')
 
@@ -25,6 +26,5 @@ prepare() {
 }
 
 package() {
-  cd $srcdir/
   cp -dpr --no-preserve=ownership usr/ $pkgdir/
 }
