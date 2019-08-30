@@ -1,35 +1,38 @@
-commit 96c2cfa0d5b92415acf59c021ed4bdb84aca53af
+commit 0bc66ba12806511bc416ae27779e104b2892b90f
 Author: Narrat
 Date:   Sat Jul 23 23:25:09 2016 +0200
 
-    add mpd to conky and remove wireless_tools
+    add mpd, remove wireless_tools and nvidia
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index ab180a6..295fafc 100644
+index c9e09d6..ad65624 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -12,8 +12,8 @@ url='https://github.com/brndnmtthws/conky'
+@@ -11,8 +11,8 @@ url='https://github.com/brndnmtthws/conky'
  license=('BSD' 'GPL')
  arch=('x86_64')
  makedepends=('cmake' 'docbook2x' 'docbook-xsl' 'man-db' 'git')
 -depends=('glib2' 'lua' 'wireless_tools' 'libxdamage' 'libxinerama' 'libxft'
--         'imlib2' 'libxml2' 'libpulse')
+-         'imlib2' 'libxml2' 'libpulse' 'libxnvctrl')
 +depends=('glib2' 'lua' 'libxdamage' 'libxinerama' 'libxft'
 +         'imlib2' 'libxml2' 'libpulse' 'mpd')
- source=("https://github.com/brndnmtthws/conky/archive/v${pkgver}.tar.gz"
-         'lua53.patch')
- sha256sums=('2ebd655a27c816bd613538b71d4ec1c096252cb522feaa05f64781dcedea8857'
-@@ -32,7 +32,7 @@ build() {
- 	cmake \
+ source=("https://github.com/brndnmtthws/conky/archive/v${pkgver}.tar.gz")
+ sha256sums=('4cefdd92219a90934c28297e4ac7448a3f69d6aeec5d48c5763b23f6b214ef13')
+ options=('!strip' 'debug')
+@@ -24,16 +24,17 @@ build() {
  		-D CMAKE_BUILD_TYPE=Release \
  		-D MAINTAINER_MODE=ON \
+ 		-D BUILD_DOCS=ON \
 -		-D BUILD_WLAN=ON \
 +		-D BUILD_WLAN=OFF \
  		-D BUILD_XDBE=ON \
+ 		-D BUILD_XSHAPE=ON \
  		-D BUILD_IMLIB2=ON \
  		-D BUILD_CURL=ON \
-@@ -41,6 +41,7 @@ build() {
- 		-D BUILD_WEATHER_XOAP=ON \
+ 		-D BUILD_RSS=ON \
+-		-D BUILD_NVIDIA=ON \
++		-D BUILD_NVIDIA=OFF \
+ 		-D BUILD_WEATHER_METAR=ON \
  		-D BUILD_PULSEAUDIO=ON \
  		-D BUILD_JOURNAL=ON \
 +		-D BUILD_MPD=ON \
