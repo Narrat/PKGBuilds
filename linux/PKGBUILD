@@ -2,7 +2,7 @@
 
 pkgbase=linux               # Build stock -ARCH kernel
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=5.3.9.1
+pkgver=5.3.10.1
 pkgrel=1
 pkgdesc='Linux'
 _srctag=v${pkgver%.*}-arch${pkgver##*.}
@@ -29,7 +29,7 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             'e749cd85d37d4d70099b0a7f54e852b039ae07c14e4ab8be299c64edae5d4ba4'
-            '1413358655cf3c231943c7eaf0a0ff4806fbdd415be49fc88982069c917b22f3'
+            '1f5c0920ec2ba175bb013b840db1af792e933a0d13f8869030837195adf8bab5'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5')
 
 export KBUILD_BUILD_HOST=archlinux
