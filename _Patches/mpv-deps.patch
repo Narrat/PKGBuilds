@@ -1,11 +1,11 @@
-commit ed9f7fe948029d1075eabf83a7fdb9e47018fd60
+commit 0743cd09bd4aefa84eb5f03a1f57ff8b68fcbb8b
 Author: Narrat <autumn-wind@web.de>
 Date:   Thu Nov 15 21:50:54 2018 +0100
 
-    Disable samba support
+    Remove smbclient from deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index 0309415b..8b5186f8 100644
+index 70f7b2ce..f94db96a 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -16,7 +16,7 @@ url='https://mpv.io/'
@@ -14,14 +14,15 @@ index 0309415b..8b5186f8 100644
           'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss' 'libxv' 'lua52'
 -         'rubberband' 'smbclient' 'uchardet' 'vulkan-icd-loader' 'wayland'
 +         'rubberband' 'uchardet' 'vulkan-icd-loader' 'wayland'
-          'xdg-utils' 'shaderc')
+          'xdg-utils' 'shaderc' 'mujs' 'libplacebo' 'libplacebo.so')
  makedepends=('mesa' 'python-docutils' 'ladspa' 'wayland-protocols'
               'ffnvcodec-headers' 'vulkan-headers')
-@@ -43,7 +43,6 @@ build() {
+@@ -43,7 +43,7 @@ build() {
      --enable-dvdnav \
      --enable-libarchive \
      --enable-libmpv-shared \
--    --enable-libsmbclient \
-     --enable-tv \
-     --enable-zsh-comp
+-    --enable-libsmbclient
++    --disable-libsmbclient
  
+   ./waf build
+ }
