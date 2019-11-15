@@ -2,7 +2,7 @@
 
 pkgbase=linux               # Build stock -ARCH kernel
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=5.3.10.1
+pkgver=5.3.11.1
 pkgrel=1
 pkgdesc='Linux'
 _srctag=v${pkgver%.*}-arch${pkgver##*.}
@@ -21,6 +21,7 @@ source=(
   config         # the main kernel config file
   config.Hekate  # custom kernel config for Hekate
   config.Persephone # custom kernel config for Persephone
+  config.Urania # custom kernel config for Urania
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -28,9 +29,10 @@ validpgpkeys=(
   '8218F88849AAC522E94CF470A5E9288C4FA415FA'  # Jan Alexander Steffens (heftig)
 )
 sha256sums=('SKIP'
-            'e749cd85d37d4d70099b0a7f54e852b039ae07c14e4ab8be299c64edae5d4ba4'
+            '54bd002b40030609bfb236c35d2a23d23e426edd1f84dd448afbadd1b0aacb55'
             '1f5c0920ec2ba175bb013b840db1af792e933a0d13f8869030837195adf8bab5'
-            'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5')
+            'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
+            '36ccc27d8b009ef022aeb06a239272ff2c2ab98bd1f8f0e0a4895cc0dbbceec9')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
