@@ -4,14 +4,13 @@
 _pkgname=rpass
 pkgname=rpass-git
 pkgver=r7.3001b45
-pkgrel=2
+pkgrel=3
 pkgdesc="GPG-based, secure, pluggable, encrypted, and simple commandline password manager."
 arch=('any')
 url="https://github.com/rscare/rpass"
 license=('GPL')
-depends=('python' 'gnupg' 'procps' 'gpgme')
+depends=('python' 'gnupg' 'procps-ng' 'gpgme')
 optdepends=('xclip: allows automatic copying of passwords to avoid all writing to stdout- HIGHLY RECOMMENDED'
-            'gnupg2: includes gpg-agent - HIGHLY RECOMMENDED'
             'dmenu: for gui utilities')
 makedepends=('git')
 source=("git://github.com/rscare/rpass.git")
