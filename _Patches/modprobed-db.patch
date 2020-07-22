@@ -1,14 +1,15 @@
-commit 39a27a8c31df064e5eb12a7f5d6735ca97ec2f09
+commit 9c9c15f702d567ceed83826e66e1fa4a3c123eb1
 Author: Narrat <autumn-wind@web.de>
-Date:   Sun Dec 2 00:41:25 2018 +0100
+Date:   Wed Jul 22 23:05:48 2020 +0200
 
     Customize the timer
     
-    Just enabling the timer starts everything.
-    (Didn't want to place them locally (Easier to follow upstream changes))
+    Start everything with the timer.
+    Set type to oneshot.
+    Default units won't work like they should.
 
 diff --git a/PKGBUILD b/PKGBUILD
-index 22ee5d6..dd83e79 100644
+index 1b54dc9..d694c35 100644
 --- a/PKGBUILD
 +++ b/PKGBUILD
 @@ -10,10 +10,18 @@ optdepends=('sudo: needed for recall function')
@@ -16,58 +17,55 @@ index 22ee5d6..dd83e79 100644
  conflicts=('modprobed_db')
  url="https://wiki.archlinux.org/index.php/Modprobed-db"
 -source=("$pkgname-$pkgver.tar.gz::https://github.com/graysky2/$pkgname/archive/v$pkgver.tar.gz")
--sha256sums=('761da77d8221adf93e60111601dcde0020b183401c66992f78d1d77ce7dc0a65')
+-sha256sums=('712fbc6ff40f439a688fc2e3d1fbd81226a24ef63ce37aa086c30cdd2c6e7047')
 +source=("$pkgname-$pkgver.tar.gz::https://github.com/graysky2/$pkgname/archive/v$pkgver.tar.gz"
-+        "modprobed-db-units.patch")
-+sha256sums=('761da77d8221adf93e60111601dcde0020b183401c66992f78d1d77ce7dc0a65'
-+            'f0f96309ddc3aa74c6401c20b759c3fe9bd237249f43ffa2c348be5a2dde2c66')
++        "adjust-units.patch")
++sha256sums=('712fbc6ff40f439a688fc2e3d1fbd81226a24ef63ce37aa086c30cdd2c6e7047'
++            '74a0c143f97fc5b9150935d1554a71f0ca04e6f1d87f8a0699d89544f24770f6')
  install=readme.install
  
 +
 +prepare() {
 +	cd "$pkgname-$pkgver"
-+	patch -Np1 -i $srcdir/modprobed-db-units.patch
++	patch -Np1 -i $srcdir/adjust-units.patch
 +}
 +
  build() {
  	cd "$pkgname-$pkgver"
  	make
-diff --git a/modprobed-db-units.patch b/modprobed-db-units.patch
+diff --git a/adjust-units.patch b/adjust-units.patch
 new file mode 100644
-index 0000000..9b2e3fd
+index 0000000..592a4c0
 --- /dev/null
-+++ b/modprobed-db-units.patch
-@@ -0,0 +1,33 @@
-+commit be0507dedb748968d5f1ec666d20ff847b218b0c
-+Author: Narrat <autumn-wind@web.de>
-+Date:   Tue Sep 22 21:14:45 2015 +0200
-+
-+    Add OnBootSec to the timer
-+
-+    This activates the .service file after one hour and then OnUnitActive resumes everything.
-+    The effect is, only the timer needs to be started/enabled
-+
-+diff --git a/init/modprobed-db.service b/init/modprobed-db.service
-+index f92aba8..7b7e501 100644
-+--- a/init/modprobed-db.service
-++++ b/init/modprobed-db.service
-+@@ -8,6 +8,3 @@ Wants=modprobed-db.timer
++++ b/adjust-units.patch
+@@ -0,0 +1,30 @@
++--- modprobed-db-2.44/init/modprobed-db.service
+++++ modprobed-db-2.44/init/modprobed-db.service
++@@ -2,13 +2,8 @@
++ Description=modprobed-db scan and store new modules
++ Documentation=man:modprobed-db(8)
++ Documentation=https://wiki.archlinux.org/index.php/Modprobed-db
++-RequiresMountsFor=/home/
++-Wants=modprobed-db.timer
++ 
 + [Service]
-+ Type=simple
++-Type=simple
+++Type=oneshot
 + ExecStart=/usr/bin/modprobed-db storesilent
++ ExecStop=/usr/bin/modprobed-db storesilent
 +-
 +-[Install]
 +-WantedBy=default.target
-+diff --git a/init/modprobed-db.timer b/init/modprobed-db.timer
-+index a41a018..aeba4d7 100644
-+--- a/init/modprobed-db.timer
-++++ b/init/modprobed-db.timer
-+@@ -3,4 +3,8 @@ Description=Timer for modprobed-db - 1Hour
++
++--- modprobed-db-2.44/init/modprobed-db.timer
+++++ modprobed-db-2.44/init/modprobed-db.timer
++@@ -3,4 +3,8 @@
 + PartOf=modprobed-db.service
 + 
 + [Timer]
 ++OnBootSec=1h
-+ OnUnitActiveSec=1h
++ OnUnitActiveSec=6h
 ++
 ++[Install]
 ++WantedBy=timers.target
++
