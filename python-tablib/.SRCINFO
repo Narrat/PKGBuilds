@@ -1,0 +1,31 @@
+pkgbase = python-tablib
+	pkgdesc = Format-agnostic tabular data library (XLS, JSON, YAML, CSV)
+	pkgver = 2.0.0
+	pkgrel = 2
+	url = http://python-tablib.org
+	arch = any
+	license = MIT
+	checkdepends = python-pytest-cov
+	checkdepends = python-tabulate
+	checkdepends = python-markuppy
+	checkdepends = python-odfpy
+	checkdepends = python-pandas
+	checkdepends = python-xlrd
+	checkdepends = python-xlwt
+	checkdepends = python-openpyxl
+	checkdepends = python-pyaml
+	makedepends = python-setuptools
+	depends = python
+	optdepends = python-tabulate: cli interface
+	optdepends = python-markuppy: for HTML support
+	optdepends = python-odfpy: for ODS support
+	optdepends = python-pandas: for pandas support
+	optdepends = python-xlrd: for XLS support (extract data)
+	optdepends = python-xlwt: for XLS support (create spreadsheets)
+	optdepends = python-openpyxl: for XLSX support
+	optdepends = python-pyaml: for YAML support
+	source = https://files.pythonhosted.org/packages/source/t/tablib/tablib-2.0.0.tar.gz
+	sha256sums = 8cc2fa10bc37219ac5e76850eb7fbd50de313c7a1a7895c44af2a8dd206b7be7
+
+pkgname = python-tablib
+
