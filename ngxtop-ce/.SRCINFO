@@ -1,0 +1,18 @@
+pkgbase = ngxtop-ce
+	pkgdesc = Real-time metrics for nginx server
+	pkgver = 0.0.3a7
+	pkgrel = 1
+	url = https://github.com/ngxtop/ngxtop
+	arch = any
+	license = MIT
+	makedepends = python-setuptools
+	depends = python-docopt
+	depends = python-tabulate
+	depends = python-pyparsing
+	provides = ngxtop
+	conflicts = ngxtop
+	source = https://files.pythonhosted.org/packages/source/n/ngxtop-ce/ngxtop-ce-0.0.3a7.tar.gz
+	sha256sums = 417e1de0e6552a45e78b8ad07b85754590f0096adb16e8f3210e5ea46666428c
+
+pkgname = ngxtop-ce
+
