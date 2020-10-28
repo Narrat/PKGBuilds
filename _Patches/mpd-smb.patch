@@ -1,22 +1,22 @@
-commit 3d7bc47040ea6e27108f50c48f03f031647167bc
+commit 3a4ec57a8d23802be73edf800a776d38ef75c393
 Author: Narrat
-Date:   Sun Sep 27 22:24:53 2020 +0200
+Date:   Wed Oct 21 17:50:01 2020 +0200
 
     Remove Samba support
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index c261117..7295be0 100644
+index 6f99b15..ba7050e 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
 @@ -15,7 +15,7 @@ arch=('x86_64')
- depends=('bzip2' 'chromaprint' 'expat' 'gcc-libs' 'glibc' 'lame' 'libcdio'
+ depends=('bzip2' 'chromaprint' 'gcc-libs' 'glibc' 'lame' 'libcdio'
  'libcdio-paranoia' 'libgcrypt' 'libgme' 'libmad' 'libmms' 'libmodplug'
  'libmpcdec' 'libnfs' 'libshout' 'libsidplayfp' 'libsoxr' 'openal' 'opus'
 -'smbclient' 'sqlite' 'wavpack' 'wildmidi' 'yajl' 'zlib' 'zziplib')
 +'sqlite' 'wavpack' 'wildmidi' 'yajl' 'zlib' 'zziplib')
- makedepends=('alsa-lib' 'audiofile' 'avahi' 'boost' 'curl' 'dbus' 'faad2'
- 'ffmpeg' 'flac' 'fluidsynth' 'icu' 'jack' 'libao' 'libid3tag' 'libmikmod'
- 'libmpdclient' 'libogg' 'libpulse' 'libsamplerate' 'libsndfile' 'libupnp'
+ makedepends=('alsa-lib' 'audiofile' 'avahi' 'boost' 'curl' 'dbus' 'expat'
+ 'faad2' 'ffmpeg' 'flac' 'fluidsynth' 'icu' 'jack' 'libao' 'libid3tag'
+ 'libmikmod' 'libmpdclient' 'libogg' 'libpulse' 'libsamplerate' 'libsndfile'
 @@ -63,6 +63,7 @@ build() {
          -D sndio=disabled \
          -D shine=disabled \
