@@ -1,23 +1,23 @@
-commit 8040cdfbeee18f9e3944bc771be9ef695a82db13
-Author: Narrat <autumn-wind@web.de>
-Date:   Thu Nov 15 21:50:54 2018 +0100
+commit e570966341ffdd92295404b85262723dfffc6331
+Author: Narrat
+Date:   Sat Nov 21 19:20:11 2020 +0100
 
     Remove smbclient from deps
 
 diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index e5ce759a..56003e83 100644
+index ddbb428..1fe92ca 100644
 --- a/trunk/PKGBUILD
 +++ b/trunk/PKGBUILD
-@@ -15,7 +15,7 @@ url='https://mpv.io/'
- depends=('desktop-file-utils' 'ffmpeg' 'hicolor-icon-theme' 'libjack.so' 'lcms2'
-          'libarchive' 'libcaca' 'libcdio-paranoia' 'libdvdnav' 'libgl' 'libva'
-          'libxinerama' 'libxkbcommon' 'libxrandr' 'libxss' 'libxv' 'lua52'
--         'librubberband.so' 'smbclient' 'uchardet' 'vulkan-icd-loader' 'wayland'
-+         'librubberband.so' 'uchardet' 'vulkan-icd-loader' 'wayland'
-          'xdg-utils' 'shaderc' 'mujs' 'libplacebo' 'libplacebo.so')
- makedepends=('mesa' 'python-docutils' 'ladspa' 'wayland-protocols'
+@@ -22,7 +22,7 @@ depends=('alsa-lib' 'libasound.so' 'desktop-file-utils' 'ffmpeg' 'libavcodec.so'
+          'libva' 'libva.so' 'libva-drm.so' 'libva-wayland.so' 'libva-x11.so' 'libvdpau' 'libx11'
+          'libxext' 'libxinerama' 'libxkbcommon' 'libxkbcommon.so' 'libxrandr' 'libxss' 'libxss'
+          'libxv' 'lua52' 'mesa' 'mujs' 'rubberband' 'librubberband.so' 'shaderc'
+-         'libshaderc_shared.so' 'smbclient' 'uchardet' 'vulkan-icd-loader' 'wayland' 'xdg-utils'
++         'libshaderc_shared.so' 'uchardet' 'vulkan-icd-loader' 'wayland' 'xdg-utils'
+          'zlib')
+ makedepends=('git' 'mesa' 'python-docutils' 'ladspa' 'wayland-protocols'
               'ffnvcodec-headers' 'vulkan-headers' 'waf')
-@@ -34,7 +34,7 @@ build() {
+@@ -43,7 +43,7 @@ build() {
      --enable-dvdnav \
      --enable-libarchive \
      --enable-libmpv-shared \
