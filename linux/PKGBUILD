@@ -2,7 +2,7 @@
 
 pkgbase=linux
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=5.9.11.arch1
+pkgver=5.9.11.arch2
 pkgrel=1
 pkgdesc='Linux'
 _srctag=v${pkgver%.*}-${pkgver##*.}
@@ -30,7 +30,7 @@ validpgpkeys=(
   'A2FF3A36AAA56654109064AB19802F8B0D70FC30'  # Jan Alexander Steffens (heftig)
 )
 sha256sums=('SKIP'
-            '958333f18de79c19ccf9eccb4e16e2a217a0619a1d96c2c65ccba23628815bab'
+            'cf69b81648a07ebedb274ed26bed3c4d2ff75c6665ecaca0a724b148c70c9c7c'
             'dfc5ddfd1e3334c4bc64e95f30c7b0abffb2ea4b1b0a3164c2c15a71932c8b0f'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             '8ee3ad8cad780504a63d5b2d360bc14464b969b8ec65304fc0053a835a6f306d'
