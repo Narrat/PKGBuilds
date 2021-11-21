@@ -2,7 +2,7 @@
 
 pkgbase=linux
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=5.14.15.arch1
+pkgver=5.15.3.arch1
 pkgrel=1
 pkgdesc='Linux'
 _srctag=v${pkgver%.*}-${pkgver##*.}
@@ -30,8 +30,8 @@ validpgpkeys=(
   'C7E7849466FE2358343588377258734B41C31549'  # David Runge <dvzrv@archlinux.org>
 )
 sha256sums=('SKIP'
-            'f5d3635520c9eb9519629f6df0d9a58091ed4b1ea4ddb1acd5caf5822d91a060'
-            '5a7a3b1814b5e2e40d5c5fe1e9241b07bd083afd3441c25a3346b05a46e785d6'
+            'e2d8d59ee965f5fabcb9dd15b70074798e168ccdbd75a9540390c281279f113d'
+            '8f8de6fb445c336aa5a0fcb6d4c9944524e329f73750754f990552c1c19ab01e'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             '2965c822f9eaa55c4b8e801289acede2b943ba5c35d75e360128fd1f5f9d94e3')
 
