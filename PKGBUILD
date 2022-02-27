@@ -16,7 +16,7 @@ license=('GPL3')
 makedepends=('git' 'libgcrypt')
 conflicts=("${_name}")
 provides=("${_name}")
-source=("${_name}::git://github.com/dyne/${_name//t/T}.git"
+source=("${_name}::git+https://github.com/dyne/${_name//t/T}.git"
         "_${_name}")
 sha256sums=('SKIP'
             '8007bc208fdac3fbd7a61320b48c4c8073639b478fcc410145a3792986aca9e8')
