@@ -2,7 +2,7 @@
 
 pkgbase=linux
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=5.18.3.arch1
+pkgver=5.18.15.arch1
 pkgrel=1
 pkgdesc='Linux'
 _srctag=v${pkgver%.*}-${pkgver##*.}
@@ -30,7 +30,7 @@ validpgpkeys=(
   'C7E7849466FE2358343588377258734B41C31549'  # David Runge <dvzrv@archlinux.org>
 )
 sha256sums=('SKIP'
-            '9f4fda38f1c59f7a20a76eff48a0cb302cb0e8e55bda53ec0f1807e10dcdad3a'
+            '03843566d43e1335cc950038537f6b4e594018f34a9510ca52dc37af6e6ac411'
             '6ce0476919358201773b8b72f949616ceae58d974889c991fa12d42be6d18b24'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             'ce226234386cc62b5b55f5d9372a7a9ce2bf2d208d98f2e3aa04138edb14fe5f')
@@ -68,8 +68,7 @@ prepare() {
 
 build() {
   cd $_srcname
-  make all
-  make htmldocs
+  make htmldocs all
 }
 
 _package() {
