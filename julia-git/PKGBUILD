@@ -4,27 +4,45 @@
 
 _pkgbase=julia
 pkgbase=${_pkgbase}-git
-pkgname=('julia-git' 'julia-git-docs')
-pkgver=1.3.0.DEV.r44719.gefd794e199
+pkgname=(julia-git julia-git-docs)
+pkgver=1.8.0.DEV.r51125.g1db8b8f1607
 pkgrel=1
+arch=(x86_64)
 pkgdesc='High-level, high-performance, dynamic programming language'
-arch=('x86_64')
-url="https://julialang.org"
-license=('MIT')
-makedepends=('cmake' 'gcc-fortran' 'gmp' 'python2' 'git')
-makedepends+=('cblas' 'hicolor-icon-theme' 'libgit2' 'libunwind' 'libutf8proc'
-              'mbedtls' 'mpfr' 'openblas' 'openlibm' 'pcre2' 'suitesparse'
-              'xdg-utils' 'desktop-file-utils' 'gtk-update-icon-cache') # 'llvm' 'patchelf' 'intel-mkl'
-# Needed if building the documentation
-#makedepends+=('juliadoc-git' 'texlive-langcjk' 'texlive-latexextra')
-source=(git://github.com/JuliaLang/julia.git#branch=master
+url='https://julialang.org/'
+license=(MIT)
+depends=(#compare with grep =1 Make.user|cut -c 11-|cut -d: -f1|tr _A-Z \\ta-z
+	openlibm
+	gmp
+	libutf8proc
+	zlib p7zip
+
+	xdg-utils desktop-file-utils
+	gtk-update-icon-cache
+	hicolor-icon-theme
+)
+makedepends=( #See minimum in doc/src/devdocs/build/build.md#required-build-tools-and-external-libraries
+	'cmake>=3.4.3' # to build libgit2
+	gcc-libs  #provides libatomics.so needed to support atomi operations
+	'python>=2.7'
+	gcc-fortran
+	patchelf
+	git
+	#the following documented minimum is already in group base-devel
+	#'gcc>5.1'
+	#make
+	#m4
+	#awk
+	#patch
+	#pkgconf #needed to build libgit2 correctly
+	#which
+)
+source=(git+https://github.com/JuliaLang/julia.git#branch=master
         Make.user
-        julia-makefile.patch
-        cblas.patch)
+        libunwind-version.patch)
 sha256sums=('SKIP'
-            '21f97b3441097e71db59e2205f644466d829bbd0b73a34bc8b857b4390cf8ffc'
-            '030b37d711a08567e7f9c5f0626dec7aed02c83373b5ec666d519897b50218ea'
-            '5eb9280c6b91c9be15a52de7dc5f05e69a5edbfe1c5d1f62497470a1aa0d1fa8')
+            'SKIP'
+            '856dab2da8124df95e4fbd17f1164bebe1b10e99852fedf38f9dfe31f8ae295c')
 
 
 pkgver() {
@@ -42,87 +60,92 @@ prepare() {
   git submodule update
 
   msg2 'Configuring the build...'
-  cp -v $srcdir/Make.user .
 
-  msg2 'Patching make install...'
-  patch -p0 -i ../julia-makefile.patch
-
-  # add and use option to build with system cblas
-  # https://github.com/JuliaLang/julia/pull/29540
-  patch -p1 --no-backup-if-mismatch -i ../cblas.patch
+  # Fixing libunwind version check
+  # https://github.com/JuliaLang/julia/pull/29082
+  patch -p1 -i ../libunwind-version.patch
+  #make full-source-dist
 }
 
 build() {
   # See FS#57387 for why USE_SYSTEM_LLVM=0 is used, for now
-  # See FS#58221 for why USE_SYSTEM_ARPACK=0 is used, for now
-  env CFLAGS="$CFLAGS -w" CXXFLAGS="$CXXFLAGS -w" make -C "$_pkgbase"
+  export PATH="$srcdir/bin:$PATH"
+  env CFLAGS="$CFLAGS -w" CXXFLAGS="$CXXFLAGS -w" make VERBOSE=1 -C "$_pkgbase"
 
   # Building doc
   cd $_pkgbase/doc
-  #make man
-  #make latexpdf
-  #make info
+  make
 }
 
 check() {
-  cd "$_pkgbase/test"
-
-  # this is the make testall target, plus the --skip option from
-  # travis/appveyor/circleci (one test fails with DNS resolution errors)
-  ../julia --check-bounds=yes --startup-file=no ./runtests.jl all --skip Sockets
-  find ../stdlib \( -name \*.cov -o -name \*.mem \) -delete
-  rm -r depot/compiled
+  cd $_pkgbase
+  make test
+  find stdlib -name \*.mem -delete
 }
 
 package_julia-git() {
-  depends=('cblas' 'hicolor-icon-theme' 'libgit2' 'libunwind' 'libutf8proc'
-           'mbedtls' 'mpfr' 'openblas' 'openlibm' 'pcre2' 'suitesparse'
-           'xdg-utils' 'desktop-file-utils' 'gtk-update-icon-cache') # 'llvm' 'patchelf' 'intel-mkl'
   optdepends=('openblas-lapack: multithreaded replacement for lapack'
               'fftw: If using the FFTW package from julia'
               'gnuplot: If using the Gaston Package from julia')
   provides=('julia')
   conflicts=('julia')
-  backup=('etc/julia/juliarc.jl')
+  backup=(etc/julia/startup.jl)
 
-  CFLAGS=${CFLAGS//-march=i686/-march=pentium4}
-  CXXFLAGS=${CXXFLAGS//-march=i686/-march=pentium4}
 
-  make -C "$_pkgbase" DESTDIR="$pkgdir" install
+  make -C "$_pkgbase" DESTDIR="$pkgdir" install \
+    prefix=/usr \
+    libexecdir=/usr/lib \
+    sysconfdir=/etc
 
-  # Documentation and examples are in the julia-docs package
-  rm -rf "$pkgdir/usr/share/"{doc,julia/doc,julia/examples}
+  # Documentation is in the julia-git-docs package.
+  # Man pages in /usr/share/julia/doc/man are duplicate.
+  rm -rf "$pkgdir/usr/share/"{doc,julia/doc,icons/hicolor/scalable}
 
-  install -Dm644 "$_pkgbase/LICENSE.md" "$pkgdir/usr/share/licenses/$pkgbase/LICENSE.md"
+  # Install icons
+  for i in 16 32 128 256 512
+  do
+    mkdir -p $pkgdir/usr/share/icons/hicolor/${i}x${i}
+    install -Dm644 $srcdir/julia/contrib/mac/frameworkapp/JuliaLauncher/Assets.xcassets/AppIcon.appiconset/$i.png $pkgdir/usr/share/icons/hicolor/${i}x${i}/apps/${i}x${i}.png
+  done
 
-  # Remove files that don't belong into the package
+  # Install licence
+  install -Dm644 "$_pkgbase/LICENSE.md" \
+    "$pkgdir/usr/share/licenses/$pkgname/LICENSE.md"
+
+  # Rm files that don't belong into the package
   find ${pkgdir} -name ".gitignore" -delete
 }
 
 package_julia-git-docs() {
   arch=('any')
   pkgdesc='Documentation and examples for Julia'
-  depends=('julia')
-  provides=('julia-docs')
-  conflicts=('julia-docs' 'julia-git-doc')
+  depends=(julia)
+  provides=(julia-docs)
+  conflicts=(julia-docs julia-git-doc)
 
   install -d "$pkgdir/usr/share/doc"
   cp -r "$_pkgbase/doc" "$pkgdir/usr/share/doc/$_pkgbase"
-  cp -r "$_pkgbase/examples" "$pkgdir/usr/share/doc/$_pkgbase/examples"
-  install -Dm644 "$_pkgbase/LICENSE.md" "$pkgdir/usr/share/licenses/$pkgbase/LICENSE.md"
+  rm -rf "$pkgdir/usr/share/doc/julia/man"
+  install -Dm644 "$_pkgbase/LICENSE.md" \
+    "$pkgdir/usr/share/licenses/$pkgname/LICENSE.md"
 
-  # Remove double
-  rm -rf "$pkgdir/usr/share/doc/julia/man/"
-
-  # Installing built docs. Adjust it accordingly to your changes in build()
+  # Installing built docs; adj accord to changes in build()
   cd "$_pkgbase/doc/_build"
   cp -dpr --no-preserve=ownership html $pkgdir/usr/share/doc/julia/
-  #install -D -m644 man/julialanguage.1 $pkgdir/usr/share/man/man1/julialanguage.1
-  #install -D -m644 texinfo/JuliaLanguage.info $pkgdir/usr/share/info/julialanguage.info
-  #install -D -m644 latex/JuliaLanguage.pdf $pkgdir/usr/share/julia/doc/julialanguage.pdf
 
-  # Remove files that don't belong into the package
+  # Fix symlinks that point to the build directory
+  for i in $(ls -lR $pkgdir | grep "^l" | grep "src/julia" | cut -d '>' -f 1 | rev | cut -d ' ' -f 2 | rev)
+  do
+    I=$(find $pkgdir -name "$i")
+    L=$(ls -ld $I)
+    syml=$(echo $L | rev | cut -d '>' -f 2 | rev | sed 's/.*pkg\/julia\-git\-docs//g' | sed 's/ -//g')
+    symd=$(echo $L | rev | cut -d '>' -f 1 | rev | sed 's/.*julia-git\/src\/julia//g')
+    ln -sf $symd $pkgdir/$syml
+  done
+
+  # Rm duplicate/unused files
+  rm -rf $pkgdir/usr/share/doc/julia/{build,_build,deps,src}
+  rm $pkgdir/usr/share/doc/julia/{make.jl,Makefile,Manifest.toml,NEWS-update.jl,Project.toml,README.md,UnicodeData.txt}
+  # Rm files that don't belong in the package
   find ${pkgdir} -name ".gitignore" -delete
 }
-
-# vim:set ts=2 sw=2 et:

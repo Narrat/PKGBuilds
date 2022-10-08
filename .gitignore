@@ -10,33 +10,7 @@ pkg/
 *.txt
 *.log
 *.scm
-<<<<<<< HEAD
-*/asp
-*/canto
-*/canto-curses
-*/canto-next
-*/ccx2
-*/cli-google
-*/eispice
-*/gist
-*/gtk-sharp
-*/julia
-*/kernel
-*/linux-git
-*/llvmlinux
-*/memoir
-*/oort
-*/pim
-*/plwm
-*/resynthesizer
-*/rpass
-*/smuxi
-*/tomb
-*/translate
-*/xdg-utils
-*/xombrero
-*/*.pkg
-=======
-*.pkg*
->>>>>>> idlex-aur/master
-*/*.asc
+julia/
+*.pkg
+*.asc
+chroot
