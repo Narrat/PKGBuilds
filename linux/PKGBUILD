@@ -2,7 +2,7 @@
 
 pkgbase=linux
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=6.3.5.arch1
+pkgver=6.3.7.arch1
 pkgrel=1
 pkgdesc='Linux'
 _srctag=v${pkgver%.*}-${pkgver##*.}
@@ -42,8 +42,8 @@ validpgpkeys=(
   C7E7849466FE2358343588377258734B41C31549  # David Runge <dvzrv@archlinux.org>
 )
 b2sums=('SKIP'
-        'c2d1c69265adc041dc0364e448f6e86dc4c9ca1207c84071abc1675dd820534a8ab5a230e579e68bfb1bf2b861f23ad34e090f8ceaef5e265ea95e2bc6946013'
-        'fa05252bbe830bdc4d426eaca400ba2e1ceecaca3a9b085c230ab2b9eba273701517e396432d4f7cc44298b51ec184b76cbc0e35d61214677ae2f7e741ad0690'
+        '10f3d6c5c45bdd49b8863f3fb824404f89625c8be4633dce13ae20cd67c542114f73e30b9d09c5365a1728e0ae411f287610d064f3f9039635162191af3292bb'
+        'cb09a7c9a462d10d2d0c7b0696792f691d670831b0c74217d6994dde5d2b19bf46540ae18d9e81b664be4942cea8b2deecb9e4412ba78af911b8b4c7b349ce7f'
         'e5c03e352ee552fe8c5fd6643b78fcaa4e9a3570f39ec9fe91108c831b27fb472c54c9bd217811ca56c1b85d6caa58f81258e2c80bb1e5a6fb4552e09a968003'
         'b2e45a9ebc6a2ef66a4e2aeb5ab1d774b8be1a50af6c213203c88fcfa69edfa8cb52f5fbe598267d5544d40cc0892d22f7d1be81299bbd61497027ab101eaea6')
 
