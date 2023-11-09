@@ -2,7 +2,7 @@
 
 pkgbase=linux
 #pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=6.5.7.arch1
+pkgver=6.6.1.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -42,19 +42,19 @@ validpgpkeys=(
   A2FF3A36AAA56654109064AB19802F8B0D70FC30  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('0d09ea448005c9cfe5383e4c72a872b39188b928f8c44e146b03b1b7851fbb8c'
+sha256sums=('da1ed7d47c97ed72c9354091628740aa3c40a3c9cd7382871f3cedbd60588234'
             'SKIP'
-            'ee42d07323d762e4bed241ad89ec75b345ae25932cdc1d64cc59939cc5ea370d'
+            '9fd606b2ac0b4ae5df8867b7651574a2e5c480366bac224406fc34ad5d79009b'
             'SKIP'
-            '5aff0f8584e01165dc20cd107df338f57a13ce7f0da14e07f4c9097cd748469f'
+            'd2060f5045a30832d70a7747c780f1358a9f4cfc1811c8ccaeaab9c027b59ee4'
             '55156f104abcbf57cee1cc442624eba0dc3cffd30fb45efd6d2d6fc032dbc9b3'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             'ce226234386cc62b5b55f5d9372a7a9ce2bf2d208d98f2e3aa04138edb14fe5f')
-b2sums=('a9bed9907bf4b22c08df8a8beaaf923648e4f0f1a4b00c11012871094e7c06a127e54bc1935edb8afc92999456c01ebabd04bc542a0e2fa16de0852a5f4be681'
+b2sums=('3bb35ba0386b00aa76dfd073e87b0d5a319d3116a80c39b11a3acd1219bc7d8b3809c1def24a3c4f52abc60f70c170a2f80d80c6b54459eec016c5ddc404c6fc'
         'SKIP'
-        '0921441d77d2de3bb89613830136e141120b420bcd7a76bcf16676b97f1d81d17f71a888f63181396d1081e19bc5ccf8d22b69b0cc9bd7f6ea9d6652ebdec4da'
+        'fda390a1633ea51e00b9d6ab4b89ca2e9ef472261e12e6e0d978d42678449150c384d2be1e9d9655704ffc2ad2f34b6e6dcf0b5862f1419d805e6c67e3e67bb3'
         'SKIP'
-        '1445dc90cf8bd3f2b9493e9e48eb76247bd37de412bdb247b132694e047ec260c25203836888ce6c1c864f46dab80b453b3f47d8b3a92f1f9dffc5589d7bc320'
+        '926cb673701fdf939d70307506683b590a441ac82d8d768ad360798602fbc6157eb4dfdabe3950887e4383b92032d82bbdea00419582cfa47075a57f58ac4376'
         'b5ce3cefeac945a21439cff3d25acac88bf6ce9d49cf86da001a211b3375f2fd27d7404041837544bd19db3c860240235536455c02a9ab93af131ba2c0c0b3d5'
         'e5c03e352ee552fe8c5fd6643b78fcaa4e9a3570f39ec9fe91108c831b27fb472c54c9bd217811ca56c1b85d6caa58f81258e2c80bb1e5a6fb4552e09a968003'
         'b2e45a9ebc6a2ef66a4e2aeb5ab1d774b8be1a50af6c213203c88fcfa69edfa8cb52f5fbe598267d5544d40cc0892d22f7d1be81299bbd61497027ab101eaea6')
@@ -132,8 +132,8 @@ _package() {
   ZSTD_CLEVEL=19 make INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 \
     DEPMOD=/doesnt/exist modules_install  # Suppress depmod
 
-  # remove build and source links
-  rm "$modulesdir"/{source,build}
+  # remove build link
+  rm "$modulesdir"/build
 }
 
 _package-headers() {
