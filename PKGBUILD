@@ -6,24 +6,30 @@
 
 _basename=weston
 pkgname="$_basename-git"
-pkgver=12.0.0.r325.g68e2a60
+pkgver=13.0.0.r161.gabe3e20
 pkgrel=1
 pkgdesc='Reference implementation of a Wayland compositor'
 arch=('x86_64')
 url='https://wayland.freedesktop.org/'
 license=('MIT')
-depends=('glibc' 'wayland' 'libxkbcommon' 'libinput' 'libunwind' 'pixman'
+depends=('fontconfig' 'glibc' 'wayland' 'libxkbcommon' 'libinput' 'libunwind' 'pixman'
          'libdrm' 'pam' 'systemd-libs' 'cairo' 'libpng' 'libjpeg-turbo' 'libwebp'
-         'mesa' 'libegl' 'libgles' 'glib2' 'pango' 'lcms2' 'mtdev' 'libx11'
+         'mesa' 'libegl' 'libevdev' 'libgles' 'glib2' 'pango' 'lcms2' 'mtdev' 'libx11'
          'libxcb' 'dbus' 'libva' 'libxcursor' 'colord' 'seatd'
          'gstreamer' 'gst-plugins-base-libs')
-makedepends=('wayland-protocols-git' 'meson' 'ninja' 'freerdp' 'neatvnc' 'libpipewire'
+makedepends=('wayland-protocols-git' 'meson' 'ninja' 'freerdp2' 'neatvnc' 'libpipewire'
              'xorg-xwayland' 'xcb-util-cursor' 'git')
+optdepends=('xorg-xwayland: support x11 backend'
+            'libpipewire: support pipewire backend'
+            'freerdp2: support rdp backend'
+            'neatvnc: support vnc backend')
 conflicts=("$_basename")
 provides=("$_basename")
 options=(!lto)
-source=("git+https://gitlab.freedesktop.org/wayland/${_basename}.git")
-sha256sums=('SKIP')
+source=("git+https://gitlab.freedesktop.org/wayland/${_basename}.git"
+        $_basename-13.0.0-neatvnc0.8.patch)  # https://gitlab.freedesktop.org/wayland/weston/-/issues/890)
+sha256sums=('SKIP'
+            'c33085a00bddd2be1227e5f7a8b7d90e67c9f0b9fab39819490255cbcbc534ae')
 
 pkgver() {
   cd "$_basename"
