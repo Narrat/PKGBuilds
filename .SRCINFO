@@ -1,10 +1,11 @@
 pkgbase = ydiff
 	pkgdesc = Colored, incremental, side-by-side diff viewer
 	pkgver = 1.2
-	pkgrel = 1
+	pkgrel = 2
 	url = http://pypi.python.org/pypi/ydiff/
 	arch = any
 	license = BSD
+	makedepends = python-setuptools
 	depends = python
 	optdepends = patchutils: uses filterdiff for context diffs
 	conflicts = cdiff
@@ -12,4 +13,3 @@ pkgbase = ydiff
 	md5sums = f11c69a90774ec0f3fb3e45137fca931
 
 pkgname = ydiff
-
