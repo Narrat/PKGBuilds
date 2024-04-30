@@ -1,9 +1,9 @@
 # Maintainer: Lex Black <autumn-wind@web.de>
 
 pkgname=prosody-mod-register-apps
-pkgver=2023.02.23
+pkgver=2023.11.16
 pkgrel=1
-_commit="556bf57d6417"
+_commit="e06af1403a60"
 pkgdesc="Manage list of compatible client apps"
 arch=('any')
 url="https://modules.prosody.im/mod_register_apps.html"
@@ -11,7 +11,7 @@ license=('MIT')
 depends=('prosody')
 makedepends=('mercurial')
 source=("hg+https://hg.prosody.im/prosody-modules/"#revision=$_commit)
-sha1sums=('SKIP')
+sha1sums=('0ae56533c66520a1091259e69a7f29473584ab48')
 
 
 package() {
