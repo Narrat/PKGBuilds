@@ -3,11 +3,11 @@
 
 pkgname=ydiff
 pkgver=1.3
-pkgrel=1
+pkgrel=2
 pkgdesc="Colored, incremental, side-by-side diff viewer"
 arch=('any')
 url="http://pypi.python.org/pypi/ydiff/"
-license=('BSD')
+license=('BSD-3-Clause')
 depends=('python')
 makedepends=(python-setuptools python-build python-installer python-wheel)
 optdepends=("patchutils: uses filterdiff for context diffs")
@@ -24,4 +24,6 @@ build() {
 package() {
     cd "$pkgname-$pkgver"
     python -m installer --destdir="$pkgdir" dist/*.whl
+
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
