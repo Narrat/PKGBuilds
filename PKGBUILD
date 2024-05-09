@@ -2,22 +2,26 @@
 # Contributor: alejandrogomez <alejandroogomez@gmail.com>
 
 pkgname=ydiff
-pkgver=1.2
-pkgrel=2
+pkgver=1.3
+pkgrel=1
 pkgdesc="Colored, incremental, side-by-side diff viewer"
 arch=('any')
 url="http://pypi.python.org/pypi/ydiff/"
 license=('BSD')
 depends=('python')
-makedepends=('python-setuptools')
+makedepends=(python-setuptools python-build python-installer python-wheel)
 optdepends=("patchutils: uses filterdiff for context diffs")
 conflicts=('cdiff')
-source=(https://files.pythonhosted.org/packages/source/${pkgname::1}/${pkgname}/${pkgname}-${pkgver}.tar.gz)
-md5sums=('f11c69a90774ec0f3fb3e45137fca931')
+source=(${pkgname}-${pkgver}.tar.gz::https://github.com/ymattw/${pkgname}/archive/refs/tags/${pkgver}.tar.gz)
+md5sums=('96bf288a051fe266ff3d3e4f87d90286')
 
+
+build() {
+    cd "$pkgname-$pkgver"
+    python -m build --wheel --no-isolation
+}
 
 package() {
-   cd "$srcdir/$pkgname-$pkgver"
-
-   python setup.py install --root="$pkgdir/" --prefix=/usr --optimize=1
+    cd "$pkgname-$pkgver"
+    python -m installer --destdir="$pkgdir" dist/*.whl
 }
