@@ -2,7 +2,7 @@
 # Contributor: kusakata <shohei atmark kusakata period com>
 
 pkgname=openspecfun
-pkgver=0.5.6
+pkgver=0.5.7
 pkgrel=1
 pkgdesc="collection of special mathematical functions"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ depends=('gcc-libs')
 makedepends=('gcc-fortran')
 options=('!emptydirs')
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/JuliaLang/openspecfun/archive/v${pkgver}.tar.gz")
-md5sums=('bb380e919c7b016565cad1e76d823b29')
+md5sums=('58df261bcc2a8ef6e23991111035ec0d')
 
 
 build() {
