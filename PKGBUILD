@@ -6,9 +6,6 @@
 
 _pkgname=xdg-utils
 pkgname=$_pkgname-mimeo
-# https://gitlab.freedesktop.org/xdg/xdg-utils/commits/master
-#_commit=af2fe0d1dcbcd982d84ddf2bbd174afe90976ed9 # master # 2024-01-30
-_commit=356c380ad6fecc9ce6bea1f6a77986ba67402c80 # tag # 1.2.1
 pkgver=1.2.1
 pkgrel=1
 pkgdesc="Command line tools that assist applications with a variety of desktop integration tasks; patched to use mimeo"
@@ -26,11 +23,10 @@ optdepends=('kde-cli-tools: for KDE Plasma5 support in xdg-open'
             'perl-x11-protocol: Perl X11 protocol used in xdg-screensaver')
 provides=($_pkgname)
 conflicts=($_pkgname)
-source=(#https://portland.freedesktop.org/download/$_pkgname-$pkgver.tar.gz #{,.asc}
-        mimeo-detection.patch
-        "git+https://gitlab.freedesktop.org/xdg/xdg-utils.git#commit=$_commit")
-sha256sums=('fedbbee834c3cfe0078b869708310779767e168c8bbc74203dfebdbbf5b97f87'
-            'SKIP')
+source=("git+https://gitlab.freedesktop.org/xdg/xdg-utils.git#tag=v$pkgver"
+        mimeo-detection.patch)
+sha256sums=('64cd656fcef8ad5391cb5bedb31873212962f932e35eaa6a01195c11529a308c'
+            'fedbbee834c3cfe0078b869708310779767e168c8bbc74203dfebdbbf5b97f87')
 #validpgpkeys=('8B75CA7811367175D05F3B03C43570F80CC295E6') # "Per Olofsson <pelle@pqz.se>"
 
 pkgver() {
