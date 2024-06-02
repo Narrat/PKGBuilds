@@ -8,33 +8,52 @@
 _basename=util-linux
 pkgbase=util-linux-aes
 pkgname=(util-linux-aes util-linux-libs-aes)
-_pkgmajor=2.39
-_realver=${_pkgmajor}.2
+_pkgmajor=2.40
+_realver=${_pkgmajor}.1
 pkgver=${_realver/-/}
 pkgrel=1
 pkgdesc='Miscellaneous system utilities for Linux, with loop-AES support'
 url='https://github.com/util-linux/util-linux'
 #url="http://sourceforge.net/projects/loop-aes/"
 arch=('x86_64')
-makedepends=('asciidoctor' 'bash-completion' 'libcap-ng'
-             'libutempter' 'libxcrypt' 'python' 'systemd' 'gtk-doc')
-license=('GPL2')
+makedepends=('asciidoctor'
+             'bash-completion'
+             'gtk-doc'
+             'libcap-ng'
+             'libxcrypt'
+             'python'
+             'sqlite'
+             'systemd')
+license=(
+  'BSD-2-Clause'
+  'BSD-3-Clause'
+  'BSD-4-Clause-UC'
+  'GPL-2.0-only'
+  'GPL-2.0-or-later'
+  'GPL-3.0-or-later'
+  'ISC'
+  'LGPL-2.1-or-later'
+  'LicenseRef-PublicDomain'
+)
 options=('strip')
 install=${pkgname}.install
 validpgpkeys=('B0C64D14301CC6EFAEDF60E4E4B71D5EEC39C284'  # Karel Zak
               '12D64C3ADCDA0AA427BDACDFF0733C808132F189') # Jari Ruusu
 source=("https://www.kernel.org/pub/linux/utils/util-linux/v${_pkgmajor}/${_basename}-${_realver}.tar."{xz,sign}
+        ${_basename}-BSD-2-Clause.txt::https://raw.githubusercontent.com/Cyan4973/xxHash/f035303b8a86c1db9be70cbb638678ef6ef4cb2d/LICENSE
         "${_basename}-${pkgver}.diff"
-        pam-{login,common,runuser,su}
+        pam-{login,common,remote,runuser,su}
         'util-linux-aes.sysusers'
         '60-rfkill.rules'
         'rfkill-unblock_.service'
         'rfkill-block_.service')
-sha256sums=('87abdfaa8e490f8be6dde976f7c80b9b5ff9f301e1b67e3899e1f05a59a1531f'
+sha256sums=('59e676aa53ccb44b6c39f0ffe01a8fa274891c91bef1474752fad92461def24f'
             'SKIP'
-            '7491357caec5e1f2d0fc48911647ca152cefa6d15b8fc7d49f3b4d8c1496193d'
-            '99cd77f21ee44a0c5e57b0f3670f711a00496f198fc5704d7e44f5d817c81a0f'
+            '6ffedbc0f7878612d2b23589f1ff2ab15633e1df7963a5d9fc750ec5500c7e7a'
+            '2e825c7aa44f2d86ab7bece5255b2010bf10cb6e147ec8a4bee8e05bc31b93eb'
+            'ee917d55042f78b8bb03f5467e5233e3e2ddc2fe01e302bc53b218003fe22275'
             '57e057758944f4557762c6def939410c04ca5803cbdd2bfa2153ce47ffe7a4af'
+            '8bfbee453618ba44d60ba7fb00eced6c62edebfc592f2e75dede08e769ed8931'
             '48d6fba767631e3dd3620cf02a71a74c5d65a525d4c4ce4b5a0b7d9f41ebfea1'
             '3f54249ac2db44945d6d12ec728dcd0d69af0735787a8b078eacd2c67e38155b'
             '10b0505351263a099163c0d928132706e501dd0a008dac2835b052167b14abe3'
@@ -42,15 +61,22 @@ sha256sums=('87abdfaa8e490f8be6dde976f7c80b9b5ff9f301e1b67e3899e1f05a59a1531f'
             '8ccec10a22523f6b9d55e0d6cbf91905a39881446710aa083e935e8073323376'
             'a22e0a037e702170c7d88460cc9c9c2ab1d3e5c54a6985cd4a164ea7beff1b36')
 
-prepare() {
-  cd "$_basename-$pkgver"
+_backports=(
+)
 
+_reverts=(
+)
+
+prepare() {
+  cd "${_basename}-${pkgver}"
+
+  # loop-aes patch
   patch -Np1 -i "../${_basename}-${pkgver}.diff"
   autoreconf -i
 }
 
 build() {
-  cd "${_basename}-${_realver}"
+  cd "${_basename}-${pkgver}"
 
   ./configure \
     --prefix=/usr \
@@ -72,15 +98,25 @@ build() {
 
 package_util-linux-aes() {
   conflicts=('rfkill' 'hardlink' "${_basename}")
-  provides=('rfkill' 'hardlink' "${_basename}=2.39")
+  provides=('rfkill' 'hardlink' "${_basename}=2.40")
   replaces=('rfkill' 'hardlink')
-  depends=('pam' 'shadow' 'coreutils' 'systemd-libs' 'libsystemd.so'
-           'libudev.so' 'libcap-ng' 'libutempter' 'libxcrypt' 'libcrypt.so' 'util-linux-libs-aes'
-           'libmagic.so' 'libncursesw.so')
+  depends=("util-linux-libs-aes"
+           'coreutils'
+           'file' 'libmagic.so'
+           'glibc'
+           'libcap-ng'
+           'libxcrypt' 'libcrypt.so'
+           'ncurses' 'libncursesw.so'
+           'pam'
+           'readline'
+           'shadow'
+           'systemd-libs' 'libsystemd.so' 'libudev.so'
+           'zlib')
   optdepends=('words: default dictionary for look')
   backup=(etc/pam.d/chfn
           etc/pam.d/chsh
           etc/pam.d/login
+          etc/pam.d/remote
           etc/pam.d/runuser
           etc/pam.d/runuser-l
           etc/pam.d/su
@@ -88,7 +124,7 @@ package_util-linux-aes() {
 
   _python_stdlib="$(python -c 'import sysconfig; print(sysconfig.get_paths()["stdlib"])')"
 
-  make -C "${_basename}-${_realver}" DESTDIR="${pkgdir}" usrsbin_execdir=/usr/bin install
+  make -C "${_basename}-${pkgver}" DESTDIR="${pkgdir}" usrsbin_execdir=/usr/bin install
 
   # remove static libraries
   rm "${pkgdir}"/usr/lib/lib*.a*
@@ -100,6 +136,7 @@ package_util-linux-aes() {
   install -Dm0644 pam-common "${pkgdir}/etc/pam.d/chfn"
   install -m0644 pam-common "${pkgdir}/etc/pam.d/chsh"
   install -m0644 pam-login "${pkgdir}/etc/pam.d/login"
+  install -m0644 pam-remote "${pkgdir}/etc/pam.d/remote"
   install -m0644 pam-runuser "${pkgdir}/etc/pam.d/runuser"
   install -m0644 pam-runuser "${pkgdir}/etc/pam.d/runuser-l"
   install -m0644 pam-su "${pkgdir}/etc/pam.d/su"
@@ -128,12 +165,16 @@ package_util-linux-aes() {
     "${pkgdir}/usr/lib/systemd/system/rfkill-unblock@.service"
   install -Dm0644 rfkill-block_.service \
     "${pkgdir}/usr/lib/systemd/system/rfkill-block@.service"
+
+  install -vDm 644 ${_basename}-${pkgver}/Documentation/licenses/COPYING.{BSD*,ISC} -t "$pkgdir/usr/share/licenses/$pkgname/"
+  install -vDm 644 ${_basename}-BSD-2-Clause.txt -t "$pkgdir/usr/share/licenses/$pkgname/"
 }
 
 package_util-linux-libs-aes() {
-  pkgdesc="util-linux runtime libraries"
-  depends=('glibc')
-  provides=('libutil-linux' 'libblkid.so' 'libfdisk.so' 'libmount.so' 'libsmartcols.so' 'libuuid.so' "${_basename}-libs=2.39")
+  pkgdesc='util-linux runtime libraries updated with loop-aes'
+  depends=('glibc'
+           'sqlite')
+  provides=('libutil-linux' 'libblkid.so' 'libfdisk.so' 'libmount.so' 'libsmartcols.so' 'libuuid.so' "${_basename}-libs=2.40")
   conflicts=('libutil-linux' "${_basename}-libs")
   replaces=('libutil-linux')
   optdepends=('python: python bindings to libmount')
@@ -143,4 +184,7 @@ package_util-linux-libs-aes() {
   mv util-linux-libs/include "$pkgdir"/usr/include
   mv util-linux-libs/site-packages "$pkgdir"/"${_python_stdlib}"/site-packages
   mv util-linux-libs/man3 "$pkgdir"/usr/share/man/man3
+
+  install -vDm 644 ${_basename}-${pkgver}/Documentation/licenses/COPYING.{BSD*,ISC} -t "$pkgdir/usr/share/licenses/$pkgname/"
+  install -vDm 644 ${_basename}-BSD-2-Clause.txt -t "$pkgdir/usr/share/licenses/$pkgname/"
 }

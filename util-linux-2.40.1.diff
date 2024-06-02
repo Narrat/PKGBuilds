@@ -19,10 +19,10 @@ to programs, like this:
     make
 
 
-diff -urN util-linux-2.39.2/include/Makemodule.am util-linux-2.39.2-AES/include/Makemodule.am
---- util-linux-2.39.2/include/Makemodule.am	2023-08-17 10:55:57.011839327 +0300
-+++ util-linux-2.39.2-AES/include/Makemodule.am	2023-08-29 19:50:46.372703899 +0300
-@@ -56,6 +56,7 @@
+diff -urN util-linux-2.40.1/include/Makemodule.am util-linux-2.40.1-AES/include/Makemodule.am
+--- util-linux-2.40.1/include/Makemodule.am	2024-05-06 10:20:54.485846983 +0300
++++ util-linux-2.40.1-AES/include/Makemodule.am	2024-05-13 20:26:08.376566246 +0300
+@@ -58,6 +58,7 @@
  	include/procfs.h \
  	include/pt-bsd.h \
  	include/pt-mbr.h \
@@ -30,9 +30,9 @@ diff -urN util-linux-2.39.2/include/Makemodule.am util-linux-2.39.2-AES/include/
  	include/pt-mbr-partnames.h \
  	include/pt-gpt-partnames.h \
  	include/pt-sgi.h \
-diff -urN util-linux-2.39.2/include/xgetpass.h util-linux-2.39.2-AES/include/xgetpass.h
---- util-linux-2.39.2/include/xgetpass.h	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/include/xgetpass.h	2023-08-29 19:50:46.373703908 +0300
+diff -urN util-linux-2.40.1/include/xgetpass.h util-linux-2.40.1-AES/include/xgetpass.h
+--- util-linux-2.40.1/include/xgetpass.h	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/include/xgetpass.h	2024-05-13 20:26:08.377566256 +0300
 @@ -0,0 +1,6 @@
 +#ifndef UTIL_LINUX_XGETPASS_H
 +#define UTIL_LINUX_XGETPASS_H
@@ -40,9 +40,9 @@ diff -urN util-linux-2.39.2/include/xgetpass.h util-linux-2.39.2-AES/include/xge
 +extern char *xgetpass(int pfd, const char *prompt);
 +
 +#endif /* UTIL_LINUX_XGETPASS_H */
-diff -urN util-linux-2.39.2/lib/Makemodule.am util-linux-2.39.2-AES/lib/Makemodule.am
---- util-linux-2.39.2/lib/Makemodule.am	2023-06-20 14:30:07.850293355 +0300
-+++ util-linux-2.39.2-AES/lib/Makemodule.am	2023-08-29 19:50:46.373703908 +0300
+diff -urN util-linux-2.40.1/lib/Makemodule.am util-linux-2.40.1-AES/lib/Makemodule.am
+--- util-linux-2.40.1/lib/Makemodule.am	2024-01-31 12:02:15.454811603 +0200
++++ util-linux-2.40.1-AES/lib/Makemodule.am	2024-05-13 20:26:08.377566256 +0300
 @@ -34,6 +34,7 @@
  	lib/randutils.c \
  	lib/sha1.c \
@@ -51,10 +51,10 @@ diff -urN util-linux-2.39.2/lib/Makemodule.am util-linux-2.39.2-AES/lib/Makemodu
  	lib/signames.c \
  	lib/strutils.c \
  	lib/strv.c \
-diff -urN util-linux-2.39.2/lib/loopdev.c util-linux-2.39.2-AES/lib/loopdev.c
---- util-linux-2.39.2/lib/loopdev.c	2023-08-17 10:55:57.015839307 +0300
-+++ util-linux-2.39.2-AES/lib/loopdev.c	2023-08-30 18:25:12.364882435 +0300
-@@ -985,8 +985,9 @@
+diff -urN util-linux-2.40.1/lib/loopdev.c util-linux-2.40.1-AES/lib/loopdev.c
+--- util-linux-2.40.1/lib/loopdev.c	2024-05-01 22:10:14.781279502 +0300
++++ util-linux-2.40.1-AES/lib/loopdev.c	2024-05-13 20:26:08.378566265 +0300
+@@ -1037,8 +1037,9 @@
   *
   * Returns: 1 if the autoclear flags is set.
   */
@@ -65,7 +65,7 @@ diff -urN util-linux-2.39.2/lib/loopdev.c util-linux-2.39.2-AES/lib/loopdev.c
  	struct path_cxt *sysfs = loopcxt_get_sysfs(lc);
  
  	if (sysfs) {
-@@ -1000,6 +1001,7 @@
+@@ -1052,6 +1053,7 @@
  		if (lo)
  			return lo->lo_flags & LO_FLAGS_AUTOCLEAR;
  	}
@@ -73,7 +73,7 @@ diff -urN util-linux-2.39.2/lib/loopdev.c util-linux-2.39.2-AES/lib/loopdev.c
  	return 0;
  }
  
-@@ -1653,8 +1655,9 @@
+@@ -1726,8 +1728,9 @@
  /*
   * Return: TRUE/FALSE
   */
@@ -84,7 +84,7 @@ diff -urN util-linux-2.39.2/lib/loopdev.c util-linux-2.39.2-AES/lib/loopdev.c
  	struct loopdev_cxt lc;
  	int rc;
  
-@@ -1669,6 +1672,9 @@
+@@ -1742,6 +1745,9 @@
  
  	loopcxt_deinit(&lc);
  	return rc;
@@ -94,9 +94,9 @@ diff -urN util-linux-2.39.2/lib/loopdev.c util-linux-2.39.2-AES/lib/loopdev.c
  }
  
  char *loopdev_get_backing_file(const char *device)
-diff -urN util-linux-2.39.2/lib/xgetpass.c util-linux-2.39.2-AES/lib/xgetpass.c
---- util-linux-2.39.2/lib/xgetpass.c	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/lib/xgetpass.c	2023-08-29 19:50:46.373703908 +0300
+diff -urN util-linux-2.40.1/lib/xgetpass.c util-linux-2.40.1-AES/lib/xgetpass.c
+--- util-linux-2.40.1/lib/xgetpass.c	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/lib/xgetpass.c	2024-05-13 20:26:08.378566265 +0300
 @@ -0,0 +1,64 @@
 +/*
 + * A function to read the passphrase either from the terminal or from
@@ -162,9 +162,9 @@ diff -urN util-linux-2.39.2/lib/xgetpass.c util-linux-2.39.2-AES/lib/xgetpass.c
 +	if(p) p[y] = 0;
 +	return p;
 +}
-diff -urN util-linux-2.39.2/libmount/src/Makemodule.am util-linux-2.39.2-AES/libmount/src/Makemodule.am
---- util-linux-2.39.2/libmount/src/Makemodule.am	2023-06-14 12:11:15.572889818 +0300
-+++ util-linux-2.39.2-AES/libmount/src/Makemodule.am	2023-08-29 19:50:46.373703908 +0300
+diff -urN util-linux-2.40.1/libmount/src/Makemodule.am util-linux-2.40.1-AES/libmount/src/Makemodule.am
+--- util-linux-2.40.1/libmount/src/Makemodule.am	2024-05-01 22:10:14.794279423 +0300
++++ util-linux-2.40.1-AES/libmount/src/Makemodule.am	2024-05-13 20:26:08.379566275 +0300
 @@ -38,7 +38,10 @@
  	libmount/src/hook_subdir.c \
  	libmount/src/hook_owner.c \
@@ -177,9 +177,9 @@ diff -urN util-linux-2.39.2/libmount/src/Makemodule.am util-linux-2.39.2-AES/lib
  	libmount/src/hook_veritydev.c \
  	libmount/src/monitor.c
  
-diff -urN util-linux-2.39.2/libmount/src/aes.c util-linux-2.39.2-AES/libmount/src/aes.c
---- util-linux-2.39.2/libmount/src/aes.c	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/libmount/src/aes.c	2023-08-30 19:51:47.002557247 +0300
+diff -urN util-linux-2.40.1/libmount/src/aes.c util-linux-2.40.1-AES/libmount/src/aes.c
+--- util-linux-2.40.1/libmount/src/aes.c	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/libmount/src/aes.c	2024-05-13 20:26:08.379566275 +0300
 @@ -0,0 +1,299 @@
 +// I retain copyright in this code but I encourage its free use provided
 +// that I don't carry any responsibility for the results. I am especially 
@@ -480,9 +480,9 @@ diff -urN util-linux-2.39.2/libmount/src/aes.c util-linux-2.39.2-AES/libmount/sr
 +
 +    state_out(out_blk, b0);
 +}
-diff -urN util-linux-2.39.2/libmount/src/aes.h util-linux-2.39.2-AES/libmount/src/aes.h
---- util-linux-2.39.2/libmount/src/aes.h	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/libmount/src/aes.h	2023-08-29 19:50:46.373703908 +0300
+diff -urN util-linux-2.40.1/libmount/src/aes.h util-linux-2.40.1-AES/libmount/src/aes.h
+--- util-linux-2.40.1/libmount/src/aes.h	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/libmount/src/aes.h	2024-05-13 20:26:08.379566275 +0300
 @@ -0,0 +1,97 @@
 +// I retain copyright in this code but I encourage its free use provided
 +// that I don't carry any responsibility for the results. I am especially 
@@ -581,10 +581,10 @@ diff -urN util-linux-2.39.2/libmount/src/aes.h util-linux-2.39.2-AES/libmount/sr
 +// if their parameters have not changed.
 +
 +#endif  // _AES_H
-diff -urN util-linux-2.39.2/libmount/src/context_mount.c util-linux-2.39.2-AES/libmount/src/context_mount.c
---- util-linux-2.39.2/libmount/src/context_mount.c	2023-08-17 10:56:12.499759671 +0300
-+++ util-linux-2.39.2-AES/libmount/src/context_mount.c	2023-09-01 00:35:48.436200413 +0300
-@@ -837,6 +837,7 @@
+diff -urN util-linux-2.40.1/libmount/src/context_mount.c util-linux-2.40.1-AES/libmount/src/context_mount.c
+--- util-linux-2.40.1/libmount/src/context_mount.c	2024-05-06 10:22:36.156220877 +0300
++++ util-linux-2.40.1-AES/libmount/src/context_mount.c	2024-05-13 20:26:08.379566275 +0300
+@@ -838,6 +838,7 @@
  	const char *type;
  	int res = 0, rc = 0;
  	struct libmnt_ns *ns_old;
@@ -592,7 +592,7 @@ diff -urN util-linux-2.39.2/libmount/src/context_mount.c util-linux-2.39.2-AES/l
  
  	assert(cxt);
  	assert(cxt->fs);
-@@ -847,6 +848,8 @@
+@@ -848,6 +849,8 @@
  
  	DBG(CXT, ul_debugobj(cxt, "mount: do mount"));
  
@@ -601,7 +601,7 @@ diff -urN util-linux-2.39.2/libmount/src/context_mount.c util-linux-2.39.2-AES/l
  	ns_old = mnt_context_switch_target_ns(cxt);
  	if (!ns_old)
  		return -MNT_ERR_NAMESPACE;
-@@ -867,8 +870,8 @@
+@@ -868,8 +871,8 @@
  	} else
  		res = do_mount_by_pattern(cxt, cxt->fstype_pattern);
  
@@ -612,10 +612,10 @@ diff -urN util-linux-2.39.2/libmount/src/context_mount.c util-linux-2.39.2-AES/l
  		rc = mnt_context_call_hooks(cxt, MNT_STAGE_MOUNT_POST);
  		if (rc)
  			return rc;
-diff -urN util-linux-2.39.2/libmount/src/context_umount.c util-linux-2.39.2-AES/libmount/src/context_umount.c
---- util-linux-2.39.2/libmount/src/context_umount.c	2023-06-14 12:11:15.575889800 +0300
-+++ util-linux-2.39.2-AES/libmount/src/context_umount.c	2023-08-30 18:05:53.685010068 +0300
-@@ -393,16 +393,18 @@
+diff -urN util-linux-2.40.1/libmount/src/context_umount.c util-linux-2.40.1-AES/libmount/src/context_umount.c
+--- util-linux-2.40.1/libmount/src/context_umount.c	2024-05-01 22:12:00.313641259 +0300
++++ util-linux-2.40.1-AES/libmount/src/context_umount.c	2024-05-13 20:26:08.380566285 +0300
+@@ -397,16 +397,18 @@
  	return rc;
  }
  
@@ -636,7 +636,7 @@ diff -urN util-linux-2.39.2/libmount/src/context_umount.c util-linux-2.39.2-AES/
  
  	/* check if it begins with /dev/loop */
  	if (strncmp(devname, _PATH_DEV_LOOP, sizeof(_PATH_DEV_LOOP) - 1) != 0)
-@@ -414,16 +416,16 @@
+@@ -418,16 +420,16 @@
  
  	/* check for the offset option in @fs */
  	optstr = mnt_fs_get_user_options(fs);
@@ -663,7 +663,7 @@ diff -urN util-linux-2.39.2/libmount/src/context_umount.c util-linux-2.39.2-AES/
  }
  
  /* returns: <0 on error; 1 not found (not wanted) */
-@@ -987,7 +989,7 @@
+@@ -991,7 +993,7 @@
  	if (!rc && mnt_context_is_loopdel(cxt) && cxt->fs) {
  		const char *src = mnt_fs_get_srcpath(cxt->fs);
  
@@ -672,9 +672,9 @@ diff -urN util-linux-2.39.2/libmount/src/context_umount.c util-linux-2.39.2-AES/
  			mnt_context_enable_loopdel(cxt, FALSE);
  	}
  
-diff -urN util-linux-2.39.2/libmount/src/hook_loopdev1.c util-linux-2.39.2-AES/libmount/src/hook_loopdev1.c
---- util-linux-2.39.2/libmount/src/hook_loopdev1.c	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/libmount/src/hook_loopdev1.c	2023-08-31 22:44:09.488236925 +0300
+diff -urN util-linux-2.40.1/libmount/src/hook_loopdev1.c util-linux-2.40.1-AES/libmount/src/hook_loopdev1.c
+--- util-linux-2.40.1/libmount/src/hook_loopdev1.c	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/libmount/src/hook_loopdev1.c	2024-05-13 20:26:08.380566285 +0300
 @@ -0,0 +1,1605 @@
 +/* SPDX-License-Identifier: LGPL-2.1-or-later */
 +/*
@@ -2281,9 +2281,9 @@ diff -urN util-linux-2.39.2/libmount/src/hook_loopdev1.c util-linux-2.39.2-AES/l
 +
 +        .deinit = hookset_deinit
 +};
-diff -urN util-linux-2.39.2/libmount/src/optmap.c util-linux-2.39.2-AES/libmount/src/optmap.c
---- util-linux-2.39.2/libmount/src/optmap.c	2023-08-17 10:56:12.500759666 +0300
-+++ util-linux-2.39.2-AES/libmount/src/optmap.c	2023-08-31 22:47:01.574813133 +0300
+diff -urN util-linux-2.40.1/libmount/src/optmap.c util-linux-2.40.1-AES/libmount/src/optmap.c
+--- util-linux-2.40.1/libmount/src/optmap.c	2024-01-31 12:02:15.493811379 +0200
++++ util-linux-2.40.1-AES/libmount/src/optmap.c	2024-05-13 20:26:08.380566285 +0300
 @@ -175,10 +175,17 @@
     { "x-",      MNT_MS_XCOMMENT,   MNT_NOHLPS | MNT_PREFIX },              /* persistent comments (utab) */
     { "X-",      MNT_MS_XFSTABCOMM, MNT_NOHLPS | MNT_NOMTAB | MNT_PREFIX }, /* fstab only comments */
@@ -2304,9 +2304,9 @@ diff -urN util-linux-2.39.2/libmount/src/optmap.c util-linux-2.39.2-AES/libmount
  
     { "nofail",  MNT_MS_NOFAIL, MNT_NOMTAB },               /* Do not fail if ENOENT on dev */
  
-diff -urN util-linux-2.39.2/libmount/src/rmd160.c util-linux-2.39.2-AES/libmount/src/rmd160.c
---- util-linux-2.39.2/libmount/src/rmd160.c	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/libmount/src/rmd160.c	2023-08-29 19:50:46.375703927 +0300
+diff -urN util-linux-2.40.1/libmount/src/rmd160.c util-linux-2.40.1-AES/libmount/src/rmd160.c
+--- util-linux-2.40.1/libmount/src/rmd160.c	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/libmount/src/rmd160.c	2024-05-13 20:26:08.380566285 +0300
 @@ -0,0 +1,532 @@
 +/* rmd160.c  -	RIPE-MD160
 + *	Copyright (C) 1998 Free Software Foundation, Inc.
@@ -2840,9 +2840,9 @@ diff -urN util-linux-2.39.2/libmount/src/rmd160.c util-linux-2.39.2-AES/libmount
 +    rmd160_final( &hd );
 +    memcpy( outbuf, hd.buf, 20 );
 +}
-diff -urN util-linux-2.39.2/libmount/src/rmd160.h util-linux-2.39.2-AES/libmount/src/rmd160.h
---- util-linux-2.39.2/libmount/src/rmd160.h	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/libmount/src/rmd160.h	2023-08-29 19:50:46.375703927 +0300
+diff -urN util-linux-2.40.1/libmount/src/rmd160.h util-linux-2.40.1-AES/libmount/src/rmd160.h
+--- util-linux-2.40.1/libmount/src/rmd160.h	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/libmount/src/rmd160.h	2024-05-13 20:26:08.380566285 +0300
 @@ -0,0 +1,9 @@
 +#ifndef RMD160_H
 +#define RMD160_H
@@ -2853,9 +2853,9 @@ diff -urN util-linux-2.39.2/libmount/src/rmd160.h util-linux-2.39.2-AES/libmount
 +#endif /*RMD160_H*/
 +
 +
-diff -urN util-linux-2.39.2/libmount/src/sha512.c util-linux-2.39.2-AES/libmount/src/sha512.c
---- util-linux-2.39.2/libmount/src/sha512.c	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/libmount/src/sha512.c	2023-08-29 19:50:46.375703927 +0300
+diff -urN util-linux-2.40.1/libmount/src/sha512.c util-linux-2.40.1-AES/libmount/src/sha512.c
+--- util-linux-2.40.1/libmount/src/sha512.c	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/libmount/src/sha512.c	2024-05-13 20:26:08.381566295 +0300
 @@ -0,0 +1,432 @@
 +/*
 + *  sha512.c
@@ -3289,9 +3289,9 @@ diff -urN util-linux-2.39.2/libmount/src/sha512.c util-linux-2.39.2-AES/libmount
 +    memset(&ctx, 0, sizeof(ctx));
 +}
 +#endif
-diff -urN util-linux-2.39.2/libmount/src/sha512.h util-linux-2.39.2-AES/libmount/src/sha512.h
---- util-linux-2.39.2/libmount/src/sha512.h	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/libmount/src/sha512.h	2023-08-29 19:50:46.375703927 +0300
+diff -urN util-linux-2.40.1/libmount/src/sha512.h util-linux-2.40.1-AES/libmount/src/sha512.h
+--- util-linux-2.40.1/libmount/src/sha512.h	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/libmount/src/sha512.h	2024-05-13 20:26:08.381566295 +0300
 @@ -0,0 +1,45 @@
 +/*
 + *  sha512.h
@@ -3338,10 +3338,10 @@ diff -urN util-linux-2.39.2/libmount/src/sha512.h util-linux-2.39.2-AES/libmount
 +/* no sha384_write(), use sha512_write() */
 +/* no sha384_final(), use sha512_final(), result in ctx->sha_out[0...47]  */
 +extern void __loDev_sha384_hash_buffer(unsigned char *, int, unsigned char *, int);
-diff -urN util-linux-2.39.2/sys-utils/Makemodule.am util-linux-2.39.2-AES/sys-utils/Makemodule.am
---- util-linux-2.39.2/sys-utils/Makemodule.am	2023-08-17 10:55:57.206838325 +0300
-+++ util-linux-2.39.2-AES/sys-utils/Makemodule.am	2023-08-29 19:50:46.375703927 +0300
-@@ -301,7 +301,7 @@
+diff -urN util-linux-2.40.1/sys-utils/Makemodule.am util-linux-2.40.1-AES/sys-utils/Makemodule.am
+--- util-linux-2.40.1/sys-utils/Makemodule.am	2024-05-01 22:10:14.971278353 +0300
++++ util-linux-2.40.1-AES/sys-utils/Makemodule.am	2024-05-13 20:26:08.381566295 +0300
+@@ -308,7 +308,7 @@
  sbin_PROGRAMS += losetup
  MANPAGES += sys-utils/losetup.8
  dist_noinst_DATA += sys-utils/losetup.8.adoc
@@ -3350,7 +3350,7 @@ diff -urN util-linux-2.39.2/sys-utils/Makemodule.am util-linux-2.39.2-AES/sys-ut
  losetup_LDADD = $(LDADD) libcommon.la libsmartcols.la
  losetup_CFLAGS = $(AM_CFLAGS) -I$(ul_libsmartcols_incdir)
  
-@@ -408,6 +408,8 @@
+@@ -415,6 +415,8 @@
  
  swapon_SOURCES = \
  	sys-utils/swapon.c \
@@ -3359,7 +3359,7 @@ diff -urN util-linux-2.39.2/sys-utils/Makemodule.am util-linux-2.39.2-AES/sys-ut
  	sys-utils/swapon-common.c \
  	sys-utils/swapon-common.h \
  	lib/swapprober.c \
-@@ -424,6 +426,7 @@
+@@ -431,6 +433,7 @@
  
  swapoff_SOURCES = \
  	sys-utils/swapoff.c \
@@ -3367,9 +3367,9 @@ diff -urN util-linux-2.39.2/sys-utils/Makemodule.am util-linux-2.39.2-AES/sys-ut
  	sys-utils/swapon-common.c \
  	sys-utils/swapon-common.h \
  	lib/swapprober.c \
-diff -urN util-linux-2.39.2/sys-utils/loop.c util-linux-2.39.2-AES/sys-utils/loop.c
---- util-linux-2.39.2/sys-utils/loop.c	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/sys-utils/loop.c	2023-08-29 19:50:46.375703927 +0300
+diff -urN util-linux-2.40.1/sys-utils/loop.c util-linux-2.40.1-AES/sys-utils/loop.c
+--- util-linux-2.40.1/sys-utils/loop.c	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/sys-utils/loop.c	2024-05-13 20:26:08.381566295 +0300
 @@ -0,0 +1,221 @@
 +/*
 + *  loop.c
@@ -3592,9 +3592,9 @@ diff -urN util-linux-2.39.2/sys-utils/loop.c util-linux-2.39.2-AES/sys-utils/loo
 +	loopinfo->lo_encrypt_type = 18; /* LO_CRYPT_CRYPTOAPI */
 +	return(loop_set_status64_ioctl(fd, loopinfo));
 +}
-diff -urN util-linux-2.39.2/sys-utils/loop.h util-linux-2.39.2-AES/sys-utils/loop.h
---- util-linux-2.39.2/sys-utils/loop.h	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/sys-utils/loop.h	2023-08-29 19:50:46.375703927 +0300
+diff -urN util-linux-2.40.1/sys-utils/loop.h util-linux-2.40.1-AES/sys-utils/loop.h
+--- util-linux-2.40.1/sys-utils/loop.h	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/sys-utils/loop.h	2024-05-13 20:26:08.381566295 +0300
 @@ -0,0 +1,87 @@
 +/*
 + *  loop.h
@@ -3683,10 +3683,10 @@ diff -urN util-linux-2.39.2/sys-utils/loop.h util-linux-2.39.2-AES/sys-utils/loo
 +extern int try_cryptoapi_loop_interface(int, struct loop_info64 *, char *);
 +
 +#endif
-diff -urN util-linux-2.39.2/sys-utils/losetup.8.adoc util-linux-2.39.2-AES/sys-utils/losetup.8.adoc
---- util-linux-2.39.2/sys-utils/losetup.8.adoc	2023-08-17 10:55:57.208838314 +0300
-+++ util-linux-2.39.2-AES/sys-utils/losetup.8.adoc	2023-08-29 19:50:46.375703927 +0300
-@@ -12,153 +12,135 @@
+diff -urN util-linux-2.40.1/sys-utils/losetup.8.adoc util-linux-2.40.1-AES/sys-utils/losetup.8.adoc
+--- util-linux-2.40.1/sys-utils/losetup.8.adoc	2024-05-02 11:56:26.829821228 +0300
++++ util-linux-2.40.1-AES/sys-utils/losetup.8.adoc	2024-05-13 20:26:08.381566295 +0300
+@@ -12,156 +12,135 @@
  
  == SYNOPSIS
  
@@ -3713,7 +3713,7 @@ diff -urN util-linux-2.39.2/sys-utils/losetup.8.adoc util-linux-2.39.2-AES/sys-u
 -
 -Set up a loop device:
 -
--*losetup* [*-o* _offset_] [*--sizelimit* _size_] [*--sector-size* _size_] [*-Pr*] [*--show*] *-f*|_loopdev file_
+-*losetup* [*-o* _offset_] [*--sizelimit* _size_] [*--sector-size* _size_] [*--loop-ref* _name_] [*-Pr*] [*--show*] *-f*|_loopdev file_
 -
 -Resize a loop device:
 -
@@ -3758,6 +3758,9 @@ diff -urN util-linux-2.39.2/sys-utils/losetup.8.adoc util-linux-2.39.2-AES/sys-u
 -
 -*-o*, *--offset* _offset_::
 -The data start is moved _offset_ bytes into the specified file or device. The _offset_ may be followed by the multiplicative suffixes; see above.
+-
+-*--loop-ref* _string_::
+-Set reference string. The backwardly compatible default is to use the backing filename as a reference in loop setup ioctl (aka lo_file_name). This option can overwrite this default behavior and set the reference to the _string_. The reference may be used by udevd in /dev/loop/by-ref. Linux kernel does not use the reference at all, but it could be used by some old utils that cannot read the backing file from sysfs. The reference is readable only for the root user (see *--output* +REF) and it is restricted to 64 bytes.
 +*-a*::
 +Show status of all loop devices.
  
@@ -3849,7 +3852,7 @@ diff -urN util-linux-2.39.2/sys-utils/losetup.8.adoc util-linux-2.39.2-AES/sys-u
 +Asks passphrase twice.
  
 -*--direct-io*[**=on**|*off*]::
--Enable or disable direct I/O for the backing file. The optional argument can be either *on* or *off*. If the optional argument is omitted, it defaults to *on*.
+-Enable or disable direct I/O for the backing file. The default is *off*. Specifying either *--direct-io* or *--direct-io=on* will enable it. But, *--direct-io=off* can be provided to explicitly turn it off.
 -
 -*-v*, *--verbose*::
 +*-v*::
@@ -3939,9 +3942,9 @@ diff -urN util-linux-2.39.2/sys-utils/losetup.8.adoc util-linux-2.39.2-AES/sys-u
 -include::man-common/translation.adoc[]
 -endif::[]
 +AES support: Jari Ruusu
-diff -urN util-linux-2.39.2/sys-utils/losetup1.c util-linux-2.39.2-AES/sys-utils/losetup1.c
---- util-linux-2.39.2/sys-utils/losetup1.c	1970-01-01 02:00:00.000000000 +0200
-+++ util-linux-2.39.2-AES/sys-utils/losetup1.c	2023-08-30 19:44:46.817614435 +0300
+diff -urN util-linux-2.40.1/sys-utils/losetup1.c util-linux-2.40.1-AES/sys-utils/losetup1.c
+--- util-linux-2.40.1/sys-utils/losetup1.c	1970-01-01 02:00:00.000000000 +0200
++++ util-linux-2.40.1-AES/sys-utils/losetup1.c	2024-05-13 20:26:08.381566295 +0300
 @@ -0,0 +1,1281 @@
 +/* Taken from Ted's losetup.c - Mitch <m.dsouza@mrc-apu.cam.ac.uk> */
 +/* Added vfs mount options - aeb - 960223 */
@@ -5224,10 +5227,10 @@ diff -urN util-linux-2.39.2/sys-utils/losetup1.c util-linux-2.39.2-AES/sys-utils
 +	}
 +	return res;
 +}
-diff -urN util-linux-2.39.2/sys-utils/mount.8.adoc util-linux-2.39.2-AES/sys-utils/mount.8.adoc
---- util-linux-2.39.2/sys-utils/mount.8.adoc	2023-08-17 10:56:12.501759661 +0300
-+++ util-linux-2.39.2-AES/sys-utils/mount.8.adoc	2023-08-29 19:50:46.376703936 +0300
-@@ -392,6 +392,9 @@
+diff -urN util-linux-2.40.1/sys-utils/mount.8.adoc util-linux-2.40.1-AES/sys-utils/mount.8.adoc
+--- util-linux-2.40.1/sys-utils/mount.8.adoc	2024-05-06 10:20:54.653845953 +0300
++++ util-linux-2.40.1-AES/sys-utils/mount.8.adoc	2024-05-13 20:26:08.382566305 +0300
+@@ -398,6 +398,9 @@
  *--options-source-force*::
  Use options from _fstab_/_mtab_ even if both _device_ and _dir_ are specified.
  
@@ -5237,7 +5240,7 @@ diff -urN util-linux-2.39.2/sys-utils/mount.8.adoc util-linux-2.39.2-AES/sys-uti
  *-R*, *--rbind*::
  Remount a subtree and all possible submounts somewhere else (so that its contents are available in both places). See above, the subsection *Bind mount operation*.
  
-@@ -1564,7 +1567,9 @@
+@@ -1572,7 +1575,9 @@
  *mount -t ext4 /tmp/disk.img /mnt*
  ____
  
@@ -5248,10 +5251,10 @@ diff -urN util-linux-2.39.2/sys-utils/mount.8.adoc util-linux-2.39.2-AES/sys-uti
  
  Since Linux 2.6.25 auto-destruction of loop devices is supported, meaning that any loop device allocated by *mount* will be freed by *umount* independently of _/etc/mtab_.
  
-diff -urN util-linux-2.39.2/sys-utils/mount.c util-linux-2.39.2-AES/sys-utils/mount.c
---- util-linux-2.39.2/sys-utils/mount.c	2023-08-17 10:55:57.210838304 +0300
-+++ util-linux-2.39.2-AES/sys-utils/mount.c	2023-08-29 19:50:46.376703936 +0300
-@@ -36,6 +36,7 @@
+diff -urN util-linux-2.40.1/sys-utils/mount.c util-linux-2.40.1-AES/sys-utils/mount.c
+--- util-linux-2.40.1/sys-utils/mount.c	2024-05-01 22:10:14.976278322 +0300
++++ util-linux-2.40.1-AES/sys-utils/mount.c	2024-05-13 20:26:08.382566305 +0300
+@@ -28,6 +28,7 @@
  #include "c.h"
  #include "env.h"
  #include "strutils.h"
@@ -5259,7 +5262,7 @@ diff -urN util-linux-2.39.2/sys-utils/mount.c util-linux-2.39.2-AES/sys-utils/mo
  #include "closestream.h"
  #include "canonicalize.h"
  #include "pathnames.h"
-@@ -48,6 +49,7 @@
+@@ -40,6 +41,7 @@
  
  static struct ul_env_list *envs_removed;
  
@@ -5267,7 +5270,7 @@ diff -urN util-linux-2.39.2/sys-utils/mount.c util-linux-2.39.2-AES/sys-utils/mo
  static int mk_exit_code(struct libmnt_context *cxt, int rc);
  
  static void suid_drop(struct libmnt_context *cxt)
-@@ -101,6 +103,32 @@
+@@ -93,6 +95,32 @@
  	return 1;
  }
  
@@ -5300,7 +5303,7 @@ diff -urN util-linux-2.39.2/sys-utils/mount.c util-linux-2.39.2-AES/sys-utils/mo
  /*
   * Replace control chars with '?' to be compatible with coreutils. For more
   * robust solution use findmnt(1) where we use \x?? hex encoding.
-@@ -512,6 +540,7 @@
+@@ -510,6 +538,7 @@
  	fputs(_("     --onlyonce          check if filesystem is already mounted\n"), out);
  	fputs(_(" -o, --options <list>    comma-separated list of mount options\n"), out);
  	fputs(_(" -O, --test-opts <list>  limit the set of filesystems (use with -a)\n"), out);
@@ -5308,7 +5311,7 @@ diff -urN util-linux-2.39.2/sys-utils/mount.c util-linux-2.39.2-AES/sys-utils/mo
  	fputs(_(" -r, --read-only         mount the filesystem read-only (same as -o ro)\n"), out);
  	fputs(_(" -t, --types <list>      limit the set of filesystem types\n"), out);
  	fputs(_("     --source <src>      explicitly specifies source (path, label, uuid)\n"), out);
-@@ -705,7 +734,7 @@
+@@ -708,7 +737,7 @@
  
  	mnt_context_set_tables_errcb(cxt, table_parser_errcb);
  
@@ -5317,7 +5320,7 @@ diff -urN util-linux-2.39.2/sys-utils/mount.c util-linux-2.39.2-AES/sys-utils/mo
  					longopts, NULL)) != -1) {
  
  		/* only few options are allowed for non-root users */
-@@ -765,6 +794,10 @@
+@@ -768,6 +797,10 @@
  			if (mnt_context_set_options_pattern(cxt, optarg))
  				err(MNT_EX_SYSERR, _("failed to set options pattern"));
  			break;
@@ -5328,7 +5331,7 @@ diff -urN util-linux-2.39.2/sys-utils/mount.c util-linux-2.39.2-AES/sys-utils/mo
  		case 'L':
  			xasprintf(&srcbuf, "LABEL=\"%s\"", optarg);
  			mnt_context_disable_swapmatch(cxt, 1);
-@@ -944,6 +977,8 @@
+@@ -967,6 +1000,8 @@
  	else if (types)
  		mnt_context_set_fstype(cxt, types);
  
@@ -5337,10 +5340,12 @@ diff -urN util-linux-2.39.2/sys-utils/mount.c util-linux-2.39.2-AES/sys-utils/mo
  	if (all) {
  		/*
  		 * A) Mount all
-diff -urN util-linux-2.39.2/sys-utils/swapoff.c util-linux-2.39.2-AES/sys-utils/swapoff.c
---- util-linux-2.39.2/sys-utils/swapoff.c	2023-06-14 12:11:15.843888172 +0300
-+++ util-linux-2.39.2-AES/sys-utils/swapoff.c	2023-08-29 19:50:46.376703936 +0300
-@@ -1,4 +1,9 @@
+diff -urN util-linux-2.40.1/sys-utils/swapoff.c util-linux-2.40.1-AES/sys-utils/swapoff.c
+--- util-linux-2.40.1/sys-utils/swapoff.c	2024-05-01 22:10:14.977278317 +0300
++++ util-linux-2.40.1-AES/sys-utils/swapoff.c	2024-05-13 20:26:08.382566305 +0300
+@@ -12,6 +12,11 @@
+  * the code. Karel Zak rewrote the code under GPL-2.0-or-later.
+  */
  #include <stdio.h>
 +#include <sys/types.h>
 +#include <sys/stat.h>
@@ -5350,7 +5355,7 @@ diff -urN util-linux-2.39.2/sys-utils/swapoff.c util-linux-2.39.2-AES/sys-utils/
  #include <errno.h>
  #include <getopt.h>
  
-@@ -7,6 +12,7 @@
+@@ -20,6 +25,7 @@
  #endif
  
  #include "nls.h"
@@ -5358,7 +5363,7 @@ diff -urN util-linux-2.39.2/sys-utils/swapoff.c util-linux-2.39.2-AES/sys-utils/
  #include "c.h"
  #include "xalloc.h"
  #include "closestream.h"
-@@ -162,6 +168,45 @@
+@@ -175,6 +181,45 @@
  	exit(SWAPOFF_EX_OK);
  }
  
@@ -5404,7 +5409,7 @@ diff -urN util-linux-2.39.2/sys-utils/swapoff.c util-linux-2.39.2-AES/sys-utils/
  static int swapoff_all(void)
  {
  	int nerrs = 0, nsucc = 0;
-@@ -196,8 +241,30 @@
+@@ -209,8 +254,30 @@
  	mnt_reset_iter(itr, MNT_ITER_FORWARD);
  
  	while (tb && mnt_table_find_next_fs(tb, itr, match_swap, NULL, &fs) == 0) {
@@ -5437,9 +5442,9 @@ diff -urN util-linux-2.39.2/sys-utils/swapoff.c util-linux-2.39.2-AES/sys-utils/
  	}
  
  	mnt_free_iter(itr);
-diff -urN util-linux-2.39.2/sys-utils/swapon.8.adoc util-linux-2.39.2-AES/sys-utils/swapon.8.adoc
---- util-linux-2.39.2/sys-utils/swapon.8.adoc	2023-08-17 10:55:57.212838294 +0300
-+++ util-linux-2.39.2-AES/sys-utils/swapon.8.adoc	2023-08-29 19:50:46.376703936 +0300
+diff -urN util-linux-2.40.1/sys-utils/swapon.8.adoc util-linux-2.40.1-AES/sys-utils/swapon.8.adoc
+--- util-linux-2.40.1/sys-utils/swapon.8.adoc	2024-05-01 22:10:14.978278310 +0300
++++ util-linux-2.40.1-AES/sys-utils/swapon.8.adoc	2024-05-13 20:26:08.382566305 +0300
 @@ -26,6 +26,8 @@
  
  *swapoff* disables swapping on the specified devices and files. When the *-a* flag is given, swapping is disabled on all known swap devices and files (as found in _/proc/swaps_ or _/etc/fstab_).
@@ -5449,10 +5454,10 @@ diff -urN util-linux-2.39.2/sys-utils/swapon.8.adoc util-linux-2.39.2-AES/sys-ut
  == OPTIONS
  
  *-a*, *--all*::
-diff -urN util-linux-2.39.2/sys-utils/swapon.c util-linux-2.39.2-AES/sys-utils/swapon.c
---- util-linux-2.39.2/sys-utils/swapon.c	2023-08-17 10:55:57.212838294 +0300
-+++ util-linux-2.39.2-AES/sys-utils/swapon.c	2023-08-29 19:50:46.377703945 +0300
-@@ -8,6 +8,8 @@
+diff -urN util-linux-2.40.1/sys-utils/swapon.c util-linux-2.40.1-AES/sys-utils/swapon.c
+--- util-linux-2.40.1/sys-utils/swapon.c	2024-05-01 22:10:14.978278310 +0300
++++ util-linux-2.40.1-AES/sys-utils/swapon.c	2024-05-13 20:26:08.382566305 +0300
+@@ -21,6 +21,8 @@
  #include <unistd.h>
  #include <sys/types.h>
  #include <sys/wait.h>
@@ -5461,7 +5466,7 @@ diff -urN util-linux-2.39.2/sys-utils/swapon.c util-linux-2.39.2-AES/sys-utils/s
  #include <fcntl.h>
  #include <stdint.h>
  #include <ctype.h>
-@@ -16,6 +18,8 @@
+@@ -29,6 +31,8 @@
  
  #include "c.h"
  #include "nls.h"
@@ -5470,7 +5475,7 @@ diff -urN util-linux-2.39.2/sys-utils/swapon.c util-linux-2.39.2-AES/sys-utils/s
  #include "bitops.h"
  #include "blkdev.h"
  #include "pathnames.h"
-@@ -735,6 +739,227 @@
+@@ -748,6 +752,227 @@
  }
  
  
@@ -5698,7 +5703,7 @@ diff -urN util-linux-2.39.2/sys-utils/swapon.c util-linux-2.39.2-AES/sys-utils/s
  static int swapon_all(struct swapon_ctl *ctl, const char *filename)
  {
  	struct libmnt_table *tb = get_fstab(filename);
-@@ -752,6 +977,9 @@
+@@ -765,6 +990,9 @@
  	while (mnt_table_find_next_fs(tb, itr, match_swap, NULL, &fs) == 0) {
  		/* defaults */
  		const char *opts;
@@ -5708,7 +5713,7 @@ diff -urN util-linux-2.39.2/sys-utils/swapon.c util-linux-2.39.2-AES/sys-utils/s
  		const char *device;
  		struct swap_prop prop;		/* per device setting */
  
-@@ -760,6 +988,10 @@
+@@ -773,6 +1001,10 @@
  				warnx(_("%s: noauto option -- ignored"), mnt_fs_get_source(fs));
  			continue;
  		}
@@ -5719,7 +5724,7 @@ diff -urN util-linux-2.39.2/sys-utils/swapon.c util-linux-2.39.2-AES/sys-utils/s
  
  		/* default setting */
  		prop = ctl->props;
-@@ -774,23 +1006,38 @@
+@@ -787,23 +1019,38 @@
  		if (!device) {
  			if (!prop.no_fail)
  				status |= cannot_find(mnt_fs_get_source(fs));
