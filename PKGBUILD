@@ -6,7 +6,7 @@
 
 _basename=weston
 pkgname="$_basename-git"
-pkgver=13.0.0.r161.gabe3e20
+pkgver=13.0.0.r287.gef175c8
 pkgrel=1
 pkgdesc='Reference implementation of a Wayland compositor'
 arch=('x86_64')
@@ -26,10 +26,8 @@ optdepends=('xorg-xwayland: support x11 backend'
 conflicts=("$_basename")
 provides=("$_basename")
 options=(!lto)
-source=("git+https://gitlab.freedesktop.org/wayland/${_basename}.git"
-        $_basename-13.0.0-neatvnc0.8.patch)  # https://gitlab.freedesktop.org/wayland/weston/-/issues/890)
-sha256sums=('SKIP'
-            'c33085a00bddd2be1227e5f7a8b7d90e67c9f0b9fab39819490255cbcbc534ae')
+source=("git+https://gitlab.freedesktop.org/wayland/${_basename}.git")
+sha256sums=('SKIP')
 
 pkgver() {
   cd "$_basename"
