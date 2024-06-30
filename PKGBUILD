@@ -4,7 +4,7 @@
 
 pkgname=wlroots0.15
 pkgver=0.15.1
-pkgrel=5
+pkgrel=6
 license=('MIT')
 pkgdesc='Modular Wayland compositor library'
 url='https://gitlab.freedesktop.org/wlroots/wlroots'
@@ -43,14 +43,22 @@ options=(
 source=(
     "$pkgname-$pkgver.tar.gz::https://gitlab.freedesktop.org/wlroots/wlroots/-/releases/$pkgver/downloads/wlroots-$pkgver.tar.gz"
     "$pkgname-$pkgver.tar.gz.sig::https://gitlab.freedesktop.org/wlroots/wlroots/-/releases/$pkgver/downloads/wlroots-$pkgver.tar.gz.sig"
+    0001-fix-calloc-transposed-args.patch
 )
 sha256sums=('5b92f11a52d978919ed1306e0d54c9d59f1762b28d44f0a2da3ef3b351305373'
-            'SKIP')
+            'SKIP'
+            '6800829f248117203738e412d034c5cf5efb60091544f0137143281825743aee')
 validpgpkeys=(
     '34FF9526CFEF0E97A340E2E40FDE7BE0E88F5E48' # Simon Ser
     '4100929B33EEB0FD1DB852797BC79407090047CA' # Drew DeVault
     '9DDA3B9FA5D58DD5392C78E652CB6609B22DA89A' # Sway signing key
 )
+
+
+prepare() {
+    cd wlroots-"$pkgver"
+    patch -Np2 -i "${srcdir}"/0001-fix-calloc-transposed-args.patch
+}
 
 build() {
     arch-meson \
