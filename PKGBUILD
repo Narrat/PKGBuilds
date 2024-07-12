@@ -9,7 +9,7 @@ _basename=util-linux
 pkgbase=util-linux-aes
 pkgname=(util-linux-aes util-linux-libs-aes)
 _pkgmajor=2.40
-_realver=${_pkgmajor}.1
+_realver=${_pkgmajor}.2
 pkgver=${_realver/-/}
 pkgrel=1
 pkgdesc='Miscellaneous system utilities for Linux, with loop-AES support'
@@ -47,7 +47,7 @@ source=("https://www.kernel.org/pub/linux/utils/util-linux/v${_pkgmajor}/${_base
         '60-rfkill.rules'
         'rfkill-unblock_.service'
         'rfkill-block_.service')
-sha256sums=('59e676aa53ccb44b6c39f0ffe01a8fa274891c91bef1474752fad92461def24f'
+sha256sums=('d78b37a66f5922d70edf3bdfb01a6b33d34ed3c3cafd6628203b2a2b67c8e8b3'
             'SKIP'
             '6ffedbc0f7878612d2b23589f1ff2ab15633e1df7963a5d9fc750ec5500c7e7a'
             '2e825c7aa44f2d86ab7bece5255b2010bf10cb6e147ec8a4bee8e05bc31b93eb'
