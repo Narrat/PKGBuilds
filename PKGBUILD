@@ -3,12 +3,12 @@
 
 pkgname=waybox
 pkgver=0.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc='Openbox clone on Wayland'
 url="https://github.com/wizbright/waybox"
 arch=('x86_64')
 license=('MIT')
-depends=('wlroots>=0.17.0' 'wlroots<0.18.0')
+depends=('libwlroots.so=12-64')
 makedepends=('meson' 'wayland-protocols')
 source=(${pkgname}-${pkgver}.tar.gz::https://github.com/wizbright/${pkgname}/archive/${pkgver}.tar.gz
         0001-missing_libxml2_import.patch)
@@ -22,6 +22,7 @@ prepare() {
 }
 
 build() {
+  export PKG_CONFIG_PATH='/usr/lib/wlroots0.17/pkgconfig'
   arch-meson "$pkgname-$pkgver" build
   meson compile -C build
 }
