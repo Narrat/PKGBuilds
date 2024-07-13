@@ -12,7 +12,7 @@ pkgname=(
   bemenu-wayland-git
   bemenu-x11-git
 )
-pkgver=0.6.21.r7.g5bc8a6c
+pkgver=0.6.22.r0.gbd62fb3
 pkgrel=1
 pkgdesc="Dynamic menu library and client program inspired by dmenu"
 url="https://github.com/Cloudef/bemenu"
@@ -30,7 +30,6 @@ makedepends=(
   scdoc
   wayland
   wayland-protocols
-  wlroots
 )
 source=(git+https://github.com/Cloudef/bemenu)
 sha256sums=('SKIP')
