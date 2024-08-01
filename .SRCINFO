@@ -1,7 +1,7 @@
 pkgbase = util-linux-aes
 	pkgdesc = Miscellaneous system utilities for Linux, with loop-AES support
 	pkgver = 2.40.2
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/util-linux/util-linux
 	install = util-linux-aes.install
 	arch = x86_64
@@ -41,7 +41,7 @@ pkgbase = util-linux-aes
 	sha256sums = d78b37a66f5922d70edf3bdfb01a6b33d34ed3c3cafd6628203b2a2b67c8e8b3
 	sha256sums = SKIP
 	sha256sums = 6ffedbc0f7878612d2b23589f1ff2ab15633e1df7963a5d9fc750ec5500c7e7a
-	sha256sums = 2e825c7aa44f2d86ab7bece5255b2010bf10cb6e147ec8a4bee8e05bc31b93eb
+	sha256sums = 9cab81b664fc66aa0f31ea00c09605e72bdd1a7345e1d4a2beb09e84cd4df7ff
 	sha256sums = ee917d55042f78b8bb03f5467e5233e3e2ddc2fe01e302bc53b218003fe22275
 	sha256sums = 57e057758944f4557762c6def939410c04ca5803cbdd2bfa2153ce47ffe7a4af
 	sha256sums = 8bfbee453618ba44d60ba7fb00eced6c62edebfc592f2e75dede08e769ed8931

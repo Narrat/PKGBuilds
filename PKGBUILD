@@ -11,7 +11,7 @@ pkgname=(util-linux-aes util-linux-libs-aes)
 _pkgmajor=2.40
 _realver=${_pkgmajor}.2
 pkgver=${_realver/-/}
-pkgrel=1
+pkgrel=2
 pkgdesc='Miscellaneous system utilities for Linux, with loop-AES support'
 url='https://github.com/util-linux/util-linux'
 #url="http://sourceforge.net/projects/loop-aes/"
@@ -50,7 +50,7 @@ source=("https://www.kernel.org/pub/linux/utils/util-linux/v${_pkgmajor}/${_base
 sha256sums=('d78b37a66f5922d70edf3bdfb01a6b33d34ed3c3cafd6628203b2a2b67c8e8b3'
             'SKIP'
             '6ffedbc0f7878612d2b23589f1ff2ab15633e1df7963a5d9fc750ec5500c7e7a'
-            '2e825c7aa44f2d86ab7bece5255b2010bf10cb6e147ec8a4bee8e05bc31b93eb'
+            '9cab81b664fc66aa0f31ea00c09605e72bdd1a7345e1d4a2beb09e84cd4df7ff'
             'ee917d55042f78b8bb03f5467e5233e3e2ddc2fe01e302bc53b218003fe22275'
             '57e057758944f4557762c6def939410c04ca5803cbdd2bfa2153ce47ffe7a4af'
             '8bfbee453618ba44d60ba7fb00eced6c62edebfc592f2e75dede08e769ed8931'
