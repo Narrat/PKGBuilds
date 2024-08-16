@@ -4,7 +4,7 @@
 _pkgname=bimp
 pkgname=gimp-plugin-bimp
 pkgver=2.6
-pkgrel=2
+pkgrel=3
 pkgdesc='Batch Image Manipulation Plugin for GIMP'
 arch=('x86_64' 'i686')
 url='http://www.alessandrofrancesconi.it/projects/bimp/'
@@ -20,7 +20,7 @@ build() {
     # https://github.com/alessandrofrancesconi/gimp-plugin-bimp/issues/411
     # Alternative: adding -fpermissive
     # https://github.com/alessandrofrancesconi/gimp-plugin-bimp/pull/412
-    CFLAGS=' -Wno-error=incompatible-pointer-types'
+    CFLAGS+=' -Wno-error=incompatible-pointer-types'
     make
 }
 
