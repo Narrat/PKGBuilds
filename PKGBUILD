@@ -9,8 +9,8 @@ pkgrel=1
 pkgdesc="portable command line archive file manager"
 arch=('any')
 url="https://wummel.github.io/patool/"
-license=('GPL')
-depends=('python')
+license=('GPL-3-only')
+depends=(python)
 makedepends=(python-build python-installer python-wheel python-setuptools python-argcomplete)
 optdepends=("lz4: extracting LZ4 archives"
     "p7zip: extracting ZIP and 7z files"
