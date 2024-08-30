@@ -3,14 +3,14 @@
 
 _gitname=zathura-cb
 pkgname=zathura-cb-git
-pkgver=0.1.10.r9.g718ae3b
+pkgver=0.1.11.r1.g8071728
 pkgrel=1
-pkgdesc="Comic book support for zathura"
+pkgdesc="Adds comic book support to zathura"
 arch=('i686' 'x86_64')
 url="https://pwmt.org/projects/zathura-cb/"
 license=('Zlib')
 depends=('zathura' 'libarchive' 'desktop-file-utils')
-makedepends=('git' 'meson' 'ninja')
+makedepends=('git' 'meson' 'ninja' 'appstream-glib')
 conflicts=('zathura-cb')
 provides=('zathura-cb')
 source=(${_gitname}::git+https://github.com/pwmt/zathura-cb.git#branch=develop)
