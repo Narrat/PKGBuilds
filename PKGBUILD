@@ -4,7 +4,7 @@
 pkgbase=python-altair
 _pyname=altair
 pkgname=('python-altair')
-pkgver=5.4.0
+pkgver=5.4.1
 pkgrel=1
 pkgdesc="Declarative statistical visualization library for Python"
 arch=('any')
@@ -17,7 +17,7 @@ optdepends=('python-numpy: for NumPy and Pandas imports'
             'python-selenium: png and svg export support'
             'python-vl-convert: png and svg export support via vega-lite specs')
 source=("${_pyname}-${pkgver}.tar.gz::https://files.pythonhosted.org/packages/source/${_pyname::1}/$_pyname/$_pyname-$pkgver.tar.gz")
-sha256sums=('27c69e93d85b7bb3c98fa3626ef7e6bc6939a1466a55a8f8bf68c4bff31cf030')
+sha256sums=('0ce8c2e66546cb327e5f2d7572ec0e7c6feece816203215613962f0ec1d76a82')
 
 
 build() {
