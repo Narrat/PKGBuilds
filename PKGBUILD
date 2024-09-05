@@ -3,7 +3,7 @@
 # Contributor: Sotirios M. Roussis (xToNouSou) <xtonousou@gmail.com>
 
 pkgname=airgeddon
-pkgver=11.30
+pkgver=11.31
 pkgrel=1
 pkgdesc='Multi-use bash script for Linux systems to audit wireless networks'
 url='https://github.com/v1s1t0r1sh3r3/airgeddon'
@@ -16,6 +16,7 @@ depends=(
   'pciutils' 'procps-ng'
 )
 optdepends=(
+  'arping-th: extends output with arp related information'
   'asleap: Actively recover LEAP/PPTP passwords'
   'beef-git: The Browser Exploitation Framework'
   'bettercap: Complete, modular, portable and easily extensible MITM framework'
@@ -51,7 +52,7 @@ optdepends=(
   'xorg-xset: User preference utility for X'
 )
 makedepends=('binutils')
-sha256sums=('83f78d5141ab32dd664e6e7461fb6cf852fc64422a23c9b09da32440f8418485')
+sha256sums=('c5540a61d9976ab803fde9b622f392809daec1e68f1b6833c38dde968ed8c622')
 arch=('any')
 
 
