@@ -2,7 +2,7 @@
 
 _pkgname=srm
 pkgname=lib${_pkgname}
-pkgver=0.7.1_1
+pkgver=0.7.2_1
 pkgrel=1
 pkgdesc="C library that simplifies the development of Linux DRM/KMS applications"
 arch=('x86_64')
@@ -11,7 +11,7 @@ license=('GPL3')
 depends=('libglvnd' 'libdrm' 'mesa' 'libdisplay-info' 'libinput' 'seatd' 'glibc' 'systemd-libs')
 makedepends=('meson')
 source=(${_pkgname}-${pkgver/_/-}.tar.gz::$url/archive/refs/tags/v${pkgver/_/-}.tar.gz)
-sha256sums=('771243a8cb65d3fe41fe4817b1450ec155e2db3cef965388ebf95e97fff449a9')
+sha256sums=('490d28c2f3fc11be4063a1f9e771fdf62c15a00f6aba51ed0da466309439b235')
 
 
 build() {
