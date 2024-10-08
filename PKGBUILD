@@ -3,7 +3,7 @@
 
 _module="tablib"
 pkgname="python-${_module}"
-pkgver=3.6.1
+pkgver=3.7.0
 pkgrel=1
 pkgdesc="Format-agnostic tabular data library (XLS, JSON, YAML, CSV)"
 arch=("any")
@@ -22,7 +22,7 @@ optdepends=("python-tabulate: cli interface"
             "python-openpyxl: for XLSX support"
             "python-pyaml: for YAML support")
 source=(https://files.pythonhosted.org/packages/source/${_module::1}/$_module/$_module-$pkgver.tar.gz)
-sha256sums=('040685fde11e9237675f43e985edb94b63250a5e9236f89d561ce6fb1465b839')
+sha256sums=('f9db84ed398df5109bd69c11d46613d16cc572fb9ad3213f10d95e2b5f12c18e')
 
 
 build() {
@@ -38,6 +38,5 @@ check() {
 package() {
     cd "${_module}-${pkgver}"
     python -m installer --destdir="$pkgdir" dist/*.whl
-    install -D -m644 "${srcdir}/${_module}-${pkgver}/LICENSE" \
-        "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+    install -D -m644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
