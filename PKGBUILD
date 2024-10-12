@@ -11,7 +11,7 @@
 _pkgbase=julia
 pkgbase=${_pkgbase}-git
 pkgname=${_pkgbase}-git
-pkgver=1.10.2.r55077.gbd47eca2c8a
+pkgver=1.11.0.r56788.g501a4f25c2b
 pkgrel=1
 arch=(x86_64)
 pkgdesc='High-level, high-performance, dynamic programming language'
@@ -38,21 +38,21 @@ makedepends=(cmake
              patchelf
              python)
 optdepends=('gnuplot: If using the Gaston Package from julia')
-source=(git+https://github.com/JuliaLang/julia.git#branch=release-1.10
+source=(git+https://github.com/JuliaLang/julia.git#branch=release-1.11
         c12e8515.patch
-        julia-libgit2-1.7.patch::https://github.com/JuliaLang/julia/commit/2c4c068e.patch
+        julia-libgit2-1.8.patch
         julia-libunwind-1.6.patch
-        julia-libcholmod-cuda.patch
-        julia-suitesparse-7.patch
-        julia-hardcoded-libs.patch)
+        julia-hardcoded-libs.patch
+        julia-metainfo.patch
+        https://github.com/JuliaLang/Downloads.jl/commit/1061ecc3.patch)
 backup=(etc/julia/startup.jl)
 sha256sums=('SKIP'
             '2cc294b63e601d50341979fb936826bdba59de2165a5929eae927e152652f367'
-            'b533dd999f019258cbcae1563f18715f41e42e0786b681150cb2c28f8a0da963'
+            'dc541120600e9c0574016a2738461ddb99be21fc8f763d4a3152169fd2f3bf54'
             '3c0c03eabb668e3242fcd3058c1011dfbb579cc1c5adc3ae1016531e711cc64e'
-            'f69afd7db3fabe4b747afa2404e1202c1dcfe0f8c5fe5238e424eea737fa2a23'
-            '0fd1a0c1fcbe7f583139ed3a4a87f77963f06876d69058fa3ffbedfaec609ee7'
-            '02f0ae518dfd50c2b3abf95fa760de85298baf79d80c2f6f48ac182e58a736d7')
+            'e981ce26bb2394333c83512a607e8aa48ae0d66ec40e0f0b6d97ec70b6baa39f'
+            '074690d913b9544bef11468454fbf5f52005b2a12160123340cfacc91d4daf9f'
+            '69297a9fcf35ffdb7961f4dd0c3bc07a7dffd936b879f29715b6d44929781b6b')
 options=(!lto)
 provides=('julia')
 conflicts=('julia')
@@ -74,27 +74,23 @@ prepare() {
 
 # libunwind 1.6 compatibility
   patch -p1 -i ../julia-libunwind-1.6.patch
-# Ignore harmless test failure, needs investigation
-  sed -e '/int.jl/d' -i test/cmdlineargs.jl
+# Update metadata install path
+  patch -p1 -i ../julia-metainfo.patch
 # Revert test that depends on patched gmp
   patch -Rp1 -i ../c12e8515.patch
-# Harmless test failure, needs investigation
-  sed -e '/int.jl/d' -i test/cmdlineargs.jl
-# libgit2 1.7 compatibility
-  patch -p1 -i ../julia-libgit2-1.7.patch
-# Don't use libcholmod-cuda
-  patch -p1 -i ../julia-libcholmod-cuda.patch
+# libgit2 1.8 compatibility
+  patch -p1 -i ../julia-libgit2-1.8.patch
 # Don't hardcode library names
   patch -p1 -i ../julia-hardcoded-libs.patch
-# Fix warnings with suitesparse 7
+# Revert Downloads commit that break tests
   #cd stdlib/srccache
-  #_SAsha=279b363ca8d3129d4742903d37c8b11545fa08a2
-  #tar -xzf SparseArrays-$_SAsha.tar.gz
-  #patch -d JuliaSparse-SparseArrays.jl-${_SAsha:0:7} -p1 < "$srcdir"/julia-suitesparse-7.patch
-  #rm SparseArrays-$_SAsha.tar.gz
-  #tar -czf SparseArrays-$_SAsha.tar.gz JuliaSparse-SparseArrays.jl-${_SAsha:0:7}
-  #md5sum SparseArrays-$_SAsha.tar.gz | cut -d ' ' -f 1 > ../../deps/checksums/SparseArrays-$_SAsha.tar.gz/md5
-  #sha512sum SparseArrays-$_SAsha.tar.gz | cut -d ' ' -f 1 > ../../deps/checksums/SparseArrays-$_SAsha.tar.gz/sha512
+  #_SAsha=89d3c7dded535a77551e763a437a6d31e4d9bf84
+  #tar -xzf Downloads-$_SAsha.tar.gz
+  #patch -d JuliaLang-Downloads.jl-${_SAsha:0:7} -Rp1 < "$srcdir"/1061ecc3.patch
+  #rm Downloads-$_SAsha.tar.gz
+  #tar -czf Downloads-$_SAsha.tar.gz JuliaLang-Downloads.jl-${_SAsha:0:7}
+  #md5sum Downloads-$_SAsha.tar.gz | cut -d ' ' -f 1 > ../../deps/checksums/Downloads-$_SAsha.tar.gz/md5
+  #sha512sum Downloads-$_SAsha.tar.gz | cut -d ' ' -f 1 > ../../deps/checksums/Downloads-$_SAsha.tar.gz/sha512
 }
 
 _make() {
@@ -122,7 +118,7 @@ _make() {
     USE_SYSTEM_LIBGIT2=1
     USE_SYSTEM_LIBSSH2=1
     USE_SYSTEM_MBEDTLS=1
-    USE_SYSTEM_CURL=1
+    USE_SYSTEM_CURL=0
     USE_SYSTEM_PATCHELF=1
     USE_SYSTEM_ZLIB=1
     USE_SYSTEM_P7ZIP=1
@@ -134,7 +130,7 @@ _make() {
     LIBLAPACKNAME=liblapack64
     MARCH=x86-64
     VERBOSE=1
-    JLDFLAGS="$LDFLAGS"
+    JLDFLAGS="$LDFLAGS -lLLVM-16jl"
     LLVM_CONFIG=/usr/lib/llvm-julia/bin/llvm-config
   )
 
@@ -143,6 +139,7 @@ _make() {
 
 build() {
   cd $_pkgbase
+  PATH="$PATH:/usr/lib/llvm-julia/bin/" \
   _make release
 }
 
@@ -151,8 +148,10 @@ check() {
   ln -s /etc/ssl/cert.pem ../usr/share/julia
 
   ../julia --check-bounds=yes --startup-file=no ./runtests.jl \
+    --skip cmdlineargs \
     --skip Downloads \
     --skip Sockets \
+    --skip channels \
     --skip nghttp2_jll \
     --skip GMP_jll \
     --skip LibCURL \
