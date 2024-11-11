@@ -1,6 +1,6 @@
 pkgbase = louvre
 	pkgdesc = C++ library for building Wayland compositors
-	pkgver = 2.11.0_1
+	pkgver = 2.12.0_1
 	pkgrel = 1
 	url = https://github.com/CuarzoSoftware/Louvre
 	arch = x86_64
@@ -22,7 +22,7 @@ pkgbase = louvre
 	depends = freetype2
 	depends = icu
 	depends = systemd-libs
-	source = louvre-2.11.0-1.tar.gz::https://github.com/CuarzoSoftware/Louvre/archive/refs/tags/v2.11.0-1.tar.gz
-	sha256sums = e0f9362df6b37fbcbb5209c64f65ee3fb80766fd3467a063fc89f85eb65077e6
+	source = louvre-2.12.0-1.tar.gz::https://github.com/CuarzoSoftware/Louvre/archive/refs/tags/v2.12.0-1.tar.gz
+	sha256sums = 0e65ba100b4af328f86a62c9c08ccda0755d59174fd46d86422dd99caea5f216
 
 pkgname = louvre
