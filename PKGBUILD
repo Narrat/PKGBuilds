@@ -2,7 +2,7 @@
 
 pkgname=loop-aes
 _pkgname=loop-AES
-pkgver=3.8d
+pkgver=3.8e
 pkgrel=1
 pkgdesc="loop Linux kernel module that has AES,Twofish,Blowfish,Serpent cipher built-in"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ install=${pkgname}.install
 source=(https://downloads.sourceforge.net/project/${pkgname}/${pkgname}/v${pkgver}/${_pkgname}-v${pkgver}.tar.bz2{,.sign}
 	loop-aes.mod
 	loop-aes.modules)
-b2sums=('67362b54d031df928080c97e5143eb80b6b3f2b89c4b2b318794bfa1cf79e9092d312e0dd42a70599b5b4684643f18477203a8ed901ebc13d77dcfbc0f625801'
+b2sums=('6051efde9c58ecc56231cc1671ed51a238b829098b0f91fe69a63d6080e7c6c87ce9510db25661058493a0e9f51382b7391509f4d146d491a0c7d20dda4eb05c'
         'SKIP'
         'c9fed266434094f41257da7e9ca5e9a59f19bd2f4c408269ae957f96d449d4191f03415a2d57b370508efdf1413e04c237bf523eec4189e6864b039a3ef21b66'
         '1ff89adc37dce634befdbe8d4bbd6420df3ae55bb4bd902f6d73783f6a19959fbfd3128275f59bd038d635419db882834d04996fd7784c28aa605055747f28fa')
