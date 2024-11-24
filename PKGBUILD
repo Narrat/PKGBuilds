@@ -1,9 +1,8 @@
 # Contributor: Lex Black <autumn-wind@web.de>
 # Contributor: Ista Zahn <istazahn[at]gmail[dot]com>
 
-pkgbase=python-altair
 _pyname=altair
-pkgname=('python-altair')
+pkgname=python-altair
 pkgver=5.4.1
 pkgrel=1
 pkgdesc="Declarative statistical visualization library for Python"
