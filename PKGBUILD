@@ -3,12 +3,12 @@
 # Contributor: Sotirios M. Roussis (xToNouSou) <xtonousou@gmail.com>
 
 pkgname=airgeddon
-pkgver=11.31
-pkgrel=2
+pkgver=11.40
+pkgrel=1
 pkgdesc='Multi-use bash script for Linux systems to audit wireless networks'
 url='https://github.com/v1s1t0r1sh3r3/airgeddon'
+arch=('any')
 license=('GPL3')
-source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz)
 depends=(
   'aircrack-ng' 'bash>=4.2' 'coreutils'
   'gawk' 'iproute2' 'iw'
@@ -52,8 +52,8 @@ optdepends=(
   'xorg-xset: User preference utility for X'
 )
 makedepends=('binutils')
-sha256sums=('c5540a61d9976ab803fde9b622f392809daec1e68f1b6833c38dde968ed8c622')
-arch=('any')
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz)
+sha256sums=('b751053450e576cb56c86b550396a0e4823726cebbc242dc4d16cd979807fb16')
 
 
 prepare() {
