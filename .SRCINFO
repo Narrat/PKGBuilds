@@ -4,7 +4,7 @@ pkgbase = airgeddon
 	pkgrel = 1
 	url = https://github.com/v1s1t0r1sh3r3/airgeddon
 	arch = any
-	license = GPL3
+	license = GPL-3.0-only
 	makedepends = binutils
 	depends = aircrack-ng
 	depends = bash>=4.2
