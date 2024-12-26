@@ -3,7 +3,7 @@
 _pkgname=canto-curses
 pkgname=canto-curses-git
 pkgver=0.9.9.r3.g13648d5
-pkgrel=2
+pkgrel=3
 pkgdesc="ncurses user interface for canto-daemon/canto-next. Git version"
 url="http://codezen.org/canto-ng/"
 license=('GPL')
@@ -13,8 +13,10 @@ makedepends=('git' 'python-setuptools' 'python-build' 'python-installer' 'python
 optdepends=('xdg-utils: xdg-open is used as default browser')
 conflicts=('canto-curses')
 provides=('canto-curses=0.9.7')
-source=('git+https://github.com/themoken/canto-curses#branch=master')
-md5sums=('SKIP')
+source=('git+https://github.com/themoken/canto-curses#branch=master'
+        fix-build.patch)
+md5sums=('SKIP'
+         '05f1e4b6ced0363581b697c14d67d640')
 
 
 pkgver() {
@@ -22,12 +24,17 @@ pkgver() {
     git describe --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/v//'
 }
 
+prepare() {
+    cd $_pkgname
+    patch -Np1 -i ../fix-build.patch
+}
+
 build() {
-    cd $srcdir/$_pkgname
+    cd $_pkgname
     python -m build --wheel --no-isolation
 }
 
 package() {
-    cd $srcdir/$_pkgname
+    cd $_pkgname
     python -m installer --destdir="$pkgdir" dist/*.whl
 }
