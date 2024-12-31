@@ -7,7 +7,7 @@
 _name=tomb
 pkgbase="${_name}-git"
 pkgname=("${_name}-git" "${_name}-kdf-git")
-pkgver=2.11.r0.g2b75962
+pkgver=2.11.r63.g212b0e3
 pkgrel=1
 pkgdesc="simple tool to manage encrypted storage"
 arch=('any')
@@ -40,7 +40,8 @@ package_tomb-git() {
         'qrencode: for paper backups of keys'
         'plocate: fast search file names'
         'recoll: fast search file contents'
-        'argon2: support for argon2 KDF')
+        'argon2: support for argon2 KDF'
+        'acl: own mountpoint in /run/media/$USER')
 
     cd "${_name}"
     make DESTDIR="${pkgdir}" PREFIX=/usr install
