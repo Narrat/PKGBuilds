@@ -1,10 +1,10 @@
 pkgbase = tomb-git
 	pkgdesc = simple tool to manage encrypted storage
-	pkgver = 2.9.r24.g8ceeca8
-	pkgrel = 1
+	pkgver = 2.11.r75.g9f79e8b
+	pkgrel = 2
 	url = https://www.dyne.org/software/tomb/
 	arch = any
-	license = GPL3
+	license = GPL-3.0-only
 	makedepends = git
 	makedepends = libgcrypt
 	provides = tomb
@@ -12,7 +12,7 @@ pkgbase = tomb-git
 	source = tomb::git+https://github.com/dyne/Tomb.git
 	source = _tomb
 	sha256sums = SKIP
-	sha256sums = 8007bc208fdac3fbd7a61320b48c4c8073639b478fcc410145a3792986aca9e8
+	sha256sums = 69cf2daa7971f1cac76574e3988ebf285f8a900c46b0f1493066f037917a4d38
 
 pkgname = tomb-git
 	depends = cryptsetup
@@ -25,8 +25,10 @@ pkgname = tomb-git
 	optdepends = steghide: steganography
 	optdepends = dcfldd: show nice progress during massive I/O
 	optdepends = qrencode: for paper backups of keys
-	optdepends = swish-e: file content indexer
+	optdepends = plocate: fast search file names
+	optdepends = recoll: fast search file contents
 	optdepends = argon2: support for argon2 KDF
+	optdepends = acl: own mountpoint in /run/media/$USER
 
 pkgname = tomb-kdf-git
 	pkgdesc = Crypto Undertaker extensions to improve password security
