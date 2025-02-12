@@ -1,11 +1,12 @@
 pkgbase = idlex
 	pkgdesc = Extensions to IDLE, the Python IDE
 	pkgver = 1.22
-	pkgrel = 1
+	pkgrel = 2
 	url = http://idlex.sourceforge.net/
 	arch = any
 	license = NCSA
-	depends = python
+	makedepends = python-setuptools
+	depends = python<=3.11
 	depends = tk
 	options = !emptydirs
 	source = idlex.desktop
