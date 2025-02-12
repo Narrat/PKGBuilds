@@ -2,13 +2,14 @@
 
 _pkgname=Rofication
 pkgname=rofication-git
-pkgver=r17.8dbd06d
+pkgver=r25.ef47f39
 pkgrel=1
 pkgdesc="minimalistic notification system loosely modeled after notification centers like on android and windows 10 (git version)"
 arch=('any')
 url="https://github.com/DaveDavenport/Rofication"
 license=('GPL')
 depends=('python-dbus' 'python-gobject' 'python-jsonpickle')
+makedepends=('git')
 conflicts=('rofication')
 provides=('rofication' 'notification-daemon')
 source=("git+https://github.com/DaveDavenport/Rofication.git")
