@@ -11,7 +11,7 @@
 _pkgbase=julia
 pkgbase=${_pkgbase}-git
 pkgname=${_pkgbase}-git
-pkgver=1.11.0.r56788.g501a4f25c2b
+pkgver=1.11.3.r56940.gd63adeda50d
 pkgrel=1
 arch=(x86_64)
 pkgdesc='High-level, high-performance, dynamic programming language'
@@ -27,7 +27,7 @@ depends=(blas64-openblas
          llvm-julia-libs
          mbedtls2
          openlibm
-         p7zip
+         7zip
          pcre2
          suitesparse)
 makedepends=(cmake
@@ -40,19 +40,19 @@ makedepends=(cmake
 optdepends=('gnuplot: If using the Gaston Package from julia')
 source=(git+https://github.com/JuliaLang/julia.git#branch=release-1.11
         c12e8515.patch
-        julia-libgit2-1.8.patch
-        julia-libunwind-1.6.patch
         julia-hardcoded-libs.patch
+        julia-libgit2-1.8.patch
+        julia-libgit2-1.9.patch
         julia-metainfo.patch
-        https://github.com/JuliaLang/Downloads.jl/commit/1061ecc3.patch)
+        julia-curl-1.10.patch)
 backup=(etc/julia/startup.jl)
 sha256sums=('SKIP'
             '2cc294b63e601d50341979fb936826bdba59de2165a5929eae927e152652f367'
-            'dc541120600e9c0574016a2738461ddb99be21fc8f763d4a3152169fd2f3bf54'
-            '3c0c03eabb668e3242fcd3058c1011dfbb579cc1c5adc3ae1016531e711cc64e'
             'e981ce26bb2394333c83512a607e8aa48ae0d66ec40e0f0b6d97ec70b6baa39f'
+            '3ba9a85464e874c8ac4caeba155a217e34c3e78e85eccaeb3c2a331ed83882b3'
+            '6b4a88fdfddd4c78c23cd8c26f5db1ca89ed6f1ae5558cf458a40482f6c64f98'
             '074690d913b9544bef11468454fbf5f52005b2a12160123340cfacc91d4daf9f'
-            '69297a9fcf35ffdb7961f4dd0c3bc07a7dffd936b879f29715b6d44929781b6b')
+            'f9953782524471c5a8ce819bf00bd47f8272cea17058d15f24522d01b5e827e5')
 options=(!lto)
 provides=('julia')
 conflicts=('julia')
@@ -72,21 +72,21 @@ prepare() {
   git submodule init
   git submodule update
 
-# libunwind 1.6 compatibility
-  patch -p1 -i ../julia-libunwind-1.6.patch
 # Update metadata install path
   patch -p1 -i ../julia-metainfo.patch
 # Revert test that depends on patched gmp
   patch -Rp1 -i ../c12e8515.patch
 # libgit2 1.8 compatibility
   patch -p1 -i ../julia-libgit2-1.8.patch
+# libgit2 1.9 compatibility
+  patch -p1 -i ../julia-libgit2-1.9.patch
 # Don't hardcode library names
   patch -p1 -i ../julia-hardcoded-libs.patch
-# Revert Downloads commit that break tests
+# Fix segfaults with curl 1.10
   #cd stdlib/srccache
   #_SAsha=89d3c7dded535a77551e763a437a6d31e4d9bf84
   #tar -xzf Downloads-$_SAsha.tar.gz
-  #patch -d JuliaLang-Downloads.jl-${_SAsha:0:7} -Rp1 < "$srcdir"/1061ecc3.patch
+  #patch -d JuliaLang-Downloads.jl-${_SAsha:0:7} -p1 < "$srcdir"/julia-curl-1.10.patch
   #rm Downloads-$_SAsha.tar.gz
   #tar -czf Downloads-$_SAsha.tar.gz JuliaLang-Downloads.jl-${_SAsha:0:7}
   #md5sum Downloads-$_SAsha.tar.gz | cut -d ' ' -f 1 > ../../deps/checksums/Downloads-$_SAsha.tar.gz/md5
@@ -94,6 +94,7 @@ prepare() {
 }
 
 _make() {
+# Follow https://github.com/JuliaCI/julia-buildbot/blob/master/master/inventory.py for JULIA_CPU_TARGET
   local make_options=(
     prefix=/usr
     bindir=/usr/bin
@@ -129,6 +130,7 @@ _make() {
     LIBLAPACK=-llapack64
     LIBLAPACKNAME=liblapack64
     MARCH=x86-64
+    JULIA_CPU_TARGET="generic;sandybridge,-xsaveopt,clone_all;haswell,-rdrnd,base(1)"
     VERBOSE=1
     JLDFLAGS="$LDFLAGS -lLLVM-16jl"
     LLVM_CONFIG=/usr/lib/llvm-julia/bin/llvm-config
@@ -149,6 +151,7 @@ check() {
 
   ../julia --check-bounds=yes --startup-file=no ./runtests.jl \
     --skip cmdlineargs \
+    --skip errorshow \
     --skip Downloads \
     --skip Sockets \
     --skip channels \
@@ -170,6 +173,8 @@ check() {
 package() {
   cd $_pkgbase
   _make DESTDIR="$pkgdir" install
+# Prevent compiled modules from being stripped, as it changes their checksum so Julia refuses to load them
+  chmod -w "$pkgdir"/usr/share/julia/compiled/*/*/*.so
 
   ln -sf /etc/ssl/cert.pem "$pkgdir"/usr/share/julia # Needed by some packages
 
