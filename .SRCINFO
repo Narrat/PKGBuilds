@@ -1,0 +1,24 @@
+pkgbase = opencloud-bin
+	pkgdesc = secure and private way to store, access, and share your files
+	pkgver = 1.0.0
+	pkgrel = 1
+	url = https://github.com/opencloud-eu/opencloud
+	install = opencloud.install
+	arch = aarch64
+	arch = x86_64
+	license = Apache-2.0
+	backup = etc/opencloud/opencloud.env
+	source = opencloud.env
+	source = opencloud.service
+	source = opencloud.sysusers
+	source = opencloud.tmpfiles
+	sha512sums = cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e
+	sha512sums = f8dff935b7cc475c1067fd4c9577a84d1cbdca106f68b329346570adde08965eaea86b829ef3508af98e9b4463d2e179b85ef07ef7d8833d54e44f462295774b
+	sha512sums = 3fa38aba73ffea0e559cf20af9f12b85321a97b41d48aad5c7cea81e9ab7d35c08d7a495c62e6a9fdf6ac7c494a4926805d89171dca0d822d922902188babed3
+	sha512sums = e4b8c5bfda8214d6493055c996010b385c3be62a861dbcb3564c68aa03851bb6f23cd269f1b869fe4eeec6396ca9943888628c2a46215a7bd3c02c2a8f000742
+	source_aarch64 = opencloud-1.0.0-aarch64::https://github.com/opencloud-eu/opencloud/releases/download/v1.0.0/opencloud-1.0.0-linux-arm64
+	sha512sums_aarch64 = 09d39cbb1c651291356c9af626532b5860498962796ce0ba3533376f2f24560ab5389480d5066377d52a6612d14f3e4401225eb62e2e3334763b2c0cd1fe2ce2
+	source_x86_64 = opencloud-1.0.0-x86_64::https://github.com/opencloud-eu/opencloud/releases/download/v1.0.0/opencloud-1.0.0-linux-amd64
+	sha512sums_x86_64 = f8145baeea11123e57a6b863a1e49a057fd748974691b45304b2de8aba2320dcdb278a50af0a947e60915fb1de529dbfe87b0a4134b43b51ace94704237c4b27
+
+pkgname = opencloud-bin
