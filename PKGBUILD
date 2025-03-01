@@ -3,7 +3,7 @@
 _pkgname=opencloud
 pkgname=opencloud-bin
 pkgver=1.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="secure and private way to store, access, and share your files"
 url="https://github.com/opencloud-eu/opencloud"
 arch=('aarch64' 'x86_64')
@@ -11,6 +11,8 @@ license=('Apache-2.0')
 #depends=('glibc')
 #makedepends=('go' 'pnpm')
 install="opencloud.install"
+conflicts=(opencloud)
+provides=(opencloud)
 backup=('etc/opencloud/opencloud.env')
 source=("opencloud.env"
         "opencloud.service"

@@ -1,12 +1,14 @@
 pkgbase = opencloud-bin
 	pkgdesc = secure and private way to store, access, and share your files
 	pkgver = 1.0.0
-	pkgrel = 1
+	pkgrel = 2
 	url = https://github.com/opencloud-eu/opencloud
 	install = opencloud.install
 	arch = aarch64
 	arch = x86_64
 	license = Apache-2.0
+	provides = opencloud
+	conflicts = opencloud
 	backup = etc/opencloud/opencloud.env
 	source = opencloud.env
 	source = opencloud.service
