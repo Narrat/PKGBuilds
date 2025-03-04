@@ -1,0 +1,22 @@
+post_install(){
+
+  cat <<INFO
+
+If installing this without prior configuration, then please run
+ $ sudo -u oceu opencloud init
+
+This will create the initial configuration and add the admin user.
+Therefore please take note of the output:
+1.) The admin passwort
+2.) The config location
+
+As the unit file is using /etc/opencloud as the place for the config,
+the generated config needs to moved from
+"/var/lib/opencloud/.opencloud/config/opencloud.yaml" to
+"/etc/opencloud/opencloud.yaml"
+
+To access the web interface visit https://localhost:9200
+
+INFO
+
+}
