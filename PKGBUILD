@@ -2,7 +2,7 @@
 
 pkgname=opencloud
 pkgver=1.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="secure and private way to store, access, and share your files"
 url="https://github.com/opencloud-eu/opencloud"
 arch=('aarch64' 'x86_64')
@@ -13,12 +13,14 @@ install="opencloud.install"
 backup=('etc/opencloud/opencloud.env')
 source=("git+https://github.com/opencloud-eu/opencloud.git#tag=v${pkgver}"
         "go.mk.patch"
+        "0001-Bump-mockery-to-2.53.0.patch"
         "opencloud.env"
         "opencloud.service"
         "opencloud.sysusers"
         "opencloud.tmpfiles")
 sha512sums=('1c80285c77e8866841422ee98f109708647e62272648bb220b1a0987c83d105da721b957e87c99891955eb6565a8df784edb53410ce75ab73ef97c2d0444de0d'
             'da70b77bf25c87d75f1a662d00a339f9b8756e6f8e33e17dcc0663d2dcd7d4981720a93fe1ba6c788d8a5e7f484f8e292e59273793106d496955c5a670862318'
+            'ee58b9be8fbd9d6c891497b3986c7d7f218cdfd8cdcc405b3029c1df70d321fc2d5796f6b3a66cc2f8fe77fa3a1065c3859598ddcafdb762cc96f3a448f9740c'
             'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e'
             'f8dff935b7cc475c1067fd4c9577a84d1cbdca106f68b329346570adde08965eaea86b829ef3508af98e9b4463d2e179b85ef07ef7d8833d54e44f462295774b'
             '3fa38aba73ffea0e559cf20af9f12b85321a97b41d48aad5c7cea81e9ab7d35c08d7a495c62e6a9fdf6ac7c494a4926805d89171dca0d822d922902188babed3'
@@ -28,7 +30,8 @@ sha512sums=('1c80285c77e8866841422ee98f109708647e62272648bb220b1a0987c83d105da72
 prepare() {
     cd "${pkgname}"
         
-    patch .make/go.mk ${srcdir}/go.mk.patch
+    patch .make/go.mk "${srcdir}"/go.mk.patch
+    patch -Np1 -i "${srcdir}"/0001-Bump-mockery-to-2.53.0.patch
 }
 
 build() {
