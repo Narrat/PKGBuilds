@@ -3,7 +3,7 @@ post_install(){
   cat <<INFO
 
 If installing this without prior configuration, then please run
- $ sudo -u oceu opencloud init
+ $ sudo -u oceu opencloud-server init
 
 This will create the initial configuration and add the admin user.
 Therefore please take note of the output:
