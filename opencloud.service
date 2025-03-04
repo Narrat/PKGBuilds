@@ -1,5 +1,5 @@
 [Unit]
-Description=Opencloud daemon
+Description=Opencloud server daemon
 After=syslog.target network.target
 
 [Service]
@@ -9,7 +9,7 @@ Type=simple
 Environment=OC_BASE_DATA_PATH=/var/lib/opencloud
 Environment=OC_CONFIG_DIR=/etc/opencloud
 EnvironmentFile=/etc/opencloud/opencloud.env
-ExecStart=/usr/bin/opencloud server
+ExecStart=/usr/bin/opencloud-server server
 WorkingDirectory=/var/lib/opencloud
 
 # Sandboxing
