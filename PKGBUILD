@@ -3,7 +3,7 @@
 _pkgname=opencloud-desktop
 pkgname=opencloud-desktop-git
 pkgver=r18046.50a6b62
-pkgrel=1
+pkgrel=2
 pkgdesc='opencloud desktop application - git checkout'
 arch=('x86_64')
 url="https://github.com/opencloud-eu/desktop"
@@ -22,9 +22,6 @@ makedepends=(doxygen
              python-sphinx
 	         qt6-declarative
              qt6-tools)
-optdepends=('nemo-python: integration with Nemo'
-            'python-caja: integration with Caja'
-            'python-nautilus: integration with Nautilus')
 conflicts=('opencloud-desktop')
 provides=('opencloud-desktop')
 backup=('etc/OpenCloud/sync-exclude.lst')
