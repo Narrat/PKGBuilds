@@ -13,7 +13,7 @@ makedepends=('git' 'go' 'pnpm')
 install="opencloud.install"
 backup=('etc/opencloud/opencloud.env')
 conflics=('opencloud' 'opencloud-bin')
-provides=('opencloud' 'opencloud-bin')
+provides=('opencloud')
 source=("git+https://github.com/opencloud-eu/opencloud.git"
         "go.mk.patch"
         "opencloud.env"

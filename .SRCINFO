@@ -11,7 +11,6 @@ pkgbase = opencloud-git
 	makedepends = go
 	makedepends = pnpm
 	provides = opencloud
-	provides = opencloud-bin
 	backup = etc/opencloud/opencloud.env
 	source = git+https://github.com/opencloud-eu/opencloud.git
 	source = go.mk.patch
