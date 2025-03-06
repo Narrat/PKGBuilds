@@ -1,7 +1,7 @@
 pkgbase = opencloud
 	pkgdesc = secure and private way to store, access, and share your files
 	pkgver = 1.0.0
-	pkgrel = 5
+	pkgrel = 6
 	url = https://github.com/opencloud-eu/opencloud
 	install = opencloud.install
 	arch = aarch64
