@@ -2,7 +2,7 @@
 
 _pkgname=opencloud
 pkgname=opencloud-git
-pkgver=1.0.0.r49.gf08e3e0
+pkgver=1.0.0.r61.g572190b
 pkgrel=1
 pkgdesc="secure and private way to store, access, and share your files - git build"
 url="https://github.com/opencloud-eu/opencloud"
@@ -35,6 +35,9 @@ pkgver() {
 
 prepare() {
     cd "${_pkgname}"
+
+    # https://github.com/opencloud-eu/opencloud/issues/315
+    git revert --no-edit 5fb225a61b4a8b28aae922c814bb36e0b0cf82b5
         
     patch .make/go.mk ${srcdir}/go.mk.patch
 }
