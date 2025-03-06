@@ -2,7 +2,7 @@
 
 pkgname=opencloud
 pkgver=1.0.0
-pkgrel=4
+pkgrel=5
 pkgdesc="secure and private way to store, access, and share your files"
 url="https://github.com/opencloud-eu/opencloud"
 arch=('aarch64' 'x86_64')
@@ -49,8 +49,7 @@ build() {
 package() {
     install -vDm755 "${pkgname}/${pkgname}/bin/${pkgname}" "${pkgdir}/usr/bin/${pkgname}-server"
 
-    install -vdm755 "${pkgdir}/etc/${pkgname}"
-    install -vDm750 "${pkgname}.env" -t "${pkgdir}/etc/${pkgname}"
+    install -vDm644 "${pkgname}.env" -t "${pkgdir}/etc/${pkgname}"
 
     install -vDm644 "${pkgname}.service" -t "${pkgdir}/usr/lib/systemd/system"
     install -vDm644 "${pkgname}.sysusers" "${pkgdir}/usr/lib/sysusers.d/${pkgname}.conf"
