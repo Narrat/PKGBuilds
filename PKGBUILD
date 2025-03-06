@@ -54,8 +54,7 @@ build() {
 package() {
     install -vDm755 "${_pkgname}/${_pkgname}/bin/${_pkgname}" "${pkgdir}/usr/bin/${_pkgname}-server"
 
-    install -vdm755 "${pkgdir}/etc/${_pkgname}"
-    install -vDm750 "${_pkgname}.env" -t "${pkgdir}/etc/${_pkgname}"
+    install -vDm644 "${_pkgname}.env" -t "${pkgdir}/etc/${_pkgname}"
 
     install -vDm644 "${_pkgname}.service" -t "${pkgdir}/usr/lib/systemd/system"
     install -vDm644 "${_pkgname}.sysusers" "${pkgdir}/usr/lib/sysusers.d/${_pkgname}.conf"
