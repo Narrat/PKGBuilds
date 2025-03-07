@@ -43,8 +43,7 @@ build() {
     export CGO_LDFLAGS="${LDFLAGS}"
     export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
 
-    make -j1 generate
-    make -C opencloud build
+    make -j1 -C opencloud generate build
 }
 
 package() {
