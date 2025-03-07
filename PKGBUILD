@@ -2,7 +2,7 @@
 
 _pkgname=opencloud
 pkgname=opencloud-git
-pkgver=1.0.0.r60.gb5bc6fb
+pkgver=1.0.0.r65.gc5a68c0
 pkgrel=1
 pkgdesc="secure and private way to store, access, and share your files - git build"
 url="https://github.com/opencloud-eu/opencloud"
@@ -48,8 +48,7 @@ build() {
     export CGO_LDFLAGS="${LDFLAGS}"
     export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
 
-    make -j1 generate
-    make -C opencloud build
+    make -j1 -C opencloud generate build
 }
 
 package() {
