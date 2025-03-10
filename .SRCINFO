@@ -1,6 +1,6 @@
 pkgbase = airgeddon
 	pkgdesc = Multi-use bash script for Linux systems to audit wireless networks
-	pkgver = 11.30
+	pkgver = 11.41
 	pkgrel = 1
 	url = https://github.com/v1s1t0r1sh3r3/airgeddon
 	arch = any
@@ -50,7 +50,7 @@ pkgbase = airgeddon
 	optdepends = wireshark-cli: Network traffic and protocol analyzer/sniffer CLI tools
 	optdepends = xorg-xdpyinfo: Display information utility for X
 	optdepends = xorg-xset: User preference utility for X
-	source = airgeddon-11.30.tar.gz::https://github.com/v1s1t0r1sh3r3/airgeddon/archive/refs/tags/v11.30.tar.gz
-	sha256sums = 83f78d5141ab32dd664e6e7461fb6cf852fc64422a23c9b09da32440f8418485
+	source = airgeddon-11.41.tar.gz::https://github.com/v1s1t0r1sh3r3/airgeddon/archive/refs/tags/v11.41.tar.gz
+	sha256sums = 35d790c82da343c53405280297a4e419114d42c4354f258877b9a7a61aa25a4f
 
 pkgname = airgeddon
