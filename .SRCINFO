@@ -4,7 +4,7 @@ pkgbase = airgeddon
 	pkgrel = 1
 	url = https://github.com/v1s1t0r1sh3r3/airgeddon
 	arch = any
-	license = GPL3
+	license = GPL-3.0-only
 	makedepends = binutils
 	depends = aircrack-ng
 	depends = bash>=4.2
@@ -17,6 +17,7 @@ pkgbase = airgeddon
 	depends = tmux
 	depends = pciutils
 	depends = procps-ng
+	optdepends = arping-th: Tool used to check hosts presence on networks
 	optdepends = asleap: Actively recover LEAP/PPTP passwords
 	optdepends = beef-git: The Browser Exploitation Framework
 	optdepends = bettercap: Complete, modular, portable and easily extensible MITM framework

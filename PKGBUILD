@@ -7,7 +7,8 @@ pkgver=11.41
 pkgrel=1
 pkgdesc='Multi-use bash script for Linux systems to audit wireless networks'
 url='https://github.com/v1s1t0r1sh3r3/airgeddon'
-license=('GPL3')
+arch=('any')
+license=('GPL-3.0-only')
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz)
 depends=(
   'aircrack-ng' 'bash>=4.2' 'coreutils'
@@ -16,6 +17,7 @@ depends=(
   'pciutils' 'procps-ng'
 )
 optdepends=(
+  'arping-th: Tool used to check hosts presence on networks'
   'asleap: Actively recover LEAP/PPTP passwords'
   'beef-git: The Browser Exploitation Framework'
   'bettercap: Complete, modular, portable and easily extensible MITM framework'
