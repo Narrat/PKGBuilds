@@ -9,7 +9,6 @@ pkgdesc='Multi-use bash script for Linux systems to audit wireless networks'
 url='https://github.com/v1s1t0r1sh3r3/airgeddon'
 arch=('any')
 license=('GPL-3.0-only')
-source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz)
 depends=(
   'aircrack-ng' 'bash>=4.2' 'coreutils'
   'gawk' 'iproute2' 'iw'
@@ -53,8 +52,8 @@ optdepends=(
   'xorg-xset: User preference utility for X'
 )
 makedepends=('binutils')
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz)
 sha256sums=('35d790c82da343c53405280297a4e419114d42c4354f258877b9a7a61aa25a4f')
-arch=('any')
 
 
 prepare() {
