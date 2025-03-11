@@ -3,7 +3,7 @@
 _pkgname=opencloud
 pkgname=opencloud-bin
 pkgver=1.0.0
-pkgrel=4
+pkgrel=5
 pkgdesc="secure and private way to store, access, and share your files - upstream built binary"
 url="https://github.com/opencloud-eu/opencloud"
 arch=('aarch64' 'x86_64')
