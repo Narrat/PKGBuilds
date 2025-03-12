@@ -2,20 +2,25 @@ post_install(){
 
   cat <<INFO
 
-If installing this without prior configuration, then please run
- $ sudo -u oceu opencloud-server init
+    If installing this without prior configuration, then please run as root
+        # OC_CONFIG_DIR="/etc/opencloud" opencloud-server init
 
-This will create the initial configuration and add the admin user.
-Therefore please take note of the output:
-1.) The admin passwort
-2.) The config location
+    This will create the initial configuration and add the admin user.
+    Please take note of the output. It tells
+    1) The admin passwort
+    2) The config location
 
-As the unit file is using /etc/opencloud as the place for the config,
-the generated config needs to moved from
-"/var/lib/opencloud/.opencloud/config/opencloud.yaml" to
-"/etc/opencloud/opencloud.yaml"
+    As the unit file is using "/etc/opencloud" as the place for the config,
+    the generated config "opencloud.yaml" needs to be at that location.
+    If the output states the config is placed somewhere else, please move it
+    to the correct location or adjust the opencloud unit file.
+    Additionally the "oceu" user needs to be able to access the config file.
+    Therefore after making sure the config is at the right location adjust
+    the access rights.
+    Either set 644 for the config or use ACL to allow access for "oceu".
 
-To access the web interface visit https://localhost:9200
+    Without OC_URL being set the web interface can be accessed
+    at https://localhost:9200
 
 INFO
 
