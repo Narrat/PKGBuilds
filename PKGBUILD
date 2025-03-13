@@ -2,7 +2,7 @@
 # Contributor: Aaron Schaefer <aaron@elasticdog.com>
 
 pkgname=duff-git
-pkgver=0.5.2.r56.g3c8eb2f
+pkgver=0.5.2.r60.gc1baefa
 pkgrel=1
 pkgdesc="A command-line utility for quickly finding duplicates in a given set of files"
 arch=('i686' 'x86_64')
@@ -20,10 +20,20 @@ pkgver() {
   git describe --tags | sed 's+-+.r+' | tr - .
 }
 
+prepare() {
+  cd ${pkgname%-git}
+
+  # How to avoid the manual confirmation?
+  gettextize --no-changelog -f
+
+  # https://github.com/elmindreda/duff/issues/17
+  sed -i 's#po/Makefile.in##' configure.ac
+
+  autoreconf -fiv
+}
+
 build() {
   cd ${pkgname%-git}
-  echo > gettextize --no-changelog -f
-  autoreconf -i
   ./configure --prefix=/usr --mandir=/usr/share/man
   make
 }
