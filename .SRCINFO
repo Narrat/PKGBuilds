@@ -1,0 +1,25 @@
+pkgbase = opencloud-desktop
+	pkgdesc = opencloud desktop application
+	pkgver = 1.0.0_alpah.1
+	pkgrel = 1
+	url = https://github.com/opencloud-eu/desktop
+	arch = x86_64
+	license = GPL-2.0-only
+	makedepends = doxygen
+	makedepends = extra-cmake-modules
+	makedepends = python-sphinx
+	makedepends = qt6-declarative
+	makedepends = qt6-tools
+	depends = gcc-libs
+	depends = glibc
+	depends = kdsingleapplication
+	depends = libre-graph-api
+	depends = qt6-base
+	depends = qtkeychain-qt6
+	depends = sqlite
+	depends = zlib
+	backup = etc/OpenCloud/sync-exclude.lst
+	source = opencloud-desktop-1.0.0-alpah.1.tar.gz::https://github.com/opencloud-eu/desktop/archive/refs/tags/v1.0.0-alpah.1.tar.gz
+	sha256sums = 8b6ed211af0e19be19ef74699a8df8ee8c886f269467d180a7a922915b82910a
+
+pkgname = opencloud-desktop
