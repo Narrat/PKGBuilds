@@ -3,7 +3,7 @@
 
 pkgname=duff-git
 pkgver=0.5.2.r60.gc1baefa
-pkgrel=1
+pkgrel=2
 pkgdesc="A command-line utility for quickly finding duplicates in a given set of files"
 arch=('i686' 'x86_64')
 url="https://github.com/elmindreda/duff"
@@ -30,6 +30,9 @@ prepare() {
   sed -i 's#po/Makefile.in##' configure.ac
 
   autoreconf -fiv
+
+  # https://github.com/elmindreda/duff/issues/18
+  sed -i 's/ö/oe/g' src/duff.c
 }
 
 build() {
