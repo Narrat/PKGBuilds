@@ -10,7 +10,7 @@ arch=('i686' 'x86_64')
 url="https://github.com/bootchk/resynthesizer"
 license=('GPL2')
 depends=('gimp')
-makedepends=('git' 'meson' 'intltool')
+makedepends=('git' 'meson')
 conflicts=('gimp-resynth' 'gimp-resynth-git')
 provides=("${pkgname/-git/}=2.0")
 options=('!emptydirs')

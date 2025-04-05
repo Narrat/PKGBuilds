@@ -8,7 +8,6 @@ pkgbase = gimp-plugin-resynthesizer-git
 	license = GPL2
 	makedepends = git
 	makedepends = meson
-	makedepends = intltool
 	depends = gimp
 	provides = gimp-plugin-resynthesizer=2.0
 	conflicts = gimp-resynth
