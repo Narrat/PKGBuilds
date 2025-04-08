@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=6.13.7.arch1
+pkgver=6.14.1.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -45,20 +45,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('3a39b62038b7ac2f43d26a1f84b4283e197804e1e817ad637e9a3d874c47801d'
+sha256sums=('5bf122d1879fd64fadf0cecfcd477957ebce1bc5931c14835ee0eda88463e407'
             'SKIP'
-            'b38f80cf02f9af621ba305ec9ccf992f9f238eb5668110b15cc0c049139f0cd6'
+            'c5b4773e9d402dd1fb9d198d6c65e1a400dcc994e27f6f82d0567301a84b8554'
             'SKIP'
-            'ffb410b8d525011be5e83e91c580845ca4948235d0aad99bdcc14cd551dae830'
-            '2c2555e0cd0042c78878807c07c310d5a933d8189ce562610f46393f3741f81b'
+            '2f0d497ad5372e51861a3ed59948795d144cbab03e9df14acf7dfe8ee7b2917e'
+            'f95e803f4ac813198a9cb2a674b4fba3740dbe993851428f3c169c3372d901f3'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             'ce226234386cc62b5b55f5d9372a7a9ce2bf2d208d98f2e3aa04138edb14fe5f')
-b2sums=('dc9e71842d7e9d2e016ca2c6e791d627790c87cd445b404c73745dc565eb89617ec69f1150b228d7853a595ea7f6daf6acdb74f8383088af30d42bb4c062a129'
+b2sums=('1aa584824d71cf7ac25d3b848aa8c00f7f172dc2491972cb0b4eeebdd491f0f5dc000c55f825da656f3447c3a38eb8d480c5f98927339811247f2cc8c82e3c50'
         'SKIP'
-        'f2a05a124d4f5dc105c959f5dceef962f867877d451c053b1ba7cca50829b961d74ac3631a5fe06ed0b79ee9388cf9c2f37cffdbd63ab2515e25a0be21a1c77e'
+        'af0eca8302cf15ddc342f20998f8585b64fc88ed82fdedeeafed644afc9583006e86a0a62e353e0c212814d399e167045ee2f85a7d3b30c58b38e2fea01b7a1a'
         'SKIP'
-        'd14d5ccf77aa799441097de19012955be489719a3a4a4850547ef14c02431e61e2e77267de01358eec1da9fa7fa9ef736e3dfaa35f2243207d9ee1f54d57eb44'
-        'dc9e94efc817ac9862ee25e204d67330630d611c345b5cb6ee2aca289076ddfa98640d5d87fc87dc04a769e72599965a929a6cbea8d0adb9e52d0a3f6c513948'
+        '78592a6fe5c715e50925775b736cf5652bc21abe8fcef9e8e56820994500d83a4031c79a3714fc97b1ef373fb62a2b3c06aa46bcf510eb70314e5f2f658b2242'
+        '95f89f8b1647b53c8ce8a002043105bef69ef3f8ea97e515a1a12ff0f14157922b387f61390583c912ec76a3313da8ff31b07b1c5e8dbc95223b4b34d821f3cc'
         'e5c03e352ee552fe8c5fd6643b78fcaa4e9a3570f39ec9fe91108c831b27fb472c54c9bd217811ca56c1b85d6caa58f81258e2c80bb1e5a6fb4552e09a968003'
         'b2e45a9ebc6a2ef66a4e2aeb5ab1d774b8be1a50af6c213203c88fcfa69edfa8cb52f5fbe598267d5544d40cc0892d22f7d1be81299bbd61497027ab101eaea6')
 
@@ -114,6 +114,7 @@ _package() {
   )
   provides=(
     KSMBD-MODULE
+    NTSYNC-MODULE
     VIRTUALBOX-GUEST-MODULES
     WIREGUARD-MODULE
   )
@@ -183,6 +184,14 @@ _package-headers() {
 
   echo "Installing KConfig files..."
   find . -name 'Kconfig*' -exec install -Dm644 {} "$builddir/{}" \;
+
+  #echo "Installing Rust files..."
+  #install -Dt "$builddir/rust" -m644 rust/*.rmeta
+  #install -Dt "$builddir/rust" rust/*.so
+
+  echo "Installing unstripped VDSO..."
+  make INSTALL_MOD_PATH="$pkgdir/usr" vdso_install \
+    link=  # Suppress build-id symlinks
 
   echo "Removing unneeded architectures..."
   local arch
