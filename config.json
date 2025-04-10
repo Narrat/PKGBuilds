@@ -1,0 +1,23 @@
+{
+  "server" : "https://localhost:9200",
+  "openIdConnect": {
+    "metadata_url": "https://localhost:9200/.well-known/openid-configuration",
+    "authority": "https://localhost:9200",
+    "clientId": "web",
+    "response_type": "code",
+    "scope": "openid profile email"
+  },
+  "apps" : [
+    "files",
+    "pdf-viewer",
+    "preview",
+    "search",
+    "text-editor",
+    "external",
+    "admin-settings",
+    "epub-reader"
+  ],
+  "options" : {
+    "contextHelpersReadMore": true
+  }
+}
