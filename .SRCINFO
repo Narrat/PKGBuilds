@@ -1,6 +1,6 @@
 pkgbase = opencloud-web
 	pkgdesc = Web UI for OpenCloud
-	pkgver = 2.1.1
+	pkgver = 2.2.0
 	pkgrel = 1
 	url = https://github.com/opencloud-eu/web
 	install = opencloud-web.install
@@ -10,9 +10,9 @@ pkgbase = opencloud-web
 	makedepends = git
 	makedepends = pnpm
 	backup = var/lib/opencloud-web/config.json
-	source = opencloud-web::git+https://github.com/opencloud-eu/web.git#tag=v2.1.1
+	source = opencloud-web::git+https://github.com/opencloud-eu/web.git#tag=v2.2.0
 	source = config.json
-	sha512sums = 08f539b822ed29e2147d85097454d04f4d1b4a1dd11b68374807ec3de9aca94b6ac626b6ca0e7df4c63ac5eb58d04ad9382cdccb554178c0e0ffad435582518e
+	sha512sums = 8439a465d8e0d40b566dfe6b5722bce41e1cb701778ac1621d640c2f915603b92c868e534eac77cc159c7c69d48db0538af218f22d3dc382b3f54079752d045a
 	sha512sums = c3692ff7d3f42af2c42d97d633cd14094c3b6421099b7eb74372ba9959ceca95f69c38da679b908802b7b5a5c2199484bb42ddc028e9e1372fb040fe51683e27
 
 pkgname = opencloud-web
