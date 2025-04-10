@@ -2,7 +2,7 @@
 
 _pkgname=opencloud
 pkgname=opencloud-git
-pkgver=2.0.0.r12.gdd30b5b
+pkgver=2.1.0.r19.gbe13bac
 pkgrel=1
 pkgdesc="secure and private way to store, access, and share your files - git build"
 url="https://github.com/opencloud-eu/opencloud"
@@ -23,7 +23,7 @@ source=("git+https://github.com/opencloud-eu/opencloud.git"
         "opencloud.tmpfiles")
 sha512sums=('SKIP'
             'da70b77bf25c87d75f1a662d00a339f9b8756e6f8e33e17dcc0663d2dcd7d4981720a93fe1ba6c788d8a5e7f484f8e292e59273793106d496955c5a670862318'
-            '72823c7dfde7e97996f948b2371f86d37337d5f62c145b8cb9d40a4d3941cf83be96df5babbed2560cb730208e2b59fa6f363987a2c4d53f08fb2fa6870f558e'
+            'fc380a7e187ae51645b0cc6f6fe15761406ca47defce86cdacbec0fa7c472d704c7dfe4cefa2b6130c9ee9991e7c54e32a14c05d5ca8a5a37c4e65fda1a64d3b'
             'af6b2e80ebaf130fb3e8f6038580bea4db811499d06f2962604941f75d1f8ef0dd3692bf21e54c0611864c49217c8fa457cb6773775a1aa47c7254330f83ba7f'
             '3fa38aba73ffea0e559cf20af9f12b85321a97b41d48aad5c7cea81e9ab7d35c08d7a495c62e6a9fdf6ac7c494a4926805d89171dca0d822d922902188babed3'
             'e4b8c5bfda8214d6493055c996010b385c3be62a861dbcb3564c68aa03851bb6f23cd269f1b869fe4eeec6396ca9943888628c2a46215a7bd3c02c2a8f000742')
