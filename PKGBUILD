@@ -1,7 +1,7 @@
 # Contributor: Lex Black <autumn-wind@web.de>
 
 pkgname=opencloud-desktop
-pkgver=1.0.0_rc.1
+pkgver=1.0.0_rc.3
 pkgrel=1
 pkgdesc='opencloud desktop application'
 arch=('x86_64')
@@ -22,7 +22,7 @@ makedepends=(doxygen
              qt6-tools)
 backup=('etc/OpenCloud/sync-exclude.lst')
 source=("${pkgname}-${pkgver/_/-}.tar.gz::https://github.com/opencloud-eu/desktop/archive/refs/tags/v${pkgver/_/-}.tar.gz")
-sha256sums=('a0a83e2bf5047366b5bd5934e33049a39322a3aeea7b2c8cc2c6cf0e7f4ac3ea')
+sha256sums=('af46c69a9ed48df77cf5a09e621b99c497f9a95f25de8532c1407a871c06f25a')
 
 
 build() {
