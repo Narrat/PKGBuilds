@@ -1,8 +1,8 @@
 # Contributor: Lex Black <autumn-wind@web.de>
 
 pkgname=opencloud
-pkgver=2.1.0
-pkgrel=3
+pkgver=2.2.0
+pkgrel=1
 pkgdesc="secure and private way to store, access, and share your files"
 url="https://github.com/opencloud-eu/opencloud"
 arch=('aarch64' 'x86_64')
@@ -18,7 +18,7 @@ source=("git+https://github.com/opencloud-eu/opencloud.git#tag=v${pkgver/_/-}"
         "opencloud.service"
         "opencloud.sysusers"
         "opencloud.tmpfiles")
-sha512sums=('a452cbf2f36dfc135c7ba069a23ccc9e996352eda217fe499b8b25e3c31d84550340acd5af700dd3577e0a45ba43653273094c0e40ab1dba8ec54fa435f72586'
+sha512sums=('a6891ba98dbaaabfe79c286d81a11c9f2db9c722ea63b6fa3d0c97293437a2030906f60776d7f87d5b697a2529b008a46222089a440b045c5fd1661bd8c7f092'
             'da70b77bf25c87d75f1a662d00a339f9b8756e6f8e33e17dcc0663d2dcd7d4981720a93fe1ba6c788d8a5e7f484f8e292e59273793106d496955c5a670862318'
             'c4814a4843c4e82ea487e0152f09b08a2df6c8c90fc1139b18b9be4370fda12c692d85b86d2179f69e065790ec6bdb9a8cf8338ffa190636ea6bd7279dfed903'
             'af6b2e80ebaf130fb3e8f6038580bea4db811499d06f2962604941f75d1f8ef0dd3692bf21e54c0611864c49217c8fa457cb6773775a1aa47c7254330f83ba7f'
@@ -41,7 +41,7 @@ build() {
     export CGO_LDFLAGS="${LDFLAGS}"
     export GOFLAGS="-buildmode=pie -trimpath -ldflags=-linkmode=external -mod=readonly -modcacherw"
 
-    make -j1 generate
+    make generate
     make -C opencloud build
 }
 
