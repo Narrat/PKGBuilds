@@ -2,7 +2,7 @@
 
 pkgname=mpvpaper
 pkgver=1.7
-pkgrel=1
+pkgrel=2
 pkgdesc="video wallpaper program for wlroots based wayland compositors"
 arch=('i686' 'x86_64')
 url="https://github.com/GhostNaN/$pkgname"
@@ -15,6 +15,8 @@ b2sums=('103582b7e5cce6293572c21299c125ef112441d1cec355e133bf54cb299123cde77deb9
 
 
 build() {
+  # Change incompatible-pointer-type back to warning instead of error (default GCC 14+)
+  CFLAGS+=' -Wno-error=incompatible-pointer-types'
   arch-meson "$pkgname-$pkgver" build
   meson compile -C build
 }
