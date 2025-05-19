@@ -1,6 +1,6 @@
 pkgbase = opencloud-git
 	pkgdesc = secure and private way to store, access, and share your files - git build
-	pkgver = 2.1.0.r75.gef94ccc
+	pkgver = 2.3.0.r0.g58354ff
 	pkgrel = 1
 	url = https://github.com/opencloud-eu/opencloud
 	install = opencloud.install
@@ -12,6 +12,8 @@ pkgbase = opencloud-git
 	makedepends = pnpm
 	optdepends = opencloud-web: if wanting to use a customized web interface
 	provides = opencloud
+	conflicts = opencloud
+	conflicts = opencloud-bin
 	backup = etc/opencloud/opencloud.env
 	source = git+https://github.com/opencloud-eu/opencloud.git
 	source = go.mk.patch
