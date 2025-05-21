@@ -1,6 +1,6 @@
 pkgbase = gimp-plugin-resynthesizer-git
 	pkgdesc = Suite of gimp plugins for texture synthesis (like heal-selection). Git-Version
-	pkgver = 2.0.3.r132.g7e3eaea
+	pkgver = 2.0.3.r153.g3846f79
 	pkgrel = 1
 	url = https://github.com/bootchk/resynthesizer
 	arch = i686
@@ -9,7 +9,7 @@ pkgbase = gimp-plugin-resynthesizer-git
 	makedepends = git
 	makedepends = meson
 	depends = gimp
-	provides = gimp-plugin-resynthesizer=2.0
+	provides = gimp-plugin-resynthesizer=3.0
 	conflicts = gimp-resynth
 	conflicts = gimp-resynth-git
 	options = !emptydirs
