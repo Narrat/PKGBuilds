@@ -1,6 +1,6 @@
 pkgbase = wireguard-go-git
 	pkgdesc = Go userspace implementation of WireGuard
-	pkgver = 0.0.20220316.r9.gbb719d3
+	pkgver = 0.0.20250522.r0.gf333402
 	pkgrel = 1
 	url = https://git.zx2c4.com/wireguard-go/
 	arch = i686
@@ -11,6 +11,7 @@ pkgbase = wireguard-go-git
 	arch = aarch64
 	license = GPL
 	makedepends = go
+	makedepends = git
 	provides = wireguard-go
 	provides = wireguard
 	conflicts = wireguard-go

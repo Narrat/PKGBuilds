@@ -3,13 +3,13 @@
 
 _pkgname=wireguard-go
 pkgname=${_pkgname}-git
-pkgver=0.0.20220316.r9.gbb719d3
+pkgver=0.0.20250522.r0.gf333402
 pkgrel=1
 pkgdesc="Go userspace implementation of WireGuard"
 arch=('i686' 'pentium4' 'x86_64' 'armv7h' 'armv6h' 'aarch64')
 url="https://git.zx2c4.com/wireguard-go/"
 license=('GPL')
-makedepends=('go')
+makedepends=('go' 'git')
 conflicts=("${_pkgname}")
 provides=("${_pkgname}" "wireguard")
 source=("${_pkgname}::git+https://git.zx2c4.com/wireguard-go.git")
