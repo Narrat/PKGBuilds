@@ -6,7 +6,7 @@ pkgrel=3
 pkgdesc="Go userspace implementation of WireGuard"
 arch=('i686' 'pentium4' 'x86_64' 'armv7h' 'armv6h' 'aarch64')
 url="https://git.zx2c4.com/wireguard-go/"
-license=('GPL')
+license=('MIT')
 depends=('glibc')
 makedepends=('go')
 source=(https://git.zx2c4.com/wireguard-go/snapshot/${pkgname}-${pkgver}.tar.xz
@@ -28,4 +28,6 @@ build() {
 package() {
   cd "$pkgname-$pkgver"
   make DESTDIR="$pkgdir" PREFIX=/usr install
+
+  install -vDm644 LICENSE -t "${pkgdir}"/usr/share/licenses/$pkgname/
 }
