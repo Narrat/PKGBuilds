@@ -1,7 +1,7 @@
 pkgbase = opencloud-desktop-git
 	pkgdesc = opencloud desktop application - git checkout
-	pkgver = r18046.50a6b62
-	pkgrel = 2
+	pkgver = r18244.4a42d67
+	pkgrel = 1
 	url = https://github.com/opencloud-eu/desktop
 	arch = x86_64
 	license = GPL-2.0-only
@@ -21,7 +21,6 @@ pkgbase = opencloud-desktop-git
 	depends = zlib
 	provides = opencloud-desktop
 	conflicts = opencloud-desktop
-	backup = etc/OpenCloud/sync-exclude.lst
 	source = opencloud-desktop::git+https://github.com/opencloud-eu/desktop.git
 	sha256sums = SKIP
 

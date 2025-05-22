@@ -2,8 +2,8 @@
 
 _pkgname=opencloud-desktop
 pkgname=opencloud-desktop-git
-pkgver=r18046.50a6b62
-pkgrel=2
+pkgver=r18244.4a42d67
+pkgrel=1
 pkgdesc='opencloud desktop application - git checkout'
 arch=('x86_64')
 url="https://github.com/opencloud-eu/desktop"
@@ -24,7 +24,6 @@ makedepends=(doxygen
              qt6-tools)
 conflicts=('opencloud-desktop')
 provides=('opencloud-desktop')
-backup=('etc/OpenCloud/sync-exclude.lst')
 source=("${_pkgname}::git+https://github.com/opencloud-eu/desktop.git")
 sha256sums=('SKIP')
 
@@ -32,6 +31,7 @@ sha256sums=('SKIP')
 pkgver() {
 	cd ${_pkgname}
 	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
+	#git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
