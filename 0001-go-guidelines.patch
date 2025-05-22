@@ -1,0 +1,12 @@
+--- a/wireguard-go/Makefile
++++ b/wireguard-go/Makefile
+@@ -17,7 +17,7 @@
+ 	@$(MAKE) wireguard-go
+ 
+ wireguard-go: $(wildcard *.go) $(wildcard */*.go)
+-	go build -v -o "$@"
++	go build -v -trimpath -buildmode=pie -mod=readonly -modcacherw -ldflags "-linkmode external -extldflags \"${LDFLAGS}\"" -o "$@"
+ 
+ install: wireguard-go
+ 	@install -v -d "$(DESTDIR)$(BINDIR)" && install -v -m 0755 "$<" "$(DESTDIR)$(BINDIR)/wireguard-go"
+
