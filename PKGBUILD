@@ -3,7 +3,7 @@
 _pkgname=opencloud
 pkgname=opencloud-bin
 pkgver=2.3.0
-pkgrel=1
+pkgrel=2
 pkgdesc="secure and private way to store, access, and share your files - upstream built binary"
 url="https://github.com/opencloud-eu/opencloud"
 arch=('aarch64' 'x86_64')
@@ -31,7 +31,7 @@ package() {
     install -vDm755 "${_pkgname}-${pkgver}-${CARCH}" "${pkgdir}/usr/bin/${_pkgname}-server"
 
     install -vdm755 "${pkgdir}/etc/${_pkgname}"
-    install -vDm750 "${_pkgname}.env" -t "${pkgdir}/etc/${_pkgname}"
+    install -vDm644 "${_pkgname}.env" -t "${pkgdir}/etc/${_pkgname}"
 
     install -vDm644 "${_pkgname}.service" -t "${pkgdir}/usr/lib/systemd/system"
     install -vDm644 "${_pkgname}.sysusers" "${pkgdir}/usr/lib/sysusers.d/${_pkgname}.conf"
