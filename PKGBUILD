@@ -3,7 +3,7 @@
 _pkgname=opencloud
 pkgname=opencloud-bin
 pkgver=2.3.0
-pkgrel=2
+pkgrel=3
 pkgdesc="secure and private way to store, access, and share your files - upstream built binary"
 url="https://github.com/opencloud-eu/opencloud"
 arch=('aarch64' 'x86_64')
@@ -19,7 +19,7 @@ source=("opencloud.env"
         "opencloud.tmpfiles")
 source_x86_64=(${_pkgname}-${pkgver}-x86_64::${url}/releases/download/v${pkgver}/${_pkgname}-${pkgver}-linux-amd64)
 source_aarch64=(${_pkgname}-${pkgver}-aarch64::${url}/releases/download/v${pkgver}/${_pkgname}-${pkgver}-linux-arm64)
-sha512sums=('c4814a4843c4e82ea487e0152f09b08a2df6c8c90fc1139b18b9be4370fda12c692d85b86d2179f69e065790ec6bdb9a8cf8338ffa190636ea6bd7279dfed903'
+sha512sums=('948d855c6f07a7fec48fab9824357a1e8dfefce0b6835baa1f9677bf5e004a75e60f1a1a37ca8b0c823aea290a91a93cae6a4d1ac2e9884b998138671a652225'
             'af6b2e80ebaf130fb3e8f6038580bea4db811499d06f2962604941f75d1f8ef0dd3692bf21e54c0611864c49217c8fa457cb6773775a1aa47c7254330f83ba7f'
             '3fa38aba73ffea0e559cf20af9f12b85321a97b41d48aad5c7cea81e9ab7d35c08d7a495c62e6a9fdf6ac7c494a4926805d89171dca0d822d922902188babed3'
             'e4b8c5bfda8214d6493055c996010b385c3be62a861dbcb3564c68aa03851bb6f23cd269f1b869fe4eeec6396ca9943888628c2a46215a7bd3c02c2a8f000742')
