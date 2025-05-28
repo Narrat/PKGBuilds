@@ -2,13 +2,13 @@
 
 _pkgname=waybox
 pkgname=waybox-git
-pkgver=0.2.2.r34.gb2e6861
+pkgver=0.2.2.r41.g557bb4a
 pkgrel=1
 pkgdesc='Openbox clone on Wayland (git version)'
 url="https://github.com/wizbright/waybox"
 arch=('x86_64')
 license=('MIT')
-depends=('bash' 'glibc' 'libevdev' 'libinput' 'libxkbcommon' 'libxml2' 'wayland' 'wlroots>=0.17.0' 'wlroots<0.19.0')
+depends=('bash' 'glibc' 'libevdev' 'libinput' 'libwlroots-0.19.so' 'libxkbcommon' 'libxml2' 'wayland')
 makedepends=('git' 'meson' 'wayland-protocols')
 optdepends=("python: for waybox-menu")
 conflicts=(waybox)
