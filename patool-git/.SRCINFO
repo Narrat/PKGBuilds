@@ -1,6 +1,6 @@
 pkgbase = patool-git
 	pkgdesc = portable command line archive file manager (git checkout)
-	pkgver = 2.4.0.r0.gecd605c
+	pkgver = 4.0.1.r0.g1cdb692
 	pkgrel = 1
 	url = https://wummel.github.io/patool/
 	arch = any
@@ -9,7 +9,7 @@ pkgbase = patool-git
 	makedepends = python-build
 	makedepends = python-installer
 	makedepends = python-wheel
-	makedepends = python-setuptools
+	makedepends = python-setuptools-reproducible
 	makedepends = python-argcomplete
 	depends = python
 	optdepends = lz4: extracting LZ4 archives
