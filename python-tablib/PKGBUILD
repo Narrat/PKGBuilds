@@ -4,10 +4,10 @@
 _module="tablib"
 pkgname="python-${_module}"
 pkgver=3.8.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Format-agnostic tabular data library (XLS, JSON, YAML, CSV)"
 arch=("any")
-url="http://python-tablib.org"
+url="https://tablib.readthedocs.io/en/stable/"
 license=("MIT")
 depends=(python)
 makedepends=(python-build python-installer python-wheel python-setuptools-scm)
