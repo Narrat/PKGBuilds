@@ -1,9 +1,9 @@
 # Maintainer: Lex Black <autumn-wind@web.de>
 
 pkgname=prosody-mod-invites-page
-pkgver=2022.07.18
+pkgver=2025.04.17
 pkgrel=1
-_commit="75b6e5df65f9"
+_commit="d68e640e76ad"
 pkgdesc="Generate friendly web page for invitations"
 arch=('any')
 url="https://modules.prosody.im/mod_invites_page.html"
@@ -12,7 +12,7 @@ depends=('prosody')
 makedepends=('mercurial')
 optdepends=("prosody-mod-register-apps: Configuring list of XMPP clients")
 source=("hg+https://hg.prosody.im/prosody-modules/"#revision=$_commit)
-sha1sums=('SKIP')
+sha1sums=('c17d5ce45cc92aa23dc990aa2c180a30243af6e2')
 
 
 package() {
