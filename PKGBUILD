@@ -1,7 +1,7 @@
 # Contributor: Lex Black <autumn-wind@web.de>
 
 pkgname=opencloud
-pkgver=3.2.0
+pkgver=3.2.1
 pkgrel=1
 pkgdesc="secure and private way to store, access, and share your files"
 url="https://github.com/opencloud-eu/opencloud"
@@ -18,7 +18,7 @@ source=("git+https://github.com/opencloud-eu/opencloud.git#tag=v${pkgver/_/-}"
         "opencloud.service"
         "opencloud.sysusers"
         "opencloud.tmpfiles")
-sha512sums=('b77655dd9b1eeba07555adcc2bedb5ad2becb6d42bb4e00c32cfaefb6c7d15d7a6171aac4646b33ca81d461f83d69ab55686599aa654f9f50011ea787c58e48e'
+sha512sums=('d4ce786a4da8c6e74b57e27c2f4eeb1c362add6b49e59cd2e10ed6fbb9cfd992de5a21c2c481fda4054ff85332290ed0d5a5973ce21b2512cb6d0e314a7cfe02'
             'da70b77bf25c87d75f1a662d00a339f9b8756e6f8e33e17dcc0663d2dcd7d4981720a93fe1ba6c788d8a5e7f484f8e292e59273793106d496955c5a670862318'
             '86d6cb0d07cbe48c3ee4e78378393aac0613526330a858956338b9e3d2069481f5466456cb79f6426993272d47d1cc08e37d7131478de7711729e281b5ade83d'
             'af6b2e80ebaf130fb3e8f6038580bea4db811499d06f2962604941f75d1f8ef0dd3692bf21e54c0611864c49217c8fa457cb6773775a1aa47c7254330f83ba7f'
