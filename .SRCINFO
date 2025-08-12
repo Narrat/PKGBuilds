@@ -1,18 +1,14 @@
 pkgbase = gimp-plugin-resynthesizer
 	pkgdesc = Suite of gimp plugins for texture synthesis
-	pkgver = 2.0.3
-	pkgrel = 2
+	pkgver = 3.0
+	pkgrel = 1
 	url = https://github.com/bootchk/resynthesizer
 	arch = x86_64
 	arch = aarch64
-	license = GPL3
-	makedepends = pkg-config
-	makedepends = intltool
-	depends = gimp>=2.8
-	depends = python2-gimp
-	depends = python2-gobject2>=2.28.7-7
-	conflicts = gimp-plugin-resynthesizer-git
-	source = gimp-plugin-resynthesizer-src-2.0.3.tgz::https://github.com/bootchk/resynthesizer/archive/v2.0.3.tar.gz
-	sha256sums = 798678095c34b101c880eb350b31e9a6ff9748707d6ad9063cdee26c38016450
+	license = GPL-3.0-only
+	makedepends = meson
+	depends = gimp
+	source = resynthesizer-3.0.tar.gz::https://github.com/bootchk/resynthesizer/archive/refs/tags/v3.0.tar.gz
+	sha256sums = d0f459e551d428e3cd3fec4c3ebfe448e6e2947d9b24553373308d6d41ddd580
 
 pkgname = gimp-plugin-resynthesizer
