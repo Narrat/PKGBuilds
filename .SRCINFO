@@ -10,7 +10,7 @@ pkgbase = gimp-plugin-resynthesizer-git
 	makedepends = meson
 	depends = gimp
 	provides = gimp-plugin-resynthesizer=3.0
-	conflicts = gimp-plugin-resynthesizer-git
+	conflicts = gimp-plugin-resynthesizer
 	conflicts = gimp-resynth
 	conflicts = gimp-resynth-git
 	options = !emptydirs

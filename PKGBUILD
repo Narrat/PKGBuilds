@@ -11,7 +11,7 @@ url="https://github.com/bootchk/resynthesizer"
 license=('GPL-3.0-only')
 depends=('gimp')
 makedepends=('git' 'meson')
-conflicts=('gimp-plugin-resynthesizer-git' 'gimp-resynth' 'gimp-resynth-git')
+conflicts=('gimp-plugin-resynthesizer' 'gimp-resynth' 'gimp-resynth-git')
 provides=("${pkgname/-git/}=3.0")
 options=('!emptydirs')
 source=('git+https://github.com/bootchk/resynthesizer#branch=resynthesizer3')
