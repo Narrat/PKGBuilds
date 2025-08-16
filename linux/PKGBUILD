@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=6.15.9.arch1
+pkgver=6.16.1.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -45,20 +45,20 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('e94f3af85492302f7a819441458f80bca0ad9912e5a4c83c699ff3c63c52957d'
+sha256sums=('ea43491bc7ace1e414b3b2d957f8cf96e7049155123f0acce798accf8da1acba'
             'SKIP'
-            'ca64ed4a15e0cedb39713b09dd7f113986e799f58d0240a5c9381a8a0b13eaf2'
+            'b357773b9ed7e0f2265a04d53306d3d85d3b705ff32abe1f399b126685e1511d'
             'SKIP'
-            '92005b43e54429b65a5adfa60f3ee5d164b6c88a64816cce920b7e67dc4661b6'
-            'b4eb1e0a294f963e0271d0d9d52b820ddd2efc85cc78a76cb95bdfd2702e2b8b'
+            'ae8836206f1518de5c9204d58d74565be8978bb2eda93731373a839e77555433'
+            '7695ca9a2490fa40fbae8d7f69d0c51c7b40e3a66512bf8d7e3b28248f24bca5'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             'ce226234386cc62b5b55f5d9372a7a9ce2bf2d208d98f2e3aa04138edb14fe5f')
-b2sums=('9818201a76f2e4cdde00a67245764cd971b0cc17ca7c6147cd53d7397eaf54036ec606a86d64b467e8973fa9650cfc83b8389de828b06860f2ee3b0164b2942e'
+b2sums=('280386f483f3f181fd0e45789815621f6f6bed208b7c10b05a7e2c2eed102d53928ce3f0e28cdd58d1e3c69f9977f60f7b6e832c3a00c0f4524aa45f83ec9491'
         'SKIP'
-        'd4e0bb27c1b3dd7ec989bedd15ec97e234d61d5df6658b1610a495e75ff482830ad977a97badeb2541f488b92aa0aed0147a586f24335b701fd6c3dcdc77f0af'
+        'e8572bedf0dfe7c4e997f03b37242752e2326372839ac152584f4bdcb91430b205ea036b3f952e7e4bde982a9e5d6c79172303d87cfa487ba3aa334ea274d5c7'
         'SKIP'
-        '60161db656851b0e651e6e7ebc974cada22474bddd6b0a7ad4946bc0ecf888ca68e66f1530997aa5c7fe09645e4cfbdd16f6e32ce50678291c708c40d8a8563c'
-        'be6a2848c9a5969453b5b0f9601d2471a783cd7a5bdf89daee44bf64bfd5f10959b20b881d4a04822c0b4ec6a93a5b04f10fc8b7efad356680128a0a585c20e5'
+        '0aea5109845ffa5d80726854a9a8faff57cbff326a96bf8bf55543d6518cab894046b35fedcd4155fdc5e81e1c1c701c42f40e5c2dc928bd5ba1565d0a0ac2eb'
+        '425133ae741bd54529d98dcdaa513746a7978021f25026a143a73c2850232482299b845f13ac1f1fd468810b70ae2340e1ca7b725a4213c2889842ce8b24644f'
         'e5c03e352ee552fe8c5fd6643b78fcaa4e9a3570f39ec9fe91108c831b27fb472c54c9bd217811ca56c1b85d6caa58f81258e2c80bb1e5a6fb4552e09a968003'
         'b2e45a9ebc6a2ef66a4e2aeb5ab1d774b8be1a50af6c213203c88fcfa69edfa8cb52f5fbe598267d5544d40cc0892d22f7d1be81299bbd61497027ab101eaea6')
 
@@ -97,7 +97,7 @@ build() {
   cd $_srcname
   make all
   make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
-  make htmldocs
+  make htmldocs SPHINXOPTS=-QT
 }
 
 _package() {
