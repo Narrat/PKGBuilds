@@ -3,7 +3,7 @@
 # Contributor: Anton Larionov <diffident dot cat at gmail dot com>
 
 pkgname=7kaa
-pkgver=2.15.6
+pkgver=2.15.7
 pkgrel=1
 pkgdesc='Seven Kingdoms: Ancient Adversaries is a real-time strategy (RTS) computer game developed by Trevor Chan'
 url='http://7kfans.com/'
@@ -17,7 +17,7 @@ source=(https://downloads.sourceforge.net/project/skfans/7KAA%20${pkgver}/${pkgn
         "${pkgname}.sh"
         "${pkgname}.desktop"
         "${pkgname}.ico")
-b2sums=('7ef2926df74f230208c438223d963362b96327c5a8dd002ec32a7af6c2c3ae910f8cbffd2f974b0a0b178b479bc798c8be9a70e99fda93797519f041c9e18aec'
+b2sums=('d71594ed46086e2c5b2c38da7e5dd2ff9eb7c0b89abcd62c7dee295530ab6609923303d2b6df42b479b8628bd80b35c149ffd20f3000685ead25b6cd7a6304ce'
         '207d4e5f6c41e0f8441009c0405fc1f4c2d2e6115ec8f002f77c38adb9e92b43a663beaf4bfbb2cd947a15c03c24c11b3a294a4b97db7ab55f1622a75d7123ac'
         'a36c65a74f057eae344f5b93614bc61dc90830902cf723b04e0765a6201a5d012b43a1be952e5d2c03dd01673f0f626c2494f0275a6246b4a1f1a7fb299ebdcf'
         '98bed86cc322ed4c58bb17b16872414de18d3f3f1d4bf995ddff86a5588b13f28779e9d95dd369f622fac4d762a2d28a6052d102686a35b3035df0e31f1c146f')
@@ -25,6 +25,10 @@ b2sums=('7ef2926df74f230208c438223d963362b96327c5a8dd002ec32a7af6c2c3ae910f8cbff
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
+  # Add a flag to avoid a desync between versions compiled by GCC14+ and those before
+  CXXFLAGS+=" -fexcess-precision=fast"
+  # Add flag to unset -Werror=format-security as it fails in two locations in ONEWSENG.cpp
+  CXXFLAGS+=" -Wno-error=format-security"
   ./configure
   make
 }
