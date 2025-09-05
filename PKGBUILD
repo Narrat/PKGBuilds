@@ -8,7 +8,7 @@ pkgrel=1
 pkgdesc='Seven Kingdoms: Ancient Adversaries is a real-time strategy (RTS) computer game developed by Trevor Chan'
 url='http://7kfans.com/'
 arch=('i686' 'x86_64')
-license=('GPL2')
+license=('GPL-2.0-only')
 depends=('openal' 'desktop-file-utils' 'enet' 'gcc-libs' 'sdl2')
 optdepends=('7kaa-music: for ingame music')
 conflicts=('7kaa-data')
@@ -24,7 +24,7 @@ b2sums=('d71594ed46086e2c5b2c38da7e5dd2ff9eb7c0b89abcd62c7dee295530ab6609923303d
 
 
 build() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${pkgname}-${pkgver}"
   # Add a flag to avoid a desync between versions compiled by GCC14+ and those before
   CXXFLAGS+=" -fexcess-precision=fast"
   # Add flag to unset -Werror=format-security as it fails in two locations in ONEWSENG.cpp
@@ -36,7 +36,7 @@ build() {
 package() {
   # install data files
   install -dm755 "${pkgdir}/opt/7kaa/"
-  cd "${srcdir}/$pkgname-$pkgver/data/"
+  cd "$pkgname-$pkgver/data/"
   cp -r {ENCYC,ENCYC2,IMAGE,RESOURCE,SCENARI2,SCENARIO,SOUND,SPRITE,TUTORIAL} "${pkgdir}/opt/7kaa/"
 
   # fix permissions
