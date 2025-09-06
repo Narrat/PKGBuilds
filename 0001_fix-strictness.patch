@@ -1,0 +1,49 @@
+Date: Sun, 3 Aug 2025 16:40:34 +1000
+Subject: [PATCH] Fix format not a string literal and no format arguments error
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Compilation with strictness turned on (for the Debian build) was giving
+these errors:
+
+    ONEWSENG.cpp: In member function ‘void News::firm_constructed()’:
+    ONEWSENG.cpp:1759:17: error: format not a string literal and no format arguments [-Werror=format-security]
+     1759 |         snprintf(str, MAX_STR_LEN+1, _(firm_constructed_msg[short_para1-1]));
+          |         ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    ONEWSENG.cpp: In member function ‘void News::weapon_ship_built()’:
+    ONEWSENG.cpp:1834:25: error: format not a string literal and no format arguments [-Werror=format-security]
+     1834 |                 snprintf(str, MAX_STR_LEN+1, weapon_ship_built_msg[short_para1-UNIT_CATAPULT]);
+          |                 ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Fix this by using strncpy instead of snprintf with no format arguments.
+---
+ src/ONEWSENG.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/ONEWSENG.cpp b/src/ONEWSENG.cpp
+index cf3d6cd2..155319e1 100644
+--- a/src/ONEWSENG.cpp
++++ b/src/ONEWSENG.cpp
+@@ -1760,7 +1760,7 @@
+ 	//
+ 	//----------------------------------------------//
+ 
+-	snprintf(str, MAX_STR_LEN+1, _(firm_constructed_msg[short_para1-1]));
++	strncpy(str, _(firm_constructed_msg[short_para1-1]), MAX_STR_LEN+1);
+ }
+ //------- End of function News::firm_constructed -----//
+ 
+@@ -1835,7 +1835,7 @@
+ 	else
+ 	{
+ 		// ships don't have tech levels, and harbors aren't always near towns
+-		snprintf(str, MAX_STR_LEN+1, _(weapon_ship_built_msg[short_para1-UNIT_CATAPULT]));
++		strncpy(str, _(weapon_ship_built_msg[short_para1-UNIT_CATAPULT]), MAX_STR_LEN+1);
+ 	}
+ }
+ //------- End of function News::weapon_ship_built -----//
+
+
+-- 
+2.47.2
