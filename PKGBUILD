@@ -4,11 +4,11 @@
 
 pkgname=7kaa
 pkgver=2.15.7
-pkgrel=2
+pkgrel=3
 pkgdesc='Seven Kingdoms: Ancient Adversaries is a real-time strategy (RTS) computer game developed by Trevor Chan'
 url='http://7kfans.com/'
 arch=('i686' 'x86_64')
-license=('GPL-2.0-only')
+license=('GPL-2.0-or-later')
 depends=('openal' 'desktop-file-utils' 'enet' 'gcc-libs' 'sdl2')
 optdepends=('7kaa-music: for ingame music')
 conflicts=('7kaa-data')
