@@ -10,8 +10,7 @@ arch=('any')
 url="https://github.com/Narrat/Pim"
 license=('MIT')
 depends=('desktop-file-utils' 'python-gobject>=3.22')
-optdepends=("libheif: support for HEIF/HEIC"
-            "libjxl: support for JPEG XL"
+optdepends=("libjxl: support for JPEG XL"
             "webp-pixbuf-loader: support for the webp format")
 makedepends=('git')
 conflicts=('pim')

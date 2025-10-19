@@ -8,7 +8,6 @@ pkgbase = pim-git
 	makedepends = git
 	depends = desktop-file-utils
 	depends = python-gobject>=3.22
-	optdepends = libheif: support for HEIF/HEIC
 	optdepends = libjxl: support for JPEG XL
 	optdepends = webp-pixbuf-loader: support for the webp format
 	provides = pim=0.10.0
