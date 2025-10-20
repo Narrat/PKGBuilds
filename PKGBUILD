@@ -4,12 +4,13 @@
 
 pkgname=wlroots0.15
 pkgver=0.15.1
-pkgrel=6
+pkgrel=7
 license=('MIT')
 pkgdesc='Modular Wayland compositor library'
 url='https://gitlab.freedesktop.org/wlroots/wlroots'
 arch=('x86_64')
 depends=(
+    'libdrm'
     'libglvnd'
     'libinput'
     'libpixman-1.so'
