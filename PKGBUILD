@@ -3,7 +3,7 @@
 # Contributor: Sotirios M. Roussis (xToNouSou) <xtonousou@gmail.com>
 
 pkgname=airgeddon
-pkgver=11.52
+pkgver=11.60
 pkgrel=1
 pkgdesc='Multi-use bash script for Linux systems to audit wireless networks'
 url='https://github.com/v1s1t0r1sh3r3/airgeddon'
@@ -32,6 +32,7 @@ optdepends=(
   'hcxdumptool: Small tool to capture packets from wlan devices'
   'hcxtools: Small set of tools convert packets from captures for the use with latest hashcat or John the Ripper'
   'hostapd: IEEE 802.11 AP, IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator'
+  'hostapd-mana: for downgrade attack against WPA2/WPA3 Transitional (Mixed Mode) networks'
   'hostapd-wpe: Modified hostapd to facilitate AP impersonation attacks'
   'john: John the Ripper password cracker'
   'iptables: Linux kernel packet control tool'
@@ -53,7 +54,7 @@ optdepends=(
 )
 makedepends=('binutils')
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz)
-sha256sums=('ac52879487cb66ee65ea3fae1d237cdc793abffddda73aec4b4c69d4fc6ad482')
+sha256sums=('f4bac3d19641581dddc37f3275a8e2293e1ed3eb1921ea69e5feedb34533a73c')
 
 
 prepare() {
