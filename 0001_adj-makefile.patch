@@ -1,0 +1,17 @@
+--- a/woodland-2.0.4/Makefile.in
++++ b/woodland-2.0.4/Makefile.in
+@@ -7,9 +7,11 @@
+ CFLAGS += -I/usr/include/gdk-pixbuf-2.0 -I/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/include
+ CFLAGS += -I/usr/include/wlroots-0.18 -I/usr/lib/x86_64-linux-gnu/wlroots-0.18/include
+ CFLAGS += -I/usr/include/pixman-1
++CFLAGS += -I/usr/include/stb
+ LDFLAGS = -lm
+-LDFLAGS += $(shell pkg-config --libs stb cairo dbus-1 librsvg-2.0 wlroots-0.18 libinput pixman-1 xkbcommon wayland-server)
+-CFLAGS += $(shell pkg-config --cflags stb cairo dbus-1 librsvg-2.0 wlroots-0.18 libinput pixman-1 xkbcommon wayland-server)
++LDFLAGS += $(shell pkg-config --libs cairo dbus-1 librsvg-2.0 wlroots-0.18 libinput pixman-1 xkbcommon wayland-server)
++CFLAGS += $(shell pkg-config --cflags cairo dbus-1 librsvg-2.0 wlroots-0.18 libinput pixman-1 xkbcommon wayland-server)
+ CFLAGS += -Isrc/
++CFLAGS += -Iinclude/
+ CFLAGS += -DWLR_USE_UNSTABLE
+ SRCFILES = src/menu.c src/panel.c src/windowlist.c src/dbus-network-management.c src/getxkbkeyname.c src/getvaluefromconf.c src/runcmd.c src/woodland.c
+
