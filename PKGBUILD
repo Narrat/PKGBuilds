@@ -32,7 +32,7 @@ optdepends=(
   'hcxdumptool: Small tool to capture packets from wlan devices'
   'hcxtools: Small set of tools convert packets from captures for the use with latest hashcat or John the Ripper'
   'hostapd: IEEE 802.11 AP, IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator'
-  'hostapd-mana: for downgrade attack against WPA2/WPA3 Transitional (Mixed Mode) networks'
+  'hostapd-mana-git: for downgrade attack against WPA2/WPA3 Transitional (Mixed Mode) networks'
   'hostapd-wpe: Modified hostapd to facilitate AP impersonation attacks'
   'john: John the Ripper password cracker'
   'iptables: Linux kernel packet control tool'
