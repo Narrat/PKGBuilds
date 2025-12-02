@@ -1,6 +1,13 @@
---- a/woodland-2.0.4/Makefile.in
-+++ b/woodland-2.0.4/Makefile.in
-@@ -7,9 +7,11 @@
+--- a/woodland-2.0.5/Makefile.in
++++ b/woodland-2.0.5/Makefile.in
+@@ -1,5 +1,5 @@
+ CC = gcc
+-CFLAGS = -Wall -flto -Wextra -Wpedantic -march=native -funroll-loops -export-dynamic -fomit-frame-pointer
++CFLAGS = -Wall -flto -Wextra -Wpedantic -funroll-loops -export-dynamic -fomit-frame-pointer
+ CFLAGS += -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include
+ CFLAGS += -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include
+ CFLAGS += -I/usr/include/librsvg-2.0 -I/usr/lib/x86_64-linux-gnu/librsvg-2.0/include
+@@ -7,10 +7,12 @@
  CFLAGS += -I/usr/include/gdk-pixbuf-2.0 -I/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/include
  CFLAGS += -I/usr/include/wlroots-0.18 -I/usr/lib/x86_64-linux-gnu/wlroots-0.18/include
  CFLAGS += -I/usr/include/pixman-1
@@ -14,4 +21,5 @@
 +CFLAGS += -Iinclude/
  CFLAGS += -DWLR_USE_UNSTABLE
  SRCFILES = src/menu.c src/panel.c src/windowlist.c src/dbus-network-management.c src/getxkbkeyname.c src/getvaluefromconf.c src/runcmd.c src/woodland.c
+ OBJFILES = $(patsubst src/%.c, %.o, $(SRCFILES))
 
