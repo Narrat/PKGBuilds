@@ -1,6 +1,6 @@
 pkgbase = opencloud-desktop-git
 	pkgdesc = opencloud desktop application - git checkout
-	pkgver = r18244.4a42d67
+	pkgver = 3.0.0.r28.g97b181d
 	pkgrel = 1
 	url = https://github.com/opencloud-eu/desktop
 	arch = x86_64

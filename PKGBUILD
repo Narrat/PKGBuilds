@@ -2,7 +2,7 @@
 
 _pkgname=opencloud-desktop
 pkgname=opencloud-desktop-git
-pkgver=r18244.4a42d67
+pkgver=3.0.0.r28.g97b181d
 pkgrel=1
 pkgdesc='opencloud desktop application - git checkout'
 arch=('x86_64')
@@ -30,8 +30,7 @@ sha256sums=('SKIP')
 
 pkgver() {
 	cd ${_pkgname}
-	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short=7 HEAD)"
-	#git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+	git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g;s/^v//'
 }
 
 build() {
