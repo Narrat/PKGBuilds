@@ -32,12 +32,10 @@ prepare() {
 }
 
 build() {
-  cd "${pkgname}/src"
-  make prefix=/usr
+  make -C "${pkgname}/src" prefix=/usr
 }
 
 package() {
-  cd "${pkgname}/src"
-  make prefix=/usr DESTDIR=${pkgdir} install
-  install -Dm644 ../LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+  make -C "${pkgname}/src" prefix=/usr DESTDIR=${pkgdir} install
+  install -Dm644 ${pkgname}/LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
