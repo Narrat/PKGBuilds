@@ -50,11 +50,11 @@ Isn't the prettiest and also on the ToDo for a rework, but it did its job.
 ## Alternatives
 * Keeping every repo in a separate branch (with or without `git-worktree` to see more than one at a time)
 * Submodules
- * Not my favourite although in theory interesting
- * Webview not working
+  * Not my favourite although in theory interesting
+  * Webview not working
 * [`git-subrepo`](https://github.com/ingydotnet/git-subrepo)
- * Need to take a deeper look
- * Theoretically keeps the benefits of `subtree` while reducing the irks
+  * Need to take a deeper look
+  * Theoretically keeps the benefits of `subtree` while reducing the irks
 * Merge-strategy `subtree`
- * Not really able to push changes back?
+  * Not really able to push changes back?
 
