@@ -1,0 +1,20 @@
+pkgbase = libtsm-git
+	pkgdesc = Terminal-emulator State Machine
+	pkgver = 4.4.2.r1.g8f8e314
+	pkgrel = 1
+	url = https://github.com/kmscon/libtsm
+	arch = i686
+	arch = x86_64
+	license = MIT
+	makedepends = check
+	makedepends = git
+	makedepends = meson
+	makedepends = libxkbcommon
+	depends = glibc
+	provides = libtsm
+	conflicts = libtsm
+	options = !libtool
+	source = git+https://github.com/kmscon/libtsm.git
+	b2sums = SKIP
+
+pkgname = libtsm-git
