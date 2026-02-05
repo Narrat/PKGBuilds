@@ -3,7 +3,7 @@
 # Contributor: Sotirios M. Roussis (xToNouSou) <xtonousou@gmail.com>
 
 pkgname=airgeddon
-pkgver=11.41
+pkgver=11.61
 pkgrel=1
 pkgdesc='Multi-use bash script for Linux systems to audit wireless networks'
 url='https://github.com/v1s1t0r1sh3r3/airgeddon'
@@ -18,7 +18,7 @@ depends=(
 optdepends=(
   'arping-th: Tool used to check hosts presence on networks'
   'asleap: Actively recover LEAP/PPTP passwords'
-  'beef-git: The Browser Exploitation Framework'
+  'beefproject-git: The Browser Exploitation Framework'
   'bettercap: Complete, modular, portable and easily extensible MITM framework'
   'bully: Retrieve WPA/WPA2 passphrase from a WPS enabled access point'
   'ccze: Robust and modular log colorizer with many plugins'
@@ -32,6 +32,7 @@ optdepends=(
   'hcxdumptool: Small tool to capture packets from wlan devices'
   'hcxtools: Small set of tools convert packets from captures for the use with latest hashcat or John the Ripper'
   'hostapd: IEEE 802.11 AP, IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator'
+  'hostapd-mana-git: IEEE 802.11 AP, IEEE 802.1X/WPA/WPA2/EAP/RADIUS Authenticator with Mana patches'
   'hostapd-wpe: Modified hostapd to facilitate AP impersonation attacks'
   'john: John the Ripper password cracker'
   'iptables: Linux kernel packet control tool'
@@ -43,6 +44,7 @@ optdepends=(
   'pixiewps: Offline bruteforce of the WPS pin exploiting the low or non-existing entropy of some APs'
   'reaver: Brute force attack against Wifi Protected Setup'
   'rfkill: Tool for enabling and disabling wireless devices'
+  'sox: sound alerts for Evil Twin'
   'systemd: System and service manager'
   'tcpdump: A powerful command-line packet analyzer'
   'usbutils: USB Device Utilities'
@@ -53,7 +55,7 @@ optdepends=(
 )
 makedepends=('binutils')
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/v${pkgver}.tar.gz)
-sha256sums=('35d790c82da343c53405280297a4e419114d42c4354f258877b9a7a61aa25a4f')
+sha256sums=('5e7ba6d42f8e5b46980dd1e6a81fcde7203c49ef3a9421e63c6166bcb73f4f56')
 
 
 prepare() {
