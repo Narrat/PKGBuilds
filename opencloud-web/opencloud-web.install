@@ -1,0 +1,13 @@
+post_install(){
+
+  cat <<INFO
+
+    This package allows customization of the opencloud web-ui.
+    If an app should be en- or disabled edit the config file respectively.
+    OpenCloud will use this only after adjusting the corresponding ENV variables
+    in opencloud.env and restarting the server.
+    The default config.json is for a local test setup.
+
+INFO
+
+}
