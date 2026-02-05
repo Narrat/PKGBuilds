@@ -10,23 +10,51 @@ So all the stuff I maintain on the AUR will be added as subtrees and main change
 
 Dunno at the moment how to handle PRs.
 
-## ToDo
-Subtrees are kinda suboptimal.
-If there is a conflict (which should never happen, but does so) files that are created are put into the top level and not into the respective folder.
-Additionally the additional steps made me kinda ignore updating the contained subtrees.  
-Ideally I could use this monorepo for all maintenance and push only the relevant history to the respective upstream repos.
-While having all files available without switching branches.
-Possible methods:
-* Subtree
-* Separate branches with no common history (with or without `git-worktree`)
-* Submodules
+## Setup
 
-Submodules are still kinda the least favourite option, as it makes the webviewer useless.
-Keeping everything in separate branches plus making use of `git-worktree` fits more or less nicely in the current structure.
-One place with the main repo and a separate folder with all the respective ones.
-Maintenance could be a hassle though.  
-Subtrees itself I need to test with more.
-I have a shell script which does things to add a foreign repo and that's it.
-Never tested what happens if a subtree is pushed back with updates.
-Especially what history it creates.
-If the combined history cannot be split out cleanly and contains wrong references pushing to the aurweb will be impossible.
+This repo makes use of the `git`-contrib script [`subtree`](https://github.com/git/git/blob/master/contrib/subtree/git-subtree.adoc) (not the [merge-strategy](https://www.kernel.org/pub/software/scm/git/docs/howto/using-merge-subtree.html) with the same name).
+
+### Commands
+
+Add remote (nothing fancy; the usual stuff):  
+```bash
+$ git remote add <name> <url>
+```
+  
+Add repo as subtree:  
+```bash
+$ REPO=<name> git subtree --prefix $REPO/ add <remote> <branch>
+```
+  
+Fetch changes (nothing fancy; the usual stuff):  
+```bash
+$ git fetch --prune --all
+```
+  
+Merge changes:  
+```fish
+REPO=<name> git subtree --prefix $REPO/ merge $(string join '-' $REPO 'aur') master -m "$(string join '' $(date --rfc-3339=date) ": Merge updates for " $REPO )"
+```
+Add least this the canonical merge.
+Regular merges work fine too. Didn't cause any issue when extracting the subtree.  
+Alternative to merge is the use of `subtree pull`.
+  
+Push subtree to another remote (origin repo or a new one):
+```bash
+$ REPO=<name> git subtree --prefix $REPO/ push <remote> <branch>
+```
+  
+There is also a [script](https://github.com/Narrat/Scripts/blob/master/subtupd.sh) I assembled in a very crude and hackish way (and with lot of copy and paste).
+Isn't the prettiest and also on the ToDo for a rework, but it did its job.
+
+## Alternatives
+* Keeping every repo in a separate branch (with or without `git-worktree` to see more than one at a time)
+* Submodules
+ * Not my favourite although in theory interesting
+ * Webview not working
+* [`git-subrepo`](https://github.com/ingydotnet/git-subrepo)
+ * Need to take a deeper look
+ * Theoretically keeps the benefits of `subtree` while reducing the irks
+* Merge-strategy `subtree`
+ * Not really able to push changes back?
+
