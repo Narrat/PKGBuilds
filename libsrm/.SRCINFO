@@ -1,6 +1,6 @@
 pkgbase = libsrm
 	pkgdesc = C library that simplifies the development of Linux DRM/KMS applications
-	pkgver = 0.12.1_1
+	pkgver = 0.13.0_1
 	pkgrel = 1
 	url = https://github.com/CuarzoSoftware/SRM
 	arch = x86_64
@@ -14,7 +14,7 @@ pkgbase = libsrm
 	depends = seatd
 	depends = glibc
 	depends = systemd-libs
-	source = srm-0.12.1-1.tar.gz::https://github.com/CuarzoSoftware/SRM/archive/refs/tags/v0.12.1-1.tar.gz
-	sha256sums = 9b7c35ffa6b90d61db814ca472f86dd22e5a3f914d7a5bede40492f9062411f3
+	source = srm-0.13.0-1.tar.gz::https://github.com/CuarzoSoftware/SRM/archive/refs/tags/v0.13.0-1.tar.gz
+	sha256sums = 13b9dcad0d41b3e1351992317f77fe33b36d3ce576584d6e0ba7b14434fb82f9
 
 pkgname = libsrm
