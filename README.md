@@ -25,6 +25,9 @@ Add repo as subtree:
 ```bash
 $ REPO=<name> git subtree --prefix $REPO/ add <remote> <branch>
 ```
+```fish
+REPO=gimp-plugin-resynthesizer git subtree --prefix $REPO/ add $(string join '-' $REPO 'aur') master
+```
   
 Fetch changes (nothing fancy; the usual stuff):  
 ```bash
