@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=6.18.7.arch1
+pkgver=6.18.9.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -48,19 +48,19 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
-sha256sums=('b726a4d15cf9ae06219b56d87820776e34d89fbc137e55fb54a9b9c3015b8f1e'
+sha256sums=('030115ff8fb4cb536d8449dc40ebc3e314e86ba1b316a6ae21091a11cc930578'
             'SKIP'
-            '57c22879f2228398564091db2ec9b186acbd56dfb0e1072f83418bfdd3829aae'
+            '4815407239a6df15f8e0362ff652f9faf2e558fd774b08645e80ca664128e390'
             'SKIP'
-            '505d823490e964e66ebe5889a3701347b4e4e2faf1772b3964f0360a176eadf8'
+            '9fed188f89847418aaf6416b64457a30bee34dcd0fa42a84dbd0f4dfca063402'
             '5cd6ff46905724d986b4faa89308229bb5c99d4705bc4765c3f7fbc890d6ccb9'
             'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
             'ce226234386cc62b5b55f5d9372a7a9ce2bf2d208d98f2e3aa04138edb14fe5f')
-b2sums=('3ad31b9b36ea2c8f865c87e63c97a4e7b6684abee35ae71d5838026de9f476edb4c847adab315235293c5f37f8f3b90799ae2b3d41915716710eae63acbf6863'
+b2sums=('9aed902e41583597cb7595efe77504630a621993d20f89365a93cf2ea4d9790a6361d93cbb7fd7603881a4f82b76394b7e12fb4e4a88c9fedb2d63d64a9d49d3'
         'SKIP'
-        '8ece2f1b2fc6530cdd65e597141550c184089a206b9aa49cb9e46d61d2e7cf9c3f07f35ed523670d892aa7e62626644a5b1e98dd9c6acd824cb7ad3254c17665'
+        '0e9a6bbc9baf4e6706699257e811dcdb7d7e6c946a45f660ee56c564d907efaaac53387b29668ca3fc3082c5badc30ee082dac9d8de2bde72c79365af4050b47'
         'SKIP'
-        'f31d83e1e10bb901d0d25c1db0ad2844584ff1014c8bf36f342fcf1999f41e5e2d5ddfa20a5a23d4626c6b35005c7e01ebe8ae7f3de3d4b61a189a49add3a158'
+        'bef3377ad86440af76e9dde4c29c9f4aaad42f5fe343f7d31f5eb537d6d358602f996f5d63986af275f2e92f94e71dc28c320edc8c03d05bd64dbd8ed23d75dc'
         'dda1d84f625f16d497ce663f3e9ab7ade808f201fcdcc94f3b3d232427906d5681857c53d266e4ddc8d69b47033c97e08a53b54cec2c14d84cf19dd7f3fdc731'
         'e5c03e352ee552fe8c5fd6643b78fcaa4e9a3570f39ec9fe91108c831b27fb472c54c9bd217811ca56c1b85d6caa58f81258e2c80bb1e5a6fb4552e09a968003'
         'b2e45a9ebc6a2ef66a4e2aeb5ab1d774b8be1a50af6c213203c88fcfa69edfa8cb52f5fbe598267d5544d40cc0892d22f7d1be81299bbd61497027ab101eaea6')
@@ -148,6 +148,7 @@ _package() {
 _package-headers() {
   pkgdesc="Headers and scripts for building modules for the $pkgdesc kernel"
   depends=(pahole)
+  provides=(LINUX-HEADERS)
 
   cd $_srcname
   local builddir="$pkgdir/usr/lib/modules/$(<version)/build"
