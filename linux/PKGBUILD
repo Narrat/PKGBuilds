@@ -1,7 +1,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-$(hostname)  # Build kernel with a different name
-pkgver=7.1.3.arch1
+pkgver=7.1.5.arch1
 pkgrel=1
 pkgdesc='Linux'
 url='https://github.com/archlinux/linux'
@@ -58,19 +58,19 @@ validpgpkeys=(
   647F28654894E3BD457199BE38DBBDC86092693E  # Greg Kroah-Hartman
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('be41c068e88f5242a19bccdbffbe077b18c47b45f627e2325504b4fab79dd1dc'
+sha256sums=('22a0196b3cbcdf34dc27b77561f4d040585fd3447edc9ab3531a1ac79e3041e7'
             'SKIP'
-            '861ea54a40c1d25296422fd48eac2e02b46e0071b3d99a6c28555ae3acc8edd7'
+            '04efe829f7b0df735f18fd8c4a0f5025fb2811012a3c8cd20b6c88350171437d'
             'SKIP')
-sha256sums_x86_64=('4b817e82f0a21798d7a1c3ebb3efb7e209fcb0fcb38bb842926c65901d25a5db'
+sha256sums_x86_64=('ecd8c76eb203493e67ba4052e7bc1fa46f51c91566f102172e7a18d7de2dd5eb'
                    'fab41f019fe8892799cbec323345b7cf319b1872b6a0223d722faaa68d048706'
                    'a5f927540c61e98dfbf9b46ce0e45f06d092aa59c2255dc18a7b868ccbb094b5'
                    'ce226234386cc62b5b55f5d9372a7a9ce2bf2d208d98f2e3aa04138edb14fe5f')
-b2sums=('b6466e2798627522f0339c670a223b21266f4d4ede39163867c0f122295e54c5d24093abb51d5c6c6c917de0cb199836e81f45f7c391a5cc138cac2a519438e8'
+b2sums=('d1dcf9b2a7ba1ed431d2b2c785ffc9a4ce729e4a004629061a73451a471316f437212004fe128157b5fc56b58bb06e60e758124a88c408e0b9124592c6a2d886'
         'SKIP'
-        'b402dbf0b29131c2c3fe80406c5560e3e1a5c1384d6a1ba670793b343d57300ec312da7d3a4f7b3f44a6615b015d7fbebb2c7df832a99aa0e1941faef0481baa'
+        'a4c870cb5a22b410432d0aa773b591ed7778e8ef5ac46f589a26518d0c0650d7cd2e34566cf850dc827eb0b21f19957a4e50179298ca69c3a55da9a178d942e8'
         'SKIP')
-b2sums_x86_64=('f08103d44e5506637ed115067c714e6184e0de538eea1c45a3d2ee8160a36d91755ca5f6cf1f4d7bc4500ed62bc69ca51fa21bef26a40c3a49c4e0f8df835c16'
+b2sums_x86_64=('0564ea851810a155cd589bd3a5d74344f16ab2c7c5ea5aa740faaf6776230ccd115474b6164ebd32d89d8615e41d24d2612d649b987f1f2cde58476e5561fe5e'
                '3bab5ab5aa24ca896cf887546f9b23eb518dfbc8fda052c158b3b0f04cebbbbf2a2a308b109c71ddd5fbedbaed1bdd1d4e00ca18907be2fde4e60ca9018ada1e'
                'e5c03e352ee552fe8c5fd6643b78fcaa4e9a3570f39ec9fe91108c831b27fb472c54c9bd217811ca56c1b85d6caa58f81258e2c80bb1e5a6fb4552e09a968003'
                'b2e45a9ebc6a2ef66a4e2aeb5ab1d774b8be1a50af6c213203c88fcfa69edfa8cb52f5fbe598267d5544d40cc0892d22f7d1be81299bbd61497027ab101eaea6')
@@ -111,9 +111,13 @@ prepare() {
 
 build() {
   cd $_srcname
+
+  make htmldocs SPHINXOPTS=-QT &
+  local pid_docs=$!
+
   make all
   make -C tools/bpf/bpftool vmlinux.h feature-clang-bpf-co-re=1
-  make htmldocs SPHINXOPTS=-QT
+  wait $pid_docs
 }
 
 _package() {
@@ -221,8 +225,8 @@ _package-headers() {
   echo "Installing KConfig files..."
   find . -name 'Kconfig*' -exec install -Dm644 {} "$builddir/{}" \;
 
-  echo "Installing Rust files..."
   if [[ $(scripts/config -s CONFIG_RUST) = y ]]; then
+    echo "Installing Rust files..."
     install -Dt "$builddir/rust" -m644 rust/*.rmeta
     install -Dt "$builddir/rust" rust/*.so
   fi
@@ -283,7 +287,10 @@ _package-docs() {
     dst="${src#Documentation/}"
     dst="$builddir/Documentation/${dst#output/}"
     install -Dm644 "$src" "$dst"
-  done < <(find Documentation -name '.*' -prune -o ! -type d -print0)
+  done < <(
+    find Documentation \( -name '.*' -o -name __pycache__ \) -prune \
+      -o \! -type d -print0
+  )
 
   echo "Adding symlink..."
   mkdir -p "$pkgdir/usr/share/doc"
